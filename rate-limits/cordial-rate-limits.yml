@@ -1,0 +1,49 @@
+generated: '2026-08-04'
+method: searched
+source: https://support.cordial.com/hc/en-us/articles/7323031900301-API-rate-limiting
+docs: https://support.cordial.com/hc/en-us/articles/7323031900301-API-rate-limiting
+
+overview: >-
+  Cordial rate-limits the REST API per HTTP method and per endpoint, capping requests within a given
+  second. The provider states limits are customizable per account and that "the overwhelming majority
+  of companies will not experience spikes in API calls that warrant limiting" — so no default numeric
+  ceiling is published. Setting a rate limit on one API does not create limits on the others.
+
+rate_limits:
+- api: Cordial API v2
+  scope: per HTTP method and per endpoint
+  limit_count: null
+  limit_period: second
+  reset_period: 'typically one minute for most endpoints'
+  customizable: true
+  note: >-
+    No public numeric limit. The account-level values are set by Cordial and adjustable on request,
+    so a caller must read the response headers rather than assume a ceiling.
+- api: Webhooks
+  scope: per webhook
+  limit_count: 100
+  limit_period: second
+  customizable: true
+  note: 'Documented default, set in the webhook configuration. Must be kept within the receiving API''s own threshold.'
+
+exceeded:
+  status_code: 429
+  status_text: Too Many Requests
+  headers:
+  - {header: X-Rate-Limit-Limit, meaning: 'The maximum number of requests you''re permitted to make per period. The period is typically one minute for most of our endpoints.'}
+  - {header: X-Rate-Limit-Remaining, meaning: 'You have [x number] of API calls left before reaching the limit.'}
+  - {header: Retry-After, meaning: 'The (minimum) number of seconds until the user should wait to retry the request.'}
+  - {header: X-Rate-Limit-Reset, meaning: 'The number of seconds until the limit will reset to its maximum capacity.'}
+  guidance: 'The provider explicitly directs callers to use these headers to implement a backoff strategy.'
+
+gaps:
+- 'No numeric default is published, so a client cannot size a request budget before integrating.'
+- '429 is not declared on any of the 106 v2 operations (or the 83 v1 operations) in the published Swagger documents — the rate-limit contract exists only in the knowledge base.'
+- 'The rate-limit headers are non-standard (X-Rate-Limit-*) rather than RFC 9331 / draft-ietf-httpapi-ratelimit-headers (RateLimit-Limit, RateLimit-Remaining, RateLimit-Reset).'
+- 'Because there is no idempotency key (see conventions/cordial-conventions.yml), the documented retry-after backoff cannot be made safe for non-upsert writes.'
+
+x-evidence:
+  fetched: '2026-08-04'
+  url: https://support.cordial.com/api/v2/help_center/en-us/articles/7323031900301.json
+  http_status: 200
+  article_updated: '2024-11-27'

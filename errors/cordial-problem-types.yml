@@ -1,0 +1,173 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/cordial-v2-openapi-original.json, openapi/cordial-v1-openapi-original.json
+format: vendor
+rfc9457: false
+note: Cordial does NOT use RFC 9457 problem+json. Errors are returned as application/json with a vendor envelope.
+  Derived by walking every 4xx/5xx response declared across both published Swagger 2.0 documents; the documented_descriptions
+  are the provider's own response descriptions verbatim. The machine-actionable discriminator is `errorKey`, catalogued
+  separately in errors/cordial-error-keys.yml.
+envelope:
+  content_type: application/json
+  fields:
+  - field: error
+    type: boolean
+    required: true
+    description: 'Always true on an error response. On 401 specifically this field is a STRING carrying the message
+      ("Access Denied: Authentication Failure") rather than a boolean — a real inconsistency in the contract.'
+  - field: errorKey
+    type: string
+    required: true
+    description: Machine-readable error discriminator. GENERIC_ERROR_KEY is the catch-all.
+  - field: message
+    type: string|object
+    required: false
+    description: Human-readable explanation. Typed as string on some operations and object on others.
+  - field: messages
+    type: object
+    required: false
+    description: Used instead of `message` by several resources (contacts, products, supplements, transports).
+  - field: validationErrors
+    type: object
+    required: false
+    description: Per-field validation explanation keyed by payload field name.
+  - field: fieldErrors
+    type: array
+    required: false
+    description: Per-key/value validation explanation, used by message transports and includes.
+  - field: errors
+    type: object
+    required: false
+    description: Used by alerts and orchestration trigger validation, keyed by field name to an array of messages.
+  inconsistency_note: 'Five different shapes ship under one nominal envelope: message vs messages vs validationErrors
+    vs fieldErrors vs errors. An agent cannot rely on a single parse path; the union of these keys is the practical
+    contract.'
+problems:
+- status: 400
+  title: Bad Request
+  occurrences: 25
+  documented_descriptions:
+  - Bad request
+  - Count not create SendBatchMessage job
+  - Export destination config error
+  - Import destination config error
+  - Invalid ID supplied
+  - Invalid request
+  - Invalid status value
+  - Order not found
+  source_operations:
+  - openapi/cordial-v2-openapi-original.json#exportAccountMonitor
+  - openapi/cordial-v2-openapi-original.json#audiencetrendsexport
+  - openapi/cordial-v2-openapi-original.json#addActivity
+  - openapi/cordial-v2-openapi-original.json#createExportCAJob
+  - openapi/cordial-v2-openapi-original.json#createExportJob
+  - openapi/cordial-v2-openapi-original.json#onetimeStats
+- status: 401
+  title: Unauthorized
+  occurrences: 13
+  documented_descriptions: null
+  source_operations:
+  - openapi/cordial-v2-openapi-original.json#getListAccountAttributes
+  - openapi/cordial-v2-openapi-original.json#addattribute
+  - openapi/cordial-v2-openapi-original.json#getAttribute
+  - openapi/cordial-v2-openapi-original.json#updateAttribute
+  - openapi/cordial-v2-openapi-original.json#addList
+  - openapi/cordial-v2-openapi-original.json#getLists
+- status: 403
+  title: Forbidden
+  occurrences: 2
+  documented_descriptions:
+  - When an account does not have an ability to merge contacts
+  - When the contacts split feature is not available for an account
+  source_operations:
+  - openapi/cordial-v2-openapi-original.json#mergecontacts
+  - openapi/cordial-v2-openapi-original.json#splitContact
+- status: 404
+  title: Not Found
+  occurrences: 115
+  documented_descriptions:
+  - Attribute not found
+  - Record is not found
+  - Record not found
+  - Records not found
+  - Template not exist
+  - When the contact cannot be found
+  - record not found
+  source_operations:
+  - openapi/cordial-v2-openapi-original.json#getListAccountAttributes
+  - openapi/cordial-v2-openapi-original.json#deleteattribute
+  - openapi/cordial-v2-openapi-original.json#getLists
+  - openapi/cordial-v2-openapi-original.json#getlist
+  - openapi/cordial-v2-openapi-original.json#updatelist
+  - openapi/cordial-v2-openapi-original.json#deletelist
+- status: 405
+  title: Method Not Allowed
+  occurrences: 1
+  documented_descriptions:
+  - Invalid input
+  source_operations:
+  - openapi/cordial-v1-openapi-original.json#addContact
+- status: 406
+  title: Not Acceptable
+  occurrences: 5
+  documented_descriptions:
+  - Export configuration error
+  - Import configuration error
+  source_operations:
+  - openapi/cordial-v2-openapi-original.json#audiencetrendsexport
+  - openapi/cordial-v2-openapi-original.json#createExportCAJob
+  - openapi/cordial-v2-openapi-original.json#createImportJob
+  - openapi/cordial-v2-openapi-original.json#ordersimport
+  - openapi/cordial-v2-openapi-original.json#importsupplementrecords
+- status: 415
+  title: Unsupported Media Type
+  occurrences: 2
+  documented_descriptions:
+  - Unsupported Media Type
+  source_operations:
+  - openapi/cordial-v2-openapi-original.json#createExportCAJob
+  - openapi/cordial-v2-openapi-original.json#createExportJob
+- status: 422
+  title: Unprocessable Entity
+  occurrences: 71
+  documented_descriptions:
+  - Creation batch message errors
+  - Creation contact errors
+  - Error on removing supplement
+  - Failed request
+  - KEY must be unique
+  - Key not exist
+  - Name must be unique
+  - Supplement does not exist
+  source_operations:
+  - openapi/cordial-v2-openapi-original.json#getListAccountAttributes
+  - openapi/cordial-v2-openapi-original.json#addattribute
+  - openapi/cordial-v2-openapi-original.json#getAttribute
+  - openapi/cordial-v2-openapi-original.json#updateAttribute
+  - openapi/cordial-v2-openapi-original.json#addList
+  - openapi/cordial-v2-openapi-original.json#updatelist
+- status: 500
+  title: Internal Server Error
+  occurrences: 2
+  documented_descriptions:
+  - Something went wrong on the application side
+  - When an unexpected internal error occurs
+  source_operations:
+  - openapi/cordial-v2-openapi-original.json#mergecontacts
+  - openapi/cordial-v2-openapi-original.json#splitContact
+- status: 429
+  title: Too Many Requests
+  occurrences: 0
+  documented_descriptions:
+  - Returned when an API rate limit is exceeded. Documented in the knowledge base but NOT declared on any operation
+    in either published Swagger document.
+  source_operations:
+  - https://support.cordial.com/hc/en-us/articles/7323031900301-API-rate-limiting
+  method: searched
+gaps:
+- 429 Too Many Requests is a real, documented response (with X-Rate-Limit-* and Retry-After headers) but appears
+  on ZERO of the 106 v2 operations in the published spec.
+- 62 of 115 declared 404 responses and 30 of 71 declared 422 responses carry an EMPTY description, so an agent gets
+  a status code and no semantics.
+- No response examples are declared anywhere in either spec; no operation-level parameter examples either.
+- The 401 response schema types `error` as a string while every other error response types it as a boolean.

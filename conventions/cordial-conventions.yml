@@ -1,0 +1,155 @@
+generated: '2026-08-04'
+method: searched
+source: https://support.cordial.com/hc/en-us/articles/203885498-RESTful-API-summary-and-usage
+derived_from: openapi/cordial-v2-openapi-original.json
+docs:
+  restful_summary: https://support.cordial.com/hc/en-us/articles/203885498-RESTful-API-summary-and-usage
+  functional_groups: https://support.cordial.com/hc/en-us/articles/203885828-API-Glossary-and-Functional-Overview
+  rate_limiting: https://support.cordial.com/hc/en-us/articles/7323031900301-API-rate-limiting
+  getting_started: https://support.cordial.com/hc/en-us/articles/360001897772-Get-started-for-developers
+
+transport:
+  protocol: HTTPS only
+  content_type: application/json
+  request_format: JSON
+  response_format: JSON
+  methods: [POST, GET, PUT, DELETE]
+  method_semantics:
+    POST: 'Creates a new entry in the collection. The ID or key is either assigned by the collection or passed in the JSON body, and is usually returned.'
+    GET: 'Retrieves members of a collection; response includes member keys for further navigation. Query parameters filter.'
+    PUT: 'Replaces or updates the entire collection with another collection or a subset of updated fields.'
+    DELETE: 'Removes a member of a collection, referenced by an ID or key.'
+  note: 'PATCH is not supported; partial updates go through PUT.'
+
+authentication:
+  style: HTTP Basic
+  credential: account API key as the username, password left blank
+  header_example: 'Authorization: Basic <base64(apikey:)>'
+  key_location: 'Cordial UI > Account Settings > Account > API'
+  artifact: authentication/cordial-authentication.yml
+  note: >-
+    The account API key is a single long-lived bearer-equivalent credential with no scoping,
+    expiry, or rotation surface in the API. The OAuth 2.1 model (scopes, refresh, DCR) exists only on
+    the MCP server and CLI, not on REST.
+
+idempotency:
+  supported: false
+  header: null
+  evidence: >-
+    Zero occurrences of "idempoten" across both published Swagger documents; no Idempotency-Key
+    parameter on any of the 106 v2 operations; no idempotency guidance in the RESTful API summary,
+    the getting-started article, or the rate-limiting article.
+  practical_consequence: >-
+    Retrying a failed POST is unsafe for genuinely creating resources. POST /v2/contacts behaves as an
+    upsert keyed on the account primary key, which makes contact creation naturally idempotent, but
+    POST /v2/contactactivities (event ingestion), POST /v2/orders, and every send operation have no
+    de-duplication contract. A client implementing the documented rate-limit backoff has no
+    provider-supplied way to make that retry safe.
+
+pagination:
+  style: page-number
+  params:
+  - {name: page, in: query, description: 'Page number, 1-based.'}
+  - {name: per_page, in: query, description: 'Records per page.'}
+  - {name: return_count, in: query, description: 'Ask the collection to include a total count in the response.'}
+  applies_to: 12 of the 106 v2 operations declare page/per_page
+  constraints:
+  - 'GET /v2/jobs: when include=statistic is requested, per_page must not exceed 25 (errorKey JOBS_STATISTIC_PER_PAGE_EXCEEDED).'
+  note: >-
+    Offset/page pagination rather than cursors. No Link header, no next/prev tokens in the spec —
+    the caller increments `page` and relies on `return_count` to know when to stop.
+
+sparse_fields:
+  supported: true
+  param: fields
+  applies_to: 11 v2 operations
+  description: 'Comma-separated field selection on collection reads, e.g. limiting a contacts response to specific attributes.'
+
+filtering:
+  style: bracketed comparison operators on query params
+  operators: ['[gt]', '[gte]', '[lt]', '[lte]']
+  common_fields:
+  - {field: 'ct', description: 'Created time. Used as ct[gt], ct[gte], ct[lt], ct[lte].'}
+  - {field: 'lm', description: 'Last modified. Used as lm[gt], lm[gte], lm[lt], lm[lte].'}
+  additional_filters: [status, tags, type, indexed, name, email, channel_key, channel_type, start_date, end_date, mcID, msID, mdtID, experiment, variant, entity, orchestrationID, include]
+  note: 'Timestamps are documented as ISO-8601 recommended; the spec''s own error strings warn "is invalid. ISO-8601 is a recommended format."'
+
+sorting:
+  params:
+  - {name: sort_by, in: query}
+  - {name: sort_dir, in: query}
+  applies_to: 5 v2 operations
+
+versioning:
+  scheme: uri-path
+  current: v2
+  also_published: v1
+  base: https://api.cordial.io/v2
+  note: >-
+    Both v1 and v2 are live and each has its own hosted Swagger console. The version is the first
+    path segment; there is no version header, no date-pinning, and no per-account version selection.
+  artifact: lifecycle/cordial-lifecycle.yml
+
+rate_limiting:
+  documented: true
+  status_code: 429
+  headers:
+  - {header: X-Rate-Limit-Limit, meaning: 'The maximum number of requests permitted per period. The period is typically one minute for most endpoints.'}
+  - {header: X-Rate-Limit-Remaining, meaning: 'Calls remaining before reaching the limit.'}
+  - {header: Retry-After, meaning: 'Minimum seconds to wait before retrying.'}
+  - {header: X-Rate-Limit-Reset, meaning: 'Seconds until the limit resets to maximum capacity.'}
+  granularity: 'Per HTTP method (GET, PUT, POST, DELETE) and per endpoint. Limits are per-account customizable.'
+  spec_gap: 'No 429 response is declared on any operation in either published spec, so the rate-limit contract is documentation-only.'
+  artifact: rate-limits/cordial-rate-limits.yml
+
+error_envelope:
+  format: vendor JSON (not RFC 9457)
+  discriminator: errorKey
+  shape_variants: [message, messages, validationErrors, fieldErrors, errors]
+  artifacts: [errors/cordial-problem-types.yml, errors/cordial-error-keys.yml]
+
+async_jobs:
+  pattern: 'POST initiates, then poll'
+  description: >-
+    Every bulk operation (imports, exports, analytics exports) returns a job rather than a result.
+    The caller polls GET /v2/jobs/{id} until completion. There is no callback, no webhook on job
+    completion, and no Location header convention declared in the spec.
+  initiating_operations: [createImportJob, createExportJob, createExportCAJob, ordersimport, productimport, exportAccountMonitor, audiencetrendsexport, exportMessageAnalytics, importsupplementrecords]
+  poller: getsinglejob
+
+request_tracing:
+  request_id_header: null
+  supported: false
+  note: >-
+    No request-id or correlation-id header is documented or declared in the spec. The CLI offers
+    `--tracing` for OpenTelemetry spans client-side, but the API returns no server-side trace handle,
+    so a caller cannot quote an identifier to support when escalating a failed call.
+
+metadata:
+  supported: true
+  mechanism: >-
+    Not a dedicated `metadata` object as in some APIs. Cordial's document store lets callers attach
+    arbitrary custom attributes to contacts, arbitrary JSON properties to contact activities, and
+    arbitrary non-indexed fields to supplement records, with automatic type recognition. Schema
+    flexibility IS the metadata mechanism.
+
+expansion:
+  param: include
+  applies_to: 2 v2 operations
+  known_values: [statistic]
+  note: 'Very limited compared with the sparse-fields support; there is no general resource-expansion convention.'
+
+webhooks:
+  direction: outbound
+  artifact: asyncapi/cordial-webhooks.yml
+  configuration: 'UI-configured (Integrations > Webhooks), not API-configured. No webhook CRUD operations exist in either spec.'
+  rate_limit_default: 100 per second, caller-configurable
+
+cross_references:
+  authentication: authentication/cordial-authentication.yml
+  scopes: scopes/cordial-scopes.yml
+  errors: [errors/cordial-problem-types.yml, errors/cordial-error-keys.yml]
+  lifecycle: lifecycle/cordial-lifecycle.yml
+  rate_limits: rate-limits/cordial-rate-limits.yml
+  data_model: data-model/cordial-data-model.yml
+  webhooks: asyncapi/cordial-webhooks.yml

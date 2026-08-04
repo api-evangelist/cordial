@@ -1,0 +1,65 @@
+generated: '2026-08-04'
+method: searched
+source: live probes of every host in apis.yml and every OpenAPI servers[] host
+note: >-
+  Four hosts were probed against six well-known paths each (24 probes). Only the MCP host publishes
+  anything. api.cordial.io answers 401 for every path including /.well-known/*, which is a blanket auth
+  gate rather than a published document — recorded as 401, not as a hit. developers.cordial.com and
+  cordial.com return 404 HTML.
+
+hosts:
+- host: https://mcp.cordial.io
+  documents:
+  - {path: /.well-known/oauth-authorization-server, status: 200, file: cordial-oauth-authorization-server.json, spec: 'RFC 8414'}
+  - {path: /.well-known/oauth-protected-resource, status: 200, file: cordial-oauth-protected-resource.json, spec: 'RFC 9728'}
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+
+- host: https://cordial.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+
+- host: https://developers.cordial.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+
+- host: https://api.cordial.io
+  note: 'Blanket 401 on every path. Not a discovery surface.'
+  documents:
+  - {path: /.well-known/security.txt, status: 401}
+  - {path: /.well-known/openid-configuration, status: 401}
+  - {path: /.well-known/oauth-authorization-server, status: 401}
+  - {path: /.well-known/oauth-protected-resource, status: 401}
+  - {path: /.well-known/api-catalog, status: 401}
+  - {path: /.well-known/ai-plugin.json, status: 401}
+  - {path: /.well-known/agent-card.json, status: 401}
+  - {path: /.well-known/agent.json, status: 401}
+
+summary:
+  hosts_probed: 4
+  paths_probed_per_host: 8
+  documents_found: 2
+  security_txt: none
+  api_catalog: none
+  agent_card: none
+
+x-evidence:
+  fetched: '2026-08-04'

@@ -1,0 +1,63 @@
+generated: '2026-08-04'
+method: searched
+source: https://mcp.cordial.io/.well-known/oauth-authorization-server
+docs: https://developers.cordial.com/mcp
+note: >-
+  Cordial's REST API declares no oauth2 security scheme — it is HTTP Basic with an unscoped account
+  API key — so derive-oauth-scopes.py correctly found zero scopes in the OpenAPI. The scopes below
+  come from the LIVE OAuth 2.1 authorization-server metadata the MCP endpoint publishes anonymously,
+  which is the only scope surface Cordial operates. Both scope strings are the provider's own,
+  verbatim from the discovery document; the descriptions are ours and are marked as such.
+
+surface: MCP server + CLI
+applies_to_rest: false
+rest_note: >-
+  The 106-operation REST API has NO scope model. One account API key grants every operation, including
+  contact export, contact deletion, and message sending. Any least-privilege requirement must be met
+  outside the API.
+
+schemes:
+- name: cordialOAuth
+  type: oauth2
+  issuer: https://mcp.cordial.io
+  source: well-known/cordial-oauth-authorization-server.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://mcp.cordial.io/oauth/authorize
+    tokenUrl: https://mcp.cordial.io/oauth/token
+  registration_endpoint: https://mcp.cordial.io/oauth/register
+  resource: https://mcp.cordial.io
+
+scopes:
+- scope: read
+  description_source: api-evangelist
+  description: >-
+    Read access to Cordial account data through the MCP server — audiences, messages, analytics,
+    content, orchestrations, sculpt blocks and templates, reports, channels, data operations,
+    supplements, products and tags. The provider summarises the current grant as "Read (writes coming
+    soon with human approval)".
+  flows: [authorizationCode]
+  sources: [well-known/cordial-oauth-authorization-server.json]
+- scope: profile
+  description_source: api-evangelist
+  description: >-
+    Identity of the signed-in user and account, surfaced by the `whoami` MCP tool and the
+    `cosdk whoami` CLI command.
+  flows: [authorizationCode]
+  sources: [well-known/cordial-oauth-authorization-server.json]
+
+granularity:
+  scope_count: 2
+  assessment: >-
+    Coarse. Two scopes cover 56 tools across 17 domains, so a client that needs only audience counts
+    receives the same grant as one that can read every message, every contact attribute definition and
+    every AI insight report. There is no per-domain or per-tool scope, and no write scope exists yet.
+    When writes land, the announced control is human approval rather than scope separation — worth
+    tracking, because a read/write split is the natural place to add it.
+
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+  - {url: 'https://mcp.cordial.io/.well-known/oauth-authorization-server', http_status: 200, scopes_supported: [read, profile]}
+  - {url: 'https://mcp.cordial.io/.well-known/oauth-protected-resource', http_status: 200, scopes_supported: [read, profile]}
+  derive_script: 'derive-oauth-scopes.py cordial -> 0 oauth2 schemes in OpenAPI (expected; REST is Basic auth).'

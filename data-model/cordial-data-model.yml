@@ -1,0 +1,148 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/cordial-v2-openapi-original.json
+docs: https://support.cordial.com/hc/en-us/articles/360001897772-Get-started-for-developers
+note: >-
+  Derived from the 212 schema definitions and 106 operations of the published v2 Swagger document, and
+  reconciled against Cordial's own "How Cordial stores data" collection list in the developer getting-
+  started article. Cordial's store is a document database (MongoDB), so the model is collection-shaped
+  and schema-optional rather than relational: contacts and supplements accept arbitrary unindexed
+  attributes, and only indexed supplement fields enforce type validation.
+
+storage:
+  engine: document database (MongoDB), described by the provider as "document-based and search-based"
+  schema_enforcement: >-
+    Optional. Contact attributes and non-indexed supplement fields accept any structured or
+    unstructured value with automatic type recognition; indexed supplement fields enforce declared types.
+
+id_conventions:
+- {field: cID, entity: Contact, description: Cordial-assigned internal contact ID}
+- {field: primary_key, entity: Contact, description: 'The account''s configured primary key, usually the email address; used in the URL path for contact operations'}
+- {field: mcID, entity: Message, description: Message contact/send ID, used to attribute an activity to a specific send}
+- {field: msID, entity: Message, description: Message send ID}
+- {field: mdtID, entity: AutomationTemplate, description: Message draft/template ID}
+- {field: orderID, entity: Order, description: Account-supplied order identifier}
+- {field: productID, entity: Product, description: Account-supplied product identifier}
+- {field: sku, entity: Product, description: Stock-keeping unit, used with productID on cart operations}
+- {field: orchestrationID, entity: Orchestration, description: Orchestration (Podium journey) ID}
+- {field: jobID, entity: Job, description: Async job ID returned by every import/export operation}
+- {field: dabId, entity: DataJob, description: One-time data job ID}
+- {field: key, entity: 'Supplement | AutomationTemplate | Include | Attribute | DataJob', description: Human-authored string key used in place of an ID on key-addressed resources}
+
+entities:
+- name: Contact
+  collection: contacts
+  description: The central record. Channels, attributes, list membership and cart items hang off it.
+  addressed_by: primary_key (path) or cID
+  operations: [addContact, getContacts, getsinglecontact, updateContacts, deletesinglecontact, mergecontacts, splitContact, unsubscribecontact, buildcontactprofile]
+  schemas: [ContactC, ContactError]
+
+- name: ContactActivity
+  collection: events
+  description: >-
+    Behavioural event stream. Covers reserved system events (open, click, bounce, complaint, optout,
+    crdl_sms_delivered, crdl_notification_tap, …) and arbitrary custom-named events with free-form
+    JSON properties. The event catalogue is captured in asyncapi/cordial-webhooks.yml.
+  operations: [addActivity, getActivityList, createExportCAJob]
+
+- name: Order
+  collection: orders
+  description: Purchase records used for personalization, audience building, replenishment and revenue attribution.
+  operations: [addorders, getorders, getorder, deleteorder, ordersimport]
+  schemas: [OrderO, OrdersFilterError]
+
+- name: Product
+  collection: products
+  description: Product catalogue used for recommendations and dynamic content. Not searchable in Audience Builder.
+  operations: [addproducts, getproducts, getproduct, updateproducts, deleteproducts, productimport]
+  schemas: [ProductResponse, ProductValidationError]
+
+- name: Supplement
+  collection: supplements
+  description: >-
+    User-defined tables for anything outside the four fixed collections — store locations, coupon
+    codes, content blocks. Indexed fields are typed; everything else is schemaless.
+  addressed_by: key
+  operations: [addsupplement, getsupplements, getsupplement, updatesupplement, deletesupplements, clearsupplement]
+
+- name: SupplementRecord
+  collection: supplements
+  description: A row inside a supplement table.
+  operations: [getsupplementrecords, addsupplementrecord, getsupplementrecord, updatesupplementrecord, deletesupplementrecord, importsupplementrecords]
+
+- name: ContactList
+  collection: contacts
+  description: Named audience list a contact can belong to.
+  operations: [addList, getLists, getlist, updatelist, deletelist, clearlist, getlistcount]
+
+- name: ContactAttribute
+  collection: contacts
+  description: Account-level definition of a contact attribute (name, type, validation).
+  addressed_by: key
+  operations: [getListAccountAttributes, addattribute, getAttribute, updateAttribute, deleteattribute]
+
+- name: BatchMessage
+  description: A one-off scheduled or immediate send.
+  operations: [addBatch, getBatch, getSingleBatch, updateBatch, deleteSingleBatch, sendSingleBatch, sendTestSingleBatch, pauseSingleBatch, resumeSingleBatch, cancelSingleBatch, unscheduleBatch, renderPreviewSingleBatch, geBatchExperimentPerformance]
+
+- name: AutomationTemplate
+  description: A reusable, published triggered-message template.
+  addressed_by: key
+  operations: [addTemplate, getTemplates, gettemplate, updateTemplate, deleteTemplate, publishTemplate, sentMessage, sentDraftMessage, renderPreviewAutomationtemplate, renderPublishedAutomationtemplate, getAutomationTemplateExperimentPerformance]
+
+- name: Orchestration
+  description: A Podium journey — a DAG of message, filter, delay and action nodes.
+  operations: [getOrchestrations, getOrchestration, orchestrationActions, triggerOrchestration]
+
+- name: Include
+  description: Reusable HTML content snippet referenced from messages.
+  addressed_by: key
+  operations: [addinclude, getincludes, getinclude, updateinclude, removeinclude]
+
+- name: DataJob
+  description: A recurring or one-time data transformation/automation.
+  addressed_by: key
+  operations: [runTransformation, runTrigger, listOfRunsForDataAutomation, statsForSingleAggregation, onetimeStats]
+
+- name: Job
+  description: The async execution record every import/export returns; polled for completion.
+  operations: [getjobs, getsinglejob]
+
+- name: Alert
+  description: Account monitoring alert definition.
+  operations: [addalert, getalert, updatealert, removealert]
+
+- name: Program
+  description: A grouping of messages reported on together.
+  operations: [getProgramSummary, getProgramStats]
+
+relationships:
+- {from: Contact, to: ContactActivity, type: has_many, via: cID, note: Every activity is attributed to a contact.}
+- {from: ContactActivity, to: BatchMessage, type: belongs_to, via: mcID, note: Message events carry the send they came from.}
+- {from: Contact, to: ContactList, type: has_many, via: lists, note: List membership is an array on the contact document.}
+- {from: Contact, to: Order, type: has_many, via: cID}
+- {from: Contact, to: Product, type: has_many, via: 'cart / cartitems (productID + sku + qty)', note: 'Cart is a sub-object on the contact, mutated by savecartcontact / updatecartcontact / addproducttocartcontact / removeproducttocartqtycontact / clearcartcontact.'}
+- {from: Order, to: Product, type: has_many, via: productID}
+- {from: Contact, to: ContactAttribute, type: belongs_to, via: 'attribute key', note: 'ContactAttribute is the account-level DEFINITION; the contact document holds the values.'}
+- {from: Supplement, to: SupplementRecord, type: has_many, via: 'supplement key'}
+- {from: BatchMessage, to: Program, type: belongs_to, via: 'program id'}
+- {from: AutomationTemplate, to: BatchMessage, type: has_many, via: 'child sends (sentMessage)', note: 'Sending from a template creates batch sends; the MCP list_child_sends tool walks this edge.'}
+- {from: Orchestration, to: AutomationTemplate, type: has_many, via: 'message nodes in the DAG'}
+- {from: Orchestration, to: ContactActivity, type: has_many, via: 'crdl-pdm-* events'}
+- {from: DataJob, to: Supplement, type: has_many, via: 'transform source/destination', note: 'The dependency edge the provider''s own data-dependency-trace skill walks backwards.'}
+- {from: Job, to: 'Contact | Order | Product | Supplement', type: has_one, via: 'import/export target', note: 'Every bulk operation is async: POST returns a jobID, then poll getsinglejob.'}
+- {from: BatchMessage, to: Include, type: has_many, via: 'include key referenced in message body'}
+
+async_pattern:
+  description: >-
+    All bulk work is job-based. POST /v2/contactimports, /v2/contactexports, /v2/contactactivityexport,
+    /v2/ordersimport, /v2/productimports, /v2/accountmonitorexport, /v2/audiencetrendsexport,
+    /v2/messageanalyticsexport and /v2/supplements/{supplement}/imports each return a job, which is then
+    polled via GET /v2/jobs/{id}.
+  initiators: [createImportJob, createExportJob, createExportCAJob, ordersimport, productimport, exportAccountMonitor, audiencetrendsexport, exportMessageAnalytics, importsupplementrecords]
+  poller: getsinglejob
+
+coverage:
+  definitions_in_spec: 212
+  entities_modelled: 17
+  relationships: 15

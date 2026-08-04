@@ -1,0 +1,112 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/cordial-v2-openapi-original.json
+note: >-
+  The non-payments sibling of a decline-code registry. Cordial's machine-actionable error
+  discriminator is the `errorKey` string on the error envelope (see errors/cordial-problem-types.yml).
+  Every key below was extracted from a declared `errorKey` enum or `example` value in the published
+  Swagger 2.0 document — none is inferred. The registry is thin and dominated by GENERIC_ERROR_KEY,
+  which is itself the finding: on most operations an agent cannot branch on the error, only read the
+  prose in `message`.
+
+envelope_field: errorKey
+
+error_keys:
+- key: GENERIC_ERROR_KEY
+  scope: global
+  status: [400, 404, 406, 422]
+  meaning: Catch-all discriminator. Carries no class information; the caller must parse `message`.
+  action: Read `message` / `messages` / `validationErrors` for the actual cause. Not retryable without change.
+  note: >-
+    Declared as the example value on the overwhelming majority of error schemas in the spec, across
+    contacts, orders, products, supplements, lists, attributes, includes, transports, imports,
+    exports, data jobs and automation templates.
+
+- key: VALIDATION_ERROR
+  scope: [alerts, orchestrations]
+  status: [400, 422]
+  meaning: The request payload failed field-level validation.
+  action: Inspect the `errors` object, which maps each failing field name to an array of messages. Fix and resubmit.
+  source: 'definitions: AlertErrorValidation, TriggerOrchestrationFailureResponse'
+
+- key: RECORD_NOT_FOUND
+  scope: global
+  status: [404]
+  meaning: The addressed record does not exist.
+  action: Not retryable. Verify the id/key.
+
+- key: ACCOUNT_LISTS_NOT_FOUND
+  scope: account lists
+  status: [404]
+  meaning: The referenced contact list does not exist.
+  action: Not retryable. Verify the list id via getLists.
+
+- key: INVALID_AUDIENCE_RULES
+  scope: audiencecount
+  status: [422]
+  meaning: The posted audience rule object is not a valid audience definition.
+  action: >-
+    Fix the rules payload. The spec enumerates causes including "Timezones should not be empty" and
+    "Timezone source should be either string or geo".
+  source: 'definition: AudienceCountErrorValidation'
+
+- key: JOBS_STATISTIC_PER_PAGE_EXCEEDED
+  scope: jobs
+  status: [422]
+  meaning: '`per_page` exceeded 25 while `include=statistic` was requested.'
+  action: Lower `per_page` to 25 or below, or drop `include=statistic`.
+  source: 'definition: JobsStatisticPerPageError'
+
+- key: UNSUPPORTED_MEDIA_TYPE
+  scope: global
+  status: [415]
+  meaning: The request Content-Type is not supported.
+  action: 'Send `Content-Type: application/json`.'
+
+- key: ORCHESTRATIONS_ORCHESTRATION_NOT_FOUND
+  scope: orchestrations
+  status: [400, 422]
+  meaning: No orchestration exists for the supplied orchestrationID.
+  action: Not retryable. Verify the ID via getOrchestrations.
+  source: 'definition: TriggerOrchestrationFailureResponse (enum)'
+
+- key: ORCHESTRATIONS_ORCHESTRATION_NOT_PUBLISHED
+  scope: orchestrations
+  status: [400, 422]
+  meaning: The orchestration exists but has never been published.
+  action: Publish the orchestration in the Cordial UI before triggering it.
+
+- key: ORCHESTRATIONS_ORCHESTRATION_IS_DISABLED
+  scope: orchestrations
+  status: [400, 422]
+  meaning: The orchestration is published but currently disabled.
+  action: Enable the orchestration before triggering.
+
+- key: ORCHESTRATIONS_API_TRIGGER_NOT_CONFIGURED
+  scope: orchestrations
+  status: [400, 422]
+  meaning: The orchestration has no API trigger configured, so it cannot be started over REST.
+  action: Add an API trigger node to the orchestration.
+
+- key: ORCHESTRATIONS_API_INVALID_CONTACTS_PAYLOAD
+  scope: orchestrations
+  status: [400, 422]
+  meaning: The contacts payload sent to the trigger is malformed.
+  action: Correct the contacts payload shape and resubmit.
+
+- key: ORCHESTRATIONS_API_NO_VALID_CONTACTS_FOUND
+  scope: orchestrations
+  status: [400, 422]
+  meaning: The payload parsed but resolved to zero valid contacts.
+  action: Verify the contact identifiers exist in the account before triggering.
+
+coverage:
+  keys_catalogued: 13
+  enum_declared: 7
+  example_declared: 6
+  operations_in_spec: 106
+  assessment: >-
+    Only the orchestration trigger declares a real, closed enum of error keys. Every other resource
+    documents GENERIC_ERROR_KEY as its example, so 13 keys cover a 106-operation surface. This is the
+    single largest agent-readiness gap in Cordial's REST contract: error semantics are present in prose
+    but not machine-branchable.

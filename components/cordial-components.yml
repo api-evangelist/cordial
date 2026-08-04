@@ -1,0 +1,75 @@
+generated: '2026-08-04'
+method: searched
+source: >-
+  https://support.cordial.com/hc/en-us/sections/204163538-Embedded-JavaScript-Listener,
+  https://support.cordial.com/hc/en-us/articles/26983758909581-Mobile-documentation
+
+note: >-
+  Cordial's client-side surface is data-collection and message-rendering rather than a UI element
+  library. There is no hosted checkout, no embeddable dashboard, and no web-component set. What it
+  ships is an embedded JavaScript listener for the web and in-app message rendering inside the mobile
+  SDKs. Recorded here because these are genuine client-side components distinct from the server-side
+  API, but the family is narrow and that is the finding.
+
+families:
+- family: Embedded JavaScript Listener
+  kind: browser script
+  docs: https://support.cordial.com/hc/en-us/sections/204163538-Embedded-JavaScript-Listener
+  current_version: v2
+  description: >-
+    A script embedded on the customer's website that identifies visitors, passes contact data,
+    custom-named events, orders and cart items into the Cordial account in real time, and stores
+    anonymous visitor data that is attributed once a contact is identified.
+  capabilities:
+  - visitor identification
+  - custom event collection
+  - cart and order collection
+  - anonymous-to-known contact stitching
+  - website personalization surfaces (greeting modals, landing pages, promotions, lightboxes)
+  tag_manager_support:
+  - {name: Tealium iQ, docs: 'https://support.cordial.com/hc/en-us/articles/15049600030605-Add-Cordial-JavaScript-Listener-v2-to-Tealium-iQ'}
+  loader: hosted script tag
+  npm_package: null
+  note: 'Not distributed via npm; installed as a script tag or through a tag manager.'
+
+- family: Mobile in-app message rendering
+  kind: native SDK UI
+  docs: https://support.cordial.com/hc/en-us/articles/26983758909581-Mobile-documentation
+  platforms: [iOS, Android, React Native, Expo]
+  packages:
+  - CordialSDK (CocoaPods 5.8.2)
+  - com.cordial.cordialsdk:android (Maven Central 4.19.2)
+  - '@cordialinc/react-native-sdk (npm 2.4.1)'
+  - '@cordialinc/expo-module (npm 1.4.0)'
+  description: >-
+    The mobile SDKs render three provider-controlled surfaces inside the host app: push notifications,
+    in-app messages, and a mobile inbox. Content is authored in Cordial (including Sculpt in-app
+    content) and rendered by the SDK, which makes these genuine embedded components rather than pure
+    data-collection libraries.
+  components:
+  - {name: Push notification, events: [crdl_notification_tap, 'crdl_{channelKey}_send_failure']}
+  - {name: In-app message, events: [crdl_in_app_message_shown, crdl_in_app_message_manual_dismiss, crdl_in_app_message_auto_dismiss]}
+  - {name: Mobile inbox, events: [crdl_inbox_read]}
+  - {name: Deep link handling, events: [crdl_deep_link_open]}
+
+- family: Sculpt
+  kind: authoring components (server-rendered)
+  description: >-
+    Cordial's modular email content system — reusable blocks composed into templates, with a
+    draft/publish workflow and change log added in June 2026. Sculpt blocks are read-only-visible
+    through MCP (list_sculpt_blocks, get_sculpt_block, list_sculpt_templates, get_sculpt_template)
+    and have NO REST operations at all.
+  client_side: false
+  note: >-
+    Included for completeness because it is component-shaped, but Sculpt renders server-side into
+    messages; it is not shipped to a browser as a library.
+
+not_published:
+  web_components: 'No custom-element / web-component library.'
+  element_library: 'No hosted input elements (Cordial handles no payment or credential capture).'
+  embedded_dashboard: 'No embeddable analytics or reporting widget.'
+  react_component_package: 'No first-party React component package on npm.'
+
+x-evidence:
+  fetched: '2026-08-04'
+  npm_search: 'registry.npmjs.org search for "cordial" returned no UI-component package; only the CLI, the two mobile SDKs, and cordialmcp.'

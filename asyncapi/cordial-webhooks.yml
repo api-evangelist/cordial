@@ -1,0 +1,145 @@
+generated: '2026-08-04'
+method: searched
+source: https://support.cordial.com/hc/en-us/articles/13584534464141-Webhooks
+event_catalog_source: https://support.cordial.com/hc/en-us/articles/4411361663501-System-events-reference-page
+spec_type: none
+asyncapi_published: false
+note: >-
+  Cordial documents a real, configurable outbound webhook surface and publishes a complete system-event
+  reference, but ships NO AsyncAPI document. Nothing here is a synthesized AsyncAPI — this artifact is
+  the webhook/event catalogue as the provider publishes it. The event names and descriptions below are
+  verbatim from the system-events reference page (last updated 2025-09-25) plus events announced in the
+  monthly release notes.
+
+surface:
+  type: outbound webhooks
+  description: >-
+    Webhooks stream real-time event data from Cordial to an external HTTP endpoint. Multiple webhooks
+    can be enabled, each configured to stream a specified set of system and/or custom events.
+  configuration_path: 'Cordial UI: Integrations > Webhooks > New'
+  api_configurable: false
+  api_gap: >-
+    There are no webhook CRUD operations in either published Swagger document. Webhooks cannot be
+    created, listed, updated, or deleted programmatically — a real gap for anyone provisioning
+    Cordial per-tenant.
+
+delivery:
+  modes:
+  - {mode: single, description: Sends a single event with each request.}
+  - {mode: batched, description: 'Sends an array of events with each request. Requires setting a maximum number of events and a maximum payload size.'}
+  rate_limiting:
+    default: 100 per second
+    configurable: true
+    guidance: 'Set within the receiving API''s own rate threshold.'
+  request_headers: 'Arbitrary headers (e.g. authorization keys or tokens) configurable per webhook.'
+  payload_transformation:
+    mechanism: setPayload utility in the Payload Editor
+    description: >-
+      Payloads are reshaped inside Cordial to match the schema the receiving API expects, using
+      Cordial's Smarty templating. This means the wire schema is account-defined, not provider-fixed —
+      which is precisely why no AsyncAPI document could describe it generically.
+  edit_constraint: 'An enabled webhook must be disabled before its payload can be edited, then re-enabled.'
+
+triggers:
+  scope: per channel
+  modes: [Send all events, Allowed events, Blocked events, Block all events]
+
+channels:
+- channel: all
+  events:
+  - {name: crdl_subscribeStatusChange, description: Contact's subscribe status changed.}
+  - {name: message-sent, description: Message was sent as directed.}
+
+- channel: email
+  events:
+  - {name: bounce, description: Email was bounced and unable to be delivered to the address.}
+  - {name: click, description: Embedded link was clicked.}
+  - {name: complaint, description: Email was marked as spam by the recipient.}
+  - {name: open, description: Email was opened by the recipient.}
+  - {name: optout, description: Recipient unsubscribed from the message.}
+
+- channel: push
+  events:
+  - {name: crdl_app_close, description: App was closed by the user.}
+  - {name: crdl_app_install, description: App was installed by the user.}
+  - {name: crdl_app_open, description: App was opened by the user.}
+  - {name: 'crdl_{channelKey}_send_failure', description: Error received when trying to send to the device.}
+  - {name: crdl_deep_link_open, description: A deep link was opened from within the app.}
+  - {name: crdl_device_notifications_manual_optin, description: Push notifications for the app were enabled by the user.}
+  - {name: crdl_device_notifications_manual_optout, description: Push notifications for the app were disabled by the user.}
+  - {name: crdl_device_notifications_optout, description: Push notifications for the app were disabled automatically.}
+  - {name: crdl_device_notifications_uninstalled, description: The application was uninstalled from a device.}
+  - {name: crdl_in_app_message_auto_dismiss, description: The in-app message was dismissed automatically.}
+  - {name: crdl_in_app_message_shown, description: The in-app message was displayed.}
+  - {name: crdl_in_app_message_manual_dismiss, description: The in-app message was closed by the user.}
+  - {name: crdl_inbox_read, description: The in-app message was read by the user.}
+  - {name: 'crdl_in-app-dismissed', description: The in-app message was dismissed.}
+  - {name: crdl_notification_tap, description: A notification was tapped by the user.}
+  - {name: crdl_push_enabled_change, description: 'Fired whenever a contact''s push notification enabled status changes. Properties: toPushEnabled, fromPushEnabled, deviceID, method. Added March 2026.'}
+
+- channel: sms
+  events:
+  - {name: crdl_phone_deactivation, description: Phone number was deactivated by the mobile carrier.}
+  - {name: crdl_sms_delivered, description: SMS message was delivered by Cordial.}
+  - {name: crdl_sms_doi_optin, description: Double opt-in message sent.}
+  - {name: crdl_sms_doi_confirm, description: Double opt-in confirmed.}
+  - {name: crdl_sms_failed, description: SMS message failed to deliver.}
+  - {name: crdl_incoming_sms, description: SMS message received from contact.}
+  - {name: optout, description: Recipient unsubscribed from the message.}
+
+- channel: rcs
+  events:
+  - {name: crdl_sms_delivered, description: 'RCS message was delivered by Cordial. Carries "sendType": "rcs".'}
+  - {name: crdl_incoming_sms, description: 'RCS message received from contact. Carries "sendType": "rcs".'}
+  - {name: crdl_rcs_fallback, description: RCS message failed to deliver, attempting fallback channel.}
+  - {name: crdl_rcs_open, description: Recipient successfully opened the message.}
+
+- channel: podium
+  description: Orchestration (journey) lifecycle events.
+  events:
+  - {name: crdl-pdm-triggered, description: An orchestration was triggered.}
+  - {name: crdl-pdm-actn-success, description: The action associated with the orchestration was a success.}
+  - {name: crdl-pdm-actn-failed, description: The action associated with the orchestration failed.}
+  - {name: crdl-pdm-actn-filtered, description: Contact action has been filtered from the orchestration.}
+  - {name: crdl-pdm-actn-ignored, description: The action associated with the orchestration was ignored.}
+  - {name: crdl-pdm-actn-expired, description: The orchestration session has expired.}
+  - {name: crdl-pdm-goal-met-organic, description: An orchestration goal was met.}
+
+- channel: rest-api
+  events:
+  - {name: 'crdl_{channelKey}_send_failure', description: Error received when trying to send to the device.}
+
+- channel: other
+  events:
+  - {name: crdl_contact_update_unique_constraint_error, description: A contact update failed because a uniquely constrained attribute value was supplied and is already in use for another contact record.}
+  - {name: crdl_graph_identified, description: 'Identity-graph match event. (The provider''s own reference page carries a copy-paste error here, describing it as "Phone number was deactivated by the mobile carrier.")'}
+  - {name: crdl_merged_contacts, description: Two contact records were merged into a single record along with respective events and orders.}
+
+custom_events:
+  supported: true
+  description: >-
+    Any custom-named event (browse, cart, order, or arbitrary IoT/behavioural events) can be posted to
+    POST /v2/contactactivities with free-form JSON properties, and then selected as a webhook trigger
+    alongside the system events above.
+  ingest_operation: 'openapi/cordial-v2-openapi-original.json#addActivity'
+
+counts:
+  system_events: 41
+  channels: 8
+
+related_streaming:
+  - name: Amazon Kinesis integration
+    docs: https://support.cordial.com/hc/en-us/articles/360026363972-Amazon-Kinesis-integration
+    note: A second event-egress path alongside webhooks, documented in the integrations category.
+  - name: Contact activity export
+    operation: 'openapi/cordial-v2-openapi-original.json#createExportCAJob'
+    note: 'Batch egress of the same event stream to FTP/SFTP/HTTP in CSV or JSON.'
+
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+  - {url: 'https://support.cordial.com/api/v2/help_center/en-us/articles/13584534464141.json', http_status: 200, updated: '2025-06-24'}
+  - {url: 'https://support.cordial.com/api/v2/help_center/en-us/articles/4411361663501.json', http_status: 200, updated: '2025-09-25'}
+  asyncapi_probes:
+  - {url: 'https://api.cordial.io/asyncapi.yaml', http_status: 401}
+  - {url: 'https://developers.cordial.com/asyncapi.yaml', result: 'HTML shell (SPA catch-all)'}

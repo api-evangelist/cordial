@@ -1,0 +1,93 @@
+generated: '2026-08-04'
+method: searched
+source: >-
+  https://support.cordial.com/hc/en-us/articles/24971200437645-Test-messages,
+  openapi/cordial-v2-openapi-original.json,
+  https://api.cordial.io/docs/v2/
+
+separate_environment: false
+test_credentials: false
+test_mode_keys: false
+
+note: >-
+  Cordial publishes NO sandbox account, no test/live key separation, no test-mode prefix, and no
+  fixture or magic-value system. There are no test contacts, no simulator identifiers, and no test
+  clock. What it does publish is in-product test-send tooling that operates against LIVE account data.
+  This is recorded honestly rather than as a sandbox: an integrator cannot exercise Cordial's write
+  surface without touching a real account and real contacts.
+
+warning_from_provider: >-
+  The hosted Swagger console states that authenticating with an account API key and making calls
+  "will directly affect your production" account — the provider's own words on the v1 console.
+
+what_exists:
+- name: Test message sends
+  type: in-product
+  docs: https://support.cordial.com/hc/en-us/articles/24971200437645-Test-messages
+  operations: [sendTestSingleBatch]
+  path: PUT /v2/batchmessages/{id}/sendtest
+  description: >-
+    Sends a batch message to a nominated test recipient rather than the message's audience. The
+    message and the contacts involved are real; only the audience is narrowed.
+
+- name: Draft sends
+  type: in-product
+  operations: [sentDraftMessage]
+  path: POST /v2/automationtemplates/{key}/senddraft
+  description: Sends the DRAFT (unpublished) version of an automation template, so an unpublished change can be exercised without publishing it.
+
+- name: Render preview without sending
+  type: in-product
+  operations: [renderPreviewSingleBatch, renderPreviewAutomationtemplate, renderPublishedAutomationtemplate]
+  paths:
+  - GET /v2/batchmessages/{id}/renderedwip/{contactID}
+  - GET /v2/automationtemplates/{key}/renderdraft/{contactID}
+  - GET /v2/automationtemplates/{key}/renderpublished/{contactID}
+  description: >-
+    Renders message content for a specified real contact and returns it WITHOUT sending. The closest
+    thing Cordial has to a dry run, and the safest way to validate personalization logic.
+
+- name: Audience count without saving
+  type: in-product
+  operations: [audiencecount]
+  path: POST /v2/audiencecount
+  description: Evaluates an ad-hoc audience rule set and returns the count without persisting an audience. Non-destructive by construction.
+
+- name: Hosted Swagger console
+  type: interactive
+  url: https://api.cordial.io/docs/v2/
+  description: >-
+    A custom Swagger UI 5.x build with an API-key box in the header that applies HTTP Basic
+    preauthorization. Calls execute against the live account. Also available for v1 at
+    https://api.cordial.io/docs/v1/.
+  note: Counts as an interactive console, not a sandbox.
+
+- name: Inbox placement tests
+  type: in-product
+  docs: https://support.cordial.com/hc/en-us/articles/115008406788-Send-inbox-placement-tests
+  description: Deliverability seed-list testing, not an API sandbox.
+
+- name: CLI dry affordances
+  type: tooling
+  description: '`cosdk --json` for machine-readable output and `--yes` to skip write confirmations — implying interactive confirmation on writes by default. `--verbose` logs HTTP request/response for debugging.'
+
+not_published:
+  test_api_keys: 'No test-mode key, no key prefix distinguishing test from live.'
+  sandbox_account: 'No self-serve sandbox or developer account. Access requires a sales conversation (https://cordial.com/contact-us/).'
+  magic_values: 'No magic email addresses, phone numbers or identifiers that simulate bounces, failures or opt-outs.'
+  test_clock: 'No time simulation for testing scheduled sends, quiet hours or frequency caps.'
+  fixtures: 'No fixture or seed-data tooling.'
+  event_triggers: 'No way to synthetically fire a system event (open, click, bounce) for webhook testing.'
+
+impact: >-
+  The absence of an event-trigger facility is the sharpest practical gap: Cordial documents 41 system
+  events and a configurable webhook surface, but gives an integrator no supported way to make one fire
+  on demand. Testing a webhook consumer means sending real mail to a real contact and waiting for a
+  real open.
+
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+  - {url: 'https://api.cordial.io/docs/v2/', http_status: 200, note: 'Swagger UI shell with live-account auth box.'}
+  - {url: 'https://api.cordial.io/docs/v1/api-docs.php', http_status: 200, note: 'info.description warns calls "will directly affect your production" account.'}
+  spec_scan: 'No parameter, path or securityDefinition in either document references a test/sandbox mode.'

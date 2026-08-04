@@ -1,0 +1,10 @@
+{
+    "authorization_servers": [
+        "https://mcp.cordial.io"
+    ],
+    "resource": "https://mcp.cordial.io",
+    "scopes_supported": [
+        "read",
+        "profile"
+    ]
+}

@@ -1,0 +1,131 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/cordial-v2-openapi-original.json, well-known/, https://cordial.com/security/
+note: >-
+  Cross-cutting standards conformance. Derived from the published Swagger documents and live discovery
+  probes, with published compliance claims searched from the provider's own security page. `conforms`
+  reflects observed evidence only.
+
+standards:
+- id: openapi-3
+  conforms: false
+  evidence: 'Both published documents are Swagger 2.0. Neither has been upgraded to OpenAPI 3.x.'
+- id: swagger-2.0
+  conforms: true
+  evidence: 'openapi/cordial-v2-openapi-original.json declares "swagger": "2.0" with 70 paths and 106 operations; v1 declares the same with 50 paths and 83 operations.'
+- id: http-basic-auth
+  conforms: true
+  evidence: 'securityDefinitions.basicAuth type basic, applied to every operation in both documents.'
+- id: oauth2
+  conforms: true
+  scope: MCP surface only
+  evidence: 'https://mcp.cordial.io/.well-known/oauth-authorization-server returns authorization_endpoint, token_endpoint, grant_types authorization_code + refresh_token.'
+- id: oauth2.1
+  conforms: partial
+  evidence: 'PKCE, DCR, refresh tokens and both discovery documents are present, but code_challenge_methods_supported advertises "plain" alongside "S256"; OAuth 2.1 mandates S256.'
+- id: rfc8414-authorization-server-metadata
+  conforms: true
+  evidence: '/.well-known/oauth-authorization-server -> 200 application/json.'
+- id: rfc9728-protected-resource-metadata
+  conforms: true
+  evidence: '/.well-known/oauth-protected-resource -> 200, and the 401 challenge carries WWW-Authenticate: Bearer resource_metadata="…".'
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: 'registration_endpoint https://mcp.cordial.io/oauth/register advertised in the authorization-server metadata.'
+- id: openid-connect
+  conforms: false
+  evidence: '/.well-known/openid-configuration returns 404 on every host. No id_token, no OIDC scopes beyond the non-standard "profile".'
+- id: mcp
+  conforms: true
+  evidence: 'Hosted server at https://mcp.cordial.io/mcp speaking JSON-RPC 2.0 over streamable HTTP; responds to tools/list with a correct 401 OAuth challenge when unauthenticated. 56 tools published across 17 domains.'
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'Errors are a vendor JSON envelope {error, errorKey, message|messages|validationErrors|fieldErrors|errors}; no application/problem+json content type appears anywhere in either document.'
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: '/.well-known/security.txt returns 404 on cordial.com, developers.cordial.com, legal.cordial.com and mcp.cordial.io.'
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: 'No Sunset or Deprecation header support documented; zero operations flagged deprecated across both documents despite two live API versions.'
+- id: rfc9331-ratelimit-headers
+  conforms: false
+  evidence: 'Rate limiting uses the non-standard X-Rate-Limit-Limit / X-Rate-Limit-Remaining / X-Rate-Limit-Reset trio rather than the standard RateLimit-* fields. Retry-After (RFC 9110) IS used correctly.'
+- id: idempotency-key
+  conforms: false
+  evidence: 'Zero occurrences of "idempoten" across both documents; no Idempotency-Key parameter on any operation; no idempotency guidance in the docs.'
+- id: pagination
+  conforms: true
+  style: page-number
+  evidence: 'page + per_page + return_count query parameters on 12 v2 operations. Offset-style, not cursor-based; no Link header.'
+- id: json-api
+  conforms: false
+  evidence: 'Plain JSON resource documents; no JSON:API media type, no data/attributes/relationships envelope.'
+- id: odata
+  conforms: false
+- id: scim2
+  conforms: false
+  evidence: 'No /Users or /Groups paths; user provisioning is not exposed via the API.'
+- id: fhir
+  conforms: false
+  applicable: false
+- id: fapi
+  conforms: false
+  applicable: false
+- id: psd2
+  conforms: false
+  applicable: false
+- id: asyncapi
+  conforms: false
+  evidence: 'A real outbound webhook surface with 41 documented system events exists, but no AsyncAPI document is published. See asyncapi/cordial-webhooks.yml.'
+- id: webhooks
+  conforms: true
+  evidence: 'Configurable outbound webhooks with single/batched delivery, per-webhook rate limiting (default 100/sec), configurable request headers, and payload transformation. Documented at https://support.cordial.com/hc/en-us/articles/13584534464141-Webhooks.'
+- id: a2a-agent-card
+  conforms: false
+  evidence: '/.well-known/agent-card.json and /.well-known/agent.json return 404 on cordial.com, developers.cordial.com and mcp.cordial.io, and 401 on api.cordial.io. No agent card is published.'
+- id: llms-txt
+  conforms: true
+  evidence: 'https://cordial.com/llms.txt returns 200 text/plain, 15,098 bytes, correctly formed with an H1, a blockquote summary and sectioned link lists.'
+- id: agent-skills
+  conforms: true
+  evidence: '16 packaged Claude skill bundles published open-source at https://github.com/CordialExperience/agentic-cookbook, each with SKILL.md frontmatter and bundled reference docs.'
+- id: tls1.3
+  conforms: true
+  evidence: 'TLSv1.3 negotiated on cordial.com, developers.cordial.com and api.cordial.io.'
+- id: hsts
+  conforms: false
+  evidence: 'No Strict-Transport-Security header observed on cordial.com, developers.cordial.com or api.cordial.io.'
+- id: dnssec
+  conforms: partial
+  evidence: 'cordial.io is DNSSEC-signed; cordial.com is not.'
+- id: dmarc
+  conforms: true
+  evidence: 'Both cordial.com and cordial.io publish DMARC with policy p=reject, plus SPF. Expected rigour for an email service provider.'
+- id: caa
+  conforms: partial
+  evidence: 'cordial.com publishes CAA records (letsencrypt.org, pki.goog, ssl.com, comodoca.com, digicert.com); cordial.io publishes none.'
+- id: soc2-type-ii
+  conforms: true
+  method: searched
+  evidence: 'Claimed on https://cordial.com/security/ — "Cordial is SOC 2 Type II compliant."'
+- id: gdpr
+  conforms: true
+  method: searched
+  evidence: 'Claimed on https://cordial.com/security/, with a published privacy policy and sub-processor list at legal.cordial.com.'
+- id: ccpa
+  conforms: true
+  method: searched
+  evidence: 'Claimed on https://cordial.com/security/.'
+- id: eu-us-data-privacy-framework
+  conforms: partial
+  method: searched
+  evidence: 'The security page still cites the invalidated EU-U.S. Privacy Shield, while the privacy policy references dataprivacyframework.gov. See security/cordial-trust-center.yml.'
+- id: iso-27001
+  conforms: false
+  evidence: 'Not claimed anywhere on the public site.'
+
+summary:
+  conforms: 17
+  partial: 4
+  does_not_conform: 13
+  not_applicable: 3

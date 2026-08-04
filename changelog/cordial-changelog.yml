@@ -1,0 +1,111 @@
+generated: '2026-08-04'
+method: searched
+source: https://support.cordial.com/hc/en-us/sections/115000944092-Monthly-release-notes
+
+changelog:
+  url: https://support.cordial.com/hc/en-us/sections/115000944092-Monthly-release-notes
+  scheme: monthly, dated, one article per calendar month
+  scope: platform and product
+  api_scoped: false
+  entries_published: 27
+  earliest_observed: '2024-04'
+  latest_observed: '2026-08-03'
+  note: >-
+    These are product release notes, not an API changelog. They record platform capabilities, AI model
+    releases, new contact-activity events and integration changes. They do NOT record REST operation
+    additions, parameter or schema changes, or version transitions — so a REST consumer has no
+    published feed telling them when the contract moved. New EVENTS are announced here (and those do
+    reach API consumers via contact activities and webhooks), which is the one place the notes and the
+    API surface genuinely intersect.
+
+entries:
+- version: '2026-07'
+  date: '2026-08-03'
+  title: July release
+  url: https://support.cordial.com/hc/en-us/articles/47864131861645
+  breaking: false
+  title_note: 'The provider titled this article "July 2027"; from its publication date and position in the sequence it is the July 2026 release.'
+  highlights:
+  - 'Mobile send and failure metrics split: push, in-app and inbox now report send and failure counts separately across Message Performance, Message Reports, the Stats Filter table and exports, with per-type failure rates instead of one blended figure. Applies only to mobile messages sent after the account rollout date; earlier messages keep existing stats.'
+  - 'Facebook audience integration can now pass birth date, gender and external ID in addition to email address, improving match rates.'
+  - 'Data job exports gained "Add All" options for columns, attributes and lists; new exports default to including a header row.'
+  - 'Amplitude integration gained a per-channel "Use adjusted metrics" option for email, excluding pre-fetched and proxied opens/clicks from forwarded events.'
+  - 'MFA exemption can now be configured for SSO users on accounts that require MFA for all users.'
+
+- version: '2026-06'
+  date: '2026-06-24'
+  title: June release
+  url: https://support.cordial.com/hc/en-us/articles/46904603764877
+  breaking: false
+  agent_relevant: true
+  highlights:
+  - 'Cordial MCP Server: a new and significantly more powerful version, letting any AI assistant securely read and analyze a Cordial account in plain English, grounded in audiences, campaigns, content and performance.'
+  - 'Cordial Claude Skills: pre-built, downloadable skill bundles giving Claude the context and tool-use patterns for specific marketing and platform tasks. Published as the open-source agentic cookbook.'
+  - 'Sculpt Blocks and Templates gained a draft/publish workflow with a built-in change log recording what changed, who changed it and when.'
+  - 'HTML editor multi-user collaboration: presence indicators and read-only viewer mode to prevent conflicting edits.'
+  - 'A View History panel was added for Includes, Automation Templates and Data Automations.'
+
+- version: '2026-05'
+  date: '2026-05-30'
+  title: May release
+  url: https://support.cordial.com/hc/en-us/articles/46263496940941
+  breaking: false
+  highlights:
+  - 'AI Frequency Optimization now supports message priority: messages are categorized (Welcome, Cart/Checkout Abandon, Browse Abandon, General Promo) and assigned High/Medium/Low priority, with send-or-defer decided against a contact''s remaining weekly capacity and engagement history.'
+  - 'Multi-user collaboration extended to Sculpt messages, including Podium orchestrations and in-app Sculpt content in push.'
+  - 'Cordial Edge Message Insights model updated to a rolling 2-week window (4 weeks for lower-volume accounts), adding human-flagged open rate, direct revenue and revenue-per-email, plus specific percentage lifts.'
+  - 'RCS fallback SMS revenue reporting.'
+
+- version: '2026-04'
+  date: '2026-04-27'
+  title: April release
+  url: https://support.cordial.com/hc/en-us/articles/45420539483021
+  breaking: false
+  additions: [matchType field on unsubscribe events, unsubScore field on unsubscribe events]
+  highlights:
+  - 'AI-powered SMS unsubscribe intent detection: two new per-channel, per-country opt-out modes — Contains (keyword within a longer message) and Intent (AI analysis of non-matching messages). Exact-match remains the default and is unchanged. New modes must be explicitly enabled under channel settings unsubscribeDetection.'
+  - 'A matchType field and unsubScore are now captured on unsubscribe events for audit and reporting.'
+  - 'SMS reply message capture: automatic outbound SMS responses (such as opt-out confirmations) are now logged alongside inbound messages, visible in the contact event timeline and available as a data export.'
+  - 'Conversion Propensity model feature flag prepared.'
+
+- version: '2026-03'
+  date: '2026-03-31'
+  title: March release
+  url: https://support.cordial.com/hc/en-us/articles/44746353992973
+  breaking: false
+  additions: [crdl_push_enabled_change event]
+  highlights:
+  - 'New contact activity event crdl_push_enabled_change fires whenever a contact''s push notification enabled status changes. Properties: toPushEnabled, fromPushEnabled, deviceID, method. Available via API and data jobs. This is a genuine API-surface addition announced only in the release notes.'
+  - 'Send Time Optimization extended to mobile push.'
+  - 'Reuse Prior Message Content: import content from a previously sent message into a new one.'
+  - 'Predictive Insights dashboard added under Customer Insights.'
+  - 'A "Last Modified By" column added across drafts, scheduled messages, automations, HTML content, Sculpt blocks and templates, and data jobs.'
+  - 'SMS "Never Send on Sundays" checkbox added to Quiet Hours for compliance.'
+
+- version: '2026-02'
+  date: '2026-02-25'
+  url: https://support.cordial.com/hc/en-us/articles/43822801345165
+  captured: false
+  note: 'Published; body not captured in this pass.'
+
+- version: '2026-01'
+  date: '2026-01-30'
+  url: https://support.cordial.com/hc/en-us/articles/43119142276877
+  captured: false
+  note: 'Published; body not captured in this pass.'
+
+related_changelogs:
+- {name: React Native SDK changelog, url: 'https://support.cordial.com/hc/en-us/articles/27743323681677'}
+- {name: Sculpt Blocks and Templates change log, note: 'In-product change log added June 2026; not publicly published.'}
+
+gaps:
+- 'No API-scoped changelog. REST operation, parameter and schema changes are not announced anywhere public.'
+- 'No RSS/Atom feed or machine-readable changelog format; the section is a Zendesk help-center listing.'
+- 'No version numbers — entries are titled by calendar month only.'
+- 'At least one entry is mis-titled by a year ("July 2027" for the 2026-08-03 publication).'
+
+x-evidence:
+  fetched: '2026-08-04'
+  url: https://support.cordial.com/api/v2/help_center/en-us/sections/115000944092/articles.json
+  http_status: 200
+  articles_returned: 27

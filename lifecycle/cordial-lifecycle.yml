@@ -1,0 +1,86 @@
+generated: '2026-08-04'
+method: searched
+source: >-
+  https://developers.cordial.com/api,
+  https://support.cordial.com/hc/en-us/sections/115000944092-Monthly-release-notes,
+  openapi/cordial-v2-openapi-original.json
+
+versioning:
+  scheme: uri-path
+  current: v2
+  supported: [v2, v1]
+  base_urls:
+    v2: https://api.cordial.io/v2
+    v1: https://api.cordial.io/v1
+  consoles:
+    v2: https://api.cordial.io/docs/v2/
+    v1: https://api.cordial.io/docs/v1/
+  docs: https://support.cordial.com/hc/en-us/articles/203885498-RESTful-API-summary-and-usage
+  note: >-
+    Both major versions remain live and each publishes its own Swagger 2.0 document. v2 carries 106
+    operations across 70 paths; v1 carries 83 operations across 50 paths. New integrations are
+    directed to v2 by the developer portal.
+
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  v1_status: >-
+    Legacy but live. Cordial publishes no sunset date, no deprecation notice, and no migration guide
+    for v1, and declares `deprecated: true` on zero operations across both documents. A v1 consumer
+    has no published signal about how long the surface will remain.
+  assessment: >-
+    This is a real gap rather than an absence of need: Cordial runs two live API versions and ships
+    monthly platform changes, which is exactly the situation a deprecation policy exists to govern.
+
+status_page:
+  url: https://status.cordial.com/
+  provider: Rootly
+  evidence: 'DNS: status.cordial.com CNAME c79c4d43ebab5ba99d7bf3be527b2a45fcf39e48.external-sp.rootly.com'
+  probe: {fetched: '2026-08-04', http_status: 403, note: 'Cloudflare interstitial to non-browser clients; the host is a genuine Rootly-hosted status page, confirmed via DNS.'}
+
+sla:
+  url: null
+  uptime_target: null
+  published: false
+  note: 'No public SLA or uptime commitment was found. Cordial is enterprise-contracted, so terms are likely in the MSA rather than published.'
+
+release_cadence:
+  scheme: monthly release notes
+  url: https://support.cordial.com/hc/en-us/sections/115000944092-Monthly-release-notes
+  entries_published: 27
+  latest: '2026-08-03'
+  artifact: changelog/cordial-changelog.yml
+  note: >-
+    Product-level release notes, not an API changelog. They record platform features, new contact
+    activity events, and AI model releases; they do not track REST operation additions, parameter
+    changes, or schema changes. There is no API-specific changelog.
+
+sdk_lifecycle:
+  react_native:
+    changelog: https://support.cordial.com/hc/en-us/articles/27743323681677
+    current: 2.4.1
+    support_floor: React Native v0.68
+  ios:
+    current: 5.8.2
+    source: https://gitlab.com/cordialinc/mobile-sdk/ios-sdk
+  android:
+    current: 4.19.2
+    source: https://gitlab.com/cordialinc/mobile-sdk/android-sdk
+  cli:
+    current: 0.4.1
+    note: 'Pre-1.0; the command surface should be treated as unstable.'
+  mcp:
+    status: 'Relaunched June 2026 as "a new and significantly more powerful version"; writes announced as forthcoming behind human approval.'
+
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+  - {url: 'https://api.cordial.io/docs/v2/api-docs.php', http_status: 200}
+  - {url: 'https://api.cordial.io/docs/v1/api-docs.php', http_status: 200}
+  - {url: 'https://status.cordial.com/', http_status: 403, note: cloudflare-interstitial}
+  - {url: 'https://support.cordial.com/api/v2/help_center/en-us/sections/115000944092/articles.json', http_status: 200}
+  deprecation_scan: 'grep for "deprecated" across both Swagger documents: 0 operations flagged.'

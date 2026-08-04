@@ -1,0 +1,90 @@
+generated: '2026-08-04'
+method: searched
+source: openapi/cordial-v1-openapi-original.json, openapi/cordial-v2-openapi-original.json
+docs: https://support.cordial.com/hc/en-us/articles/203885498-RESTful-API-summary-and-usage
+note: >-
+  Derived mechanically from both published Swagger documents, then upgraded from the provider's own
+  authentication documentation and from the live OAuth discovery metadata served by the MCP endpoint.
+  Cordial runs TWO distinct auth models on two different surfaces, which the OpenAPI alone does not
+  reveal: long-lived HTTP Basic API keys on REST, and OAuth 2.1 on MCP and the CLI.
+
+summary:
+  types: [http, oauth2]
+  api_key_in: [header]
+  oauth2_flows: [authorizationCode]
+  surfaces: 2
+
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  surface: REST API (v1 + v2)
+  hosts: [api.cordial.io]
+  description: HTTP Basic Authentication. Works over HTTPS
+  credential: account API key
+  username: the API key
+  password: blank
+  header_example: 'Authorization: Basic <base64 of "APIKEY:">'
+  curl_example: 'curl -u "$CORDIAL_API_KEY:" https://api.cordial.io/v2/contacts'
+  key_generation: 'Cordial UI: Account Settings > Account > API'
+  scoped: false
+  expiring: false
+  rotation_api: false
+  sources:
+  - openapi/cordial-v1-openapi-original.json
+  - openapi/cordial-v2-openapi-original.json
+  applied_to: all 106 v2 operations and all 83 v1 operations
+  failure_response:
+    status: 401
+    body: '{"error": "Access Denied: Authentication Failure"}'
+    note: 'On 401 the `error` field is a STRING, whereas on every other error response it is a boolean.'
+
+- name: cordialOAuth
+  type: oauth2
+  profile: OAuth 2.1
+  surface: MCP server + CLI
+  hosts: [mcp.cordial.io]
+  issuer: https://mcp.cordial.io
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://mcp.cordial.io/oauth/authorize
+    tokenUrl: https://mcp.cordial.io/oauth/token
+    scopes:
+      read: Read access to account data via the MCP server
+      profile: Identity of the signed-in user and account
+  registration_endpoint: https://mcp.cordial.io/oauth/register
+  dynamic_client_registration: true
+  pkce_methods: [S256, plain]
+  grant_types: [authorization_code, refresh_token]
+  token_endpoint_auth_methods: [client_secret_basic, client_secret_post]
+  refreshable: true
+  sources:
+  - well-known/cordial-oauth-authorization-server.json
+  - well-known/cordial-oauth-protected-resource.json
+  discovery:
+    oauth_authorization_server: {path: /.well-known/oauth-authorization-server, status: 200}
+    oauth_protected_resource: {path: /.well-known/oauth-protected-resource, status: 200}
+  challenge: >-
+    An unauthenticated request returns 401 with
+    WWW-Authenticate: Bearer resource_metadata="https://mcp.cordial.io/.well-known/oauth-protected-resource",
+    error="invalid_token" — a correct RFC 9728 protected-resource challenge.
+
+assessment:
+  strengths:
+  - 'The MCP surface is a textbook OAuth 2.1 deployment: RFC 8414 authorization-server metadata, RFC 9728 protected-resource metadata, RFC 7591 dynamic client registration, PKCE, and refresh tokens — all discoverable anonymously.'
+  - 'Auth is declared and applied on 100% of operations in both Swagger documents.'
+  gaps:
+  - 'The REST API — the surface that can actually write data, send messages, and export contact records — is protected by a single unscoped, non-expiring account API key. There is no scope model, no key rotation endpoint, no key listing endpoint, and no per-key permission boundary in the API.'
+  - 'The API key is transmitted as an HTTP Basic username, which means it lands in any tooling that logs Authorization headers or basic-auth URLs.'
+  - 'No OpenID Connect, no mTLS, no signed requests, and no per-request identity: the API cannot tell which human or system made a call, only which account.'
+  - 'The two auth models do not meet. An OAuth token from the MCP server cannot call REST, and a REST API key cannot call MCP. An integration spanning both must hold two unrelated credentials.'
+  - 'PKCE advertises `plain` alongside `S256`. OAuth 2.1 requires S256; advertising plain is a downgrade affordance clients should not be offered.'
+
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+  - {url: 'https://mcp.cordial.io/.well-known/oauth-authorization-server', http_status: 200, content_type: application/json}
+  - {url: 'https://mcp.cordial.io/.well-known/oauth-protected-resource', http_status: 200, content_type: application/json}
+  - {url: 'https://mcp.cordial.io/mcp', method: 'POST tools/list', http_status: 401, challenge: 'Bearer invalid_token'}
+  - {url: 'https://api.cordial.io/v2/', http_status: 401, body: '{"error":"Access Denied: Authentication Failure"}'}
+  spec_scan: 'securityDefinitions in both documents contain exactly one scheme (basicAuth, type basic).'

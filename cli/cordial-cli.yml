@@ -1,0 +1,84 @@
+generated: '2026-08-04'
+method: searched
+source: https://developers.cordial.com/cli
+
+cli:
+  name: cosdk
+  full_name: Cordial CLI
+  package: '@cordialexperience/cosdk'
+  version: 0.4.1
+  registry: npm
+  requires: Node.js 18 or newer
+  docs: https://developers.cordial.com/cli
+
+install:
+- method: npm
+  command: npm install -g @cordialexperience/cosdk
+
+authentication:
+  model: OAuth 2.0 browser login with automatic token refresh
+  note: >-
+    The CLI authenticates against the same OAuth authorization server as the hosted MCP endpoint
+    (https://mcp.cordial.io), not with the HTTP Basic API key the REST API uses. `cosdk whoami`
+    reports the signed-in user, account and granted scopes.
+  commands:
+  - {command: cosdk login, description: OAuth2 browser login with auto-refresh}
+  - {command: cosdk whoami, description: Display current user, account, scopes}
+  - {command: cosdk whoami --token, description: Print a fresh access token}
+  - {command: cosdk logout, description: Remove saved credentials}
+
+command_groups:
+- group: analytics
+  commands: [overview, audiences, reports adhoc, reports run]
+- group: messages
+  commands: [list, info, sends, preview]
+- group: contacts
+  commands: [search, info, attributes, events, orders list]
+- group: audiences
+  commands: [list, info, translate, query-count]
+- group: content
+  commands: [includes list, includes create, images list, images upload, images tags]
+- group: orchestrations
+  commands: [list, info]
+  flags: ['--mermaid', '--published']
+- group: data
+  commands: [automations list, automations info, batches list, batches info]
+- group: jobs
+  commands: [list, info]
+- group: supplements
+  commands: [supporting data-model operations]
+- group: products
+  commands: [supporting data-model operations]
+- group: tags
+  commands: [supporting data-model operations]
+- group: account
+  commands: [info]
+- group: artifacts
+  commands: [search]
+- group: skill
+  commands: [skill]
+  note: Ties the CLI to the packaged Agent Skills in skills/.
+
+global_flags:
+- {flag: '--json', description: Machine-readable JSON output}
+- {flag: '--yes / -y', description: Skip write confirmations}
+- {flag: '--verbose / -V', description: HTTP request/response logging}
+- {flag: '--tracing / -T', description: OpenTelemetry span collection}
+- {flag: '--help', description: Per-command documentation}
+
+flows:
+- name: Authenticated scripting
+  steps:
+  - cosdk login
+  - cosdk whoami
+  - "cosdk <group> <command> --json | jq"
+  note: >-
+    `--json` on any command makes the CLI a scriptable front end to the same account data the MCP
+    server exposes. `--tracing` emitting OpenTelemetry spans is unusual for a marketing-platform CLI
+    and is worth noting as a genuine observability affordance.
+
+x-evidence:
+  fetched: '2026-08-04'
+  url: https://developers.cordial.com/cli
+  http_status: 200
+  registry_confirmed: 'https://registry.npmjs.org/@cordialexperience%2Fcosdk -> 200, latest 0.4.1'

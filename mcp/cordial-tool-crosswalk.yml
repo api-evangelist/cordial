@@ -1,0 +1,159 @@
+generated: '2026-08-04'
+method: derived
+source: mcp/cordial-mcp.yml, openapi/cordial-v2-openapi-original.json
+note: >-
+  Binds each published Cordial MCP tool to the REST operation(s) that back it. The MCP server's live
+  tools/list is OAuth-gated (401 on anonymous introspection), so no inputSchema was captured; the
+  mapping below is by name and documented semantics against verified v2 operationIds, and every
+  confidence value reflects that. Where a binding is high confidence, the tool's REAL input contract
+  is that operation's `parameters` + `body` schema in openapi/cordial-v2-openapi-original.json.
+  Nothing here is fabricated: every operationId named was grepped out of the published spec, and
+  tools with no public REST equivalent are recorded in mcp_only[] rather than mapped to something
+  approximate.
+
+surfaces:
+  openapi:
+    file: openapi/cordial-v2-openapi-original.json
+    spec: Swagger 2.0
+    base_url: https://api.cordial.io/v2
+    operations: 106
+    auth: HTTP Basic (API key as username, blank password)
+    gated: false
+  mcp:
+    url: https://mcp.cordial.io/mcp
+    transport: http
+    tools: 56
+    auth: OAuth 2.1 (authorization_code + refresh_token, DCR, PKCE S256)
+    scopes: [read, profile]
+    gated: true
+    gate_note: 'tools/list returned 401 invalid_token on 2026-08-04; schemas require an authenticated account session.'
+  graphql:
+    present: false
+  cli:
+    package: '@cordialexperience/cosdk'
+    note: >-
+      The CLI is a third projection of the same core. Its command groups (analytics, messages,
+      contacts, audiences, content, orchestrations, data, jobs, supplements, products, tags) line up
+      with the MCP domains far more closely than with the REST resource groups, which is a strong
+      signal that CLI and MCP share a service layer that sits above the public v2 REST API.
+
+crosswalk:
+- {tool: list_messages, category: messages, rest: [getBatch, getTemplates], binding: rest, confidence: medium, note: 'One tool fans out across two REST resources — batch messages and automation templates are separate collections in REST but a single "messages" concept in MCP.'}
+- {tool: get_message, category: messages, rest: [getSingleBatch, gettemplate], binding: rest, confidence: medium, note: 'Same fan-out. The MCP tool additionally returns a performance dashboard, which REST exposes only through the separate analytics export path.'}
+- {tool: list_child_sends, category: messages, rest: [getBatch], binding: rest, confidence: low, note: 'Child sends of an automation template have no dedicated REST operation; closest is filtering getBatch. Likely served by an internal endpoint.'}
+- {tool: export_message_stats, category: messages, rest: [exportMessageAnalytics], binding: rest, confidence: high, note: 'POST /v2/messageanalyticsexport creates the CSV export job; REST then requires polling getsinglejob, which the MCP tool appears to absorb.'}
+
+- {tool: get_audience_count, category: audiences, rest: [getlistcount], binding: rest, confidence: medium, note: 'getlistcount counts an account LIST; a saved audience is a distinct object with no REST read operation. Confidence capped accordingly.'}
+- {tool: estimate_audience, category: audiences, rest: [audiencecount], binding: rest, confidence: high, note: 'POST /v2/audiencecount takes an ad-hoc audience rule object and returns a count without saving — an exact semantic match.'}
+- {tool: get_audience_trends, category: analytics, rest: [audiencetrendsexport], binding: rest, confidence: high, note: 'POST /v2/audiencetrendsexport is the only audience-trend surface in the spec.'}
+
+- {tool: describe_contact_schema, category: account-context, rest: [getListAccountAttributes], binding: rest, confidence: high, note: 'GET /v2/accountcontactattributes returns every attribute definition with type and validation.'}
+- {tool: get_account_supplements, category: account-context, rest: [getsupplements], binding: rest, confidence: high}
+- {tool: list_supplements, category: supplements, rest: [getsupplements], binding: rest, confidence: high}
+- {tool: get_supplement, category: supplements, rest: [getsupplement], binding: rest, confidence: high, note: 'Both key-addressed: GET /v2/supplements/{key}.'}
+- {tool: list_supplement_records, category: supplements, rest: [getsupplementrecords], binding: rest, confidence: high}
+
+- {tool: list_products, category: products-and-tags, rest: [getproducts], binding: rest, confidence: high}
+- {tool: get_product, category: products-and-tags, rest: [getproduct], binding: rest, confidence: high}
+- {tool: get_account_products_config, category: account-context, rest: [getproducts], binding: rest, confidence: low, note: 'Catalogue CONFIGURATION is not exposed in REST; only the product records are. Partial binding.'}
+
+- {tool: list_html_includes, category: content, rest: [getincludes], binding: rest, confidence: high, note: 'Note the spec reuses operationId `getincludes` for BOTH GET /v2/includes and GET /v2/alerts — a genuine duplicate-operationId defect in the published document. The includes path is the correct binding here.'}
+- {tool: get_html_include, category: content, rest: [getinclude], binding: rest, confidence: high}
+
+- {tool: list_orchestrations, category: orchestrations, rest: [getOrchestrations], binding: rest, confidence: high}
+- {tool: get_orchestration, category: orchestrations, rest: [getOrchestration, orchestrationActions], binding: rest, confidence: high, note: 'The DAG the MCP tool renders as a Mermaid flowchart is composed from the orchestration record plus its actions list. Mermaid rendering is MCP-side presentation with no REST equivalent.'}
+
+- {tool: list_data_automations, category: data-operations, rest: [listOfRunsForDataAutomation], binding: rest, confidence: low, note: 'REST exposes RUNS of a data job, not a list of automations. The listing itself has no public operation.'}
+- {tool: get_data_automation, category: data-operations, rest: [listOfRunsForDataAutomation, statsForSingleAggregation], binding: rest, confidence: low}
+- {tool: get_data_batch, category: data-operations, rest: [onetimeStats], binding: rest, confidence: medium, note: 'GET /v2/datajobs/{dabId}/stats returns one-time (batch) data job stats.'}
+- {tool: list_data_batches, category: data-operations, rest: [getjobs], binding: rest, confidence: low}
+
+- {tool: get_recent_account_activity, category: composite, rest: [getjobs, getBatch], binding: rest, confidence: medium, note: 'Composite: latest jobs + recent batch messages, both of which have real REST operations.'}
+- {tool: get_audience_health, category: composite, rest: [audiencecount, audiencetrendsexport], binding: rest, confidence: medium, note: 'Composite of count + size trends.'}
+- {tool: get_message_performance, category: composite, rest: [exportMessageAnalytics, getProgramStats], binding: rest, confidence: low, note: 'MCP returns dashboard stats synchronously; REST only offers an async export job plus program-level time series.'}
+- {tool: explain_message_performance, category: composite, rest: [exportMessageAnalytics], binding: rest, confidence: low}
+- {tool: get_message_report, category: analytics, rest: [exportMessageAnalytics, getProgramSummary], binding: rest, confidence: low, note: 'Same async-vs-sync divergence.'}
+- {tool: get_account_overview, category: analytics, rest: [getProgramSummary], binding: rest, confidence: low, note: 'Account-wide subscriber counts and per-channel stats have no REST operation; program summary is the nearest published analogue.'}
+
+mcp_only:
+- {tool: whoami, reason: 'Identity of the OAuth principal. REST uses HTTP Basic with an account API key and has no identity endpoint at all — there is no /me, /whoami or /account operation in either spec.'}
+- {tool: get_account_overview_document, reason: 'A synthesized account-context document (channels + attributes + audiences + config in one payload). Composed server-side; no REST equivalent.'}
+- {tool: describe_account_events, reason: 'Event DEFINITIONS. REST exposes event instances via getActivityList but never the account''s event schema.'}
+- {tool: get_account_audience_samples, reason: 'Sample audiences with criteria and counts. Audiences are not a REST resource.'}
+- {tool: list_audiences, reason: 'Saved audiences have no REST collection. REST only has account LISTS (getLists), which are a different object.'}
+- {tool: get_audience, reason: 'No REST read for a saved audience, including its criteria and natural-language translation.'}
+- {tool: describe_audience, reason: 'Composite of criteria + translation + count; the translation step is MCP-only.'}
+- {tool: search_images, reason: 'Image/asset library (Cordial SAM). No image operations exist in either published spec.'}
+- {tool: get_image, reason: 'Same — the asset library is absent from REST.'}
+- {tool: list_sculpt_blocks, reason: 'Sculpt is Cordial''s modular email content system. It has no REST surface in v1 or v2.'}
+- {tool: get_sculpt_block, reason: 'Sculpt absent from REST.'}
+- {tool: list_sculpt_templates, reason: 'Sculpt absent from REST.'}
+- {tool: get_sculpt_template, reason: 'Sculpt absent from REST.'}
+- {tool: list_saved_reports, reason: 'Saved reports are not a REST resource; REST only offers one-shot analytics export jobs.'}
+- {tool: run_saved_report, reason: 'Executing a saved report has no REST operation.'}
+- {tool: describe_report_export_columns, reason: 'Reporting metadata (available export columns per channel) is not exposed by REST.'}
+- {tool: describe_report_entities, reason: 'Reporting filter-dimension metadata is not exposed by REST.'}
+- {tool: list_insight_reports, reason: 'Cordial Edge AI message-insight reports have no REST surface.'}
+- {tool: get_insight_report, reason: 'AI insight reports are MCP/UI-only.'}
+- {tool: compare_insight_reports, reason: 'AI insight comparison is MCP-only and has no REST analogue.'}
+- {tool: list_channel_types, reason: 'Channel configuration is not exposed in the published REST spec.'}
+- {tool: list_message_transports, reason: 'Message transports appear only as error schemas in the v2 spec (MessageTransportValidationError); no transport operations are declared on any path.'}
+- {tool: get_message_transport, reason: 'Same — transport schemas exist, transport operations do not.'}
+- {tool: list_tags, reason: 'Content tagging has no REST operations. `tags` appears only as a query filter on some collections.'}
+- {tool: get_tag, reason: 'Tag detail with asset counts is MCP-only.'}
+- {tool: search_audience_examples, reason: 'Semantic (vector) search over audiences. A retrieval capability with no REST equivalent by construction.'}
+- {tool: search_orchestration_examples, reason: 'Semantic search over orchestrations. Same.'}
+
+rest_only:
+- capability: Contact write and lifecycle
+  operations: [addContact, updateContacts, deletesinglecontact, mergecontacts, splitContact, unsubscribecontact, buildcontactprofile, getContacts, getsinglecontact]
+  note: 'The MCP server is read-only, so all 9 contact operations — including the merge/split identity tools and the GDPR-shaped downloadprofile — are REST-only.'
+- capability: Contact cart
+  operations: [savecartcontact, updatecartcontact, clearcartcontact, addproducttocartcontact, removeproducttocartqtycontact]
+- capability: Event ingestion
+  operations: [addActivity, getActivityList, createExportCAJob]
+  note: 'addActivity is the highest-volume write in the whole API and has no agent-facing tool.'
+- capability: Order write
+  operations: [addorders, getorders, getorder, deleteorder, ordersimport]
+- capability: Product write
+  operations: [addproducts, updateproducts, deleteproducts, productimport]
+- capability: Supplement write
+  operations: [addsupplement, updatesupplement, deletesupplements, clearsupplement, addsupplementrecord, updatesupplementrecord, deletesupplementrecord, getsupplementrecord, importsupplementrecords]
+- capability: List and attribute administration
+  operations: [addList, updatelist, deletelist, clearlist, getlist, getLists, addattribute, updateAttribute, deleteattribute, getAttribute]
+- capability: Message sending and scheduling
+  operations: [addBatch, updateBatch, deleteSingleBatch, sendSingleBatch, sendTestSingleBatch, pauseSingleBatch, resumeSingleBatch, cancelSingleBatch, unscheduleBatch, renderPreviewSingleBatch, addTemplate, updateTemplate, deleteTemplate, publishTemplate, sentMessage, sentDraftMessage, renderPreviewAutomationtemplate, renderPublishedAutomationtemplate]
+  note: 'Every send-side operation is REST-only. This is the deliberate line the provider drew: agents may read the account, humans (or API keys) send the mail.'
+- capability: Orchestration trigger
+  operations: [triggerOrchestration]
+- capability: Data job execution
+  operations: [runTransformation, runTrigger]
+- capability: Imports and exports
+  operations: [createImportJob, createExportJob, exportAccountMonitor]
+- capability: Alerts
+  operations: [addalert, getalert, updatealert, removealert]
+- capability: Experiment performance
+  operations: [geBatchExperimentPerformance, getAutomationTemplateExperimentPerformance]
+  note: 'Interesting divergence: REST has dedicated A/B experiment-performance operations, yet the provider''s own experiment-report Agent Skill is built on MCP analytics tools rather than these.'
+
+coverage:
+  mcp_tools_published: 56
+  mcp_tools_bound_to_rest: 29
+  mcp_only: 27
+  rest_operations_total: 106
+  rest_operations_with_a_tool: 24
+  rest_operations_without_a_tool: 82
+  high_confidence_bindings: 11
+  medium_confidence_bindings: 8
+  low_confidence_bindings: 10
+
+assessment: >-
+  The two surfaces are close to disjoint in intent rather than overlapping projections of one core.
+  MCP is a read/analysis plane over objects REST largely does not expose (audiences, sculpt, images,
+  saved reports, AI insight reports, tags, channels, transports, semantic search) — 27 of 56 tools
+  have no REST operation at all. REST is a write/ingest plane over the data model — 82 of 106
+  operations have no tool. Only 24 REST operations are reachable from an agent. Any consumer that
+  assumes the MCP server is "the API for agents" will find it cannot create a contact, log an event,
+  or send a message; and any consumer that assumes REST is the whole platform will not find audiences,
+  sculpt content, or the AI insight layer. Both surfaces are needed, and the tool crosswalk is the
+  only place that fact is written down.

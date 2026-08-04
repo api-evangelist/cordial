@@ -1,0 +1,36 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Cordial API v2
+  version: 1.0.0
+extends: openapi/cordial-v2-openapi-original.json
+x-generated: '2026-08-04'
+x-method: generated
+x-note: Captures API Evangelist annotations over the provider's harvested Swagger 2.0 document. The original at openapi/ is
+  never mutated. These actions record what we observed about the contract; they do not add operations, schemas or examples
+  the provider does not publish.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-harvested: '2026-08-04'
+    x-apievangelist-source: https://api.cordial.io/docs/v2/api-docs.php
+    x-apievangelist-spec-version: Swagger 2.0 (not upgraded to OpenAPI 3.x by the provider)
+    x-apievangelist-operations: 106
+- target: $.info
+  update:
+    x-apievangelist-contract-notes:
+    - Spec is served from the API host root behind an otherwise blanket-401 domain; every conventional discovery path (/openapi.json,
+      /swagger.json, /api-docs) returns 401. The document itself is anonymous at /docs/<ver>/api-docs.php.
+    - No tags[] array is declared at the document level, although every operation carries a tag string.
+    - No response or parameter examples are declared anywhere in the document.
+    - No 429 response is declared on any operation despite a documented rate limiter.
+    - No idempotency key is defined on any write operation.
+- target: $.securityDefinitions.basicAuth
+  update:
+    x-apievangelist-note: API key is sent as the HTTP Basic username with a blank password. See authentication/cordial-authentication.yml.
+- target: $.info
+  update:
+    x-apievangelist-companion-surfaces:
+      mcp: https://mcp.cordial.io/mcp
+      cli: '@cordialexperience/cosdk'
+      skills: https://github.com/CordialExperience/agentic-cookbook
+      crosswalk: mcp/cordial-tool-crosswalk.yml

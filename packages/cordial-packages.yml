@@ -1,0 +1,125 @@
+generated: '2026-08-04'
+method: searched
+source: >-
+  npm registry, Maven Central, CocoaPods trunk, GitLab (gitlab.com/cordialinc/mobile-sdk),
+  https://support.cordial.com/hc/en-us/articles/26983758909581-Mobile-documentation
+note: >-
+  All packages below were resolved live against their registry on 2026-08-04. First-party status is
+  asserted only where the registry record itself carries a Cordial-owned scope, a Cordial author
+  (press@cordial.com), Cordial-employee maintainers, or a Cordial-owned group. Cordial's iOS and
+  Android SDK SOURCE is hosted on GitLab under gitlab.com/cordialinc/mobile-sdk, not GitHub — the
+  CordialExperience GitHub org carries forks and infrastructure tooling plus the agentic cookbook,
+  not the mobile SDKs.
+
+packages:
+- language: javascript
+  registry: npm
+  name: '@cordialexperience/cosdk'
+  version: 0.4.1
+  url: https://www.npmjs.com/package/@cordialexperience/cosdk
+  install: npm install -g @cordialexperience/cosdk
+  binary: cosdk
+  license: UNLICENSED
+  official: true
+  kind: cli
+  note: The first-party Cordial CLI. Command surface catalogued in cli/cordial-cli.yml. Requires Node.js 18+.
+
+- language: javascript
+  registry: npm
+  name: '@cordialinc/react-native-sdk'
+  version: 2.4.1
+  url: https://www.npmjs.com/package/@cordialinc/react-native-sdk
+  install: npm install @cordialinc/react-native-sdk
+  license: MIT
+  official: true
+  kind: mobile-sdk
+  docs: https://support.cordial.com/hc/en-us/articles/26779640148621-React-Native-SDK
+  changelog: https://support.cordial.com/hc/en-us/articles/27743323681677
+  note: Supports React Native from v0.68 onward. Push, deep links, analytics, inbox messages.
+
+- language: javascript
+  registry: npm
+  name: '@cordialinc/expo-module'
+  version: 1.4.0
+  url: https://www.npmjs.com/package/@cordialinc/expo-module
+  install: npm install @cordialinc/expo-module
+  license: MIT
+  official: true
+  kind: mobile-sdk
+  docs: https://support.cordial.com/hc/en-us/articles/30143397162893-Expo-SDK
+  evidence: 'npm author: Cordial Experience, Inc. <press@cordial.com>'
+
+- language: swift
+  registry: cocoapods
+  name: CordialSDK
+  version: 5.8.2
+  url: https://cocoapods.org/pods/CordialSDK
+  install: "pod 'CordialSDK'"
+  official: true
+  kind: mobile-sdk
+  source: https://gitlab.com/cordialinc/mobile-sdk/ios-sdk
+  note: 90 published versions on CocoaPods trunk; latest released 2026-07-23.
+
+- language: kotlin
+  registry: maven-central
+  name: com.cordial.cordialsdk:android
+  version: 4.19.2
+  url: https://central.sonatype.com/artifact/com.cordial.cordialsdk/android
+  install: "implementation 'com.cordial.cordialsdk:android:4.19.2'"
+  official: true
+  kind: mobile-sdk
+  source: https://gitlab.com/cordialinc/mobile-sdk/android-sdk
+
+- language: javascript
+  registry: npm
+  name: cordialmcp
+  version: 1.2.0
+  url: https://www.npmjs.com/package/cordialmcp
+  install: npm install cordialmcp
+  license: MIT
+  official: true
+  kind: mcp-extension
+  note: >-
+    "Standalone MCP extension for Cordial marketing platform", published by a Cordial-employee
+    maintainer account. Unscoped and undocumented on the developer portal, which points MCP clients
+    at the hosted https://mcp.cordial.io/mcp endpoint instead — treat this package as adjacent
+    tooling rather than the supported MCP integration path.
+
+not_published:
+- registry: pypi
+  searched: cordial
+  result: no first-party package
+- registry: nuget
+  searched: cordial
+  result: no first-party package
+- registry: pkg.go.dev
+  searched: cordial
+  result: no first-party package
+- registry: rubygems
+  searched: cordial
+  result: no first-party package
+- registry: packagist
+  searched: cordial
+  result: no first-party package
+- registry: crates.io
+  searched: cordial
+  result: no first-party package
+
+client_libraries_for_rest_api:
+  status: none
+  note: >-
+    Cordial publishes no server-side REST client library in any language. The REST API is documented
+    as plain HTTPS + HTTP Basic and exercised through the hosted Swagger console at
+    https://api.cordial.io/docs/v2/. The packages above are mobile data-collection SDKs, the CLI, and
+    MCP tooling — none of them wraps the 106-operation v2 REST surface.
+
+x-evidence:
+  fetched: '2026-08-04'
+  probes:
+  - {url: 'https://registry.npmjs.org/@cordialexperience%2Fcosdk', http_status: 200}
+  - {url: 'https://registry.npmjs.org/@cordialinc%2Freact-native-sdk', http_status: 200}
+  - {url: 'https://registry.npmjs.org/@cordialinc%2Fexpo-module', http_status: 200}
+  - {url: 'https://trunk.cocoapods.org/api/v1/pods/CordialSDK', http_status: 200}
+  - {url: 'https://search.maven.org/solrsearch/select?q=cordial', http_status: 200}
+  - {url: 'https://gitlab.com/cordialinc/mobile-sdk/ios-sdk', http_status: 200}
+  - {url: 'https://gitlab.com/cordialinc/mobile-sdk/android-sdk', http_status: 200}

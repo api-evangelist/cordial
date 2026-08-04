@@ -1,0 +1,38 @@
+generated: '2026-08-04'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: cordial.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 10 18:03:31 2026 GMT
+  hsts: null
+- host: developers.cordial.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  8 15:42:45 2026 GMT
+  hsts: null
+- host: api.cordial.io
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  2 05:06:26 2026 GMT
+  hsts: null
+domains:
+- domain: cordial.com
+  dnssec: false
+  caa:
+  - 0 issuewild "letsencrypt.org"
+  - 0 issuewild "pki.goog; cansignhttpexchanges=yes"
+  - 0 issuewild "ssl.com"
+  - 0 issue "comodoca.com"
+  - 0 issue "digicert.com; cansignhttpexchanges=yes"
+  - 0 issue "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: cordial.io
+  dnssec: true
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

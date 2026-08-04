@@ -1,18 +1,116 @@
 aid: cordial
 name: Cordial
-description: 'Cordial is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Cordial is a cross-channel marketing and customer data platform headquartered
+  in San Diego, California, used by consumer brands to unify customer data and orchestrate
+  personalized messaging across email, SMS/MMS, RCS, mobile app (push, in-app, mobile
+  inbox), website, and any external channel reachable over REST. The platform combines
+  a native customer data platform built on a document database, real-time journey
+  orchestration, identity resolution, and the Cordial Edge AI suite of brand-specific
+  predictive models. Cordial is API-first: a documented Swagger 2.0 REST API at
+  api.cordial.io exposes 106 operations across 24 resource groups covering contacts,
+  contact activities, orders, products, supplements, lists, attributes, batch messages,
+  automation templates, orchestrations, data jobs, imports/exports, alerts, and
+  analytics. Alongside REST it publishes a hosted Model Context Protocol server with
+  56 read tools over 17 domains, a first-party npm CLI, mobile SDKs for iOS, Android,
+  React Native and Expo, an embedded JavaScript listener, configurable outbound
+  webhooks, and an open-source cookbook of packaged Claude Agent Skills.'
 url: https://raw.githubusercontent.com/api-evangelist/cordial/refs/heads/main/apis.yml
+image: https://kinlane-productions2.s3.amazonaws.com/api-evangelist-site/companies/cordial.jpg
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-08-04'
 modified: '2026-08-04'
+x-enrichment:
+  date: '2026-08-04'
+  status: enriched
+  artifacts_added: 45
+  pass: local-v1
 tags:
 - Company
-apis: []
+- Marketing
+- Marketing Automation
+- Messaging
+- Email
+- SMS
+- Push Notifications
+- Customer Data Platform
+- Personalization
+- Customer Engagement
+- Artificial Intelligence
+- Retail
+- E-Commerce
+apis:
+- aid: cordial:cordial-api-v2
+  name: Cordial API v2
+  description: 'The current Cordial REST API. 106 operations across 24 resource groups:
+    contacts, contact activities, orders, products, supplements, account lists,
+    contact attributes, batch messages, automation templates, orchestrations, data
+    jobs, contact/order/product imports and exports, jobs, alerts, message content
+    includes, programs, and analytics exports. JSON in, JSON out, over HTTPS only,
+    authenticated with HTTP Basic using an account API key as the username and a
+    blank password.'
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - Marketing
+  - Messaging
+  - Customer Data Platform
+  - Contacts
+  - Email
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-v2-openapi-original.json
+  - type: Overlay
+    url: overlays/cordial-v2-overlay.yaml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+- aid: cordial:cordial-api-v1
+  name: Cordial API v1
+  description: 'The legacy Cordial REST API, still published and documented alongside
+    v2. 83 operations across 50 paths covering the same contact, event, order,
+    product, supplement, list, message and job surface at an earlier revision. New
+    integrations are directed to v2.'
+  humanURL: https://api.cordial.io/docs/v1/
+  baseURL: https://api.cordial.io/v1
+  tags:
+  - Marketing
+  - Messaging
+  - Legacy
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-v1-openapi-original.json
+  - type: Overlay
+    url: overlays/cordial-v1-overlay.yaml
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-mcp
+  name: Cordial MCP Server
+  description: 'Cordial''s hosted Model Context Protocol server, which gives any MCP
+    client secure read access to a Cordial account: audiences, messages, analytics,
+    content, orchestrations, sculpt blocks and templates, reports, channels, data
+    operations, supplements, products and tags. 56 tools across 17 domains, served
+    over streamable HTTP and protected by OAuth 2.1 with dynamic client registration.
+    Writes are described as forthcoming behind human approval.'
+  humanURL: https://developers.cordial.com/mcp
+  baseURL: https://mcp.cordial.io/mcp
+  tags:
+  - MCP
+  - Agents
+  - Marketing
+  properties:
+  - type: MCPServer
+    url: mcp/cordial-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/cordial-tool-crosswalk.yml
+  - type: Documentation
+    url: https://developers.cordial.com/mcp
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +118,78 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/cordial_stock/
+  url: https://cordial.com/
+- type: DeveloperPortal
+  url: https://developers.cordial.com/
+- type: Documentation
+  url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+- type: APIReference
+  url: https://developers.cordial.com/api
+- type: GettingStarted
+  url: https://support.cordial.com/hc/en-us/articles/360001897772-Get-started-for-developers
+- type: Support
+  url: https://support.cordial.com/hc/en-us
+- type: HelpCenter
+  url: https://support.cordial.com/hc/en-us
+- type: Blog
+  url: https://cordial.com/resource-library/
+- type: GitHubOrganization
+  url: https://github.com/CordialExperience
+- type: SignUp
+  url: https://cordial.com/contact-us/
+- type: Login
+  url: https://admin.cordial.io/#login
+- type: TermsOfService
+  url: https://cordial.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://legal.cordial.com/privacy-policy/
+- type: StatusPage
+  url: https://status.cordial.com/
+- type: ChangeLog
+  url: https://support.cordial.com/hc/en-us/sections/115000944092-Monthly-release-notes
+- type: Compliance
+  url: https://cordial.com/security/
+- type: TrustCenter
+  url: security/cordial-trust-center.yml
+- type: Integrations
+  url: https://cordial.com/platform-integrations/
+- type: Authentication
+  url: authentication/cordial-authentication.yml
+- type: OAuthScopes
+  url: scopes/cordial-scopes.yml
+- type: DomainSecurity
+  url: security/cordial-domain-security.yml
+- type: Packages
+  url: packages/cordial-packages.yml
+- type: SDKs
+  url: packages/cordial-packages.yml
+- type: CLI
+  url: cli/cordial-cli.yml
+- type: Components
+  url: components/cordial-components.yml
+- type: WellKnown
+  url: well-known/cordial-well-known.yml
+- type: LLMsTxt
+  url: llms/cordial-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Conventions
+  url: conventions/cordial-conventions.yml
+- type: ErrorCatalog
+  url: errors/cordial-problem-types.yml
+- type: ErrorCodes
+  url: errors/cordial-error-keys.yml
+- type: Lifecycle
+  url: lifecycle/cordial-lifecycle.yml
+- type: Conformance
+  url: conformance/cordial-conformance.yml
+- type: DataModel
+  url: data-model/cordial-data-model.yml
+- type: ChangeLog
+  url: changelog/cordial-changelog.yml
+- type: Webhooks
+  url: asyncapi/cordial-webhooks.yml
+- type: RateLimits
+  url: rate-limits/cordial-rate-limits.yml
+- type: Sandbox
+  url: sandbox/cordial-sandbox.yml

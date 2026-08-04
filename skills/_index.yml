@@ -1,0 +1,175 @@
+generated: '2026-08-04'
+method: searched
+source: https://github.com/CordialExperience/agentic-cookbook
+note: Provider-published Agent Skills. Cordial ships an open-source 'agentic cookbook' of self-contained
+  Claude Desktop skill bundles (<recipe>.zip, each carrying SKILL.md plus reference/tool-ergonomics.md
+  and reference/audience-query-mechanics.md). The SKILL.md of each bundle is saved here verbatim; nothing
+  in this directory is authored by API Evangelist. Every skill is grounded in the hosted Cordial MCP server
+  (mcp/cordial-mcp.yml), not in the REST API, so its tool calls are MCP tool names rather than OpenAPI
+  operationIds.
+runtime:
+  surface: MCP
+  server: https://mcp.cordial.io/mcp
+  client: Claude Desktop (skill upload)
+  access: read-only
+x-evidence:
+  fetched: '2026-08-04'
+  repo: https://github.com/CordialExperience/agentic-cookbook
+  http_status: 200
+  bundles: 16
+skills:
+- file: cordial-ai-model-profiler.md
+  name: ai-model-profiler
+  description: Explain and profile a single Cordial AI attribute (a crdl_ai_* field). Use when a marketer
+    or CSM asks what an AI attribute means, what its distinct values are and how many contacts fall in
+    each, why a large share of the file has no score, or what feeds the model. Triggers include "what
+    does crdl_ai_… mean", "unique values + counts for this AI attribute", "why do half my contacts have
+    no [propensity/affinity] score", "what data feeds this model". Profiles the attribute itself across
+    the whole file (or a stated base), reconciling every slice.
+  source_bundle: ai-model-profiler.zip
+- file: cordial-audience-ai-breakdown.md
+  name: audience-ai-breakdown
+  description: Profile an audience you already send to by breaking it down across Cordial AI attributes.
+    Use when a marketer asks how many of their audience are price sensitive, high purchase-propensity,
+    what the send-time or engagement-momentum distribution looks like, or "break down / profile my audience
+    by [crdl_ai attribute]". Takes a base audience and reports its distribution across one or more crdl_ai_*
+    dimensions, enumerated deterministically so every slice reconciles.
+  source_bundle: audience-ai-breakdown.zip
+- file: cordial-audience-count-snapshot.md
+  name: audience-count-snapshot
+  description: Give a marketer/CSM a quick, LIVE "how many contacts are in this audience right now" count
+    — for a named saved audience or an ad-hoc filter — so routine operational asks get answered without
+    opening Audience Builder. Use when someone asks "how many contacts are in [audience name]," "what's
+    the count for [audience/segment] right now," "audience count for today," "how big is the [X] audience,"
+    "how many people match [filter/criteria]," "size of this segment," or "current count for [saved audience]."
+  source_bundle: audience-count-snapshot.zip
+- file: cordial-audience-overlap-diff.md
+  name: audience-overlap-diff
+  description: Run set operations across two audiences (or an audience and a loaded list) live and reconcile
+    them — intersection, A-not-B difference, complement, rule-by-rule diff of why two audiences differ,
+    and external-list overlap (e.g. how many on a suppression list are still subscribed). Use when a marketer/CSM
+    asks "why does this audience pull more contacts than the client's file," "how many on this suppression
+    list are still subscribed/emailable," "what's the overlap between audience A and audience B," "diff
+    these two audiences rule by rule," "how many are in both segments / in A but not B," "reconcile the
+    count difference between two segments," or "cross-tab my loyalty members by AI attribute." Cordial
+    has no native audience-diff or overlap endpoint, so the answer is composed by hand and reconciled.
+  source_bundle: audience-overlap-diff.zip
+- file: cordial-capability-adoption-audit.md
+  name: capability-adoption-audit
+  description: Account-level audit of which Cordial AI models and platform capabilities are ENABLED, which
+    are actually being USED (contacts scored + dims targeted in live audiences/content), and which are
+    still AVAILABLE to turn on — to prep a QBR or feature review and prioritize activations. Use when
+    a CSM/marketer asks "what AI models / features do we have enabled?", "which capabilities are we using
+    vs not using?", "feature/capability audit for this account", "what's live and what's next to activate
+    / turn on?", "which AI models are we paying for but not using?", "go over all the features — which
+    are enabled, which haven't we used yet?", or "prep a capability + adoption review for the QBR".
+  source_bundle: capability-adoption-audit.zip
+- file: cordial-contact-360-trace.md
+  name: contact-360-trace
+  description: Trace ONE contact end-to-end — confirm the record exists (plus any duplicate), read its
+    consent/subscription state, when it opted out, what suppression/send-governance applies, and which
+    sends/journeys its identity qualified for — to explain a single-contact anomaly. Use when a marketer/CSM
+    asks "what happened to this contact," "why did this person get 4 emails back-to-back / is there a
+    frequency cap," "did my suppression actually fire for this customer," "why can't this contact receive
+    push even though tokens look valid," "when and how did this number opt out," "find this complaining
+    customer and any duplicate record," "is this email still subscribed," or "trace this one contact's
+    history."
+  source_bundle: contact-360-trace.zip
+- file: cordial-data-dependency-trace.md
+  name: data-dependency-trace
+  description: When a contact attribute looks broken (a field gone to 0, blank, or wrong), trace it backward
+    — attribute → the data job that writes it → the supplement/table it reads → the import feed/batch
+    — to localize where the dependency broke. Use when a marketer/CSM/Solutions person types "why is this
+    attribute suddenly 0/blank/wrong", "trace this attribute back to its data job and feed", "what data
+    job/feed writes this field", "which import populates this supplement", or "did the last import/batch
+    fail for this table".
+  source_bundle: data-dependency-trace.zip
+- file: cordial-experiment-report.md
+  name: experiment-report
+  description: Report the A/B / subject-line experiment results for a Cordial message (or rolled up across
+    its sends) — the per-variant breakdown, the real winner on the metric the marketer cares about (open
+    / click / conversion / revenue-per-email, bot-adjusted and channel-correct), stated with the right
+    confidence and caveats. Use when a marketer asks "who won the A/B test on [message]?", "show me the
+    subject-line test results", "which variant performed best", "did version A or B win", "what's the
+    winning subject line and the adjusted open rate", or "aggregate the split-test results across all
+    sends of this automation."
+  source_bundle: experiment-report.zip
+- file: cordial-frequency-volume-revenue.md
+  name: frequency-volume-revenue
+  description: Prove whether send volume and attributed revenue move together or inversely — send volume,
+    frequency (sends-per-contact), and revenue over a window, sliced by engagement tier and compared period-over-period
+    / YoY (e.g. H1 vs H2) — as a Cordial-branded QBR artifact. Use when a CSM asks "are we over-mailing
+    / can we cut frequency without losing revenue," "volume down but revenue up — show me the trend,"
+    "send volume vs revenue," "sends per contact this period vs last," "frequency by engagement tier,"
+    or wants a mail-frequency-vs-revenue case for a QBR / strategy review.
+  source_bundle: frequency-volume-revenue.zip
+- file: cordial-list-growth-churn-trend.md
+  name: list-growth-churn-trend
+  description: Show subscriber/list growth and net churn (gross subscribes minus unsubscribes) by month
+    across a multi-year window that exceeds the platform's native 12-month dashboard limit — overall or
+    for a named audience. Use when a marketer/CSM asks "show subscriber growth by month for the last 2
+    years," "net subscriber gain/loss by month beyond 12 months," "list growth and churn trend," "subscribes
+    vs unsubscribes per month," "year-over-year sign-up growth," "net subscribers added/lost for this
+    audience," "the dashboard only goes back a year — pull more history," or "monthly emailable list size
+    over time."
+  source_bundle: list-growth-churn-trend.zip
+- file: cordial-orchestration-performance-report.md
+  name: orchestration-performance-report
+  description: Build an accurate performance report for a Cordial orchestration (automated journey) —
+    per-node sends/engagement over a real date window, node-to-node drop-off explained by each step's
+    filters/delays, per-run revenue, and any A/B experiment running inside the journey. Use when a marketer
+    asks "how is this journey/automation performing," "results by node/step/send for [journey]," "why
+    does step 2 send to fewer people than step 1," "which message in the welcome series wins," "what's
+    the test running inside this journey," or "journey stats for the last N days." Chains orchestration
+    → message nodes → child sends → performance so the numbers tie out.
+  source_bundle: orchestration-performance-report.zip
+- file: cordial-personalization-discovery.md
+  name: personalization-discovery
+  description: Explore what's possible to personalize or segment on in a Cordial account. Use when a marketer
+    asks what contact attributes exist, what values an attribute actually holds, what data coverage looks
+    like, whether an attribute is wired up/used anywhere, or "what can I personalize on / segment by".
+    Self-learns the account's real attributes and values before estimating coverage, then checks where
+    each attribute is already used in content and data jobs.
+  source_bundle: personalization-discovery.zip
+- file: cordial-program-performance-report.md
+  name: program-performance-report
+  description: Build a Cordial-branded, exec-ready report on a whole program's send performance over a
+    period — sends, engagement, and revenue broken down by channel, promotional vs transactional, and
+    batch vs automated, with WoW/MoM/YoY comparison. Use when a marketer/CSM asks to "analyze our whole
+    program's campaign performance and give me a branded report," wants a QBR / exec dashboard for the
+    account, asks "how is our email/SMS/push program performing this month vs last," or to "break down
+    sends and revenue by channel" or "compare channel performance."
+  source_bundle: program-performance-report.zip
+- file: cordial-send-health-diagnostic.md
+  name: send-health-diagnostic
+  description: TRIAGE a send that looks wrong — stuck, slow, under-delivered, or showing an implausible
+    delivered rate — by reconciling its INTENDED audience size against sent/delivered/failed counts, classifying
+    the symptom (in-progress vs slow-but-moving vs short-fired vs truly stalled vs benign), and either
+    resolving it from account data or producing an escalation-ready packet for Cordial support. Use when
+    a marketer/CSM asks "why did this send under-deliver," "this message is stuck processing," "is this
+    send stuck or just slow," "it only sent to 96 of my audience," "the batch only went to 3k of 7k,"
+    "why does SMS show 5% delivered," "my scheduled campaign never went out," or "is the delivery rate
+    real or inflated by failures."
+  source_bundle: send-health-diagnostic.zip
+- file: cordial-tag-coverage-audit.md
+  name: tag-coverage-audit
+  description: Audit whether messages are tagged consistently enough to slice program/regional reporting
+    — what share of the message corpus carries the tags a dashboard slices by (region, promo-type, channel),
+    where the untagged gaps are, and which tag names are near-duplicates that fragment a dimension — so
+    a CSM/marketer can decide whether to trust an O1/O12 sliced report before building it. Use when someone
+    asks "are my messages tagged consistently enough to slice reporting", "what's our tag coverage across
+    sends", "which messages are missing region / promo-type tags", "can I trust a regional report or are
+    tags too patchy", "audit our message tagging / naming convention", "how many sends are untagged",
+    "before I build a sliced report, check tag coverage", or "are our tags clean enough for a segmented
+    QBR".
+  source_bundle: tag-coverage-audit.zip
+- file: cordial-where-used-lookup.md
+  name: where-used-lookup
+  description: Reverse-dependency lookup — find every place a given sculpt block, HTML include, contact
+    attribute, coupon code, or image is referenced across the account (which messages, orchestrations,
+    templates, includes) so a marketer can safely edit or retire it without breaking sends. Use when a
+    marketer/CSM/Solutions person types "where is this block/include used", "what uses this sculpt block/template",
+    "where is this coupon code used", "which messages/orchestrations reference this attribute", "where
+    is {$contact.attribute} used", "what drives the footer / which include builds X", "find everywhere
+    this content key is referenced", or "what will break if I change/delete this block/include".
+  source_bundle: where-used-lookup.zip
