@@ -43,61 +43,14 @@ tags:
 - Retail
 - E-Commerce
 apis:
-- aid: cordial:cordial-api-v2
-  name: Cordial API v2
-  description: 'The current Cordial REST API. 106 operations across 24 resource groups:
-    contacts, contact activities, orders, products, supplements, account lists,
-    contact attributes, batch messages, automation templates, orchestrations, data
-    jobs, contact/order/product imports and exports, jobs, alerts, message content
-    includes, programs, and analytics exports. JSON in, JSON out, over HTTPS only,
-    authenticated with HTTP Basic using an account API key as the username and a
-    blank password.'
-  humanURL: https://developers.cordial.com/api
-  baseURL: https://api.cordial.io/v2
-  tags:
-  - Marketing
-  - Messaging
-  - Customer Data Platform
-  - Contacts
-  - Email
-  properties:
-  - type: OpenAPI
-    url: openapi/cordial-v2-openapi-original.json
-  - type: Overlay
-    url: overlays/cordial-v2-overlay.yaml
-  - type: Documentation
-    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
-  - type: APIReference
-    url: https://developers.cordial.com/api
-  - type: Console
-    url: https://api.cordial.io/docs/v2/
-- aid: cordial:cordial-api-v1
-  name: Cordial API v1
-  description: 'The legacy Cordial REST API, still published and documented alongside
-    v2. 83 operations across 50 paths covering the same contact, event, order,
-    product, supplement, list, message and job surface at an earlier revision. New
-    integrations are directed to v2.'
-  humanURL: https://api.cordial.io/docs/v1/
-  baseURL: https://api.cordial.io/v1
-  tags:
-  - Marketing
-  - Messaging
-  - Legacy
-  properties:
-  - type: OpenAPI
-    url: openapi/cordial-v1-openapi-original.json
-  - type: Overlay
-    url: overlays/cordial-v1-overlay.yaml
-  - type: Console
-    url: https://api.cordial.io/docs/v1/
 - aid: cordial:cordial-mcp
   name: Cordial MCP Server
-  description: 'Cordial''s hosted Model Context Protocol server, which gives any MCP
-    client secure read access to a Cordial account: audiences, messages, analytics,
-    content, orchestrations, sculpt blocks and templates, reports, channels, data
-    operations, supplements, products and tags. 56 tools across 17 domains, served
-    over streamable HTTP and protected by OAuth 2.1 with dynamic client registration.
-    Writes are described as forthcoming behind human approval.'
+  description: >-
+    Cordial's hosted Model Context Protocol server, which gives any MCP client secure read access to a
+    Cordial account: audiences, messages, analytics, content, orchestrations, sculpt blocks and templates,
+    reports, channels, data operations, supplements, products and tags. 56 tools across 17 domains, served
+    over streamable HTTP and protected by OAuth 2.1 with dynamic client registration. Writes are described
+    as forthcoming behind human approval.
   humanURL: https://developers.cordial.com/mcp
   baseURL: https://mcp.cordial.io/mcp
   tags:
@@ -111,12 +64,448 @@ apis:
     url: mcp/cordial-tool-crosswalk.yml
   - type: Documentation
     url: https://developers.cordial.com/mcp
+- aid: cordial:cordial-account-attributes-api
+  name: Cordial account attributes API
+  description: The account attributes API from Cordial — 4 operation(s) for account attributes.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - account attributes
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-account-attributes-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-account-lists-api
+  name: Cordial account lists API
+  description: The account lists API from Cordial — 7 operation(s) for account lists.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - account lists
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-account-lists-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-account-monitor-export-api
+  name: Cordial account monitor export API
+  description: The account monitor export API from Cordial — 1 operation(s) for account monitor export.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - account monitor export
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-account-monitor-export-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-alerts-api
+  name: Cordial Alerts API
+  description: The alerts API from Cordial — 2 operation(s) for alerts.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-analytics-audiences-api
+  name: Cordial analytics audiences API
+  description: The analytics audiences API from Cordial — 2 operation(s) for analytics audiences.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - analytics audiences
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-analytics-audiences-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-analytics-messages-api
+  name: Cordial analytics messages API
+  description: The analytics messages API from Cordial — 2 operation(s) for analytics messages.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - analytics messages
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-analytics-messages-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-audiencecount-api
+  name: Cordial Audiencecount API
+  description: The audiencecount API from Cordial — 1 operation(s) for audiencecount.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - audiencecount
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-audiencecount-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-automation-templates-api
+  name: Cordial automation templates API
+  description: The automation templates API from Cordial — 15 operation(s) for automation templates.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - automation templates
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-automation-templates-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-batch-messages-api
+  name: Cordial batch messages API
+  description: The batch messages API from Cordial — 18 operation(s) for batch messages.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - batch messages
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-batch-messages-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-contact-activities-api
+  name: Cordial contact activities API
+  description: The contact activities API from Cordial — 2 operation(s) for contact activities.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - contact activities
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-contact-activities-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-contact-activity-exports-api
+  name: Cordial contact activity exports API
+  description: >-
+    The contact activity exports API from Cordial — 2 operation(s) for contact activity exports.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - contact activity exports
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-contact-activity-exports-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-contact-exports-api
+  name: Cordial contact exports API
+  description: The contact exports API from Cordial — 2 operation(s) for contact exports.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - contact exports
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-contact-exports-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-contact-imports-api
+  name: Cordial contact imports API
+  description: The contact imports API from Cordial — 2 operation(s) for contact imports.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - contact imports
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-contact-imports-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-contacts-api
+  name: Cordial Contacts API
+  description: The contacts API from Cordial — 17 operation(s) for contacts.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-data-jobs-api
+  name: Cordial data jobs API
+  description: The data jobs API from Cordial — 5 operation(s) for data jobs.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - data jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-data-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-jobs-api
+  name: Cordial Jobs API
+  description: The jobs API from Cordial — 4 operation(s) for jobs.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-message-content-includes-api
+  name: Cordial message content includes API
+  description: >-
+    The message content includes API from Cordial — 4 operation(s) for message content includes.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - message content includes
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-message-content-includes-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-orchestrations-api
+  name: Cordial Orchestrations API
+  description: The orchestrations API from Cordial — 4 operation(s) for orchestrations.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - orchestrations
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-orchestrations-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-orders-api
+  name: Cordial Orders API
+  description: The orders API from Cordial — 4 operation(s) for orders.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - orders
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-orders-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-ordersimport-api
+  name: Cordial Ordersimport API
+  description: The ordersimport API from Cordial — 2 operation(s) for ordersimport.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - ordersimport
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-ordersimport-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-productimports-api
+  name: Cordial Productimports API
+  description: The productimports API from Cordial — 2 operation(s) for productimports.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - productimports
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-productimports-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-products-api
+  name: Cordial Products API
+  description: The products API from Cordial — 4 operation(s) for products.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - products
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-products-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-programs-api
+  name: Cordial Programs API
+  description: The programs API from Cordial — 2 operation(s) for programs.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - programs
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-programs-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
+- aid: cordial:cordial-supplements-api
+  name: Cordial Supplements API
+  description: The supplements API from Cordial — 12 operation(s) for supplements.
+  humanURL: https://developers.cordial.com/api
+  baseURL: https://api.cordial.io/v2
+  tags:
+  - supplements
+  properties:
+  - type: OpenAPI
+    url: openapi/cordial-supplements-api-openapi.yml
+  - type: Documentation
+    url: https://support.cordial.com/hc/en-us/categories/12092749097741-Developer-resources
+  - type: APIReference
+    url: https://developers.cordial.com/api
+  - type: Console
+    url: https://api.cordial.io/docs/v2/
+  - type: Console
+    url: https://api.cordial.io/docs/v1/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/cordial-v1-overlay.yaml
 - type: Website
   url: https://cordial.com/
 - type: DeveloperPortal
