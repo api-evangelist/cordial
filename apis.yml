@@ -22,11 +22,11 @@ x-tier: profiled
 x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-08-04'
-modified: '2026-08-04'
+modified: '2026-08-14'
 x-enrichment:
-  date: '2026-08-04'
+  date: '2026-08-14'
   status: enriched
-  artifacts_added: 45
+  artifacts_added: 2
   pass: local-v1
 tags:
 - Company
@@ -504,6 +504,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/cordial-agentic-access.yml
 - type: Overlay
   url: overlays/cordial-v1-overlay.yaml
 - type: Website
@@ -582,3 +584,5 @@ common:
   url: rate-limits/cordial-rate-limits.yml
 - type: Sandbox
   url: sandbox/cordial-sandbox.yml
+- type: Plans
+  url: plans/cordial-plans-pricing.yml
