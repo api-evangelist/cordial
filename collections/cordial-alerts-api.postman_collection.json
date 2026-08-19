@@ -1,0 +1,1063 @@
+{
+  "item": [
+    {
+      "id": "f1a1f235-95b3-4ccb-9c47-95ecf449d875",
+      "name": "alerts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "056f4829-c0d5-4825-a88d-8508b792a49e",
+          "name": "Get a single alert",
+          "request": {
+            "name": "Get a single alert",
+            "description": {
+              "content": "Retrieves the specified alert.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "alerts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Alert id value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6cfc4c8a-b37e-42c9-adec-ad423ce7425c",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Alert id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"type\": \"total-sent\",\n  \"msID\": \"string\",\n  \"mdtID\": \"string\",\n  \"enabled\": true,\n  \"notify\": [\n    \"string\",\n    \"string\"\n  ],\n  \"conditions\": [\n    {\n      \"operator\": \"lte\",\n      \"value\": 2401,\n      \"type\": 4232,\n      \"period\": 4984\n    },\n    {\n      \"operator\": \"lte\",\n      \"value\": 8566,\n      \"type\": \"string\",\n      \"period\": 4697.387288913954\n    }\n  ],\n  \"period\": 7144\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa5b9187-0152-415e-b481-0594b0424c0f",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Alert id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa8d1f50-82e6-4da0-a401-35abe496050e",
+          "name": "Update a single alert",
+          "request": {
+            "name": "Update a single alert",
+            "description": {
+              "content": "Update alert",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "alerts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Alert id value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"notify\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": 9172.821894519904,\n      \"period\": false\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": true,\n      \"period\": 846\n    }\n  ],\n  \"type\": \"total-sent\",\n  \"msID\": \"<string>\",\n  \"mdtID\": \"<string>\",\n  \"period\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6106ff8b-6591-4c40-a6bd-d1b67222e7c6",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Alert id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"notify\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": true,\n      \"period\": \"string\"\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": 3754,\n      \"period\": 5958.823365806556\n    }\n  ],\n  \"type\": \"total-sent\",\n  \"msID\": \"<string>\",\n  \"mdtID\": \"<string>\",\n  \"period\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6b302be-5ed2-413c-baed-34976185cf79",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Alert id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"notify\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": true,\n      \"period\": \"string\"\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": 3754,\n      \"period\": 5958.823365806556\n    }\n  ],\n  \"type\": \"total-sent\",\n  \"msID\": \"<string>\",\n  \"mdtID\": \"<string>\",\n  \"period\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bfdc6de-f424-4244-9d27-9142d05ccc25",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Alert id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"notify\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": true,\n      \"period\": \"string\"\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": 3754,\n      \"period\": 5958.823365806556\n    }\n  ],\n  \"type\": \"total-sent\",\n  \"msID\": \"<string>\",\n  \"mdtID\": \"<string>\",\n  \"period\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"for\": [\n      \"The for field is required\"\n    ]\n  },\n  \"error\": true,\n  \"errorKey\": \"VALIDATION_ERROR\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "923d5428-e676-4609-9c5a-d4105b002b38",
+          "name": "Delete an alert",
+          "request": {
+            "name": "Delete an alert",
+            "description": {
+              "content": "Deletes alerts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "alerts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Alert id value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "61f807bf-6658-40a5-89dc-cfb9b2bf989b",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Alert id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa4c1aae-5f41-46a8-98d1-c22a3da7b52c",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Alert id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0f798a0-07d3-49eb-96aa-0d3df21a05ac",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Alert id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aebd5cd9-dd21-4cf5-b4bc-8ed99fcd6b28",
+          "name": "Add alert",
+          "request": {
+            "name": "Add alert",
+            "description": {
+              "content": "Adds a new alert using the appropriate JSON body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"notify\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": 5541,\n      \"period\": 678\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": 5772,\n      \"period\": 684\n    }\n  ],\n  \"type\": \"total-sent\",\n  \"msID\": \"<string>\",\n  \"mdtID\": \"<string>\",\n  \"period\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "51a7f976-4c42-4b2e-988d-20fe228094e4",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"notify\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": true,\n      \"period\": \"string\"\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": 3754,\n      \"period\": 5958.823365806556\n    }\n  ],\n  \"type\": \"total-sent\",\n  \"msID\": \"<string>\",\n  \"mdtID\": \"<string>\",\n  \"period\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"id\": 123\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f84f0d67-b50c-425b-ace0-6e2e4eacc4ab",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"notify\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conditions\": [\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": true,\n      \"period\": \"string\"\n    },\n    {\n      \"operator\": \"<string>\",\n      \"value\": \"<integer>\",\n      \"type\": 3754,\n      \"period\": 5958.823365806556\n    }\n  ],\n  \"type\": \"total-sent\",\n  \"msID\": \"<string>\",\n  \"mdtID\": \"<string>\",\n  \"period\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"for\": [\n      \"The for field is required\"\n    ]\n  },\n  \"error\": true,\n  \"errorKey\": \"VALIDATION_ERROR\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "835ebae6-9758-495f-aafd-bb72cd0643bd",
+          "name": "Get content includes",
+          "request": {
+            "name": "Get content includes",
+            "description": {
+              "content": "Retrieves alerts list. Using query string parameters, it is possible to filter the response mdtID or msID to retrieve information for particular messages or templates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "mdtID",
+                  "value": "<string>",
+                  "description": "Filter alerts by automation message delivery template ID (mdtID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "msID",
+                  "value": "<string>",
+                  "description": "Filter alerts by message send ID (mdtID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "entity",
+                  "value": "<string>",
+                  "description": "Filter alerts by entity. Possible values message-automation or batch-message"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Specific page number to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Number of records per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "Field by which results should be sorted."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_dir",
+                  "value": "<string>",
+                  "description": "Direction to sort by. Works in conjunction with `sort_by` (e.g. asc, desc)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a5faaf2d-9177-44f8-bb75-033f85763b7e",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mdtID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "msID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_dir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"type\": \"total-sent\",\n    \"msID\": \"string\",\n    \"mdtID\": \"string\",\n    \"enabled\": false,\n    \"notify\": [\n      \"string\",\n      \"string\"\n    ],\n    \"conditions\": [\n      {\n        \"operator\": \"<string>\",\n        \"value\": \"<integer>\",\n        \"type\": \"string\",\n        \"period\": false\n      },\n      {\n        \"operator\": \"<string>\",\n        \"value\": \"<integer>\",\n        \"type\": false,\n        \"period\": 6033.261623172629\n      }\n    ],\n    \"period\": 2399\n  },\n  {\n    \"id\": \"string\",\n    \"type\": \"total-sent\",\n    \"msID\": \"string\",\n    \"mdtID\": \"string\",\n    \"enabled\": true,\n    \"notify\": [\n      \"string\",\n      \"string\"\n    ],\n    \"conditions\": [\n      {\n        \"operator\": \"<string>\",\n        \"value\": \"<integer>\",\n        \"type\": \"string\",\n        \"period\": 3538\n      },\n      {\n        \"operator\": \"<string>\",\n        \"value\": \"<integer>\",\n        \"type\": \"string\",\n        \"period\": \"string\"\n      }\n    ],\n    \"period\": 793\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a08a884-ca69-4baa-93a7-e892d82fce23",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mdtID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "msID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_dir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cda85985-9f7b-4fc5-b469-14dc378ffadf",
+    "name": "Cordial Alerts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the Cordial API documentation! This interactive API documentation allows you to test API calls from the Swagger interface. Authenticate yourself with the API key from your Cordial account and then make API calls. Keep in mind that testing in Swagger will directly affect your production data.",
+      "type": "text/plain"
+    }
+  }
+}

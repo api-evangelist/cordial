@@ -121,7 +121,7 @@ custom_events:
     Any custom-named event (browse, cart, order, or arbitrary IoT/behavioural events) can be posted to
     POST /v2/contactactivities with free-form JSON properties, and then selected as a webhook trigger
     alongside the system events above.
-  ingest_operation: 'openapi/cordial-v2-openapi-original.json#addActivity'
+  ingest_operation: 'openapi/_original/cordial-v2-openapi-original.json#addActivity'
 
 counts:
   system_events: 41
@@ -132,7 +132,7 @@ related_streaming:
     docs: https://support.cordial.com/hc/en-us/articles/360026363972-Amazon-Kinesis-integration
     note: A second event-egress path alongside webhooks, documented in the integrations category.
   - name: Contact activity export
-    operation: 'openapi/cordial-v2-openapi-original.json#createExportCAJob'
+    operation: 'openapi/_original/cordial-v2-openapi-original.json#createExportCAJob'
     note: 'Batch egress of the same event stream to FTP/SFTP/HTTP in CSV or JSON.'
 
 x-evidence:

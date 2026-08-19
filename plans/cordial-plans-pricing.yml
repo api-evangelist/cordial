@@ -1,0 +1,54 @@
+generated: '2026-08-14'
+method: searched
+source: https://cordial.com/page-sitemap.xml
+docs: https://cordial.com/contact-us/
+
+plan_count: 0
+pricing_published: false
+model: enterprise-contract
+
+note: >-
+  Cordial publishes no public pricing. This is a recorded negative result, not an unchecked box.
+  cordial.com/pricing, cordial.com/pricing/ and cordial.com/plans/ all return HTTP 404, and the
+  site's own WordPress page sitemap (cordial.com/page-sitemap.xml, HTTP 200) contains no pricing
+  or plans page — the only commercial-intent pages it lists are /request-demo/, /contact-us/ and
+  /demo-about-us/. The developer portal at developers.cordial.com carries no pricing link either;
+  its calls to action are "contact sales" and "install the CLI". Every commercial path terminates
+  in a sales conversation, so there is no tier, quota, overage or per-tier limit to record.
+
+commercial_path:
+- {name: Request a demo, url: 'https://cordial.com/request-demo/', kind: sales-gate}
+- {name: Contact us, url: 'https://cordial.com/contact-us/', kind: sales-gate}
+
+pricing_dimensions:
+  note: >-
+    Cordial's own marketing describes what pricing scales on, without naming a number. Recorded as
+    the provider's stated shape of the commercial model, NOT as a price. No third-party estimate is
+    recorded here — analyst and review-site figures are not provider-published data and do not
+    belong in this artifact.
+  stated: [contact volume, channel scope, AI feature scope]
+  source: https://cordial.com/
+
+api_metering:
+  metered: unknown
+  note: >-
+    No published relationship between API usage and price. Rate limits are set per account by
+    Cordial and adjustable on request (see rate-limits/cordial-rate-limits.yml), which implies the
+    API is governed contractually rather than by a published usage tier. There is no free tier, no
+    self-serve signup, and no trial: admin.cordial.io is a login-only surface.
+
+gap: >-
+  A developer evaluating Cordial cannot size cost, entitlement or API quota before entering a sales
+  process. For a platform that now markets itself as headless and agent-addressable
+  (developers.cordial.com, "Cordial Headless — now in preview"), the absence of any published
+  commercial surface is the single largest friction between an interested developer and a first API
+  call.
+
+x-evidence:
+  fetched: '2026-08-14'
+  probes:
+  - {url: 'https://cordial.com/pricing', http_status: 404}
+  - {url: 'https://cordial.com/pricing/', http_status: 404}
+  - {url: 'https://cordial.com/plans/', http_status: 404}
+  - {url: 'https://cordial.com/page-sitemap.xml', http_status: 200, note: 'No pricing or plans page in the sitemap.'}
+  - {url: 'https://developers.cordial.com/', http_status: 200, note: 'Developer portal; no pricing link.'}

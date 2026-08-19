@@ -1,0 +1,298 @@
+{
+  "item": [
+    {
+      "id": "fe9614f1-5743-4df8-a869-321acb7b69f1",
+      "name": "ordersimport",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bf824be6-8e05-40b5-a217-35d248b07aa9",
+          "name": "Create an order import job",
+          "request": {
+            "name": "Create an order import job",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "ordersimport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": {\n    \"transport\": \"<string>\",\n    \"url\": \"<string>\",\n    \"path\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"importName\": \"<string>\",\n  \"confirmEmail\": \"<string>\",\n  \"hasHeader\": \"<boolean>\",\n  \"columns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"nullMarker\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60305cfa-b661-4a1f-a5df-9cb1ccd7ba01",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ordersimport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"transport\": \"<string>\",\n    \"url\": \"<string>\",\n    \"path\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"importName\": \"<string>\",\n  \"confirmEmail\": \"<string>\",\n  \"hasHeader\": \"<boolean>\",\n  \"columns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"nullMarker\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29337385-a52a-46f2-bb16-e04b29f42a79",
+          "name": "Create an order import job",
+          "request": {
+            "name": "Create an order import job",
+            "description": {
+              "content": "Creates an import job to batch load a file of orders into the Cordial database from an external location. Only JSONL file type is permissible for imports using this API endpoint. Compared to CSV, JSONL file format allows for greater flexibility when working with large sets of multi-layered data, making it ideal for importing order data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "ordersimport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": {\n    \"transport\": \"<string>\",\n    \"url\": \"<string>\",\n    \"path\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"buket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\",\n    \"database\": \"<string>\",\n    \"schema\": \"<string>\",\n    \"source\": \"<string>\"\n  },\n  \"importName\": \"<string>\",\n  \"confirmEmail\": \"<string>\",\n  \"suppressTriggers\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7510f7ea-4121-4053-99c8-d4b0d3fbb97c",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ordersimport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"transport\": \"<string>\",\n    \"url\": \"http://files.example.com/file.csv\",\n    \"path\": \"files/file.csv\",\n    \"aws_access_key_id\": \"WIfdavFHS8adsfhad98df\",\n    \"aws_secret_access_key\": \"dudhKDDHE476383kdsdhdka\",\n    \"aws_bucket\": \"my_bucket\",\n    \"aws_region\": \"us-west-2\",\n    \"server\": \"example.com\",\n    \"port\": \"<integer>\",\n    \"username\": \"myusername\",\n    \"password\": \"Msm1th$99!\",\n    \"savedKey\": \"<string>\",\n    \"buket\": \"name_used_in_marketplace_setup\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\",\n    \"database\": \"<string>\",\n    \"schema\": \"<string>\",\n    \"source\": \"<string>\"\n  },\n  \"importName\": \"<string>\",\n  \"confirmEmail\": \"joesmith@example.com\",\n  \"suppressTriggers\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"5f6b1434f778ac145d25391a\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15fd6713-042c-4f55-8f5f-009ab6cb780e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "ordersimport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"transport\": \"<string>\",\n    \"url\": \"http://files.example.com/file.csv\",\n    \"path\": \"files/file.csv\",\n    \"aws_access_key_id\": \"WIfdavFHS8adsfhad98df\",\n    \"aws_secret_access_key\": \"dudhKDDHE476383kdsdhdka\",\n    \"aws_bucket\": \"my_bucket\",\n    \"aws_region\": \"us-west-2\",\n    \"server\": \"example.com\",\n    \"port\": \"<integer>\",\n    \"username\": \"myusername\",\n    \"password\": \"Msm1th$99!\",\n    \"savedKey\": \"<string>\",\n    \"buket\": \"name_used_in_marketplace_setup\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\",\n    \"database\": \"<string>\",\n    \"schema\": \"<string>\",\n    \"source\": \"<string>\"\n  },\n  \"importName\": \"<string>\",\n  \"confirmEmail\": \"joesmith@example.com\",\n  \"suppressTriggers\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"The source.transport field is required.\",\n  \"errorKey\": \"GENERIC_ERROR_KEY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b12c0b54-dd5b-4b07-b5e4-94c2af6dd083",
+    "name": "Cordial Ordersimport API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged ordersimport across 2 of this provider's published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,962 @@
+{
+  "item": [
+    {
+      "id": "eca26844-cb7f-4ecb-ac10-b1aac7f7bd74",
+      "name": "contact activities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3b7cad9e-afd0-4e8b-9bf8-020de88b6e76",
+          "name": "Get events",
+          "request": {
+            "name": "Get events",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "contactactivities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time",
+                  "value": "<string>",
+                  "description": "can be searched with modifiers (lt, gt, lte, gte, between.start, between.end)"
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "can be click, open, send, or any user defined actions"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "search contact primary key"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Number of page"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Count items on page"
+                },
+                {
+                  "disabled": false,
+                  "key": "return_count",
+                  "value": "false",
+                  "description": "Return count of records"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "dcc7d1b7-3d4b-4ce4-abc7-f29506d4178a",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contactactivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_count",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"action\": \"string\",\n    \"cID\": \"string\",\n    \"time\": \"string\",\n    \"mcID\": \"string\",\n    \"bmID\": \"string\",\n    \"first\": 3746,\n    \"properties\": {}\n  },\n  {\n    \"action\": \"string\",\n    \"cID\": \"string\",\n    \"time\": \"string\",\n    \"mcID\": \"string\",\n    \"bmID\": \"string\",\n    \"first\": 9753,\n    \"properties\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "debd3943-a58f-4c32-8061-9268c1e23eb1",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contactactivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_count",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f657268a-62e9-4ef3-bcb8-dde6ebf32fb0",
+          "name": "Add a new event",
+          "request": {
+            "name": "Add a new event",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "contactactivities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"a\": \"<string>\",\n  \"<primaryKey>\": \"<string>\",\n  \"UID\": \"<string>\",\n  \"ats\": \"<If provided must be in ISO 8601 format>\",\n  \"properties\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d92daab7-4a5d-471c-ac3d-2855a7015814",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contactactivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"a\": \"<string>\",\n  \"<primaryKey>\": \"<string>\",\n  \"UID\": \"<string>\",\n  \"ats\": \"<If provided must be in ISO 8601 format>\",\n  \"properties\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b433fce-ca18-4f47-a6d7-8a55d767cceb",
+          "name": "Get events",
+          "request": {
+            "name": "Get events",
+            "description": {
+              "content": "Retrieves contact activities. Response data can be filtered for a specific contact using the `email` and `mcID` query string parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contactactivities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "time[lt]",
+                  "value": "<string>",
+                  "description": "Filter activities that occurred before this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+                },
+                {
+                  "disabled": false,
+                  "key": "time[gt]",
+                  "value": "<string>",
+                  "description": "Filter activities that occurred after this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+                },
+                {
+                  "disabled": false,
+                  "key": "time[lte]",
+                  "value": "<string>",
+                  "description": "Filter activities that occurred before or at this time (ISO 08601 format e.g. YYYY-MM-DDThh:mm:ss)."
+                },
+                {
+                  "disabled": false,
+                  "key": "time[gte]",
+                  "value": "<string>",
+                  "description": "Filter activities that occurred after or at this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "Filter by a specific event (e.g. click, open, send, or a custom-named event)."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "Filter activities by contact email address value."
+                },
+                {
+                  "disabled": false,
+                  "key": "mdtID",
+                  "value": "<string>",
+                  "description": "Filter activities by automation message delivery template ID (mdtID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "mcID",
+                  "value": "<string>",
+                  "description": "Filter by message contact ID (mcID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Number or records per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_count",
+                  "value": "false",
+                  "description": "Show the total count of records returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "contactFields",
+                  "value": "<string>",
+                  "description": "Specify additional contact attributes that should be added in each event."
+                },
+                {
+                  "disabled": false,
+                  "key": "contactFields",
+                  "value": "<string>",
+                  "description": "Specify additional contact attributes that should be added in each event."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9a3b4ec5-69b6-4ed5-98a5-334916e01e8a",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactactivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mdtID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mcID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "contactFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "contactFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"action\": \"string\",\n    \"cID\": \"string\",\n    \"time\": \"string\",\n    \"mcID\": \"string\",\n    \"bmID\": \"string\",\n    \"first\": 6173,\n    \"properties\": {}\n  },\n  {\n    \"action\": \"string\",\n    \"cID\": \"string\",\n    \"time\": \"string\",\n    \"mcID\": \"string\",\n    \"bmID\": \"string\",\n    \"first\": 5582,\n    \"properties\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09c35ede-f4ad-4227-90e7-207e6416231b",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactactivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mdtID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mcID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "contactFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "contactFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53feccc6-055f-4126-beb5-9fa1b3672dc0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactactivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "time[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mdtID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mcID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_count",
+                      "value": "false"
+                    },
+                    {
+                      "key": "contactFields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "contactFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"error\": true,\n  \"message\": \"Data Automation does not exist.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "903479f5-8a8f-4bbc-b4ed-b0237e293e30",
+          "name": "Add a new event",
+          "request": {
+            "name": "Add a new event",
+            "description": {
+              "content": "Creates a new contact activity using the appropriate JSON body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contactactivities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"a\": \"<string>\",\n  \"primaryKey\": \"<string>\",\n  \"UID\": \"<string>\",\n  \"ats\": \"<string>\",\n  \"properties\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "27a1db53-0615-4f75-9635-ea1ef82a4ff2",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactactivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"a\": \"<string>\",\n  \"primaryKey\": \"<string>\",\n  \"UID\": \"<string>\",\n  \"ats\": \"2024-05-03T00:00:00\",\n  \"properties\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cbcad7be-4bf5-4a92-89a9-bf121028eb74",
+              "name": "Attribute Error Or Validation Errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactactivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"a\": \"<string>\",\n  \"primaryKey\": \"<string>\",\n  \"UID\": \"<string>\",\n  \"ats\": \"2024-05-03T00:00:00\",\n  \"properties\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"message\": \"Key must be unique\",\n  \"messages\": {\n    \"validationErrors\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8a24e7b-028b-4cdf-a49c-6e8ed84b47c7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactactivities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"a\": \"<string>\",\n  \"primaryKey\": \"<string>\",\n  \"UID\": \"<string>\",\n  \"ats\": \"2024-05-03T00:00:00\",\n  \"properties\": {\n    \"key\": \"value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Access Denied: Authentication Failure\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bc03b268-0c6e-4b30-91ee-498fbf414989",
+    "name": "Cordial contact activities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged contact activities across 2 of this provider's published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

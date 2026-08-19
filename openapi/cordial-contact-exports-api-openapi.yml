@@ -1,0 +1,303 @@
+openapi: 3.2.0
+info:
+  title: Cordial contact exports API
+  termsOfService: https://cordial.zendesk.com
+  version: '1.0'
+  description: 'Operations tagged contact exports across 2 of this provider''s published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: contact exports
+paths:
+  /v1/contactexports:
+    post:
+      security:
+      - basicAuth: []
+      summary: Create a contacts export job
+      operationId: createExportJob
+      tags:
+      - contact exports
+      responses:
+        '200':
+          description: jobId
+        '422':
+          description: Unprocessable Entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceCE'
+        description: Export object that needs to be getting from the system
+        required: true
+  /v2/contactexports:
+    post:
+      security:
+      - basicAuth: []
+      summary: Create a contacts export job
+      description: Creates an export job to download and store a file of contact records to an external location. The exported file can be downloaded via Cordial UI, via FTP/SFTP, sent to Amazon S3 bucket, or sent to Google Cloud Storage bucket.
+      operationId: createExportJob
+      tags:
+      - contact exports
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactExportsResponse'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactExportsError'
+        '415':
+          description: Unsupported Media Type
+          $ref: '#/components/responses/incorrectmediatype'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceCE_2'
+        description: JSON body information to create the export job.
+        required: true
+components:
+  schemas:
+    ContactExportsResponse:
+      title: ContactExports
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
+    MediaTypeIsIncorrect:
+      title: Unsupported Media Type
+      description: Unsupported Media Type
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: UNSUPPORTED_MEDIA_TYPE
+        message:
+          type: string
+          example: 'Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.'
+    SourceCE_2:
+      title: Source
+      type: object
+      required:
+      - destination
+      - fields
+      - accountId
+      properties:
+        name:
+          type: string
+          description: Defines the export file name. If provided, this value will be displayed next to the job ID on the Jobs status page.
+        exportType:
+          description: 'Defines the file type to be exported. Possible values: CSV, JSON, TXT.'
+          type: string
+        delimiter:
+          type: string
+          description: Character used to break up export file columns. Only used if ExportType is set to TXT. Defaults to `,` if not specified.
+          example: ','
+        destination:
+          $ref: '#/components/schemas/DestinationObject'
+        fields:
+          type: array
+          items:
+            type: string
+          description: Fields or contact attribute keys to include (e.g. ["first_name","last_name"]).
+        lists:
+          type: array
+          items:
+            type: number
+          description: List names or list IDs to include (e.g. ["monthly_newsletter","weekly_specials"] or [8756,8757]). Contact's list association is indicated with a <b>1</b> for being on the list or an <b>0</b> for not being on the lsit.
+        audience-key:
+          type: string
+          description: Limit export results to a specific audience using a saved audience rule name (e.g. 30_Day_Engaged).
+        accountId:
+          type: integer
+          description: Account ID.
+        showHeader:
+          type: boolean
+          description: 'For use when export file type is <b>CSV</b> to determine if the first row will display column names. Possible values: true, false.'
+        compress:
+          type: boolean
+          description: Compresses the exported file. If set to `true`, the file is compressed using GZIP with the file extension <b>.gz</b> added to the filename.
+        confirmEmail:
+          type: string
+          description: Email address to send an administrative alert when the job is done running.
+    DestinationObject:
+      title: Destination
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: 'Defines the destination type. Possible values: AWS (should be used if the file is to be downloaded via the Cordial UI), FTP, SFTP, S3, GCS, AZUREBLOB.'
+        aws_access_key_id:
+          type: string
+          description: Defines the public AWS access key ID. Required if destination is S3 and IAM role is not configured.
+        aws_secret_access_key:
+          type: string
+          description: Defines the secret AWS access key. Required if destination is S3 and IAM role is not configured.
+        aws_bucket:
+          type: string
+          description: Defines the AWS bucket name. Required if destination is S3.
+        aws_region:
+          type: string
+          description: Defines the AWS region (e.g. us-west-2). Required if destination is S3.
+        server:
+          type: string
+          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP destinations.
+          example: sftp.example.com
+        port:
+          type: integer
+          description: Defines the port number for the FTP or SFTP server (e.g. 22).
+          example: 22
+        username:
+          type: string
+          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        password:
+          type: string
+          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        savedKey:
+          type: string
+          description: SFTP public key authentication key `name` if using SFTP public key authentication instead of password.
+        path:
+          type: string
+          description: Path to folder where the export file will be stored. Required if destination is FTP, SFTP, S3, GCS, or AZUREBLOB.
+        gcs_bucket:
+          type: string
+          description: Defines the GCS bucket name. Required if destination is GCS.
+        account:
+          type: string
+          description: Defines the Azure Blob Storage account name. Required if destination is AZUREBLOB.
+        container:
+          type: string
+          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
+    ContactExportsError:
+      title: ContactExports
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Error validation message
+          description: 'Error explanation. Possible errors: [''SSH key with such Name/ID: wrong does not exist.'', ''The selected export type is invalid.'', ''Audience with name: ''string'' does not exist.'', etc.]'
+    DestinationCE:
+      title: Destination
+      type: object
+      required:
+      - type
+      - port
+      properties:
+        type:
+          type: string
+          description: Type of report
+          enum:
+          - ftp
+          - aws
+          - sftp
+          - s3
+        aws_access_key_id:
+          type: string
+          description: (required for s3)
+        aws_secret_access_key:
+          type: string
+          description: (required for s3)
+        aws_bucket:
+          type: string
+          description: (required for s3)
+        aws_region:
+          type: string
+          description: (required for s3)
+        server:
+          type: string
+          description: (required for ftp or sftp)
+        port:
+          type: integer
+        username:
+          type: string
+          description: (required for ftp or sftp)
+        password:
+          type: string
+          description: (required for ftp or sftp)
+        path:
+          type: string
+          description: (required for ftp,sftp,s3)
+    SourceCE:
+      title: Source
+      type: object
+      required:
+      - destination
+      - fields
+      - accountId
+      properties:
+        name:
+          type: string
+          description: File name
+        exportType:
+          description: Type of report
+          type: string
+          enum:
+          - csv
+          - json
+        destination:
+          $ref: '#/components/schemas/DestinationCE'
+        fields:
+          type: array
+          items:
+            type: string
+          description: Export list fields, the sequence has a value
+        lists:
+          type: array
+          items:
+            type: number
+          description: Export list of lists, the sequence has a value
+        audience-key:
+          type: string
+          description: Audience name for filtering contacts
+        showHeader:
+          type: boolean
+          description: Add header in export file
+        accountId:
+          type: integer
+          description: Account ID
+        compress:
+          type: boolean
+          default: false
+          description: If true then gzip and add .gz to filename(s)
+        confirmEmail:
+          type: string
+  responses:
+    incorrectmediatype:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MediaTypeIsIncorrect'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
+x-refined-from:
+- cordial-v1-openapi-original.json
+- cordial-v2-openapi-original.json

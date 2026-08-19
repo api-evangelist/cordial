@@ -1,0 +1,271 @@
+openapi: 3.2.0
+info:
+  title: Cordial Ordersimport API
+  termsOfService: https://cordial.zendesk.com
+  version: '1.0'
+  description: 'Operations tagged ordersimport across 2 of this provider''s published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: ordersimport
+paths:
+  /v1/ordersimport:
+    post:
+      security:
+      - basicAuth: []
+      summary: Create an order import job
+      tags:
+      - ordersimport
+      operationId: ordersimport
+      responses:
+        '200':
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobOI'
+        description: Import new orders
+        required: true
+  /v2/ordersimport:
+    post:
+      security:
+      - basicAuth: []
+      description: Creates an import job to batch load a file of orders into the Cordial database from an external location. Only JSONL file type is permissible for imports using this API endpoint. Compared to CSV, JSONL file format allows for greater flexibility when working with large sets of multi-layered data, making it ideal for importing order data.
+      summary: Create an order import job
+      tags:
+      - ordersimport
+      operationId: ordersimport
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderImportConfigSuccess'
+        '406':
+          $ref: '#/components/responses/OrderImportConfigError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderImportsJob'
+        description: JSON body information to create the import job.
+        required: true
+components:
+  schemas:
+    SourceOrders:
+      title: Source
+      type: object
+      required:
+      - transport
+      - url
+      - path
+      properties:
+        transport:
+          type: string
+          enum:
+          - ftp
+          - http
+          - sftp
+          - s3
+        aws_access_key_id:
+          type: string
+          description: (required for s3)
+        aws_secret_access_key:
+          type: string
+          description: (required for s3)
+        aws_bucket:
+          type: string
+          description: (required for s3)
+        aws_region:
+          type: string
+          description: (required for s3)
+        url:
+          type: string
+        server:
+          type: string
+          enum:
+          - ftp
+          - sftp
+        port:
+          type: integer
+        username:
+          type: string
+          description: (optional for http basic auth)
+        password:
+          type: string
+          description: (optional for http basic auth)
+        path:
+          type: string
+          description: (filepath only for s3)
+          enum:
+          - ftp
+          - sftp
+    JobOI:
+      title: Job
+      type: object
+      required:
+      - source
+      properties:
+        importName:
+          type: string
+          description: If field provided, will be shown in Job Widget
+        source:
+          $ref: '#/components/schemas/SourceOrders'
+        confirmEmail:
+          type: string
+        hasHeader:
+          type: boolean
+          description: required, if 'columns' is not included, if imported file 'jsonl' hasHeader will be ignored
+        columns:
+          type: array
+          items:
+            type: string
+          description: required, if 'hasHeader' is not explicitly set to 'true', if imported file 'jsonl' columns will be ignored
+        nullMarker:
+          type: string
+    OrderImportConfigSuccess:
+      title: Import configuration error
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string|object
+          example: 5f6b1434f778ac145d25391a
+          schema:
+            description: String. Mongo ID or object from created job when successful.
+            properties:
+              error:
+                type: boolean
+                example: true
+              errorKey:
+                type: string
+                example: GENERIC_ERROR_KEY
+              message:
+                type: string
+                example: Can't login to the server (serverName)
+                description: 'Field is present if import configuration is wrong. Possible errors: [''Can''t login to the server (serverName)'', ''Can''t connect to the server (serverName)'', ''Couldn''t get the size of the file (fileFolder/file.json)'']'
+    OrderImportConfigError:
+      title: Import configuration error
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: The source.transport field is required.
+          description: 'Field is present if import configuration is wrong. Possible errors: [''The source.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'', ''The source.path field is required.'', ''The source.transport field is required.'', ''The selected source.transport is invalid.'', ''The source.aws access key id field is required.'', ''The source.aws secret access key field is required.'', ''The source.aws bucket field is required.'', ''The source.aws region field is required.'', ''The columns field is required.'']'
+    SourceObject:
+      title: Source
+      type: object
+      required:
+      - transport
+      - url
+      - path
+      properties:
+        transport:
+          type: string
+          description: Transport options include HTTP, HTTPS, FTP, SFTP, S3, GCS, AZUREBLOB, SNOWFLAKE .
+        aws_access_key_id:
+          type: string
+          description: Defines the public AWS access key ID. Required if transport is S3 and IAM role is not configured.
+          example: WIfdavFHS8adsfhad98df
+        aws_secret_access_key:
+          type: string
+          description: Defines the secret AWS access key. Required if transport is S3 and IAM role is not configured.
+          example: dudhKDDHE476383kdsdhdka
+        aws_bucket:
+          type: string
+          description: Defines the AWS bucket name. Required if transport is S3.
+          example: my_bucket
+        aws_region:
+          type: string
+          description: Defines the AWS region (e.g. us-west-2). Required if transport is S3.
+          example: us-west-2
+        url:
+          type: string
+          description: URL or location of the import file (e.g. http://files.example.com/file.csv).
+          example: http://files.example.com/file.csv
+        server:
+          type: string
+          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP transports.
+          example: example.com
+        port:
+          type: integer
+          description: Defines the port number for the FTP or SFTP server (e.g. 22). Required for FTP and SFTP transports.
+        username:
+          type: string
+          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP transports.
+          example: myusername
+        password:
+          type: string
+          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP transports.
+          example: Msm1th$99!
+        savedKey:
+          type: string
+          description: SFTP public authentication key name if using SFTP public key authentication instead of password.
+        path:
+          type: string
+          description: Path to folder where the import file is located. Required if transport is FTP, SFTP, S3, GCS, or AZUREBLOB.
+          example: files/file.csv
+        buket:
+          type: string
+          description: Defines the GCS bucket name. Required if transport is GCS.
+          example: name_used_in_marketplace_setup
+        account:
+          type: string
+          description: Defines the Azure Blob Storage or Snowflake account name. Required if destination is AZUREBLOB or SNOWFLAKE.
+        container:
+          type: string
+          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
+        database:
+          type: string
+          description: Defines the Snowflake database. Required if destination is SNOWFLAKE.
+        schema:
+          type: string
+          description: Defines the Snowflake schema. Required if destination is SNOWFLAKE.
+        source:
+          type: string
+          description: Defines the Snowflake table or view. Required if destination is SNOWFLAKE.
+    OrderImportsJob:
+      title: Job
+      type: object
+      required:
+      - source
+      properties:
+        importName:
+          type: string
+          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
+        source:
+          $ref: '#/components/schemas/SourceObject'
+        confirmEmail:
+          type: string
+          description: Email address to send an administrative alert when the job is done running.
+          example: joesmith@example.com
+        suppressTriggers:
+          type: boolean
+          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
+          default: true
+  responses:
+    OrderImportConfigError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrderImportConfigError'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
+x-refined-from:
+- cordial-v1-openapi-original.json
+- cordial-v2-openapi-original.json

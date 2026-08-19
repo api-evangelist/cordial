@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial Programs API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "programs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a summary of stats for a given program",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/programs/:id/summary",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Program id"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Period start date (YYYY-MM-DD)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Period end date (YYYY-MM-DD)"
+              },
+              {
+                "name": "channel_key",
+                "value": "",
+                "type": "query",
+                "description": "Channel key"
+              },
+              {
+                "name": "channel_type",
+                "value": "",
+                "type": "query",
+                "description": "Channel type"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Validates if program exists and returns summary stats for it. <b>Note:</b> Programs endpoints are a beta feature. Please contact your CSM or Solutions representative for more information."
+        },
+        {
+          "info": {
+            "name": "Get time series data for a messages in a given program",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/programs/:id/stats",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Program id"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Period start date (YYYY-MM-DD)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Period end date (YYYY-MM-DD)"
+              },
+              {
+                "name": "channel_key",
+                "value": "",
+                "type": "query",
+                "description": "Channel key"
+              },
+              {
+                "name": "channel_type",
+                "value": "",
+                "type": "query",
+                "description": "Channel type"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Current page"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Validates if program exists and returns program messages with stats. <b>Note:</b> Programs endpoints are a beta feature. Please contact your CSM or Solutions representative for more information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

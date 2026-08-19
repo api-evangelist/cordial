@@ -1,0 +1,705 @@
+openapi: 3.2.0
+info:
+  title: Cordial Products API
+  termsOfService: https://cordial.zendesk.com
+  version: '1.0'
+  description: 'Operations tagged products across 2 of this provider''s published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: products
+paths:
+  /v1/products/{productID}:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single product
+      tags:
+      - products
+      operationId: getproduct
+      parameters:
+      - name: productID
+        description: Key for attribute
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductP'
+        '404':
+          description: record not found
+    put:
+      security:
+      - basicAuth: []
+      summary: Update an existing product
+      tags:
+      - products
+      operationId: updateproducts
+      parameters:
+      - name: productID
+        description: Product ID
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: record not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductP'
+        description: Product object that needs to be updated in the system
+        required: true
+    delete:
+      security:
+      - basicAuth: []
+      summary: Delete a single product
+      tags:
+      - products
+      operationId: deleteproducts
+      parameters:
+      - name: productID
+        description: Product id to delete
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '400':
+          description: unable to validate segment participation
+  /v1/products:
+    post:
+      security:
+      - basicAuth: []
+      summary: Add new products
+      tags:
+      - products
+      operationId: addproducts
+      responses:
+        '200':
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductP'
+        description: Product object that needs to be added to the system
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get products list
+      tags:
+      - products
+      operationId: getproducts
+      parameters:
+      - name: page
+        description: Number of page
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Count products on page
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: fields
+        description: Fields (can be many, separate by comma)
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductP'
+        '404':
+          description: record not found
+  /v2/products/{productID}:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single product
+      description: Retrieves the specified product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would return the response data for the product with the productID value of <b>112233</b>.
+      tags:
+      - products
+      operationId: getproduct
+      parameters:
+      - name: productID
+        description: Product id value.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+    put:
+      security:
+      - basicAuth: []
+      summary: Update an existing product
+      description: Updates a product in the Cordial database using the appropriate JSON body. The product is defined by its unique product `id` value. For example, /products/112233 would update the the product with the productID value of <b>112233</b>.
+      tags:
+      - products
+      operationId: updateproducts
+      parameters:
+      - name: productID
+        description: Product id value.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+        '422':
+          $ref: '#/components/responses/ProductValidationError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreationModel'
+        description: Product object that needs to be updated.
+        required: true
+    delete:
+      security:
+      - basicAuth: []
+      summary: Delete a single product
+      description: Deletes a product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would remove the product with the productID value of <b>112233</b>.
+      tags:
+      - products
+      operationId: deleteproducts
+      parameters:
+      - name: productID
+        description: Product id value.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '400':
+          $ref: '#/components/responses/ProductNotFound'
+  /v2/products:
+    post:
+      security:
+      - basicAuth: []
+      summary: Add new products
+      description: Creates a new product in the Cordial database using the appropriate JSON body. A product can include one or more variants. Posting the same product more than once with the same `productID` value will update the existing product. This is helpful for reloading and/or updating product information when batch processing multiple records.
+      tags:
+      - products
+      operationId: addproducts
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductCreationSuccess'
+        '422':
+          $ref: '#/components/responses/ProductValidationError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreationModel'
+        description: Product object that needs to be added.
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get products list
+      description: Retrieves all products from the Cordial database. Using query string parameters, it is possible to filter the field set returned using a query string for the `fields` parameter.
+      tags:
+      - products
+      operationId: getproducts
+      parameters:
+      - name: page
+        description: Specific page number to be returned.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Number or records per page.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: fields
+        description: Fields to include (can be many, comma-separated).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sort_by
+        description: Field by which results should be sorted.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sort_dir
+        description: Direction to sort by. Works in conjunction with `sort_by` (e.g. asc, desc).
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductResponse'
+        '400':
+          $ref: '#/components/responses/RecordNotFound'
+components:
+  schemas:
+    ProductNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Product not found
+    ProductP:
+      title: Product
+      type: object
+      required:
+      - productID
+      - productName
+      properties:
+        productID:
+          type: string
+        productName:
+          type: string
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantsP'
+        description:
+          type: string
+          description: Product description.
+          example: Black T-shirt with white print.
+        productType:
+          type: string
+          enum:
+          - physical
+          - digital
+          - subscription
+          - event
+        price:
+          type: number
+          format: float
+        sale:
+          $ref: '#/components/schemas/SaleP'
+        UPCCode:
+          type: string
+        category:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+        manufacturerName:
+          type: string
+        inStock:
+          type: boolean
+        taxable:
+          type: boolean
+        enabled:
+          type: boolean
+        url:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+    VariantsP:
+      title: Variants
+      type: object
+      required:
+      - sku
+      properties:
+        sku:
+          type: string
+        attr:
+          $ref: '#/components/schemas/AttrP'
+        qty:
+          type: integer
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    SaleP:
+      title: Sale
+      properties:
+        enabled:
+          type: boolean
+        price:
+          type: number
+          format: float
+        start:
+          type: string
+          format: date
+        end:
+          type: string
+          format: date
+    ProductResponse:
+      title: Product
+      type: object
+      required:
+      - productID
+      - productName
+      properties:
+        productID:
+          type: string
+          description: Unique identifier for a product.
+          example: Acme-30 Stapler
+        productName:
+          type: string
+          description: The name of the product.
+          example: Acme-30 Stapler
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantsP_2'
+        productType:
+          type: string
+          enum:
+          - physical
+          - digital
+          - subscription
+          - event
+          example: physical
+          description: The product type. Options include physical, digital, subscription, and event.
+        price:
+          type: number
+          format: float
+          description: The current price of the product.
+          example: ''
+        sale:
+          $ref: '#/components/schemas/SaleP_2'
+        UPCCode:
+          type: string
+          description: The Universal Product Code (e.g. 8 34460 00372 4).
+          example: 8 34460 00372 4
+        category:
+          type: string
+          description: Item category.
+          example: Office Supplies
+        images:
+          type: array
+          items:
+            type: string
+          description: A comma-separated array of image file locations. Use an empty array `[]` as default if no values exist (e.g. "http://example.com/image1.jpg", "http://example.com/image2.jpg").
+          example: http://example.com/images/123
+        manufacturerName:
+          type: string
+          description: The name of the manufacturer.
+          example: Acme Supplies
+        inStock:
+          type: boolean
+          description: 'Product stock status. Possible values: true, false or 1, 0. Defaults to `false`.'
+          example: true
+        taxable:
+          type: boolean
+          description: 'Flags product as taxable. Possible values: true, false or 1, 0. Defaults to `false`.'
+          example: true
+        enabled:
+          type: boolean
+          description: 'Flags product as enabled. Possible values: true, false or 1, 0. Defaults to `false`.'
+          example: true
+        url:
+          type: string
+          description: Link to the product page (e.g. https://mydomain.com/myproduct).
+          example: http://acme.com/ac30
+        tags:
+          type: array
+          items:
+            type: string
+          description: An array of product tags (e.g. ["office","office supplies"]).
+          example:
+          - office
+          - office supplies
+        properties:
+          type: object
+          description: 'Can be used in place of the `attr` key (e.g. "brands":["Marmot", "Quicksilver"], "return_date": "2018-07-01 00:00:00"). Values added <b>can</b> be searched using the Kaleidoscope and within Smarty for personalization.'
+        ct:
+          type: string
+          format: date-time
+          description: Created date.
+        lm:
+          type: string
+          format: date-time
+          description: Last modified date.
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    ProductCreationModel:
+      title: Product
+      type: object
+      required:
+      - productID
+      - productName
+      properties:
+        productID:
+          type: string
+          description: Unique product identifier (e.g. 1234abcd).
+          example: Acme-30 Stapler
+        productName:
+          type: string
+          description: Name of the product (e.g. Acme-30 Stapler).
+          example: Acme-30 Stapler
+        description:
+          type: string
+          description: Product description.
+          example: Black T-shirt with white print.
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantsP_2'
+        productType:
+          type: string
+          example: physical
+          description: The product type. Options include physical, digital, subscription, and event.
+        price:
+          type: number
+          format: float
+          description: Product price.
+          example: ''
+        sale:
+          $ref: '#/components/schemas/SaleP_2'
+        UPCCode:
+          type: string
+          description: The Universal Product Code (e.g. 8 34460 00372 4).
+          example: 8 34460 00372 4
+        category:
+          type: string
+          description: The category given to the particular item.
+          example: Office Supplies
+        images:
+          type: array
+          items:
+            type: string
+          description: A comma-separated array of image file locations. Use an empty array [] as default if no values exist.
+          example: http://example.com/images/123
+        manufacturerName:
+          type: string
+          description: The name of the manufacturer (e.g. Acme Supplies).
+          example: Acme Supplies
+        inStock:
+          type: boolean
+          description: 'Flags product as in stock. Possible values: true, false or 1, 0. Defaults to `false`.'
+          example: true
+        taxable:
+          type: boolean
+          description: 'Flags product as taxable. Possible values: true, false or 1, 0. Defaults to `false`.'
+          example: true
+        enabled:
+          type: boolean
+          description: 'Flags product as enabled. Possible values: true, false or 1, 0. Defaults to `false`.'
+          example: true
+        url:
+          type: string
+          description: Link to the product page (e.g. https://mydomain.com/myproduct).
+          example: http://acme.com/ac30
+        tags:
+          type: array
+          items:
+            type: string
+          description: A comma-separated array of values to describe the product (e.g. ["office","office supplies"]).
+          example:
+          - office
+          - office supplies
+        properties:
+          type: object
+          description: An schema-less object of metadata about a product (as key value pairs).
+          example:
+            hasVideo: true
+            ratings: 5 stars
+    VariantsP_2:
+      title: Variants
+      type: object
+      required:
+      - sku
+      properties:
+        sku:
+          type: string
+          description: The Stock Keeping Unit value for the product (e.g. RF-WP33286-21).
+          example: RF-WP33286-21
+        attr:
+          $ref: '#/components/schemas/AttrP_2'
+          description: Key value pairs describing product attributes (e.g. "size":"large", "color":"red"). Attribute values <b>cannot</b> be searched using the Kaleidoscope or within Smarty for personalization.
+        qty:
+          type: integer
+          description: The available inventory.
+          example: 1
+    AttrP:
+      title: Attr
+      type: object
+      properties:
+        color:
+          type: string
+        size:
+          type: string
+    AttrP_2:
+      title: Attr
+      type: object
+      properties:
+        color:
+          type: string
+          example: blue
+        size:
+          type: string
+          example: medium
+    validationProductErrors:
+      required:
+      - validationErrors
+      properties:
+        validationErrors:
+          type: object
+          description: 'Object with validation error explanation for each field from payload. Possible errors: [''The product id field is required.'', ''The product name field is required.'', ''The qty must be a number.'', ''The sku field is required'']'
+    ProductValidationError:
+      title: Validation error
+      required:
+      - messages
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        messages:
+          type: object
+          $ref: '#/components/schemas/validationProductErrors'
+    SaleP_2:
+      title: Sale
+      properties:
+        enabled:
+          type: boolean
+          description: 'Flag to determine if the sale is active. Possible values: true, false, or 1, 0. Defaults to `false`.'
+          example: true
+        price:
+          type: number
+          format: float
+          description: Sale price of the item.
+          example: 12.95
+        start:
+          type: string
+          format: date
+          description: The date and time the sale is in effect or active.
+        end:
+          type: string
+          format: date
+          description: The date and time the sale ends or becomes inactive.
+    ProductCreationSuccess:
+      title: Success operation on product creation
+      type: object
+      required:
+      - success
+      - message
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: product created
+  responses:
+    ProductValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductValidationError'
+    ProductNotFound:
+      description: Product not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductNotFound'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
+x-refined-from:
+- cordial-v1-openapi-original.json
+- cordial-v2-openapi-original.json

@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial contact activity exports API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "contact activity exports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an event export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/contactactivityexport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create an event export job"
+        },
+        {
+          "info": {
+            "name": "Create an event export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/contactactivityexport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates an export job to download and store a file of contact activities to an external location. The exported file can be downloaded via Cordial UI, via FTP/SFTP, sent to Amazon S3 bucket, or sent to Google Cloud Storage bucket."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

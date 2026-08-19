@@ -1,6 +1,6 @@
 generated: '2026-08-04'
 method: derived
-source: openapi/cordial-v2-openapi-original.json, well-known/, https://cordial.com/security/
+source: openapi/_original/cordial-v2-openapi-original.json, well-known/, https://cordial.com/security/
 note: >-
   Cross-cutting standards conformance. Derived from the published Swagger documents and live discovery
   probes, with published compliance claims searched from the provider's own security page. `conforms`
@@ -12,7 +12,7 @@ standards:
   evidence: 'Both published documents are Swagger 2.0. Neither has been upgraded to OpenAPI 3.x.'
 - id: swagger-2.0
   conforms: true
-  evidence: 'openapi/cordial-v2-openapi-original.json declares "swagger": "2.0" with 70 paths and 106 operations; v1 declares the same with 50 paths and 83 operations.'
+  evidence: 'openapi/_original/cordial-v2-openapi-original.json declares "swagger": "2.0" with 70 paths and 106 operations; v1 declares the same with 50 paths and 83 operations.'
 - id: http-basic-auth
   conforms: true
   evidence: 'securityDefinitions.basicAuth type basic, applied to every operation in both documents.'

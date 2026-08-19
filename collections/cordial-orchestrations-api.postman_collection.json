@@ -1,0 +1,886 @@
+{
+  "item": [
+    {
+      "id": "8052655e-e157-4582-87b1-92cc7cddbd31",
+      "name": "orchestrations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5b40382-9551-4183-9827-afa400a57606",
+          "name": "Get a single orchestration",
+          "request": {
+            "name": "Get a single orchestration",
+            "description": {
+              "content": "Retrieves the specified orchestration. The orchestration record is defined by its unique `orchestrationID` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orchestrations",
+                ":orchestrationID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orchestrationID",
+                  "description": "(Required) Orchestration ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f94f7221-b7fe-44e2-8c85-5efd4a7d345c",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orchestrations",
+                    ":orchestrationID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orchestrationID",
+                      "description": "(Required) Orchestration ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": false,\n  \"composition\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c96a28c9-69c1-499a-84ab-d0dae34dd3d0",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orchestrations",
+                    ":orchestrationID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orchestrationID",
+                      "description": "(Required) Orchestration ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1146c1d-d541-4d08-b7b0-1eb73860db86",
+          "name": "Get orchestrations",
+          "request": {
+            "name": "Get orchestrations",
+            "description": {
+              "content": "Retrieves orchestrations. Response data can be filtered using orchestration `tags` and `timestamp` values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orchestrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields to include (can be many, comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[gt]",
+                  "value": "<string>",
+                  "description": "Create date is greater than."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[gte]",
+                  "value": "<string>",
+                  "description": "Create date is greater than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[lt]",
+                  "value": "<string>",
+                  "description": "Create date is less than."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[lte]",
+                  "value": "<string>",
+                  "description": "Create date is less than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[gt]",
+                  "value": "<string>",
+                  "description": "Last modified date is greater than."
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[gte]",
+                  "value": "<string>",
+                  "description": "Last modified date is greater than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[lt]",
+                  "value": "<string>",
+                  "description": "Last modified date is less than."
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[lte]",
+                  "value": "<string>",
+                  "description": "Last modified date is less than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Returns orchestrations that contain specified tags (can be many, comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Specific page number to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Number or records per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fb6dee0d-0ea0-4762-bba3-4389cdf7783e",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orchestrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"status\": false,\n    \"composition\": {}\n  },\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"status\": false,\n    \"composition\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b330b63-7dd5-4eda-be6b-ce94cb95a96a",
+          "name": "Trigger an orchestration",
+          "request": {
+            "name": "Trigger an orchestration",
+            "description": {
+              "content": "Triggers an existing orchestration. The orchestration can be triggered for one or more contacts, as specified within the JSON body. This endpoint will successfully create a new contact record if the contact key value in the request does not already exist. The newly added contact will have a subscribe status of <b>none</b> and will not receive promotional messages until subscribed to the appropriate channel. If the contact key exists, data passed in the contact object will upsert corresponding contact attributes in the Cordial database.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orchestrations",
+                ":orchestrationID",
+                "trigger"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orchestrationID",
+                  "description": "(Required) Unique identifier for the orchestration."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"for\": [\n    {\n      \"contact\": {\n        \"email\": \"<string>\"\n      },\n      \"extVars\": {\n        \"key\": \"<string>\"\n      }\n    },\n    {\n      \"contact\": {\n        \"email\": \"<string>\"\n      },\n      \"extVars\": {\n        \"key\": \"<string>\"\n      }\n    }\n  ],\n  \"identifyBy\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extVars\": {\n    \"key\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cbc626b0-903a-4a78-9fa6-d2e1b0e96e3d",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orchestrations",
+                    ":orchestrationID",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orchestrationID",
+                      "description": "(Required) Unique identifier for the orchestration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"for\": [\n    {\n      \"contact\": {\n        \"email\": \"<string>\"\n      },\n      \"extVars\": {\n        \"key\": \"<string>\"\n      }\n    },\n    {\n      \"contact\": {\n        \"email\": \"<string>\"\n      },\n      \"extVars\": {\n        \"key\": \"<string>\"\n      }\n    }\n  ],\n  \"identifyBy\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extVars\": {\n    \"key\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Orchestration API trigger successfully processed\",\n  \"triggered\": [\n    {\n      \"triggered\": false,\n      \"contact\": {\n        \"email\": \"<string>\"\n      }\n    },\n    {\n      \"triggered\": false,\n      \"contact\": {\n        \"email\": \"<string>\"\n      }\n    }\n  ],\n  \"failures\": [\n    {\n      \"triggered\": true,\n      \"payload\": {\n        \"contact\": {\n          \"email\": \"<string>\"\n        },\n        \"extVars\": {\n          \"key\": \"<string>\"\n        }\n      },\n      \"error\": \"string\"\n    },\n    {\n      \"triggered\": true,\n      \"payload\": {\n        \"contact\": {\n          \"email\": \"<string>\"\n        },\n        \"extVars\": {\n          \"key\": \"<string>\"\n        }\n      },\n      \"error\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81fe1f6f-6cdd-43b2-8043-f119c627f129",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orchestrations",
+                    ":orchestrationID",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orchestrationID",
+                      "description": "(Required) Unique identifier for the orchestration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"for\": [\n    {\n      \"contact\": {\n        \"email\": \"<string>\"\n      },\n      \"extVars\": {\n        \"key\": \"<string>\"\n      }\n    },\n    {\n      \"contact\": {\n        \"email\": \"<string>\"\n      },\n      \"extVars\": {\n        \"key\": \"<string>\"\n      }\n    }\n  ],\n  \"identifyBy\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extVars\": {\n    \"key\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Access Denied: Authentication Failure\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3872ebdf-c4d1-407a-8a51-19eb1b5c5dd1",
+              "name": "Failed request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orchestrations",
+                    ":orchestrationID",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orchestrationID",
+                      "description": "(Required) Unique identifier for the orchestration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"for\": [\n    {\n      \"contact\": {\n        \"email\": \"<string>\"\n      },\n      \"extVars\": {\n        \"key\": \"<string>\"\n      }\n    },\n    {\n      \"contact\": {\n        \"email\": \"<string>\"\n      },\n      \"extVars\": {\n        \"key\": \"<string>\"\n      }\n    }\n  ],\n  \"identifyBy\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extVars\": {\n    \"key\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"errorKey\": \"ORCHESTRATIONS_ORCHESTRATION_NOT_FOUND\",\n  \"errors\": {\n    \"for\": [\n      \"The for field is required\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47d58ac4-6832-408a-8544-ee256f330f0e",
+          "name": "Get list of orchestration actions",
+          "request": {
+            "name": "Get list of orchestration actions",
+            "description": {
+              "content": "Returns actions list of an orchestration",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orchestrations",
+                ":orchestrationID",
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orchestrationID",
+                  "description": "(Required) Unique identifier for the orchestration."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4e62f4c7-5a89-4643-a3c3-f1f32ac3c543",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orchestrations",
+                    ":orchestrationID",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orchestrationID",
+                      "description": "(Required) Unique identifier for the orchestration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"label\": \"Action one\",\n  \"id\": \"68f884e1f87b09aa645cbe9b\",\n  \"type\": \"Message\",\n  \"templateKey\": \"sometemplatekey\",\n  \"currentContentKey\": \"6ef675eb444c55d554a6b354f89af4b0\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76ac9afd-5c5e-4809-af42-72d0fe106fca",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orchestrations",
+                    ":orchestrationID",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orchestrationID",
+                      "description": "(Required) Unique identifier for the orchestration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Access Denied: Authentication Failure\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2564980d-4b99-4587-8bbd-a81a2553652d",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orchestrations",
+                    ":orchestrationID",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orchestrationID",
+                      "description": "(Required) Unique identifier for the orchestration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "11948f48-6846-4cbf-9cda-fbd5696ffc4a",
+    "name": "Cordial Orchestrations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the Cordial API documentation! This interactive API documentation allows you to test API calls from the Swagger interface. Authenticate yourself with the API key from your Cordial account and then make API calls. Keep in mind that testing in Swagger will directly affect your production data.",
+      "type": "text/plain"
+    }
+  }
+}

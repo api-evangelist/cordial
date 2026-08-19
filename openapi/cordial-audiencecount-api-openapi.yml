@@ -1,0 +1,79 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Cordial API documentation! This interactive API documentation allows you to test API calls from the Swagger interface. Authenticate yourself with the API key from your Cordial account and then make API calls. Keep in mind that testing in Swagger will directly affect your production data.
+  version: 2.0.0
+  title: Cordial Audiencecount API
+  termsOfService: https://cordial.zendesk.com
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: audiencecount
+paths:
+  /v2/audiencecount:
+    post:
+      security:
+      - basicAuth: []
+      summary: Post audience object to get count
+      description: Return count of contacts using the appropriate audience JSON body.
+      operationId: audiencecount
+      tags:
+      - audiencecount
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudienceCountSuccess'
+        '422':
+          description: validation error
+          $ref: '#/components/responses/AudienceCountErrorValidation'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudienceObject'
+        description: Audience object for returning count.
+        required: true
+components:
+  responses:
+    AudienceCountErrorValidation:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AudienceCountErrorValidation'
+  schemas:
+    AudienceCountSuccess:
+      title: Source
+      type: object
+      properties:
+        count:
+          type: number
+          description: Count of contacts
+          default: 123
+    AudienceCountErrorValidation:
+      title: Contact error
+      required:
+      - message
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: INVALID_AUDIENCE_RULES
+        message:
+          type: object
+          example: 'Object with error explanation what happen with payload. Possible errors: [''Timezones should not be empty'',''Timezone source should be either string or geo number provided'', ''Dynamic values is not set'']'
+    AudienceObject:
+      title: Source
+      type: object
+      properties: {}
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS

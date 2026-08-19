@@ -1,7 +1,7 @@
 generated: '2026-08-04'
 method: searched
 source: https://support.cordial.com/hc/en-us/articles/203885498-RESTful-API-summary-and-usage
-derived_from: openapi/cordial-v2-openapi-original.json
+derived_from: openapi/_original/cordial-v2-openapi-original.json
 docs:
   restful_summary: https://support.cordial.com/hc/en-us/articles/203885498-RESTful-API-summary-and-usage
   functional_groups: https://support.cordial.com/hc/en-us/articles/203885828-API-Glossary-and-Functional-Overview

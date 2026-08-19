@@ -3,7 +3,7 @@ method: searched
 source: >-
   https://developers.cordial.com/api,
   https://support.cordial.com/hc/en-us/sections/115000944092-Monthly-release-notes,
-  openapi/cordial-v2-openapi-original.json
+  openapi/_original/cordial-v2-openapi-original.json
 
 versioning:
   scheme: uri-path

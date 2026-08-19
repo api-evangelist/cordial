@@ -1,0 +1,822 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial Contacts API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export Contact Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/contacts/:primary_key/downloadprofile",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Primary key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Export Contact Profile"
+        },
+        {
+          "info": {
+            "name": "Get contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/contacts",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Email for search"
+              },
+              {
+                "name": "audience-key",
+                "value": "",
+                "type": "query",
+                "description": "Audience name for filtering contacts"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of records returned"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort field"
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              },
+              {
+                "name": "return_count",
+                "value": "",
+                "type": "query",
+                "description": "Return count of records"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get contacts"
+        },
+        {
+          "info": {
+            "name": "Add a new contact to the system",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/contacts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a new contact to the system"
+        },
+        {
+          "info": {
+            "name": "Get a single contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/contacts/:primary_key",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Primary key"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a single contact"
+        },
+        {
+          "info": {
+            "name": "Update an existing contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/contacts/:primary_key",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Primary key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an existing contact"
+        },
+        {
+          "info": {
+            "name": "Delete a single contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v1/contacts/:primary_key",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Primary key"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a single contact"
+        },
+        {
+          "info": {
+            "name": "Unsubscribe contact by primary Key with channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/contacts/:primary_key/unsubscribe/:channel",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Primary key"
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "path",
+                "description": "Specified channel"
+              },
+              {
+                "name": "mcID",
+                "value": "",
+                "type": "query",
+                "description": "mcID provided for attribution purposes"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Unsubscribe contact by primary Key with channel"
+        },
+        {
+          "info": {
+            "name": "Add cart object to contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/contacts/:primary_key/cart",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Primary key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add cart object to contact"
+        },
+        {
+          "info": {
+            "name": "Update cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/contacts/:primary_key/cart",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Primary key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update cart"
+        },
+        {
+          "info": {
+            "name": "Remove cart object from contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v1/contacts/:primary_key/cart",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Primary key"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Remove cart object from contact"
+        },
+        {
+          "info": {
+            "name": "Add product to cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/contacts/:primary_key/cartitems",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Primary key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add product to cart"
+        },
+        {
+          "info": {
+            "name": "Remove product from cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v1/contacts/:primary_key/cartitems/:productID",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Primary key"
+              },
+              {
+                "name": "productID",
+                "value": "",
+                "type": "path",
+                "description": "Product ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Remove product from cart"
+        },
+        {
+          "info": {
+            "name": "Remove product from cart by Qty",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v1/contacts/:primary_key/cartitems/:productID/:qty",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Primary key"
+              },
+              {
+                "name": "productID",
+                "value": "",
+                "type": "path",
+                "description": "Product ID"
+              },
+              {
+                "name": "qty",
+                "value": "",
+                "type": "path",
+                "description": "Quantity"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Remove product from cart by Qty"
+        },
+        {
+          "info": {
+            "name": "Get contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/contacts",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter records for a specific contact using the email address value."
+              },
+              {
+                "name": "audience-key",
+                "value": "",
+                "type": "query",
+                "description": "Filter records for contacts in an audience using a saved audience rule key."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Specific page number to be returned."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number or records per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field by which results should be sorted."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "Direction to sort by. Works in conjunction with `sort_by` (e.g. asc, desc)."
+              },
+              {
+                "name": "return_count",
+                "value": "",
+                "type": "query",
+                "description": "Show the total count of records returned."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves contact records from the Cordial database. It is possible to filter the response using query string parameters including a unique contact identifier to retrieve information for a single contact, saved audience rule to limit the response to contacts in an audience, and by contact attribute key to get contact records with a specified attribute value."
+        },
+        {
+          "info": {
+            "name": "Add a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/contacts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a new contact record using the appropriate JSON body. The contact object can optionally include attribute values and list associations. Note that contact attribute keys and list names must be created in advance using the Cordial UI or the <b>/accountcontactattributes</b> and <b>/accountlists</b> API endpoints."
+        },
+        {
+          "info": {
+            "name": "Get a single contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/contacts/:primary_key",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves a single contact record and the associated contact attribute values."
+        },
+        {
+          "info": {
+            "name": "Update a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/contacts/:primary_key",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key: secondary_key_value>`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates a contact record using the appropriate JSON body."
+        },
+        {
+          "info": {
+            "name": "Delete a single contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v2/contacts/:primary_key",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes a contact record and the associated account attribute values."
+        },
+        {
+          "info": {
+            "name": "Unsubscribe a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/contacts/:primary_key/unsubscribe/:channel",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`."
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "path",
+                "description": "Unique channel key (e.g. email, sms, push or a custom-named channel key)."
+              },
+              {
+                "name": "mcID",
+                "value": "",
+                "type": "query",
+                "description": "Unique message contact ID (mcID) typically used for tracking revenue attribution."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Unsubscribes a contact from the specified channel. Contacts can be associated with multiple channels (email, SMS, push, etc.), each channel having a subscribe status of either subscribed, unsubscribed, or none. Promotional messages will not be sent to <b>unsubscribed</b> contacts."
+        },
+        {
+          "info": {
+            "name": "Merges two contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/contacts/merge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Merges one contact (source) into another (destination) in the Cordial database using the appropriate JSON body."
+        },
+        {
+          "info": {
+            "name": "Splits a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/contacts/split",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Splits part of the existing contact into a new contact. Requires a contacts split feature to be enabled."
+        },
+        {
+          "info": {
+            "name": "Add contact cart object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/contacts/:primary_key/cart",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Adds a cart object to the contact record."
+        },
+        {
+          "info": {
+            "name": "Update contact cart object",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/contacts/:primary_key/cart",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates the cart object for the contact record."
+        },
+        {
+          "info": {
+            "name": "Remove contact cart object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v2/contacts/:primary_key/cart",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Removes the cart object from the contact record."
+        },
+        {
+          "info": {
+            "name": "Add product to cart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/contacts/:primary_key/cartitems",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Adds a product to the contact's cart."
+        },
+        {
+          "info": {
+            "name": "Remove product from cart in quantities by product ID and, optionally, SKU",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v2/contacts/:primary_key/cartitems/:productID/:qty/:sku",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`."
+              },
+              {
+                "name": "productID",
+                "value": "",
+                "type": "path",
+                "description": "Product id value."
+              },
+              {
+                "name": "qty",
+                "value": "",
+                "type": "path",
+                "description": "Quantity of product to be removed."
+              },
+              {
+                "name": "sku",
+                "value": "",
+                "type": "path",
+                "description": "Product SKU value"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Removes the specified quantity of a product from the contact's cart."
+        },
+        {
+          "info": {
+            "name": "Download contact profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/contacts/:primary_key/downloadprofile",
+            "params": [
+              {
+                "name": "primary_key",
+                "value": "",
+                "type": "path",
+                "description": "Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates an export job to download and store a JSON file of a contact's profile including channel association, contact attributes, and event data. Destination parameters are only required if FTP/SFTP is used as the destination. If parameters are not supplied or set as \"AWS\", the exported file can be downloaded via the Jobs page from the Cordial UI."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

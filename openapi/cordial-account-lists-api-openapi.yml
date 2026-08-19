@@ -1,0 +1,589 @@
+openapi: 3.2.0
+info:
+  title: Cordial account lists API
+  termsOfService: https://cordial.zendesk.com
+  version: '1.0'
+  description: 'Operations tagged account lists across 2 of this provider''s published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: account lists
+paths:
+  /v1/accountlists/{id}:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single list
+      operationId: getlist
+      tags:
+      - account lists
+      parameters:
+      - name: id
+        description: List id
+        required: true
+        in: path
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListShow'
+        '404':
+          description: record not found
+    put:
+      security:
+      - basicAuth: []
+      summary: Update List
+      operationId: updatelist
+      tags:
+      - account lists
+      parameters:
+      - name: id
+        description: List id
+        required: true
+        in: path
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListShow'
+        '404':
+          description: record not found
+        '422':
+          description: Validation error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/List'
+        description: List object that needs to be updated to the system
+    delete:
+      security:
+      - basicAuth: []
+      summary: Delete an existing list
+      operationId: deletelist
+      tags:
+      - account lists
+      parameters:
+      - name: id
+        description: Key for list
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: record not found
+  /v1/accountlists/{id}/clear:
+    put:
+      security:
+      - basicAuth: []
+      summary: Clear a list
+      operationId: clearlist
+      tags:
+      - account lists
+      parameters:
+      - name: id
+        description: List id
+        required: true
+        in: path
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Record not found
+  /v1/accountlists:
+    post:
+      security:
+      - basicAuth: []
+      summary: Add a new list
+      operationId: addList
+      tags:
+      - account lists
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List'
+        '422':
+          description: Name must be unique
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/List'
+        description: List object that needs to be added to the system
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get lists
+      operationId: getLists
+      tags:
+      - account lists
+      parameters:
+      - name: name
+        description: Name given to the list
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListShow'
+        '404':
+          description: Records not found
+  /v2/accountlists/{id}:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single list
+      description: Retrieves the specified list. The list is defined by its unique `id` value. For example, /accountlists/128 would return the response data for the list with the id value of <b>128</b>.
+      operationId: getlist
+      tags:
+      - account lists
+      parameters:
+      - name: id
+        description: List id value.
+        required: true
+        in: path
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListShow_2'
+        '404':
+          $ref: '#/components/responses/ListNotExist'
+    put:
+      security:
+      - basicAuth: []
+      summary: Update a list
+      description: Updates the list name to a new value and enables or disables date tracking. Enabling list tracking will automatically track the date each contact was added to the list.
+      operationId: updatelist
+      tags:
+      - account lists
+      parameters:
+      - name: id
+        description: List id value.
+        required: true
+        in: path
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListShow_2'
+        '404':
+          $ref: '#/components/responses/ListNotFound'
+        '422':
+          $ref: '#/components/responses/ListValidationError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/List_2'
+        description: List object that needs to be updated.
+    delete:
+      security:
+      - basicAuth: []
+      summary: Delete an existing list
+      description: Deletes an existing list. The list is defined by its unique `id` value. For example, /accountlists/128 would delete the list with the id value of <b>128</b>.
+      operationId: deletelist
+      tags:
+      - account lists
+      parameters:
+      - name: id
+        description: List id value.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '401':
+          $ref: '#/components/responses/AuthenticationFailure'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/accountlists/{id}/count:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single list with count of assigned contacts
+      description: Retrieves the specified list. The list is defined by its unique `id` value. For example, /accountlists/128/count would return the response data for the list with the id value of <b>128</b> and count of contacts assigned to this list.
+      operationId: getlistcount
+      tags:
+      - account lists
+      parameters:
+      - name: id
+        description: List id value.
+        required: true
+        in: path
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListShowCount'
+        '404':
+          $ref: '#/components/responses/ListNotExist'
+  /v2/accountlists/{id}/clear:
+    put:
+      security:
+      - basicAuth: []
+      summary: Clear a list
+      description: Removes all contact list associations for the given list `id` while retaining the list itself in the Cordial database. **Note:** when a list is cleared, no contacts are deleted from the system.
+      operationId: clearlist
+      tags:
+      - account lists
+      parameters:
+      - name: id
+        description: List id value.
+        required: true
+        in: path
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCreationSuccess'
+        '401':
+          $ref: '#/components/responses/AuthenticationFailure'
+        '404':
+          $ref: '#/components/responses/ListNotExist'
+  /v2/accountlists:
+    post:
+      security:
+      - basicAuth: []
+      summary: Add a list
+      description: 'Creates a new list using the appropriate JSON body. Posting more than once for the same list name will generate an error.
+
+
+        The accountlists collection contains the names of lists used to define segments of your audience. For example, you may have lists for Weekly Specials, Daily Deals, and Fashion Newsletter. Each represents subscriber selections on information and promotions they requested to receive. You can also use accountlists to represent groups or segments you determine to be important such as New Customers, VIPs, or Net Promoters.<ul><li>A single contact can be associated with one or more lists.</li><li>Create as many lists as required.</li><li>List names must be unique, so it is important to use a naming convention that supports creation of multiple lists over time.</li>'
+      operationId: addList
+      tags:
+      - account lists
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCreationSuccess'
+        '401':
+          $ref: '#/components/responses/AuthenticationFailure'
+        '422':
+          $ref: '#/components/responses/ListError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/List_2'
+        description: List object that needs to be added.
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get lists
+      description: Retrieves all lists from the Cordial database. It is possible to filter the response data for a specific list using the list `name` query string parameter.
+      operationId: getLists
+      tags:
+      - account lists
+      parameters:
+      - name: name
+        description: List name value.
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListShow_2'
+        '401':
+          $ref: '#/components/responses/AuthenticationFailure'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+components:
+  schemas:
+    List_2:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Unique name to identify and reference the list.
+          example: Sellers
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list. Possible values: true, false.'
+          example: true
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    ListValidationError:
+      title: Validation Error
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Name must contain only letters, numbers, and dashes. Should not exceed 128 characters.
+          description: 'Message with error explanation. Possible errors: [''Name must contain only letters, numbers and dashes and should not exceed 128 characters'',''Name must be unique'']'
+    ListShow:
+      type: object
+      title: List
+      required:
+      - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list '
+    ListShowCount:
+      type: object
+      title: List
+      required:
+      - name
+      properties:
+        id:
+          type: integer
+          description: 'List id: unique identifier on the platform.'
+          example: 123
+        name:
+          type: string
+          description: List name. Should be unique and have maximum of 128 characters.
+          example: Sellers
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list. '
+          example: true
+        count:
+          type: integer
+          description: Count of contacts assigned to this list.
+          example: 255
+    ListError:
+      title: Validation Error
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Name must be unique
+          description: 'Message with error explanation. Possible errors: [''cid is not allowed for list names.'', ''Name must contain only letters, numbers, and dashes. Should not exceed 128 characters''].'
+    ListCreationSuccess:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+        id:
+          type: number
+          example: 123
+    ListNotFound:
+      title: List is not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: List is not found
+    ListNotExist:
+      title: List does not exist
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: ACCOUNT_LISTS_NOT_FOUND
+        message:
+          type: string
+          example: List does not exist
+    List:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list '
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    ListShow_2:
+      type: object
+      title: List
+      required:
+      - name
+      properties:
+        id:
+          type: integer
+          description: 'List id: unique identifier on the platform.'
+          example: 123
+        name:
+          type: string
+          description: List name. Should be unique and have maximum of 128 characters.
+          example: Sellers
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list. '
+          example: true
+  responses:
+    ListError:
+      description: Name must be unique
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListError'
+    ListNotFound:
+      description: List is not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListNotFound'
+    ListValidationError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListValidationError'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    ListNotExist:
+      description: List does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListNotExist'
+    AuthenticationFailure:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationFailed'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
+x-refined-from:
+- cordial-v1-openapi-original.json
+- cordial-v2-openapi-original.json

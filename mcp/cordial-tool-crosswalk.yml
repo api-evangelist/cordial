@@ -1,19 +1,19 @@
 generated: '2026-08-04'
 method: derived
-source: mcp/cordial-mcp.yml, openapi/cordial-v2-openapi-original.json
+source: mcp/cordial-mcp.yml, openapi/_original/cordial-v2-openapi-original.json
 note: >-
   Binds each published Cordial MCP tool to the REST operation(s) that back it. The MCP server's live
   tools/list is OAuth-gated (401 on anonymous introspection), so no inputSchema was captured; the
   mapping below is by name and documented semantics against verified v2 operationIds, and every
   confidence value reflects that. Where a binding is high confidence, the tool's REAL input contract
-  is that operation's `parameters` + `body` schema in openapi/cordial-v2-openapi-original.json.
+  is that operation's `parameters` + `body` schema in openapi/_original/cordial-v2-openapi-original.json.
   Nothing here is fabricated: every operationId named was grepped out of the published spec, and
   tools with no public REST equivalent are recorded in mcp_only[] rather than mapped to something
   approximate.
 
 surfaces:
   openapi:
-    file: openapi/cordial-v2-openapi-original.json
+    file: openapi/_original/cordial-v2-openapi-original.json
     spec: Swagger 2.0
     base_url: https://api.cordial.io/v2
     operations: 106

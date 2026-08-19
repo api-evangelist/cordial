@@ -1,0 +1,4749 @@
+{
+  "item": [
+    {
+      "id": "e2c33c04-814a-45b3-8428-e77a065ab951",
+      "name": "batch messages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "30c1618d-ccbe-4b3e-9b92-ccd156a3ec63",
+          "name": "Create a batch message",
+          "request": {
+            "name": "Create a batch message",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "batchmessages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"after\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f571acbc-c0f2-45a5-a982-389eee4e149a",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"after\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3bed5bd6-5645-415c-aa9f-cb39a3673f67",
+              "name": "Validation errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"after\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f9b4afe-5f45-42ae-93b9-def972fb8ad4",
+          "name": "Get batch messages",
+          "request": {
+            "name": "Get batch messages",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "batchmessages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sendTime[gt]",
+                  "value": "<string>",
+                  "description": "Send Time greater "
+                },
+                {
+                  "disabled": false,
+                  "key": "sendTime[gte]",
+                  "value": "<string>",
+                  "description": "Send Time greater or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "sendTime[lt]",
+                  "value": "<string>",
+                  "description": "Send Time less"
+                },
+                {
+                  "disabled": false,
+                  "key": "sendTime[lte]",
+                  "value": "<string>",
+                  "description": "Send Time less or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Message status"
+                },
+                {
+                  "disabled": false,
+                  "key": "triggers[api][enabled]",
+                  "value": "<string>",
+                  "description": "API trigger"
+                },
+                {
+                  "disabled": false,
+                  "key": "triggers[event][enabled]",
+                  "value": "<string>",
+                  "description": "Event trigger"
+                },
+                {
+                  "disabled": false,
+                  "key": "triggers[recurring][enabled]",
+                  "value": "<string>",
+                  "description": "Recurring trigger"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Message tags (can be many, separate by comma)"
+                },
+                {
+                  "disabled": false,
+                  "key": "mdtID",
+                  "value": "<string>",
+                  "description": "Automation template ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[gt]",
+                  "value": "<string>",
+                  "description": "Create date greater "
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[gte]",
+                  "value": "<string>",
+                  "description": "Create date greater or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[lt]",
+                  "value": "<string>",
+                  "description": "Create date less"
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[lte]",
+                  "value": "<string>",
+                  "description": "Create date less or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Number of records returned"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "69453e94-24df-48b0-afb7-59ba3c08684f",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sendTime[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[api][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[event][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[recurring][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mdtID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"channel\": \"string\",\n    \"classification\": \"transactional\",\n    \"name\": \"string\",\n    \"audience\": {},\n    \"schedule\": \"1992-07-24\",\n    \"message\": {\n      \"headers\": {\n        \"subject\": \"<string>\",\n        \"fromEmail\": \"<string>\",\n        \"fromDesc\": \"<string>\",\n        \"replyEmail\": \"<string>\"\n      },\n      \"content\": {\n        \"text/html\": \"<string>\"\n      }\n    },\n    \"transportID\": \"string\",\n    \"trackLinks\": \"disabled\",\n    \"priority\": 2\n  },\n  {\n    \"channel\": \"string\",\n    \"classification\": \"promotional\",\n    \"name\": \"string\",\n    \"audience\": {},\n    \"schedule\": \"1955-03-28\",\n    \"message\": {\n      \"headers\": {\n        \"subject\": \"<string>\",\n        \"fromEmail\": \"<string>\",\n        \"fromDesc\": \"<string>\",\n        \"replyEmail\": \"<string>\"\n      },\n      \"content\": {\n        \"text/html\": \"<string>\"\n      }\n    },\n    \"transportID\": \"string\",\n    \"trackLinks\": \"disabled\",\n    \"priority\": 2\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea0f6a0d-4b89-4e2b-a13b-748c4f42bbd2",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sendTime[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[api][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[event][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[recurring][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mdtID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "465cdd17-5aa6-429f-b00f-1a7ff7dfd96c",
+          "name": "Update an existing message",
+          "request": {
+            "name": "Update an existing message",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "batchmessages",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Message send ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"after\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf7c9422-b04d-4761-b80a-fbef379ff339",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"after\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "22cdcbd5-fb1f-4dc2-9e80-312cf4f08ef1",
+              "name": "Invalid ID supplied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"after\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd121be8-92ab-4f34-8858-e25a796ad158",
+          "name": "GET single message by msID",
+          "request": {
+            "name": "GET single message by msID",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "batchmessages",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Message send ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "78fb766c-c99a-4d7a-81ed-aa955ad70a97",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"channel\": \"string\",\n  \"classification\": \"promotional\",\n  \"name\": \"string\",\n  \"audience\": {},\n  \"schedule\": \"2017-11-13\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"string\",\n  \"trackLinks\": \"disabled\",\n  \"priority\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9aabdea-e1a0-4f01-8ebc-7005630165c4",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84477e37-f26d-4998-ae21-6d7b56c9ec36",
+          "name": "Delete a single contact",
+          "request": {
+            "name": "Delete a single contact",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "batchmessages",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Message send ID"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b3835b24-1384-49ef-9fbf-9a1701e0292a",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15ef2f3a-3274-418d-b47c-e1da93531d24",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b75202e0-b25a-433f-993e-a93ec29cc25b",
+          "name": "Send Manual Messagesend",
+          "request": {
+            "name": "Send Manual Messagesend",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "batchmessages",
+                ":id",
+                "send"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Message send ID"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c49c6278-2f9c-4410-9521-b4f0872a6305",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7711b4e2-9317-4dd9-892f-62ea8665fa01",
+              "name": "Count not create SendBatchMessage job",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f1d23718-82c6-41a9-9918-bc1be49cd628",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26a0481d-43d5-46e8-b330-72dbba742228",
+          "name": "Send a test batch message",
+          "request": {
+            "name": "Send a test batch message",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "batchmessages",
+                ":id",
+                "sendtest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Message send ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"<primaryKey>\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a99cee7e-05bc-4a85-a496-a11a6d5587f7",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "sendtest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"<primaryKey>\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0ebbd24-65ff-45f3-9437-875615684698",
+              "name": "Record is not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "sendtest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"<primaryKey>\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fbb8b5b-66fc-4edf-b3cf-bf77d9572b97",
+          "name": "Render preview of a batch message",
+          "request": {
+            "name": "Render preview of a batch message",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "batchmessages",
+                ":id",
+                "renderedwip",
+                ":contactID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "experiment",
+                  "value": "<string>",
+                  "description": "Name of experiment "
+                },
+                {
+                  "disabled": false,
+                  "key": "variant",
+                  "value": "<string>",
+                  "description": "Variant name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Message send ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contactID",
+                  "description": "(Required) Contact ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "327fbc27-eeb9-46d9-8ce0-dd22390a3013",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "renderedwip",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Contact ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "17eab7fc-c48c-47ca-9733-9a7b8f1ec0a0",
+              "name": "Record is not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "renderedwip",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Contact ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09df8943-188f-4f96-bee2-3bdeb4475e83",
+          "name": "Pause a batch message sending",
+          "request": {
+            "name": "Pause a batch message sending",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "batchmessages",
+                ":id",
+                "pause"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Message send ID"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bdd98b4c-a42f-469b-accc-ae483718494a",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "abaa7391-f778-4c2f-a607-ce11f8479fba",
+              "name": "Record is not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11db541b-16e2-43c8-94d4-81c10899d4b3",
+          "name": "Cancel a batch message sending",
+          "request": {
+            "name": "Cancel a batch message sending",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "batchmessages",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Message send ID"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2fc7d1ac-9275-4021-af61-d0e4ff02224d",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fb4dd695-82f2-4719-b936-05318993f184",
+              "name": "Record is not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3097d9a3-3e28-4181-b6ea-eed855dcade0",
+          "name": "Resume a batch message sending",
+          "request": {
+            "name": "Resume a batch message sending",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "batchmessages",
+                ":id",
+                "resume"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Message send ID"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c58cc154-53d9-4c1d-9a17-a9f7a56599ea",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d617e049-bfdf-4bef-9d72-e785d4e8367d",
+              "name": "Record is not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "batchmessages",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message send ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35fb7f1b-243a-406a-9ca9-a15248ad03ab",
+          "name": "Create a batch message",
+          "request": {
+            "name": "Create a batch message",
+            "description": {
+              "content": "Creates a batch message template using the appropriate JSON body. Posting more than once will create subsequent batch message templates. Use PUT to change or update a batch message template that has not been sent yet.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"<string>\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\",\n  \"vanityDomainKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fac707ed-c557-4a77-b194-c224e0c55bdc",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"<string>\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\",\n  \"vanityDomainKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"bmID\": \"bmID\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc8a6d97-4667-448d-89e4-817536662676",
+              "name": "Creation batch message errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"<string>\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\",\n  \"vanityDomainKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": {},\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"error\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e162b47-5eb2-4ff1-a47e-e13552e4c9f0",
+          "name": "Get batch messages",
+          "request": {
+            "name": "Get batch messages",
+            "description": {
+              "content": "Retrieves batch messages. Note that info and stats on daily message <b>automation</b> sends are retrieved using the <b>GET /batchmessages</b> method. The response for automation sends can be filtered using the automation trigger sending method status, the creation time, and automation message delivery template ID (mdtID).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sendTime[gt]",
+                  "value": "<string>",
+                  "description": "Send time is greater than."
+                },
+                {
+                  "disabled": false,
+                  "key": "sendTime[gte]",
+                  "value": "<string>",
+                  "description": "Send time is greater than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "sendTime[lt]",
+                  "value": "<string>",
+                  "description": "Send time is less than."
+                },
+                {
+                  "disabled": false,
+                  "key": "sendTime[lte]",
+                  "value": "<string>",
+                  "description": "Send time is less than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Message status (e.g. sent, canceled, paused, processing, pending)."
+                },
+                {
+                  "disabled": false,
+                  "key": "triggers[api][enabled]",
+                  "value": "<string>",
+                  "description": "API trigger sending method status. True for enabled and false for disabled."
+                },
+                {
+                  "disabled": false,
+                  "key": "triggers[event][enabled]",
+                  "value": "<string>",
+                  "description": "Event trigger sending method status. True for enabled and false for disabled."
+                },
+                {
+                  "disabled": false,
+                  "key": "triggers[recurring][enabled]",
+                  "value": "<string>",
+                  "description": "Recurring trigger sending method status. True for enabled and false for disabled."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Filter results by messages that contain specified message tags (can be many, comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "mdtID",
+                  "value": "<string>",
+                  "description": "Automation message delivery template ID (mdtID). Represents both the published and draft versions of an automation template."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[gt]",
+                  "value": "<string>",
+                  "description": "Create date is greater than."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[gte]",
+                  "value": "<string>",
+                  "description": "Create date is greater than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[lt]",
+                  "value": "<string>",
+                  "description": "Create date is less than."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[lte]",
+                  "value": "<string>",
+                  "description": "Create date less than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Specific page number to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Number or records per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "744b7ba9-cb43-4f89-9194-b47b265be8a0",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sendTime[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[api][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[event][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[recurring][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mdtID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"channel\": \"string\",\n    \"classification\": \"string\",\n    \"name\": \"string\",\n    \"audience\": {},\n    \"schedule\": \"1967-04-22\",\n    \"message\": {\n      \"headers\": {\n        \"subject\": \"<string>\",\n        \"fromEmail\": \"<string>\",\n        \"fromDesc\": \"<string>\",\n        \"replyEmail\": \"<string>\"\n      },\n      \"content\": {\n        \"text/html\": \"<string>\"\n      }\n    },\n    \"transportID\": \"string\",\n    \"trackLinks\": \"string\",\n    \"priority\": 2,\n    \"bcc\": \"string\",\n    \"bccEnabled\": true,\n    \"alerts\": {\n      \"id\": \"string\",\n      \"type\": \"total-sent\",\n      \"msID\": \"string\",\n      \"mdtID\": \"string\",\n      \"enabled\": false,\n      \"notify\": [\n        \"string\",\n        \"string\"\n      ],\n      \"conditions\": [\n        {\n          \"operator\": \"lt\",\n          \"value\": 7066,\n          \"type\": 2169,\n          \"period\": 3595.670247685888\n        },\n        {\n          \"operator\": \"gte\",\n          \"value\": 4185,\n          \"type\": 4291.893569730454,\n          \"period\": 1836\n        }\n      ],\n      \"period\": 1646\n    }\n  },\n  {\n    \"channel\": \"string\",\n    \"classification\": \"string\",\n    \"name\": \"string\",\n    \"audience\": {},\n    \"schedule\": \"1958-11-30\",\n    \"message\": {\n      \"headers\": {\n        \"subject\": \"<string>\",\n        \"fromEmail\": \"<string>\",\n        \"fromDesc\": \"<string>\",\n        \"replyEmail\": \"<string>\"\n      },\n      \"content\": {\n        \"text/html\": \"<string>\"\n      }\n    },\n    \"transportID\": \"string\",\n    \"trackLinks\": \"string\",\n    \"priority\": 2,\n    \"bcc\": \"string\",\n    \"bccEnabled\": false,\n    \"alerts\": {\n      \"id\": \"string\",\n      \"type\": \"total-sent\",\n      \"msID\": \"string\",\n      \"mdtID\": \"string\",\n      \"enabled\": false,\n      \"notify\": [\n        \"string\",\n        \"string\"\n      ],\n      \"conditions\": [\n        {\n          \"operator\": \"gt\",\n          \"value\": 2863,\n          \"type\": 5459.618508907062,\n          \"period\": \"string\"\n        },\n        {\n          \"operator\": \"gte\",\n          \"value\": 1718,\n          \"type\": \"string\",\n          \"period\": 4139.843110585641\n        }\n      ],\n      \"period\": 7789\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c820705-693e-46a2-9e2b-ed1fcc665877",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sendTime[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendTime[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[api][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[event][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "triggers[recurring][enabled]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mdtID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78c32fee-3b84-466b-8bbb-e83060b60fec",
+          "name": "Update a batch message draft",
+          "request": {
+            "name": "Update a batch message draft",
+            "description": {
+              "content": "Updates a batch message draft using the appropriate JSON body. The batch message record is defined by its unique message `id` value (generated by the POST method). The PUT method can only be used if the message status is `draft`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Batch message ID (msID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"<string>\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\",\n  \"vanityDomainKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e62ac3e-3bfe-4369-bbbb-a6513212044f",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"<string>\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\",\n  \"vanityDomainKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f54f331-f0b8-4248-9b5d-ffb4f847ea81",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"<string>\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\",\n  \"vanityDomainKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d5a5311-27c2-427b-b531-8835550ef692",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"<string>\",\n  \"classification\": \"<string>\",\n  \"name\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"audience\": \"<object>\",\n  \"audience-key\": \"<string>\",\n  \"schedule\": \"<dateTime>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"trackLinks\": \"<string>\",\n  \"scheduleType\": \"<string>\",\n  \"sendTimeType\": \"<string>\",\n  \"tests\": [\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\",\n  \"vanityDomainKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": {},\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"error\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db898cdd-8907-4ecd-bb80-bef62d55e59b",
+          "name": "Get a single batch message",
+          "request": {
+            "name": "Get a single batch message",
+            "description": {
+              "content": "Retrieves a batch message. The batch message record is defined by its unique message `id` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Batch message ID (msID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "52e3f9b9-4d2a-4e07-82dc-5457c551c982",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"channel\": \"string\",\n  \"classification\": \"string\",\n  \"name\": \"string\",\n  \"audience\": {},\n  \"schedule\": \"2014-12-05\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"string\",\n  \"trackLinks\": \"string\",\n  \"priority\": 2,\n  \"bcc\": \"string\",\n  \"bccEnabled\": false,\n  \"alerts\": {\n    \"id\": \"string\",\n    \"type\": \"total-sent\",\n    \"msID\": \"string\",\n    \"mdtID\": \"string\",\n    \"enabled\": false,\n    \"notify\": [\n      \"string\",\n      \"string\"\n    ],\n    \"conditions\": [\n      {\n        \"operator\": \"lt\",\n        \"value\": 1823,\n        \"type\": \"string\",\n        \"period\": \"string\"\n      },\n      {\n        \"operator\": \"gt\",\n        \"value\": 1456,\n        \"type\": false,\n        \"period\": 5149\n      }\n    ],\n    \"period\": 262\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1784b712-31fe-455c-b763-6d0ecbffe363",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a941d77-c017-41f1-8bf1-628e301f68d2",
+          "name": "Delete a batch message",
+          "request": {
+            "name": "Delete a batch message",
+            "description": {
+              "content": "Deletes an existing draft or scheduled batch message. The batch message record is defined by its unique message `id` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Batch message ID (msID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "33176dbf-ca51-4c0b-a4de-2e138925f621",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a8adc5d-9dbb-4b1a-9a09-a5c368d29193",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1693e471-44a2-494b-9dc2-6a6c53911d29",
+          "name": "Send or schedule a batch message",
+          "request": {
+            "name": "Send or schedule a batch message",
+            "description": {
+              "content": "Sends or schedules an existing batch message draft. If the draft is scheduled for a future send date, the message will be scheduled and sent on that date and time. The batch message record is defined by its unique message `id` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages",
+                ":id",
+                "send"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Batch message ID (msID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "26dcf1be-f076-4694-9481-f300cbe71a5b",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ac6bb57-faa7-4a8a-a8fc-1d40eec286ec",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be8d1543-4ee6-47b1-b09d-fea71d4ad73a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": {},\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"error\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d012d82-d4ce-43c4-81dc-2d4557d0b19c",
+          "name": "Send a test batch message",
+          "request": {
+            "name": "Send a test batch message",
+            "description": {
+              "content": "Sends a test batch message. The batch message record is defined by its unique message `id` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages",
+                ":id",
+                "sendtest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Batch message ID (msID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"primaryKey\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e9299d2-1924-4eb1-81be-58cbab10cdcb",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "sendtest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"primaryKey\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecc530ce-637a-4171-8889-0dd7680b2831",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "sendtest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"primaryKey\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5010718-b499-4e08-b10e-b32c6a420a57",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "sendtest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"primaryKey\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": {},\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"error\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed0bb764-b395-4b6e-b21a-974843b992c6",
+          "name": "Get experiment performance for single batch message",
+          "request": {
+            "name": "Get experiment performance for single batch message",
+            "description": {
+              "content": "Retrieves experiment performance for single batch message. The batch message record is defined by its unique message `id` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages",
+                ":id",
+                "experimentperformance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Batch message ID (msID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5cb2789e-4d16-4b5c-bc57-fc0c2c6c0bc0",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "experimentperformance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"variants\": [\n    {\n      \"stats\": {\n        \"ts\": 303,\n        \"tc\": 4311,\n        \"uc\": 7182,\n        \"to\": 6575,\n        \"uo\": 9505,\n        \"tci\": 1904,\n        \"uci\": 9635,\n        \"tb\": 6783,\n        \"tr\": 5772,\n        \"tri\": 8842,\n        \"or\": 8009,\n        \"ori\": 2328,\n        \"cmp\": 7142,\n        \"oo\": 6354\n      },\n      \"name\": \"string\"\n    },\n    {\n      \"stats\": {\n        \"ts\": 7542,\n        \"tc\": 6681,\n        \"uc\": 1728,\n        \"to\": 86,\n        \"uo\": 3318,\n        \"tci\": 7118,\n        \"uci\": 7959,\n        \"tb\": 4396,\n        \"tr\": 7723,\n        \"tri\": 6101,\n        \"or\": 3997,\n        \"ori\": 176,\n        \"cmp\": 9264,\n        \"oo\": 6265\n      },\n      \"name\": \"string\"\n    }\n  ],\n  \"strategy\": 485,\n  \"conversions\": 4954,\n  \"totalAudience\": 598\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba75c6af-f0ca-4f8b-ba6e-6afe660ed1b0",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "experimentperformance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b7c4470-27ad-4c16-aa2f-32f5b255ce8e",
+          "name": "Render preview of a batch message",
+          "request": {
+            "name": "Render preview of a batch message",
+            "description": {
+              "content": "Retrieves the message headers, the rendered HTML, and experiment name and variants of a batch message for a specified contact. The batch message record is defined by its unique message `id` value. The contact record is defined by its unique contact ID (cID) value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages",
+                ":id",
+                "renderedwip",
+                ":contactID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "experiment",
+                  "value": "<string>",
+                  "description": "Returns the batch message that contains the specified experiment name. Variant is required if experiment is specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "variant",
+                  "value": "<string>",
+                  "description": "Returns the batch message that contains the specified experiment variant. Experiment is required if variant is specified."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Batch message ID (msID)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contactID",
+                  "description": "(Required) Cordial database contact ID (cID) value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "20d173df-aad8-4f5d-9fe9-4391cf1f9188",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "renderedwip",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Cordial database contact ID (cID) value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": {\n    \"text/html\": \"string\"\n  },\n  \"headers\": {\n    \"subject\": \"string\",\n    \"fromEmail\": \"string\",\n    \"fromDesc\": \"string\",\n    \"replyEmail\": \"string\"\n  },\n  \"experiments\": {\n    \"experimentName\": [\n      \"varaint1\",\n      \"varaint2\",\n      \"variantN\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19a8a6c8-87a7-496f-b47f-d43f843562b6",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "renderedwip",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Cordial database contact ID (cID) value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2f3f894-6654-4f2c-bb7e-af870ac80a3f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "renderedwip",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Cordial database contact ID (cID) value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": {},\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"error\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e815b3f2-4416-4ecf-9c3d-66db0f757ad8",
+          "name": "Pause batch message sending",
+          "request": {
+            "name": "Pause batch message sending",
+            "description": {
+              "content": "Pauses the sending of a batch message. The batch message record is defined by its unique message `id` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages",
+                ":id",
+                "pause"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Batch message ID (msID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b5f9b5fa-ba06-4e66-a7a4-391766f2424c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cd26739-6edb-43c8-8200-80b082fb3299",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e86d8a4a-feff-4474-a180-ae03b8e02d78",
+          "name": "Cancel batch message sending",
+          "request": {
+            "name": "Cancel batch message sending",
+            "description": {
+              "content": "Cancels the sending of a batch message. A paused message may also be canceled. The batch message record is defined by its unique message `id` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Batch message ID (msID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d71ac390-8163-4e5c-bdac-7b93ef440894",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1a3302d-1bf6-4469-980a-d3f3f8d5995a",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "979dec94-96bb-4e26-b4ac-42502b876670",
+          "name": "Resume batch message sending",
+          "request": {
+            "name": "Resume batch message sending",
+            "description": {
+              "content": "Resumes the sending of a batch message. The batch message record is defined by its unique message `id` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages",
+                ":id",
+                "resume"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Batch message ID (msID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a1b198a3-e8b7-4624-994b-f82df368a438",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb5031a8-847c-4376-8a6b-ac7d812ee63b",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "resume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d370bdf3-5c1c-495c-bba2-94344cc4f198",
+          "name": "Unschedule a batch message",
+          "request": {
+            "name": "Unschedule a batch message",
+            "description": {
+              "content": "Unschedule a scheduled batch message. Unscheduled messages will revert to draft status and can be edited. Messages that are in the processing status cannot be unscheduled. The batch message record is defined by its unique message `id` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "batchmessages",
+                ":id",
+                "unschedule"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Batch message ID (msID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9b95bd35-4fe4-4c1f-8c5c-aa674c32d619",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "unschedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4c24353-e672-4b12-b3be-a3c5ccd7c01f",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "batchmessages",
+                    ":id",
+                    "unschedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Batch message ID (msID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bd09aa07-8417-405b-be2e-71830a917ca1",
+    "name": "Cordial batch messages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged batch messages across 2 of this provider's published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

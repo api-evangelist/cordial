@@ -1,0 +1,1691 @@
+{
+  "item": [
+    {
+      "id": "a958355e-130a-4462-b156-17666f2b69f6",
+      "name": "products",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e63dcc75-6002-4e24-ba00-5cb2cc9a2cb6",
+          "name": "Get a single product",
+          "request": {
+            "name": "Get a single product",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "products",
+                ":productID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productID",
+                  "description": "(Required) Key for attribute"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f3f41320-85cc-40bd-ac67-072b79f572f9",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Key for attribute"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"productID\": \"string\",\n  \"productName\": \"string\",\n  \"variants\": [\n    {\n      \"sku\": \"string\",\n      \"attr\": {\n        \"color\": \"string\",\n        \"size\": \"string\"\n      },\n      \"qty\": 3750\n    },\n    {\n      \"sku\": \"string\",\n      \"attr\": {\n        \"color\": \"string\",\n        \"size\": \"string\"\n      },\n      \"qty\": 4225\n    }\n  ],\n  \"description\": \"Black T-shirt with white print.\",\n  \"productType\": \"subscription\",\n  \"price\": 307.0403801029364,\n  \"sale\": {\n    \"enabled\": true,\n    \"price\": 7459.562027634999,\n    \"start\": \"1970-02-17\",\n    \"end\": \"2001-11-16\"\n  },\n  \"UPCCode\": \"string\",\n  \"category\": \"string\",\n  \"images\": [\n    \"string\",\n    \"string\"\n  ],\n  \"manufacturerName\": \"string\",\n  \"inStock\": true,\n  \"taxable\": false,\n  \"enabled\": true,\n  \"url\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"properties\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b15adfc9-d06c-48fe-bee6-034bcda1206d",
+              "name": "record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Key for attribute"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00d5bb1d-3dad-4183-8709-dfc913ee4498",
+          "name": "Update an existing product",
+          "request": {
+            "name": "Update an existing product",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "products",
+                ":productID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productID",
+                  "description": "(Required) Product ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productID\": \"<string>\",\n  \"productName\": \"<string>\",\n  \"variants\": [\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"productType\": \"<string>\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": \"<boolean>\",\n    \"price\": \"<float>\",\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"<string>\",\n  \"category\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"<string>\",\n  \"inStock\": \"<boolean>\",\n  \"taxable\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"properties\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "db1b9dff-53e7-4d83-a9d8-ceb48c56fff1",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Product ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productID\": \"<string>\",\n  \"productName\": \"<string>\",\n  \"variants\": [\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    }\n  ],\n  \"description\": \"Black T-shirt with white print.\",\n  \"productType\": \"<string>\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": \"<boolean>\",\n    \"price\": \"<float>\",\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"<string>\",\n  \"category\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"<string>\",\n  \"inStock\": \"<boolean>\",\n  \"taxable\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"properties\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d2f9b9a2-2200-4b1c-a83b-91bb62b420c4",
+              "name": "record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Product ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productID\": \"<string>\",\n  \"productName\": \"<string>\",\n  \"variants\": [\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    }\n  ],\n  \"description\": \"Black T-shirt with white print.\",\n  \"productType\": \"<string>\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": \"<boolean>\",\n    \"price\": \"<float>\",\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"<string>\",\n  \"category\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"<string>\",\n  \"inStock\": \"<boolean>\",\n  \"taxable\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"properties\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8630d81c-d8c4-4793-8ff3-491913c1507b",
+          "name": "Delete a single product",
+          "request": {
+            "name": "Delete a single product",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "products",
+                ":productID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productID",
+                  "description": "(Required) Product id to delete"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "936b34e7-2ce3-4b4b-ae7e-cfb4c8eadd9f",
+              "name": "unable to validate segment participation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Product id to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39324ba5-acf8-4784-b0ec-b922d6521cc6",
+          "name": "Add new products",
+          "request": {
+            "name": "Add new products",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productID\": \"<string>\",\n  \"productName\": \"<string>\",\n  \"variants\": [\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    }\n  ],\n  \"description\": \"<string>\",\n  \"productType\": \"<string>\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": \"<boolean>\",\n    \"price\": \"<float>\",\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"<string>\",\n  \"category\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"<string>\",\n  \"inStock\": \"<boolean>\",\n  \"taxable\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"properties\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d1afccfc-692d-4851-9272-ef3937cb8817",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productID\": \"<string>\",\n  \"productName\": \"<string>\",\n  \"variants\": [\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    }\n  ],\n  \"description\": \"Black T-shirt with white print.\",\n  \"productType\": \"<string>\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": \"<boolean>\",\n    \"price\": \"<float>\",\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"<string>\",\n  \"category\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"<string>\",\n  \"inStock\": \"<boolean>\",\n  \"taxable\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"properties\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bce088e-8a5a-4525-9c95-488a871351e4",
+          "name": "Get products list",
+          "request": {
+            "name": "Get products list",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Number of page"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Count products on page"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields (can be many, separate by comma)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8f763e15-bd09-4bac-9e9f-33c974b7f55a",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"productID\": \"<string>\",\n    \"productName\": \"<string>\",\n    \"variants\": [\n      {\n        \"sku\": \"<string>\",\n        \"attr\": {\n          \"color\": \"<string>\",\n          \"size\": \"<string>\"\n        },\n        \"qty\": \"<integer>\"\n      },\n      {\n        \"sku\": \"<string>\",\n        \"attr\": {\n          \"color\": \"<string>\",\n          \"size\": \"<string>\"\n        },\n        \"qty\": \"<integer>\"\n      }\n    ],\n    \"description\": \"Black T-shirt with white print.\",\n    \"productType\": \"<string>\",\n    \"price\": \"<float>\",\n    \"sale\": {\n      \"enabled\": \"<boolean>\",\n      \"price\": \"<float>\",\n      \"start\": \"<date>\",\n      \"end\": \"<date>\"\n    },\n    \"UPCCode\": \"<string>\",\n    \"category\": \"<string>\",\n    \"images\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"manufacturerName\": \"<string>\",\n    \"inStock\": \"<boolean>\",\n    \"taxable\": \"<boolean>\",\n    \"enabled\": \"<boolean>\",\n    \"url\": \"<string>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"properties\": \"<object>\"\n  },\n  {\n    \"productID\": \"<string>\",\n    \"productName\": \"<string>\",\n    \"variants\": [\n      {\n        \"sku\": \"<string>\",\n        \"attr\": {\n          \"color\": \"<string>\",\n          \"size\": \"<string>\"\n        },\n        \"qty\": \"<integer>\"\n      },\n      {\n        \"sku\": \"<string>\",\n        \"attr\": {\n          \"color\": \"<string>\",\n          \"size\": \"<string>\"\n        },\n        \"qty\": \"<integer>\"\n      }\n    ],\n    \"description\": \"Black T-shirt with white print.\",\n    \"productType\": \"<string>\",\n    \"price\": \"<float>\",\n    \"sale\": {\n      \"enabled\": \"<boolean>\",\n      \"price\": \"<float>\",\n      \"start\": \"<date>\",\n      \"end\": \"<date>\"\n    },\n    \"UPCCode\": \"<string>\",\n    \"category\": \"<string>\",\n    \"images\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"manufacturerName\": \"<string>\",\n    \"inStock\": \"<boolean>\",\n    \"taxable\": \"<boolean>\",\n    \"enabled\": \"<boolean>\",\n    \"url\": \"<string>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"properties\": \"<object>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f685b3c-678a-42c8-b4a0-72503daa189e",
+              "name": "record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4cbfc17-c097-4def-842f-3d632769ec83",
+          "name": "Get a single product",
+          "request": {
+            "name": "Get a single product",
+            "description": {
+              "content": "Retrieves the specified product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would return the response data for the product with the productID value of <b>112233</b>.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "products",
+                ":productID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productID",
+                  "description": "(Required) Product id value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "138a5861-1ab8-46a0-9402-03f1ee225d8e",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Product id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"productID\": \"Acme-30 Stapler\",\n  \"productName\": \"Acme-30 Stapler\",\n  \"variants\": [\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    },\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    }\n  ],\n  \"productType\": \"physical\",\n  \"price\": 1386.6117215838792,\n  \"sale\": {\n    \"enabled\": true,\n    \"price\": 12.95,\n    \"start\": \"1953-10-05\",\n    \"end\": \"1955-09-22\"\n  },\n  \"UPCCode\": \"8 34460 00372 4\",\n  \"category\": \"Office Supplies\",\n  \"images\": [\n    \"string\",\n    \"string\"\n  ],\n  \"manufacturerName\": \"Acme Supplies\",\n  \"inStock\": true,\n  \"taxable\": true,\n  \"enabled\": true,\n  \"url\": \"http://acme.com/ac30\",\n  \"tags\": [\n    \"office\",\n    \"office supplies\"\n  ],\n  \"properties\": {},\n  \"ct\": \"2022-08-26T05:59:47.305Z\",\n  \"lm\": \"1946-09-01T09:02:15.902Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e38b4e3-2990-484f-b696-f36e2f3d8c23",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Product id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7639308-4a22-4998-a4b6-cbc1ec431d2a",
+          "name": "Update an existing product",
+          "request": {
+            "name": "Update an existing product",
+            "description": {
+              "content": "Updates a product in the Cordial database using the appropriate JSON body. The product is defined by its unique product `id` value. For example, /products/112233 would update the the product with the productID value of <b>112233</b>.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "products",
+                ":productID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productID",
+                  "description": "(Required) Product id value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productID\": \"<string>\",\n  \"productName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    }\n  ],\n  \"productType\": \"<string>\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": \"<boolean>\",\n    \"price\": \"<float>\",\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"<string>\",\n  \"category\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"<string>\",\n  \"inStock\": \"<boolean>\",\n  \"taxable\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"properties\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b745755-46ee-4724-916d-11a28d085aa2",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Product id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productID\": \"Acme-30 Stapler\",\n  \"productName\": \"Acme-30 Stapler\",\n  \"description\": \"Black T-shirt with white print.\",\n  \"variants\": [\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    },\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    }\n  ],\n  \"productType\": \"physical\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": true,\n    \"price\": 12.95,\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"8 34460 00372 4\",\n  \"category\": \"Office Supplies\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"Acme Supplies\",\n  \"inStock\": true,\n  \"taxable\": true,\n  \"enabled\": true,\n  \"url\": \"http://acme.com/ac30\",\n  \"tags\": [\n    \"office\",\n    \"office supplies\"\n  ],\n  \"properties\": {\n    \"hasVideo\": true,\n    \"ratings\": \"5 stars\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "496d8e23-0e7e-489f-a7a2-8988958eac98",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Product id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productID\": \"Acme-30 Stapler\",\n  \"productName\": \"Acme-30 Stapler\",\n  \"description\": \"Black T-shirt with white print.\",\n  \"variants\": [\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    },\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    }\n  ],\n  \"productType\": \"physical\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": true,\n    \"price\": 12.95,\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"8 34460 00372 4\",\n  \"category\": \"Office Supplies\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"Acme Supplies\",\n  \"inStock\": true,\n  \"taxable\": true,\n  \"enabled\": true,\n  \"url\": \"http://acme.com/ac30\",\n  \"tags\": [\n    \"office\",\n    \"office supplies\"\n  ],\n  \"properties\": {\n    \"hasVideo\": true,\n    \"ratings\": \"5 stars\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf6daba8-6626-4a79-84e9-d26ad2cdaa99",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Product id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productID\": \"Acme-30 Stapler\",\n  \"productName\": \"Acme-30 Stapler\",\n  \"description\": \"Black T-shirt with white print.\",\n  \"variants\": [\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    },\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    }\n  ],\n  \"productType\": \"physical\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": true,\n    \"price\": 12.95,\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"8 34460 00372 4\",\n  \"category\": \"Office Supplies\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"Acme Supplies\",\n  \"inStock\": true,\n  \"taxable\": true,\n  \"enabled\": true,\n  \"url\": \"http://acme.com/ac30\",\n  \"tags\": [\n    \"office\",\n    \"office supplies\"\n  ],\n  \"properties\": {\n    \"hasVideo\": true,\n    \"ratings\": \"5 stars\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": {\n    \"validationErrors\": {}\n  },\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"error\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe1eef3f-fb7c-4a3f-9bf1-44fdc9bd2ade",
+          "name": "Delete a single product",
+          "request": {
+            "name": "Delete a single product",
+            "description": {
+              "content": "Deletes a product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would remove the product with the productID value of <b>112233</b>.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "products",
+                ":productID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productID",
+                  "description": "(Required) Product id value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2cf7db79-cdf3-465a-bdcf-e199b4cd04b2",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Product id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a19835c-7b0a-47f4-8153-f07c0ffc1a7f",
+              "name": "Product not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "products",
+                    ":productID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productID",
+                      "description": "(Required) Product id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"Product not found\",\n  \"errorKey\": \"GENERIC_ERROR_KEY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a847450-6b96-4445-ba58-8e300761e448",
+          "name": "Add new products",
+          "request": {
+            "name": "Add new products",
+            "description": {
+              "content": "Creates a new product in the Cordial database using the appropriate JSON body. A product can include one or more variants. Posting the same product more than once with the same `productID` value will update the existing product. This is helpful for reloading and/or updating product information when batch processing multiple records.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productID\": \"<string>\",\n  \"productName\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"attr\": {\n        \"color\": \"<string>\",\n        \"size\": \"<string>\"\n      },\n      \"qty\": \"<integer>\"\n    }\n  ],\n  \"productType\": \"<string>\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": \"<boolean>\",\n    \"price\": \"<float>\",\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"<string>\",\n  \"category\": \"<string>\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"<string>\",\n  \"inStock\": \"<boolean>\",\n  \"taxable\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"url\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"properties\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b5b6742-bb3c-416f-bea2-98d4180c5c60",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productID\": \"Acme-30 Stapler\",\n  \"productName\": \"Acme-30 Stapler\",\n  \"description\": \"Black T-shirt with white print.\",\n  \"variants\": [\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    },\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    }\n  ],\n  \"productType\": \"physical\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": true,\n    \"price\": 12.95,\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"8 34460 00372 4\",\n  \"category\": \"Office Supplies\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"Acme Supplies\",\n  \"inStock\": true,\n  \"taxable\": true,\n  \"enabled\": true,\n  \"url\": \"http://acme.com/ac30\",\n  \"tags\": [\n    \"office\",\n    \"office supplies\"\n  ],\n  \"properties\": {\n    \"hasVideo\": true,\n    \"ratings\": \"5 stars\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"product created\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42a2fc9b-193a-484e-b349-17b8431cd386",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"productID\": \"Acme-30 Stapler\",\n  \"productName\": \"Acme-30 Stapler\",\n  \"description\": \"Black T-shirt with white print.\",\n  \"variants\": [\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    },\n    {\n      \"sku\": \"RF-WP33286-21\",\n      \"attr\": {\n        \"color\": \"blue\",\n        \"size\": \"medium\"\n      },\n      \"qty\": 1\n    }\n  ],\n  \"productType\": \"physical\",\n  \"price\": \"<float>\",\n  \"sale\": {\n    \"enabled\": true,\n    \"price\": 12.95,\n    \"start\": \"<date>\",\n    \"end\": \"<date>\"\n  },\n  \"UPCCode\": \"8 34460 00372 4\",\n  \"category\": \"Office Supplies\",\n  \"images\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"manufacturerName\": \"Acme Supplies\",\n  \"inStock\": true,\n  \"taxable\": true,\n  \"enabled\": true,\n  \"url\": \"http://acme.com/ac30\",\n  \"tags\": [\n    \"office\",\n    \"office supplies\"\n  ],\n  \"properties\": {\n    \"hasVideo\": true,\n    \"ratings\": \"5 stars\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": {\n    \"validationErrors\": {}\n  },\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"error\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a7ce7ca-bad6-49dd-aeea-2397b5fc0c2a",
+          "name": "Get products list",
+          "request": {
+            "name": "Get products list",
+            "description": {
+              "content": "Retrieves all products from the Cordial database. Using query string parameters, it is possible to filter the field set returned using a query string for the `fields` parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Specific page number to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Number or records per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields to include (can be many, comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "Field by which results should be sorted."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_dir",
+                  "value": "<string>",
+                  "description": "Direction to sort by. Works in conjunction with `sort_by` (e.g. asc, desc)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d1129110-dcdb-4c1c-9d8c-04e84def3aee",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_dir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"productID\": \"Acme-30 Stapler\",\n    \"productName\": \"Acme-30 Stapler\",\n    \"variants\": [\n      {\n        \"sku\": \"RF-WP33286-21\",\n        \"attr\": {\n          \"color\": \"blue\",\n          \"size\": \"medium\"\n        },\n        \"qty\": 1\n      },\n      {\n        \"sku\": \"RF-WP33286-21\",\n        \"attr\": {\n          \"color\": \"blue\",\n          \"size\": \"medium\"\n        },\n        \"qty\": 1\n      }\n    ],\n    \"productType\": \"physical\",\n    \"price\": 3620.7050592666446,\n    \"sale\": {\n      \"enabled\": true,\n      \"price\": 12.95,\n      \"start\": \"<date>\",\n      \"end\": \"<date>\"\n    },\n    \"UPCCode\": \"8 34460 00372 4\",\n    \"category\": \"Office Supplies\",\n    \"images\": [\n      \"string\",\n      \"string\"\n    ],\n    \"manufacturerName\": \"Acme Supplies\",\n    \"inStock\": true,\n    \"taxable\": true,\n    \"enabled\": true,\n    \"url\": \"http://acme.com/ac30\",\n    \"tags\": [\n      \"office\",\n      \"office supplies\"\n    ],\n    \"properties\": {},\n    \"ct\": \"2016-12-09T14:04:37.733Z\",\n    \"lm\": \"1950-09-30T18:35:54.553Z\"\n  },\n  {\n    \"productID\": \"Acme-30 Stapler\",\n    \"productName\": \"Acme-30 Stapler\",\n    \"variants\": [\n      {\n        \"sku\": \"RF-WP33286-21\",\n        \"attr\": {\n          \"color\": \"blue\",\n          \"size\": \"medium\"\n        },\n        \"qty\": 1\n      },\n      {\n        \"sku\": \"RF-WP33286-21\",\n        \"attr\": {\n          \"color\": \"blue\",\n          \"size\": \"medium\"\n        },\n        \"qty\": 1\n      }\n    ],\n    \"productType\": \"physical\",\n    \"price\": 9281.026464832792,\n    \"sale\": {\n      \"enabled\": true,\n      \"price\": 12.95,\n      \"start\": \"<date>\",\n      \"end\": \"<date>\"\n    },\n    \"UPCCode\": \"8 34460 00372 4\",\n    \"category\": \"Office Supplies\",\n    \"images\": [\n      \"string\",\n      \"string\"\n    ],\n    \"manufacturerName\": \"Acme Supplies\",\n    \"inStock\": true,\n    \"taxable\": true,\n    \"enabled\": true,\n    \"url\": \"http://acme.com/ac30\",\n    \"tags\": [\n      \"office\",\n      \"office supplies\"\n    ],\n    \"properties\": {},\n    \"ct\": \"2010-04-06T07:35:19.315Z\",\n    \"lm\": \"1984-04-25T06:35:55.882Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48755c98-c9fb-4375-8b1c-636391e47a44",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_dir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8937e15f-a69e-46c0-88e9-c414be3f51d0",
+    "name": "Cordial Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged products across 2 of this provider's published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

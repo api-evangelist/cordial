@@ -2,7 +2,7 @@ generated: '2026-08-04'
 method: searched
 source: >-
   https://support.cordial.com/hc/en-us/articles/24971200437645-Test-messages,
-  openapi/cordial-v2-openapi-original.json,
+  openapi/_original/cordial-v2-openapi-original.json,
   https://api.cordial.io/docs/v2/
 
 separate_environment: false

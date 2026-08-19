@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial Alerts API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/alerts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Alert id value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the specified alert."
+        },
+        {
+          "info": {
+            "name": "Update a single alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/alerts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Alert id value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update alert"
+        },
+        {
+          "info": {
+            "name": "Delete an alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v2/alerts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Alert id value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes alerts."
+        },
+        {
+          "info": {
+            "name": "Get content includes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/alerts",
+            "params": [
+              {
+                "name": "mdtID",
+                "value": "",
+                "type": "query",
+                "description": "Filter alerts by automation message delivery template ID (mdtID)."
+              },
+              {
+                "name": "msID",
+                "value": "",
+                "type": "query",
+                "description": "Filter alerts by message send ID (mdtID)."
+              },
+              {
+                "name": "entity",
+                "value": "",
+                "type": "query",
+                "description": "Filter alerts by entity. Possible values message-automation or batch-message"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Specific page number to be returned."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field by which results should be sorted."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "Direction to sort by. Works in conjunction with `sort_by` (e.g. asc, desc)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves alerts list. Using query string parameters, it is possible to filter the response mdtID or msID to retrieve information for particular messages or templates."
+        },
+        {
+          "info": {
+            "name": "Add alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/alerts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Adds a new alert using the appropriate JSON body."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

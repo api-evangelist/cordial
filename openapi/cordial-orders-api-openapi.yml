@@ -1,0 +1,1001 @@
+openapi: 3.2.0
+info:
+  title: Cordial Orders API
+  termsOfService: https://cordial.zendesk.com
+  version: '1.0'
+  description: 'Operations tagged orders across 2 of this provider''s published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: orders
+paths:
+  /v1/orders/{id}:
+    put:
+      security:
+      - basicAuth: []
+      summary: Update a single order
+      tags:
+      - orders
+      parameters:
+      - name: id
+        description: Order ID
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderUPD'
+        '404':
+          description: record not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderO'
+        description: Order object that needs to be updated in the system
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single order
+      tags:
+      - orders
+      operationId: getorder
+      parameters:
+      - name: id
+        description: Order ID
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: fields
+        description: Fields (can be many, separate by comma)
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderO'
+        '404':
+          description: record not found
+    delete:
+      security:
+      - basicAuth: []
+      summary: Delete order
+      tags:
+      - orders
+      operationId: deleteorder
+      parameters:
+      - name: id
+        description: Order ID
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: record not found
+  /v1/orders:
+    post:
+      security:
+      - basicAuth: []
+      summary: Add a new order
+      tags:
+      - orders
+      operationId: addorders
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: record not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderO'
+        description: Order object that needs to be added to the system
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get orders
+      tags:
+      - orders
+      operationId: getorders
+      parameters:
+      - name: fields
+        description: Fields (can be many, separate by comma)
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: cID
+        description: Contact ID
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: email
+        description: Search by contact primary key
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: purchaseDate
+        description: Purchase Date used in conjunction with eq, lt, gt (YYYY-MM-DD HH:ii:ss)
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: page
+        description: Number of page
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Count orders on page
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: return_count
+        description: Return count of records
+        required: false
+        in: query
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
+          default: false
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderO'
+        '404':
+          description: record not found
+  /v2/orders/{id}:
+    put:
+      security:
+      - basicAuth: []
+      summary: Update a single order
+      description: Updates the specified order in the Cordial database using the appropriate JSON body.
+      tags:
+      - orders
+      parameters:
+      - name: id
+        description: Order id value.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '422':
+          $ref: '#/components/responses/OrderValidationError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderUPD_2'
+        description: Order object that needs to be updated.
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single order
+      description: Retrieves the specified order from the Cordial database. The order is defined by its unique order `id` value. For example, /orders/112233 would return the response data for the order with the orderID value of <b>112233</b>.
+      tags:
+      - orders
+      operationId: getorder
+      parameters:
+      - name: id
+        description: Order id value.
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: fields
+        description: Fields to include (can be many, comma-separated).
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderO_2'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+    delete:
+      security:
+      - basicAuth: []
+      summary: Delete order
+      description: Deletes an order from the Cordial database. The order is defined by its unique order `id` value. For example, /orders/22345 would delete the order with the orderID value of <b>22345</b>.
+      tags:
+      - orders
+      operationId: deleteorder
+      parameters:
+      - name: id
+        description: Order id value.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '400':
+          description: Order not found
+          $ref: '#/components/responses/OrderNotFound'
+  /v2/orders:
+    post:
+      security:
+      - basicAuth: []
+      summary: Add an order
+      description: Creates a new order in the Cordial database using the appropriate JSON body. An order can include one or more items. Posting more than once for the same "orderID" will generate an error.
+      tags:
+      - orders
+      operationId: addorders
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '422':
+          $ref: '#/components/responses/OrderValidationError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderOWithSuppress'
+        description: Order object that needs to be added.
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get orders
+      description: Retrieves orders from the Cordial database. Using query string parameters, it is possible to filter the response by contact ID (`cID`) or `email` address value to retrieve all orders for a single contact. In addition, the response can be filtered by a specified order purchase date or date range. The GET /orders endpoint can retrieve up to 10,000 records at a time. To page through more than 10,000 records, multiple queries must be made with manually adjusted parameters for each.
+      tags:
+      - orders
+      operationId: getorders
+      parameters:
+      - name: fields
+        description: Fields to include (can be many, comma-separated).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: cID
+        description: Filter records for a specific contact using the Cordial database contact ID (cID) value.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: email
+        description: Filter records for a specific contact using the email address value.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: purchaseDate
+        description: Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: purchaseDate[lt]
+        description: Filter orders that occurred before this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: purchaseDate[gt]
+        description: Filter orders that occurred after this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: purchaseDate[lte]
+        description: Filter orders that occurred before or at this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: purchaseDate[gte]
+        description: Filter orders that occurred after or at this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: page
+        description: Specific page number to be returned.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Number or records per page.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sort_by
+        description: Field by which results should be sorted.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sort_dir
+        description: Direction to sort by. Works in conjunction with `sort_by` (e.g. asc, desc).
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: return_count
+        description: Show the total count of records returned.
+        required: false
+        in: query
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
+          default: false
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderO_2'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+        '422':
+          $ref: '#/components/responses/OrdersFilterError'
+components:
+  schemas:
+    ShippingAddressO:
+      title: ShippingAddress
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: integer
+        country:
+          type: string
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    ShippingAddressO_2:
+      title: ShippingAddress
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the person or company placing the order.
+          example: Mark Smith
+        address:
+          type: string
+          description: Shipping address street (e.g. 13130 Silverlake Road).
+          example: 13130 Silverlake Road
+        city:
+          type: string
+          description: Shipping address city (e.g. Hollywood).
+          example: Hollywood
+        state:
+          type: string
+          description: Shipping address state (e.g. CA).
+          example: CA
+        postalCode:
+          type: string
+          description: Shipping address postal code (e.g. 90028).
+          example: 90028
+        country:
+          type: string
+          description: Shipping address country (e.g. USA).
+          example: USA
+    OrderUPD:
+      title: Order
+      type: object
+      properties:
+        linkID:
+          description: Link ID
+          type: string
+        mcID:
+          description: Messagecontact ID
+          type: string
+        storeID:
+          description: Store ID
+          type: string
+        customerID:
+          type: integer
+        purchaseDate:
+          type: string
+          format: datetime
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddressO'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddressO'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemsO'
+        tax:
+          type: integer
+        shippingAndHandling:
+          type: string
+        properties:
+          type: object
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    ItemsO_2:
+      title: Items
+      type: object
+      required:
+      - productID
+      - sku
+      - category
+      - name
+      properties:
+        productID:
+          type: string
+          description: Unique product identifier (e.g. 1234abcd).
+          example: 1234abcd
+        description:
+          type: string
+          description: Product description (e.g. Ultra soft casual t-shirt).
+          example: Great product!
+        sku:
+          type: string
+          description: The Stock Keeping Unit value for a particular item (e.g. RF-WP33286-21).
+          example: RF-WP33286-21
+        category:
+          type: string
+          description: The category given to the particular item.
+          example: Office Supplies
+        name:
+          type: string
+          description: The name of the person or company placing the order.
+          example: S22-Refrigerator
+        qty:
+          type: integer
+          description: The number of items purchased. Defaults to `1` if not specified.
+          example: 2
+        itemPrice:
+          type: number
+          format: float
+          description: Item price.
+          example: 22.95
+        salePrice:
+          type: number
+          description: Sale price of the item.
+          format: float
+          example: 20.99
+        url:
+          type: string
+          description: Link to the product page (e.g. https://mydomain.com/myproduct).
+          example: http://myproduct.com
+        attr:
+          type: object
+          description: Key value pairs describing product attributes (e.g. "size":"large", "color":"red"). Attribute values <b>cannot</b> be searched using the Kaleidoscope or within Smarty for personalization.
+          example:
+            size: large
+            color: red
+        productType:
+          type: string
+          example: physical
+          description: The product type. Options include physical, digital, subscription, and event.
+        manufacturerName:
+          type: string
+          description: The name of the manufacturer (e.g. Acme Supplies).
+          example: Acme Supplies
+        UPCCode:
+          type: string
+          description: The Universal Product Code (e.g. 8 34460 00372 4).
+          example: 8 34460 00372 4
+        images:
+          type: array
+          items:
+            type: string
+          description: A -ated array of image file locations. Use an empty array [] as default if no values exist.
+          example:
+          - http://example.com/image1.jpg
+          - http://example.com/image2.jpg
+        tags:
+          type: array
+          items:
+            type: string
+          description: A comma-separated array of values to describe the product (e.g. ["office","office-supplies"]). Only accepts alphanumeric characters or dashes.
+        properties:
+          type: object
+          description: 'Can be used in place of the `attr` key (e.g. "brands":["Marmot", "Quicksilver"], "return_date": "2018-07-01 00:00:00"). Values added <b>can</b> be searched using the Kaleidoscope and within Smarty for personalization.'
+        inStock:
+          type: boolean
+          description: 'Flags product as in stock. Possible value: 1, 0, or true, false. Defaults to `false`.'
+          example: true
+        taxable:
+          type: boolean
+          description: 'Flags product as taxable. Possible value: 1, 0, or true, false. Defaults to `false`.'
+          example: true
+        enabled:
+          type: boolean
+          description: 'Flags product as enabled. Possible value: 1, 0, or true, false. Defaults to `false`.'
+          example: true
+    BillingAddressO:
+      title: BillingAddress
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: integer
+        country:
+          type: string
+    OrdersFilterError:
+      title: Filter incorrect
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Time value is incorrect
+    ItemsO:
+      title: Items
+      type: object
+      required:
+      - productID
+      - sku
+      - category
+      - name
+      properties:
+        productID:
+          type: string
+        description:
+          type: string
+        sku:
+          type: string
+        category:
+          type: string
+        name:
+          type: string
+        qty:
+          type: integer
+        itemPrice:
+          type: number
+          format: float
+        url:
+          type: string
+        attr:
+          type: object
+        productType:
+          type: string
+          enum:
+          - physical
+          - digital
+          - subscription
+          - event
+        manufacturerName:
+          type: string
+        UPCCode:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+        inStock:
+          type: boolean
+        taxable:
+          type: boolean
+        enabled:
+          type: boolean
+    OrderO_2:
+      title: Order
+      type: object
+      required:
+      - orderID
+      - purchaseDate
+      - cID
+      properties:
+        orderID:
+          description: Unique order identifier.
+          type: string
+          example: '33451'
+        cID:
+          description: Cordial database contact ID (cID) value.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        linkID:
+          description: Cordial ID that represents the specific message and link (e.g. 45:55....aef:1). Required to track revenue attribution to a specific link.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        status:
+          description: Order status.
+          type: string
+        mcID:
+          description: Message contact ID (mcID). Represents the Cordial account, specific contact, and the specific message (e.g. 45:55....aef:1). Required to track revenue attribution.
+          type: string
+          example: 1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1
+        storeID:
+          description: Store ID.
+          type: string
+          example: abc123
+        customerID:
+          type: string
+          description: Customer ID. Typically a value assigned by the eCommerce or CRM platform (e.g. abc123).
+        purchaseDate:
+          type: string
+          format: date-time
+          description: Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddressO_2'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddressO_2'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemsO_2'
+        totalDiscountAmount:
+          type: number
+          format: float
+          description: Represents discount amount automatically calculated by discountApplication.
+        discountApplication:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - fixed
+            amount:
+              type: number
+              format: float
+        tax:
+          type: float
+          description: The amount of the tax.
+          example: 22.5
+        shippingAndHandling:
+          type: number
+          description: The amount charged for shipping and handling.
+          example: 0.0
+        properties:
+          type: object
+          description: Key/value pairs describing the properties of the order.
+          example:
+            currency: USD
+    OrderUPD_2:
+      title: Order
+      type: object
+      properties:
+        cID:
+          description: Cordial database contact ID (cID) value.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        linkID:
+          description: Cordial ID that represents the specific message and link (e.g. 45:55....aef:1). Required to track revenue attribution to a specific link.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        mcID:
+          description: Message contact ID (mcID). Represents the Cordial account, specific contact, and the specific message (e.g. 45:55....aef:1). Required to track revenue attribution.
+          type: string
+          example: 1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1
+        storeID:
+          description: Store ID.
+          type: string
+          example: abc123
+        customerID:
+          type: string
+          description: Customer ID. Typically a value assigned by the eCommerce or CRM platform (e.g. abc123).
+          example: abc123
+        purchaseDate:
+          type: string
+          format: date-time
+          description: Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddressO_2'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddressO_2'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemsO_2'
+        tax:
+          type: float
+          description: The amount of tax.
+          example: 22.5
+        shippingAndHandling:
+          type: number
+          description: The amount charged for shipping and handling.
+          example: 0.0
+        properties:
+          type: object
+          description: 'Key/value pairs describing order properties (e.g "currency": "USD").'
+          example:
+            currency: USD
+        suppressTriggers:
+          type: boolean
+          example: false
+          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the order. Defaults to `false`.
+        discountApplication:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - fixed
+            amount:
+              type: number
+              format: float
+    BillingAddressO_2:
+      title: BillingAddress
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the person or company placing the order.
+          example: Mark Smith
+        address:
+          type: string
+          description: Billing street address (e.g. 13130 Silverlake Road).
+          example: 13130 Silverlake Road
+        city:
+          type: string
+          description: Billing address city (e.g. Hollywood).
+          example: Hollywood
+        state:
+          type: string
+          description: Billing address state (e.g. CA).
+          example: CA
+        postalCode:
+          type: string
+          description: Billing address postal code (e.g. 90028).
+          example: 90028
+        country:
+          type: string
+          description: Billing address country (e.g. USA).
+          example: USA
+    OrderO:
+      title: Order
+      type: object
+      required:
+      - orderID
+      - purchaseDate
+      - cID
+      properties:
+        orderID:
+          description: Unique identifier for Order
+          type: string
+        cID:
+          description: Contact ID
+          type: string
+        linkID:
+          description: Link ID
+          type: string
+        status:
+          description: Order Status
+          type: string
+        mcID:
+          description: Messagecontact ID
+          type: string
+        storeID:
+          description: Store ID
+          type: string
+        customerID:
+          type: integer
+        purchaseDate:
+          type: string
+          format: datetime
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddressO'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddressO'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemsO'
+        discountApplication:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - fixed
+            amount:
+              type: number
+              format: float
+        tax:
+          type: integer
+        shippingAndHandling:
+          type: string
+        properties:
+          type: object
+    OrderOWithSuppress:
+      title: Order
+      type: object
+      required:
+      - orderID
+      - purchaseDate
+      - cID
+      properties:
+        orderID:
+          description: Unique order identifier.
+          type: string
+          example: '33451'
+        cID:
+          description: Cordial database contact ID (cID) value.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        linkID:
+          description: Cordial ID that represents the specific message and link (e.g. 45:55....aef:1). Required to track revenue attribution to a specific link.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        status:
+          description: Order status.
+          type: string
+        mcID:
+          description: Message contact ID (mcID). Represents the Cordial account, specific contact, and the specific message (e.g. 45:55....aef:1). Required to track revenue attribution.
+          type: string
+          example: 1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1
+        storeID:
+          description: Store ID.
+          type: string
+          example: abc123
+        customerID:
+          type: string
+          description: Customer ID. Typically a value assigned by the eCommerce or CRM platform (e.g. abc123).
+        purchaseDate:
+          type: string
+          format: date-time
+          description: Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddressO_2'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddressO_2'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemsO_2'
+        discountApplication:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - fixed
+            amount:
+              type: number
+              format: float
+        tax:
+          type: float
+          description: The amount of the tax
+          example: 22.5
+        shippingAndHandling:
+          type: number
+          description: The amount charged for shipping and handling.
+          example: 0.0
+        properties:
+          type: object
+          description: Key/value pairs describing the properties of the order.
+          example:
+            currency: USD
+        suppressTriggers:
+          type: boolean
+          example: false
+          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the order. Defaults to `false`.
+  responses:
+    OrdersFilterError:
+      description: Filter incorrect
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrdersFilterError'
+    OrderValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrderValidationError'
+    OrderNotFound:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrderNotFound'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
+x-refined-from:
+- cordial-v1-openapi-original.json
+- cordial-v2-openapi-original.json

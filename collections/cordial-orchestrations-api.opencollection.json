@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial Orchestrations API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "orchestrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/orchestrations/:orchestrationID",
+            "params": [
+              {
+                "name": "orchestrationID",
+                "value": "",
+                "type": "path",
+                "description": "Orchestration ID."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the specified orchestration. The orchestration record is defined by its unique `orchestrationID` value."
+        },
+        {
+          "info": {
+            "name": "Get orchestrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/orchestrations",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to include (can be many, comma-separated)."
+              },
+              {
+                "name": "ct[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Create date is greater than."
+              },
+              {
+                "name": "ct[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Create date is greater than or equal to."
+              },
+              {
+                "name": "ct[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Create date is less than."
+              },
+              {
+                "name": "ct[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Create date is less than or equal to."
+              },
+              {
+                "name": "lm[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date is greater than."
+              },
+              {
+                "name": "lm[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date is greater than or equal to."
+              },
+              {
+                "name": "lm[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date is less than."
+              },
+              {
+                "name": "lm[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date is less than or equal to."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Returns orchestrations that contain specified tags (can be many, comma-separated)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Specific page number to be returned."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number or records per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves orchestrations. Response data can be filtered using orchestration `tags` and `timestamp` values."
+        },
+        {
+          "info": {
+            "name": "Trigger an orchestration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/orchestrations/:orchestrationID/trigger",
+            "params": [
+              {
+                "name": "orchestrationID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the orchestration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Triggers an existing orchestration. The orchestration can be triggered for one or more contacts, as specified within the JSON body. This endpoint will successfully create a new contact record if the contact key value in the request does not already exist. The newly added contact will have a subscribe status of <b>none</b> and will not receive promotional messages until subscribed to the appropriate channel. If the contact key exists, data passed in the contact object will upsert corresponding co"
+        },
+        {
+          "info": {
+            "name": "Get list of orchestration actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/orchestrations/:orchestrationID/actions",
+            "params": [
+              {
+                "name": "orchestrationID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the orchestration."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns actions list of an orchestration"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

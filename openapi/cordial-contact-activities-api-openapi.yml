@@ -1,0 +1,403 @@
+openapi: 3.2.0
+info:
+  title: Cordial contact activities API
+  termsOfService: https://cordial.zendesk.com
+  version: '1.0'
+  description: 'Operations tagged contact activities across 2 of this provider''s published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: contact activities
+paths:
+  /v1/contactactivities:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get events
+      operationId: getActivityList
+      tags:
+      - contact activities
+      parameters:
+      - name: time
+        description: can be searched with modifiers (lt, gt, lte, gte, between.start, between.end)
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: action
+        description: can be click, open, send, or any user defined actions
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: email
+        description: search contact primary key
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: page
+        description: Number of page
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Count items on page
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: return_count
+        description: Return count of records
+        required: false
+        in: query
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
+          default: false
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ActivityActivityShow'
+        '404':
+          description: Record not found
+    post:
+      security:
+      - basicAuth: []
+      summary: Add a new event
+      operationId: addActivity
+      tags:
+      - contact activities
+      responses:
+        '201':
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityActivity'
+        description: Activity object that needs to be added to the system
+        required: true
+  /v2/contactactivities:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get events
+      description: Retrieves contact activities. Response data can be filtered for a specific contact using the `email` and `mcID` query string parameters.
+      operationId: getActivityList
+      tags:
+      - contact activities
+      parameters:
+      - name: time[lt]
+        description: Filter activities that occurred before this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: time[gt]
+        description: Filter activities that occurred after this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: time[lte]
+        description: Filter activities that occurred before or at this time (ISO 08601 format e.g. YYYY-MM-DDThh:mm:ss).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: time[gte]
+        description: Filter activities that occurred after or at this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: action
+        description: Filter by a specific event (e.g. click, open, send, or a custom-named event).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: email
+        description: Filter activities by contact email address value.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: mdtID
+        description: Filter activities by automation message delivery template ID (mdtID).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: mcID
+        description: Filter by message contact ID (mcID).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Number or records per page.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: return_count
+        description: Show the total count of records returned.
+        required: false
+        in: query
+        schema:
+          type: boolean
+          enum:
+          - true
+          - false
+          default: false
+      - name: contactFields
+        description: Specify additional contact attributes that should be added in each event.
+        required: false
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ActivityActivityShow_2'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+        '422':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactActivityError'
+    post:
+      security:
+      - basicAuth: []
+      summary: Add a new event
+      description: Creates a new contact activity using the appropriate JSON body.
+      operationId: addActivity
+      tags:
+      - contact activities
+      responses:
+        '201':
+          description: successful operation
+        '400':
+          $ref: '#/components/responses/AttributeErrorOrValidationErrors'
+        '401':
+          $ref: '#/components/responses/AuthenticationFailure'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityActivity_2'
+        description: Activity object that needs to be added.
+        required: true
+components:
+  schemas:
+    validationErrors:
+      required:
+      - validationErrors
+      properties:
+        validationErrors:
+          type: object
+          description: Object with validation error explanation for each field from payload.
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    ActivityActivityShow_2:
+      title: Activity
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          description: Can be click, open, send, or any user-defined actions.
+        cID:
+          type: string
+          description: Contact ID
+        time:
+          type: string
+          format: dateTime
+        mcID:
+          type: string
+        bmID:
+          type: string
+        first:
+          type: integer
+        properties:
+          type: object
+    ActivityActivityShow:
+      title: Activity
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          description: can be click, open, send, or any user defined actions
+        cID:
+          type: string
+          description: Primary key for the contact
+        time:
+          type: string
+          format: dateTime
+        mcID:
+          type: string
+        bmID:
+          type: string
+        first:
+          type: integer
+        properties:
+          type: object
+    PropertiesActivity:
+      title: Properties
+      type: object
+      properties: {}
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    ActivityActivity:
+      title: Activity
+      type: object
+      required:
+      - a
+      - <primaryKey>
+      properties:
+        a:
+          type: string
+          description: can be click, open, send, or any user defined actions
+        UID:
+          type: string
+          description: unique identifier of the event
+        <primaryKey>:
+          type: string
+          description: Primary key for the contact
+        ats:
+          type: string
+          format: If provided must be in ISO 8601 format
+        properties:
+          $ref: '#/components/schemas/PropertiesActivity'
+    ContactActivityError:
+      title: Invalid request
+      required:
+      - messages
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Data Automation does not exist.
+          description: 'Possible errors: [''too many parameters'',''Contact doesn''t exist'']'
+    AttributeErrorOrValidationErrors:
+      title: Attribute Error Or Validation Errors
+      required:
+      - error
+      - errorKey
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Key must be unique
+          description: 'Message with error explanation. Possible errors: [''Name must be unique'', ''invalid field type'', ''You can not change type'']'
+        messages:
+          type: object
+          $ref: '#/components/schemas/validationErrors'
+    ActivityActivity_2:
+      title: Activity
+      type: object
+      required:
+      - a
+      - primaryKey
+      properties:
+        a:
+          type: string
+          description: 'Defines the custom action to be created such as browse, order, cart, or any other custom action. The maximum length of the parameter is 40 characters. Note: system reserved actions cannot be created via the POST method.'
+        UID:
+          type: string
+          description: Optional unique event identifier.
+        primaryKey:
+          type: string
+          description: 'Contact identifier key/value pair to determine the contact record with which to associate the action. Use the "identifierKey":"identifierValue" format (e.g. "cID": "58d2fc99ac0c8117814d4e78", "email": "msmith@example.com", "custID": "ID1234").'
+        ats:
+          type: string
+          description: Action timestamp. If not specified, the current date and time will be used (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+          example: '2024-05-03T00:00:00'
+        properties:
+          type: object
+          description: 'An object of additional event attributes (e.g. {"propertyOne": 1, "propertyTwo": 2}. Note that property keys consisting of numeric-only values (e.g. 57) or keys containing a "dot" (e.g. shoes.color) will be stripped.'
+          example:
+            key: value
+  responses:
+    AuthenticationFailure:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationFailed'
+    AttributeErrorOrValidationErrors:
+      description: Attribute Error Or Validation Errors
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttributeErrorOrValidationErrors'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
+x-refined-from:
+- cordial-v1-openapi-original.json
+- cordial-v2-openapi-original.json

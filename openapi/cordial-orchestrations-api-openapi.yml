@@ -1,0 +1,405 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Cordial API documentation! This interactive API documentation allows you to test API calls from the Swagger interface. Authenticate yourself with the API key from your Cordial account and then make API calls. Keep in mind that testing in Swagger will directly affect your production data.
+  version: 2.0.0
+  title: Cordial Orchestrations API
+  termsOfService: https://cordial.zendesk.com
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: orchestrations
+paths:
+  /v2/orchestrations/{orchestrationID}:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single orchestration
+      description: Retrieves the specified orchestration. The orchestration record is defined by its unique `orchestrationID` value.
+      operationId: getOrchestration
+      tags:
+      - orchestrations
+      parameters:
+      - name: orchestrationID
+        description: Orchestration ID.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Orchestration'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/orchestrations:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get orchestrations
+      description: Retrieves orchestrations. Response data can be filtered using orchestration `tags` and `timestamp` values.
+      operationId: getOrchestrations
+      tags:
+      - orchestrations
+      parameters:
+      - name: fields
+        description: Fields to include (can be many, comma-separated).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[gt]
+        description: Create date is greater than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[gte]
+        description: Create date is greater than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[lt]
+        description: Create date is less than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[lte]
+        description: Create date is less than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: lm[gt]
+        description: Last modified date is greater than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: lm[gte]
+        description: Last modified date is greater than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: lm[lt]
+        description: Last modified date is less than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: lm[lte]
+        description: Last modified date is less than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: tags
+        required: false
+        in: query
+        description: Returns orchestrations that contain specified tags (can be many, comma-separated).
+        schema:
+          type: string
+      - name: page
+        description: Specific page number to be returned.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Number or records per page.
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Orchestration'
+  /v2/orchestrations/{orchestrationID}/trigger:
+    post:
+      security:
+      - basicAuth: []
+      summary: Trigger an orchestration
+      description: Triggers an existing orchestration. The orchestration can be triggered for one or more contacts, as specified within the JSON body. This endpoint will successfully create a new contact record if the contact key value in the request does not already exist. The newly added contact will have a subscribe status of <b>none</b> and will not receive promotional messages until subscribed to the appropriate channel. If the contact key exists, data passed in the contact object will upsert corresponding contact attributes in the Cordial database.
+      operationId: triggerOrchestration
+      tags:
+      - orchestrations
+      parameters:
+      - name: orchestrationID
+        description: Unique identifier for the orchestration.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerOrchestrationSuccessResponse'
+        '422':
+          description: Failed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TriggerOrchestrationFailureResponse'
+        '401':
+          $ref: '#/components/responses/AuthenticationFailure'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TriggerOrchestrationRequestBody'
+        description: One or more `contact` objects along with any external variables that will render content in the message.
+        required: true
+  /v2/orchestrations/{orchestrationID}/actions:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get list of orchestration actions
+      description: Returns actions list of an orchestration
+      operationId: orchestrationActions
+      tags:
+      - orchestrations
+      parameters:
+      - name: orchestrationID
+        description: Unique identifier for the orchestration.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionsOrchestrationSuccessResponse'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+        '401':
+          $ref: '#/components/responses/AuthenticationFailure'
+components:
+  schemas:
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    PodiumForPayload:
+      title: For
+      type: object
+      required:
+      - contact
+      properties:
+        contact:
+          $ref: '#/components/schemas/ContactAuto'
+        extVars:
+          $ref: '#/components/schemas/extVarsPodium'
+    TriggerOrchestrationSuccessResponse:
+      title: Response
+      type: object
+      required:
+      - success
+      - message
+      - triggered
+      - failures
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+          example: Orchestration API trigger successfully processed
+        triggered:
+          type: array
+          items:
+            $ref: '#/components/schemas/PodiumTriggerSuccess'
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/PodiumTriggerFailure'
+    PodiumTriggerSuccess:
+      title: Payload
+      type: object
+      required:
+      - triggered
+      - contact
+      properties:
+        triggered:
+          $ref: '#/components/schemas/PodiumTriggerResponseTriggeredValue'
+        contact:
+          $ref: '#/components/schemas/ContactAuto'
+    ActionsOrchestrationSuccessResponse:
+      title: ActionsOrchestrationSuccess
+      required:
+      - label
+      - id
+      - type
+      - templateKey
+      - currentContentKey
+      type: object
+      properties:
+        label:
+          type: string
+          example: Action one
+        id:
+          type: string
+          example: 68f884e1f87b09aa645cbe9b
+        type:
+          type: string
+          example: Message
+          description: An action is a message or a transformation template
+        templateKey:
+          type: string
+          example: sometemplatekey
+          description: Automation template or data automation key value.
+        currentContentKey:
+          type: string
+          example: 6ef675eb444c55d554a6b354f89af4b0
+          description: Content key of current published version.
+    TriggerOrchestrationFailureResponse:
+      title: Response
+      type: object
+      required:
+      - error
+      - errorKey
+      properties:
+        errors:
+          type: object
+          example:
+            for:
+            - The for field is required
+        error:
+          type: boolean
+        errorKey:
+          type: string
+          enum:
+          - VALIDATION_ERROR
+          - ORCHESTRATIONS_ORCHESTRATION_NOT_FOUND
+          - ORCHESTRATIONS_ORCHESTRATION_NOT_PUBLISHED
+          - ORCHESTRATIONS_ORCHESTRATION_IS_DISABLED
+          - ORCHESTRATIONS_API_TRIGGER_NOT_CONFIGURED
+          - ORCHESTRATIONS_API_INVALID_CONTACTS_PAYLOAD
+          - ORCHESTRATIONS_API_NO_VALID_CONTACTS_FOUND
+    extVarsPodium:
+      title: extVars
+      type: object
+      description: 'Using the `extVars` object, any number of external variables may be added. These values are then made available for all initial actions in the orchestration. For example, if `"extVars": {"orderID":"o1234"}` is included in the request body, then within the message it can be accessed as `{$extVars.triggerData.orderID}`. `extVars` defined within a <b>PodiumForPayload</b> are merged with `extVars` defined at the root of the request body.'
+      properties:
+        key:
+          type: string
+          description: 'Using the `extVars` object, any number of external variables may be added. These values are then made available for all initial actions in the orchestration. For example, if `"extVars": {"orderID":"o1234"}` is included in the request body, then within the message it can be accessed as `{$extVars.triggerData.orderID}`. `extVars` defined within a PodiumForPayload are merged with `extVars` defined at the root of the request body'
+    IdentifyBy:
+      title: IdentifyBy
+      type: array
+      items:
+        type: string
+      description: Specifies which identifier key in the request body should be used to look up the contact (e.g. cID, email, custID). Accepts a string or an array of strings in descending priority order. Because contact attribute data sent in the `contact` object of the call will upsert corresponding contact attributes in Cordial, `identifyBy` should be used to specify which key serves as the contact identifier and should not be upserted.
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    TriggerOrchestrationRequestBody:
+      title: Request Body
+      type: object
+      required:
+      - for
+      properties:
+        for:
+          title: For
+          type: array
+          items:
+            $ref: '#/components/schemas/PodiumForPayload'
+        identifyBy:
+          $ref: '#/components/schemas/IdentifyBy'
+        extVars:
+          $ref: '#/components/schemas/extVarsPodium'
+    ContactAuto:
+      title: Contact
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          description: 'Contact identifier key/value pair. Use the "identifierKey": "identifierValue" format (e.g. "cID": "58d2fc99ac0c8117814d4e78", "email": "msmith@example.com", "custID": "ID1234").'
+    PodiumTriggerFailure:
+      title: Payload
+      type: object
+      required:
+      - triggered
+      - payload
+      - error
+      properties:
+        triggered:
+          $ref: '#/components/schemas/PodiumTriggerResponseTriggeredValue'
+          example: false
+        payload:
+          $ref: '#/components/schemas/PodiumForPayload'
+        error:
+          type: string
+    PodiumTriggerResponseTriggeredValue:
+      type: boolean
+      description: Indicates whether the orchestration was successfully triggered for the given payload.
+    Orchestration:
+      title: Orchestration
+      type: object
+      required:
+      - _id
+      - name
+      - status
+      - composition
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        status:
+          type: boolean
+        composition:
+          type: object
+  responses:
+    AuthenticationFailure:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationFailed'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS

@@ -1,0 +1,686 @@
+openapi: 3.2.0
+info:
+  title: Cordial Jobs API
+  termsOfService: https://cordial.zendesk.com
+  version: '1.0'
+  description: 'Operations tagged jobs across 2 of this provider''s published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: jobs
+paths:
+  /v1/jobs/{id}:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single job
+      operationId: getsinglejob
+      tags:
+      - jobs
+      parameters:
+      - name: id
+        description: Job id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobJ'
+        '404':
+          description: record not found
+  /v1/jobs:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get jobs list
+      operationId: getjobs
+      tags:
+      - jobs
+      parameters:
+      - name: jobName
+        description: Name given to the job
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[start][gt]
+        description: 'Start Time greater '
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[start][gte]
+        description: Start Time greater or equal
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[start][lt]
+        description: Start Time less
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[start][lte]
+        description: Start Time less or equal
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[end][gt]
+        description: 'End Time greater '
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[end][gte]
+        description: End Time greater or equal
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[end][lt]
+        description: End Time less
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[end][lte]
+        description: End Time less or equal
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: status
+        description: Active status for job
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - Scheduled
+          - Pending
+          - Processing
+          - Throttled
+          - Failed
+          - Done
+      - name: page
+        description: Number of page
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Count items on page
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobJ'
+        '404':
+          description: record not found
+  /v2/jobs/{id}:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single job
+      description: Retrieves the specified job record from the Cordial database. The job record is defined by its unique `id` value. For example, /jobs/548817d0367df1ef518b4567 would return the response data for the job with the id of <b>548817d0367df1ef518b4567</b>.
+      operationId: getsinglejob
+      tags:
+      - jobs
+      parameters:
+      - name: id
+        description: Unique job id.
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: fields
+        description: Fields to include (can be many, comma-separated).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: include
+        description: 'Comma-separated list of optional related resources to attach to the response. Supported values: `statistic` (only meaningful for data automation jobs: `DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration` — adds the `run` and `statistic` blocks with the data automation run''s normalized status, start/end times, and full aggregation counters).'
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - statistic
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobJ_2'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/jobs:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get jobs
+      description: Retrieves all jobs from the Cordial database. Response data can be filtered by job name, job start/end time and job status.
+      operationId: getjobs
+      tags:
+      - jobs
+      parameters:
+      - name: jobName
+        description: Name given to the job. Job names are assigned automatically based on the API initiating the job. For example, contactimports will assign the value of <b>ImportContacts</b> to the `jobName`.
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - ImportContacts
+          - SendBatchMessage
+          - ExportContacts
+          - ImportSupplements
+          - ImportIntegrationSupplements
+          - AudienceSplit
+          - ExportEvents
+          - DeleteContacts
+          - DeleteAudience
+          - SendFbCustomAudienceJob
+          - ExportMessageAnalytics
+          - DeleteContact
+          - ExportContactProfile
+          - ExportBlocks
+          - ImportBlocks
+          - ImportSculptTemplates
+          - ExportSculptTemplates
+          - DataAutomationProcessAudience
+          - DataAutomationProcessList
+          - ExportDataAutomationLog
+          - ExportDataTransformationRecords
+          - ImportOrders
+          - DataAutomationUpdateIntegration
+          - ExportClientsLogs
+      - name: times[start][gt]
+        description: Start time is greater than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[start][gte]
+        description: Start time is greater than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[start][lt]
+        description: Start time is less than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[start][lte]
+        description: Start time is less than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[end][gt]
+        description: End time is greater than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[end][gte]
+        description: End time is greater than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[end][lt]
+        description: End time is less than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: times[end][lte]
+        description: End time is less than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: status
+        description: The current job status.
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - Scheduled
+          - Pending
+          - Processing
+          - Throttled
+          - Failed
+          - Done
+      - name: page
+        description: Specific page number to be returned.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Number of records per page. When `include=statistic` is requested, `per_page` must not exceed 25; a larger value returns a 400 error.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: include
+        description: 'Comma-separated list of optional related resources to attach to each job in the response. Supported values: `statistic` (only meaningful for data automation jobs: `DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration` — adds the `run` and `statistic` blocks with the data automation run''s normalized status, start/end times, and full aggregation counters). Note: requesting `statistic` is a heavy operation, so the page size is capped at 25 — `per_page` values above 25 are rejected with a 400 error.'
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - statistic
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobJ_2'
+        '400':
+          $ref: '#/components/responses/JobsStatisticPerPageError'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+        '422':
+          $ref: '#/components/responses/JobsFilterError'
+components:
+  schemas:
+    JobRunJ:
+      title: JobRun
+      type: object
+      description: Status and timing of the underlying data automation run. Maps internal `dataautomationbatch` statuses to a normalized vocabulary.
+      properties:
+        status:
+          type: string
+          description: Normalized run status.
+          enum:
+          - completed
+          - failed
+          - cancelled
+          - processing
+          - pending
+          - draft
+          - unknown
+        startedAt:
+          type: string
+          format: date-time
+          description: Timestamp the run started.
+        endedAt:
+          type: string
+          format: date-time
+          description: Timestamp the run ended. Null when still in progress.
+    JobsFilterError:
+      title: Filter incorrect
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Time value is incorrect
+    ResultJ_2:
+      title: Result
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+          example: 50
+          description: Total amount of processed records.
+        updated:
+          type: integer
+          format: int64
+          example: 50
+          description: Amount of updated records.
+        rejected:
+          type: integer
+          format: int64
+          example: 50
+          description: Amount of rejected records from insert/update.
+        inserted:
+          type: integer
+          format: int64
+          example: 50
+          description: Amount of inserted records.
+        error:
+          type: integer
+          format: int64
+          example: 50
+          description: Amount of records that provide error because of 'Unique constraint error'.
+        ignored:
+          type: integer
+          format: int64
+          example: 50
+          description: Amount of ignored records because of strategy config, etc.
+    JobsStatisticPerPageError:
+      title: per_page limit exceeded for include=statistic
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: JOBS_STATISTIC_PER_PAGE_EXCEEDED
+        message:
+          type: string
+          example: When include=statistic is requested, per_page must not exceed 25.
+    JobJ:
+      title: Job
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Scheduled
+          - Pending
+          - Processing
+          - Failed
+          - Done
+        jobName:
+          type: string
+        totalItems:
+          type: integer
+          format: int64
+        completedItems:
+          type: integer
+          format: int64
+        times:
+          $ref: '#/components/schemas/TimesJ'
+        result:
+          $ref: '#/components/schemas/ResultJ'
+    TimesJ:
+      title: Times
+      type: object
+      properties:
+        start:
+          type: string
+          format: datetime
+        end:
+          type: string
+          format: datetime
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    ResultJ:
+      title: Result
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+        duplicateRecords:
+          type: integer
+          format: int64
+        invalidRecords:
+          type: integer
+          format: int64
+        newRecords:
+          type: integer
+          format: int64
+    JobStatisticJ:
+      title: JobStatistic
+      type: object
+      description: Aggregated counters for the data automation run. Counter keys vary based on what the run produced. The full counter set is returned plus a derived `perRecord` map normalized by `total_processed`.
+      properties:
+        total_queued:
+          type: integer
+          format: int64
+          example: 1014296
+          description: Records queued for the run.
+        total_processed:
+          type: integer
+          format: int64
+          example: 1014296
+          description: Records processed.
+        total_successful:
+          type: integer
+          format: int64
+          example: 1014296
+          description: Records processed successfully.
+        total_failures:
+          type: integer
+          format: int64
+          example: 0
+          description: Records that failed processing.
+        total_executed:
+          type: integer
+          format: int64
+          description: Total operations executed.
+        total_messages_sent:
+          type: integer
+          format: int64
+          description: Messages sent during the run.
+        total_contacts_inserted:
+          type: integer
+          format: int64
+          description: Contacts created.
+        total_contacts_updated:
+          type: integer
+          format: int64
+          description: Contacts updated.
+        total_orders_inserted:
+          type: integer
+          format: int64
+        total_orders_updated:
+          type: integer
+          format: int64
+        total_products_inserted:
+          type: integer
+          format: int64
+        total_products_updated:
+          type: integer
+          format: int64
+        total_supplements_inserted:
+          type: integer
+          format: int64
+        total_supplements_updated:
+          type: integer
+          format: int64
+        total_events_inserted:
+          type: integer
+          format: int64
+        total_records_inserted:
+          type: integer
+          format: int64
+        total_exported:
+          type: integer
+          format: int64
+        perRecord:
+          type: object
+          description: Each numeric counter divided by `total_processed`, expressed as a per-record ratio. Empty when `total_processed` is 0.
+          additionalProperties:
+            type: number
+            format: float
+          example:
+            total_successful: 1
+            total_failures: 0
+            total_messages_sent: 1
+    TimesJ_2:
+      title: Times
+      type: object
+      properties:
+        start:
+          type: string
+          format: date-time
+          description: Time when job starts execution.
+        end:
+          type: string
+          format: date-time
+          description: Time when job ends execution.
+    JobJ_2:
+      title: Job
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Scheduled
+          - Pending
+          - Processing
+          - Failed
+          - Done
+        jobName:
+          type: string
+          description: Job name for current job.
+          example: ImportContacts
+        totalItems:
+          type: integer
+          format: int64
+          example: 1000
+          description: Amount of records/contacts that should be processed.
+        completedItems:
+          type: integer
+          format: int64
+          example: 1000
+          description: Amount of records/contacts that processed.
+        times:
+          $ref: '#/components/schemas/TimesJ_2'
+        result:
+          $ref: '#/components/schemas/ResultJ_2'
+        metadata:
+          $ref: '#/components/schemas/JobMetadataJ'
+        run:
+          $ref: '#/components/schemas/JobRunJ'
+          description: Returned only for data automation jobs (`DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration`) when `include=statistic` is requested.
+        statistic:
+          $ref: '#/components/schemas/JobStatisticJ'
+          description: Returned only for data automation jobs (`DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration`) when `include=statistic` is requested. Null when no aggregated counters exist for the run.
+    JobMetadataJ:
+      title: JobMetadata
+      type: object
+      description: Job-type-specific identifiers and parameters lifted from the underlying job payload. Fields present depend on the job type.
+      properties:
+        msID:
+          type: string
+          description: Message send ID.
+        dabID:
+          type: string
+          description: Data automation batch (run) ID. Present for data automation jobs (`DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration`).
+        daID:
+          type: string
+          description: Data automation ID.
+        cID:
+          type: string
+          description: Campaign ID.
+        compositionID:
+          type: string
+          description: Composition ID.
+        orchestrationID:
+          type: string
+          description: Orchestration ID.
+        contactID:
+          type: string
+          description: Contact ID.
+        tzOffset:
+          type: integer
+          description: Timezone offset for the run.
+        messageSendDataName:
+          type: string
+        messageSendDataCompositionID:
+          type: string
+        messageSendDataOrchestrationID:
+          type: string
+        name:
+          type: string
+        mdtID:
+          type: string
+        exportType:
+          type: string
+        lists:
+          type: array
+          items:
+            type: string
+        fileName:
+          type: string
+        filename:
+          type: string
+        importName:
+          type: string
+        ids:
+          type: array
+          items:
+            type: string
+        key:
+          type: string
+        taskID:
+          type: string
+        parentJobId:
+          type: string
+  responses:
+    JobsStatisticPerPageError:
+      description: per_page exceeds the limit allowed when include=statistic is requested
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JobsStatisticPerPageError'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    JobsFilterError:
+      description: Filter incorrect
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JobsFilterError'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
+x-refined-from:
+- cordial-v1-openapi-original.json
+- cordial-v2-openapi-original.json

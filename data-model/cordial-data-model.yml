@@ -1,6 +1,6 @@
 generated: '2026-08-04'
 method: derived
-source: openapi/cordial-v2-openapi-original.json
+source: openapi/_original/cordial-v2-openapi-original.json
 docs: https://support.cordial.com/hc/en-us/articles/360001897772-Get-started-for-developers
 note: >-
   Derived from the 212 schema definitions and 106 operations of the published v2 Swagger document, and

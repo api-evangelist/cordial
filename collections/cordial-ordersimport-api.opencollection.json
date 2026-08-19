@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial Ordersimport API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ordersimport",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an order import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/ordersimport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create an order import job"
+        },
+        {
+          "info": {
+            "name": "Create an order import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/ordersimport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates an import job to batch load a file of orders into the Cordial database from an external location. Only JSONL file type is permissible for imports using this API endpoint. Compared to CSV, JSONL file format allows for greater flexibility when working with large sets of multi-layered data, making it ideal for importing order data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

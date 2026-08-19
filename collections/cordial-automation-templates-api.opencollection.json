@@ -1,0 +1,766 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial automation templates API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "automation templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/automationtemplates/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Template Key"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields (can be many, separate by comma)"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a single automation template"
+        },
+        {
+          "info": {
+            "name": "Update a single automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/automationtemplates/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Template Key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a single automation template"
+        },
+        {
+          "info": {
+            "name": "Delete an automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v1/automationtemplates/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Delivery template key"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete an automation template"
+        },
+        {
+          "info": {
+            "name": "Get automation templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/automationtemplates",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields (can be many, separate by comma)"
+              },
+              {
+                "name": "ct[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Create date greater "
+              },
+              {
+                "name": "ct[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Create date greater or equal"
+              },
+              {
+                "name": "ct[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Create date less"
+              },
+              {
+                "name": "ct[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Create date less or equal"
+              },
+              {
+                "name": "lm[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date greater "
+              },
+              {
+                "name": "lm[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date greater or equal"
+              },
+              {
+                "name": "lm[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date less"
+              },
+              {
+                "name": "lm[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date less or equal"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Message tags (can be many, separate by comma)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Number of page"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Count templates on page"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get automation templates"
+        },
+        {
+          "info": {
+            "name": "Add a new automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/automationtemplates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a new automation template"
+        },
+        {
+          "info": {
+            "name": "Send a batch message from an automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/automationtemplates/:key/send",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Delivery template key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Send a batch message from an automation template"
+        },
+        {
+          "info": {
+            "name": "Send a draft message of an automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/automationtemplates/:key/senddraft",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Delivery template key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Send a draft message of an automation template"
+        },
+        {
+          "info": {
+            "name": "Publish a single automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/automationtemplates/:key/publish",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Delivery template key"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Publish a single automation template"
+        },
+        {
+          "info": {
+            "name": "Render draft content of a single automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/automationtemplates/:key/renderdraft/:contactID",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Delivery template key"
+              },
+              {
+                "name": "contactID",
+                "value": "",
+                "type": "path",
+                "description": "Contact ID"
+              },
+              {
+                "name": "experiment",
+                "value": "",
+                "type": "query",
+                "description": "Name of experiment "
+              },
+              {
+                "name": "variant",
+                "value": "",
+                "type": "query",
+                "description": "Variant name"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Render draft content of a single automation template"
+        },
+        {
+          "info": {
+            "name": "Render published content of a single automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/automationtemplates/:key/renderpublished/:contactID",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Delivery template key"
+              },
+              {
+                "name": "contactID",
+                "value": "",
+                "type": "path",
+                "description": "Contact ID"
+              },
+              {
+                "name": "experiment",
+                "value": "",
+                "type": "query",
+                "description": "Name of experiment "
+              },
+              {
+                "name": "variant",
+                "value": "",
+                "type": "query",
+                "description": "Variant name"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Render published content of a single automation template"
+        },
+        {
+          "info": {
+            "name": "Get a single automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/automationtemplates/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Automation template key value."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to include (can be many, comma-separated)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the specified automation template. The automation template record is defined by its unique `key` value."
+        },
+        {
+          "info": {
+            "name": "Update an automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/automationtemplates/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Automation template key value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates automation template fields. The automation template record is defined by its unique `key` value. For example, /automationtemplates/promo_01_20_2018 allows the template with the key value of <b>promo_01_20_2018</b> to be updated using the appropriate JSON body."
+        },
+        {
+          "info": {
+            "name": "Delete an automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v2/automationtemplates/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Automation template key value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes an existing automation template. The automation template is defined by its unique `key` value. For example, /automationtemplate/newsletter_week1 would delete the template with the key value of <b>newsletter_week1</b>."
+        },
+        {
+          "info": {
+            "name": "Get automation templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/automationtemplates",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to include (can be many, comma-separated)."
+              },
+              {
+                "name": "ct[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Create date is greater than."
+              },
+              {
+                "name": "ct[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Create date is greater than or equal to."
+              },
+              {
+                "name": "ct[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Create date is less than."
+              },
+              {
+                "name": "ct[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Create date is less than or equal to."
+              },
+              {
+                "name": "lm[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date is greater than."
+              },
+              {
+                "name": "lm[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date is greater than or equal to."
+              },
+              {
+                "name": "lm[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date is less than."
+              },
+              {
+                "name": "lm[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Last modified date is less than or equal to."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Returns automation templates that contain specified message tags (can be many, comma-separated)."
+              },
+              {
+                "name": "orchestrationID",
+                "value": "",
+                "type": "query",
+                "description": "Returns automation templates tied to specified orchestration."
+              },
+              {
+                "name": "compositionID",
+                "value": "",
+                "type": "query",
+                "description": "Returns automation templates tied to specific version of orchestration."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Specific page number to be returned."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number or records per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves automation templates. Response data can be filtered using template `fields`, message `tags`, and `timestamp` values."
+        },
+        {
+          "info": {
+            "name": "Add a new automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/automationtemplates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a new automation template using the appropriate JSON body. Posting more than once for the same template key will generate an error. Use the PUT method to change or update fields once the template is created."
+        },
+        {
+          "info": {
+            "name": "Send a batch message from an automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/automationtemplates/:key/send",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Automation template key value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Sends an existing automation template. The template can be sent to one or more contacts, as specified within the JSON body. This endpoint will successfully create a new contact record if the contact key value in the request does not already exist. The newly added contact will have a subscribe status of <b>none</b> and will not receive promotional messages until subscribed to the appropriate channel. If the contact key exists, data passed in the contact object will upsert corresponding contact at"
+        },
+        {
+          "info": {
+            "name": "Send a draft message of an automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/automationtemplates/:key/senddraft",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Automation template key value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Sends an existing automation template draft for testing purposes. For example, /automationtemplates/promo_01_20_2018/senddraft allows the draft automation template with the key value of <b>promo_01_20_2018</b> to be sent using the appropriate JSON body. The template can be sent to one or more contacts, as specified within the JSON body."
+        },
+        {
+          "info": {
+            "name": "Publish a single automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/automationtemplates/:key/publish",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Automation template key value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Publishes an existing automation template draft. The automation template record is defined by its unique `key` value."
+        },
+        {
+          "info": {
+            "name": "Render draft content of a single automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/automationtemplates/:key/renderdraft/:contactID",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Automation template key value."
+              },
+              {
+                "name": "contactID",
+                "value": "",
+                "type": "path",
+                "description": "Cordial database contact ID (cID) value."
+              },
+              {
+                "name": "experiment",
+                "value": "",
+                "type": "query",
+                "description": "Returns the automation template that contains the specified experiment name. Variant is required if experiment is specified."
+              },
+              {
+                "name": "variant",
+                "value": "",
+                "type": "query",
+                "description": "Returns the automation template that contains the specified experiment variant. Experiment is required if variant is specified."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the message headers, the rendered HTML, and experiment name and variants of an automated template draft for a specified contact. Additionally, experiment names and variants can be passed using a query string."
+        },
+        {
+          "info": {
+            "name": "Render published content of a single automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/automationtemplates/:key/renderpublished/:contactID",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Automation template key value."
+              },
+              {
+                "name": "contactID",
+                "value": "",
+                "type": "path",
+                "description": "Cordial database contact ID (cID) value."
+              },
+              {
+                "name": "experiment",
+                "value": "",
+                "type": "query",
+                "description": "Returns the automation template that contains the specified experiment name. Variant is required if experiment is specified."
+              },
+              {
+                "name": "variant",
+                "value": "",
+                "type": "query",
+                "description": "Returns the automation template that contains the specified experiment variant. Experiment is required if variant is specified."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the message headers, the rendered HTML, and experiment name and variants of a published automated template for a specified contact. Additionally, experiment names and variants can be passed using a query string."
+        },
+        {
+          "info": {
+            "name": "Get experiment performance for the published version of a single automation template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/automationtemplates/:key/experimentperformance",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Automation template key value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves experiment performance for the published version of a single automation template. The automation template record is defined by its unique template `key` value."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

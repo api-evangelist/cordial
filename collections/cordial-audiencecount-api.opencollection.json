@@ -1,0 +1,38 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial Audiencecount API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "audiencecount",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Post audience object to get count",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/audiencecount",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Return count of contacts using the appropriate audience JSON body."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,744 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial Supplements API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "supplements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/supplements/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Key for attribute"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields (can be many, separate by comma)"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a single supplement"
+        },
+        {
+          "info": {
+            "name": "Update a single supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/supplements/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Key for attribute"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a single supplement"
+        },
+        {
+          "info": {
+            "name": "Delete supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v1/supplements/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Supplement key"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete supplement"
+        },
+        {
+          "info": {
+            "name": "Get supplements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/supplements",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Number of page"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Count supplements on page"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get supplements"
+        },
+        {
+          "info": {
+            "name": "Add a new supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/supplements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a new supplement"
+        },
+        {
+          "info": {
+            "name": "Clear a single supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/supplements/:supplement/clear",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement Key"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Clear a single supplement"
+        },
+        {
+          "info": {
+            "name": "Get records from a supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/supplements/:supplement/records",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement Key"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields (can be many, separate by comma)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Number of page"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Count supplements on page"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort field"
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get records from a supplement"
+        },
+        {
+          "info": {
+            "name": "Add records to a supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/supplements/:supplement/records",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement Key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add records to a supplement"
+        },
+        {
+          "info": {
+            "name": "Get a single supplement record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/supplements/:supplement/records/:id",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement Key"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Record ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a single supplement record"
+        },
+        {
+          "info": {
+            "name": "Update a single supplement record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/supplements/:supplement/records/:id",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement Key"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Record ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a single supplement record"
+        },
+        {
+          "info": {
+            "name": "Delete a single supplement record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v1/supplements/:supplement/records/:id",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement Key"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Record ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a single supplement record"
+        },
+        {
+          "info": {
+            "name": "Add a new job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/supplements/:supplement/imports",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement Key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a new job"
+        },
+        {
+          "info": {
+            "name": "Get a single supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/supplements/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Supplement key value."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to include (can be many, comma-separated)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the specified supplement from the Cordial database. The supplement is defined by its unique `key` value. For example, /supplements/cars would return the response data for the supplement with the key of <b>cars</b>."
+        },
+        {
+          "info": {
+            "name": "Update a single supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/supplements/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Supplement key value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates a supplement in the Cordial database using the appropriate JSON body. The supplement is defined by its unique `key` value. For example, /supplements/cars would update the supplement with the key of <b>cars</b>."
+        },
+        {
+          "info": {
+            "name": "Delete supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v2/supplements/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Supplement key value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes a supplement collection from the Cordial database. The supplement is defined by its unique `key` value. For example, /supplements/cars would delete the supplement with the key value of <b>cars</b>."
+        },
+        {
+          "info": {
+            "name": "Get supplements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/supplements",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Specific page number to be returned."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number or records per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves all supplements from the Cordial database. When retrieving a large number of supplements, it is possible to apply the `per_page` and `page` query string parameters to limit the count returned along with page position."
+        },
+        {
+          "info": {
+            "name": "Add a supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/supplements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a new supplement in the Cordial database using the appropriate JSON body. Fields that will serve as search indexes need to be placed in the indexed array of fields. Additional non-indexed fields can be added in the JSON records, or by declaring the field as a column in an import file. These non-indexed fields are available for message content, but not available for searching or filtering via Smarty. Posting more than once for the same supplement key will generate an error."
+        },
+        {
+          "info": {
+            "name": "Clear a single supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/supplements/:supplement/clear",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement key value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates a supplement by clearing all previously added field values. Supplement name, key, and indexes will remain in the Cordial database and the supplement can be updated again with new values for the fields.\n\nThe supplement is defined by its unique `key` value. For example, /supplements/cars/clear would clear the field values in the supplement with a key of <b>cars</b>."
+        },
+        {
+          "info": {
+            "name": "Get records from a supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/supplements/:supplement/records",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement key value."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to include (can be many, comma-separated)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Specific page number to be returned."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number or records per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field by which results should be sorted."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "Direction to sort by. Works in conjunction with `sort_by` (e.g. asc, desc)."
+              },
+              {
+                "name": "return_count",
+                "value": "",
+                "type": "query",
+                "description": "Show the total count of records returned."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves all records within the specified supplement collection. The supplement is defined by its unique `key` value.\n\nFor example, /supplements/cars/records would return the response data for the supplement with the key value of <b>cars</b>."
+        },
+        {
+          "info": {
+            "name": "Add records to a supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/supplements/:supplement/records",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement key value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a new data record in the specified supplement collection using the appropriate JSON body. The record must include values for each of the indexed fields along with any other optional non-indexed fields of your choosing. The values provided for the indexed fields cannot be empty strings. Posting more than once for the same record `id` will update the existing data record."
+        },
+        {
+          "info": {
+            "name": "Get a single supplement record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/supplements/:supplement/records/:id",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement key value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique supplement record id."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves a record from the specified supplement collection. The supplement is defined by its unique `key` value and the supplement record is defined by its unique `id` value.\n\nFor example, /supplements/cars/records/33415 would return the response data for the record with the id value <b>33415</b> from the <b>cars</b> supplement collection."
+        },
+        {
+          "info": {
+            "name": "Update a single supplement record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/supplements/:supplement/records/:id",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement key value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique supplement record id."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates an existing data record in the specified supplement collection using the appropriate JSON body. The supplement is defined by its unique `key` value and the supplement record is defined by its unique `id` value.\n\nFor example, /supplements/cars/records/33415 would update the record with the id value <b>33415</b> within the <b>cars</b> supplement collection. It is possible to update any number of field values."
+        },
+        {
+          "info": {
+            "name": "Delete a single supplement record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v2/supplements/:supplement/records/:id",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement key value."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique supplement record id."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes a supplement record and its data from the specified supplement collection. The supplement is defined by its unique `key` value and the supplement record is defined by its unique `id` value.\n\nFor example, /supplements/cars/records/33415 would remove the record with the id value <b>33415</b> from the <b>cars</b> supplement collection."
+        },
+        {
+          "info": {
+            "name": "Create a supplement record import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/supplements/:supplement/imports",
+            "params": [
+              {
+                "name": "supplement",
+                "value": "",
+                "type": "path",
+                "description": "Supplement key value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a supplement record import job using the JSON body information. The import file must contain an `id` field that uniquely identifies each supplement data record. By default, importing records with an `id` that already exists will overwrite the existing data record.\n\nColumn headers can include one or more indexed fields along with any other optional non-indexed fields of your choosing.\n\nIf needed, an optional email confirmation can be sent to the specified email address when the job is don"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

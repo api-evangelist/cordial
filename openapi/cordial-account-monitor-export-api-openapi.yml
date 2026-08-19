@@ -1,0 +1,179 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Cordial API documentation! This interactive API documentation allows you to test API calls from the Swagger interface. Authenticate yourself with the API key from your Cordial account and then make API calls. Keep in mind that testing in Swagger will directly affect your production data.
+  version: 2.0.0
+  title: Cordial account monitor export API
+  termsOfService: https://cordial.zendesk.com
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: account monitor export
+paths:
+  /v2/accountmonitorexport:
+    post:
+      security:
+      - basicAuth: []
+      tags:
+      - account monitor export
+      summary: Export logs from your account monitor
+      description: ''
+      operationId: exportAccountMonitor
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountMonitorExportResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountMonitorExportError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceAccountMonitorExport'
+        description: JSON body information to create the export job.
+        required: true
+components:
+  schemas:
+    SourceAccountMonitorExport:
+      title: Source Account Monitor export
+      type: object
+      required:
+      - exportType
+      - name
+      - destination
+      - selected_timeframe_start
+      - selected_timeframe_end
+      properties:
+        name:
+          type: string
+          description: Defines the export file name. If provided, this value will be displayed next to the job ID on the Jobs status page.
+        destination:
+          description: This parameter is only required if SFTP, FTP, S3, or Google Cloud Storage (GCS) is used as the destination. Destination type "AWS" should be used if the file is to be downloaded via the UI.
+          $ref: '#/components/schemas/DestinationObject'
+        selected_timeframe_start:
+          type: string
+          format: date-time
+          description: Start time for the export time period (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        selected_timeframe_end:
+          type: string
+          format: date-time
+          description: End time for the export time period (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        selected_category:
+          type: string
+          description: 'Specifies the category to export. Possible values: API, Automated messages, Batch messages, Data Automation, Exports, Imports, Inbound, Jobs, JS Listener, System.'
+          example: API
+        selected_level:
+          type: string
+          description: 'Specifies the level to export. Possible values: Debug, Info, Warning, Error. If no value is passed, all levels will be exported. Possible values: Debug, Info, Warning, Error'
+          example: Error
+        limitRecordsPerFile:
+          type: integer
+          description: Defines the number of exported records per file. If no value is passed, all records that match the filters will be exported in one file. Default is `0`.
+          example: 1000
+        compress:
+          type: boolean
+          description: 'Compresses the exported file. If set to `true`, the file is compressed using GZIP with the file extension <b>.gz</b> added to the filename(s). Possible values: true, false.'
+        confirmEmail:
+          type: string
+          description: Email address to send an administrative alert when the job is done running.
+    AccountMonitorExportError:
+      title: AccountMonitorExportError
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Error validation message
+          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
+        fieldErrors:
+          type: object
+          $ref: '#/components/schemas/fieldErrorsInclude'
+          description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
+    AccountMonitorExportResponse:
+      title: ContactExports
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
+    DestinationObject:
+      title: Destination
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: 'Defines the destination type. Possible values: AWS (should be used if the file is to be downloaded via the Cordial UI), FTP, SFTP, S3, GCS, AZUREBLOB.'
+        aws_access_key_id:
+          type: string
+          description: Defines the public AWS access key ID. Required if destination is S3 and IAM role is not configured.
+        aws_secret_access_key:
+          type: string
+          description: Defines the secret AWS access key. Required if destination is S3 and IAM role is not configured.
+        aws_bucket:
+          type: string
+          description: Defines the AWS bucket name. Required if destination is S3.
+        aws_region:
+          type: string
+          description: Defines the AWS region (e.g. us-west-2). Required if destination is S3.
+        server:
+          type: string
+          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP destinations.
+          example: sftp.example.com
+        port:
+          type: integer
+          description: Defines the port number for the FTP or SFTP server (e.g. 22).
+          example: 22
+        username:
+          type: string
+          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        password:
+          type: string
+          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        savedKey:
+          type: string
+          description: SFTP public key authentication key `name` if using SFTP public key authentication instead of password.
+        path:
+          type: string
+          description: Path to folder where the export file will be stored. Required if destination is FTP, SFTP, S3, GCS, or AZUREBLOB.
+        gcs_bucket:
+          type: string
+          description: Defines the GCS bucket name. Required if destination is GCS.
+        account:
+          type: string
+          description: Defines the Azure Blob Storage account name. Required if destination is AZUREBLOB.
+        container:
+          type: string
+          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
+    fieldErrorsInclude:
+      type: object
+      required:
+      - fieldErrors
+      properties:
+        <field>:
+          type: array
+          items:
+            type: string
+            example: The destination field is required.
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS

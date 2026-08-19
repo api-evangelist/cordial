@@ -1,0 +1,4021 @@
+{
+  "item": [
+    {
+      "id": "3f84ec52-f2e9-497c-a7ea-47882e2d9a27",
+      "name": "automation templates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ed181895-a50d-408e-8a81-0649b140c062",
+          "name": "Get a single automation template",
+          "request": {
+            "name": "Get a single automation template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "automationtemplates",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields (can be many, separate by comma)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Template Key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "14544b6a-e6b3-4ca6-b20f-d1079ff6f522",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Template Key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountID\": \"string\",\n  \"key\": \"string\",\n  \"channel\": \"string\",\n  \"classification\": \"transactional\",\n  \"baseAggregation\": \"hourly\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"string\",\n      \"fromEmail\": \"string\",\n      \"fromDesc\": \"string\",\n      \"replyEmail\": \"string\"\n    },\n    \"content\": {\n      \"text/html\": \"string\"\n    }\n  },\n  \"transportID\": \"string\",\n  \"stats\": {},\n  \"priority\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8e3d0eb-0531-48f9-ad8c-76735d559699",
+              "name": "Records not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Template Key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb963f83-8851-4e26-8eb7-e95d30166ee4",
+          "name": "Update a single automation template",
+          "request": {
+            "name": "Update a single automation template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "automationtemplates",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Template Key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ef70981-380f-45d2-8963-ac16ce8e7508",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Template Key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b05ece69-a3cd-4eb5-a139-c8365758e117",
+              "name": "Records not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Template Key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2826a6d9-8eab-4aeb-b183-51448d6d545b",
+          "name": "Delete an automation template",
+          "request": {
+            "name": "Delete an automation template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "automationtemplates",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Delivery template key"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "730f8e5d-3dba-44fe-9dbc-069e435153fb",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a225f87e-3181-4d32-9895-35f6255186ed",
+              "name": "Records not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c207587-2258-4666-ab42-29ae6ea5fe7e",
+          "name": "Add a new automation template",
+          "request": {
+            "name": "Add a new automation template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "automationtemplates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"name\": \"<string>\",\n  \"baseAggregation\": \"<string>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55df0260-e2d6-408d-abc3-0fde405725bb",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"name\": \"<string>\",\n  \"baseAggregation\": \"<string>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd4e550d-d405-4c0b-a09e-112dc1e409ce",
+              "name": "KEY must be unique",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"name\": \"<string>\",\n  \"baseAggregation\": \"<string>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "947ae339-10c1-4575-a08f-41aeca08009e",
+          "name": "Get automation templates",
+          "request": {
+            "name": "Get automation templates",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "automationtemplates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields (can be many, separate by comma)"
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[gt]",
+                  "value": "<string>",
+                  "description": "Create date greater "
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[gte]",
+                  "value": "<string>",
+                  "description": "Create date greater or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[lt]",
+                  "value": "<string>",
+                  "description": "Create date less"
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[lte]",
+                  "value": "<string>",
+                  "description": "Create date less or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[gt]",
+                  "value": "<string>",
+                  "description": "Last modified date greater "
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[gte]",
+                  "value": "<string>",
+                  "description": "Last modified date greater or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[lt]",
+                  "value": "<string>",
+                  "description": "Last modified date less"
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[lte]",
+                  "value": "<string>",
+                  "description": "Last modified date less or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Message tags (can be many, separate by comma)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Number of page"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Count templates on page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3a4cc14c-1ae7-498a-b32c-f3378e1be5ee",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"accountID\": \"string\",\n    \"key\": \"string\",\n    \"channel\": \"string\",\n    \"classification\": \"transactional\",\n    \"baseAggregation\": \"hourly\",\n    \"message\": {\n      \"headers\": {\n        \"subject\": \"<string>\",\n        \"fromEmail\": \"<string>\",\n        \"fromDesc\": \"<string>\",\n        \"replyEmail\": \"<string>\"\n      },\n      \"content\": {\n        \"text/html\": \"<string>\"\n      }\n    },\n    \"transportID\": \"string\",\n    \"stats\": {},\n    \"priority\": 2\n  },\n  {\n    \"accountID\": \"string\",\n    \"key\": \"string\",\n    \"channel\": \"string\",\n    \"classification\": \"promotional\",\n    \"baseAggregation\": \"daily\",\n    \"message\": {\n      \"headers\": {\n        \"subject\": \"<string>\",\n        \"fromEmail\": \"<string>\",\n        \"fromDesc\": \"<string>\",\n        \"replyEmail\": \"<string>\"\n      },\n      \"content\": {\n        \"text/html\": \"<string>\"\n      }\n    },\n    \"transportID\": \"string\",\n    \"stats\": {},\n    \"priority\": 2\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "224c7ce0-7c09-4df4-b35e-68dc6f535f07",
+          "name": "Send a batch message from an automation template",
+          "request": {
+            "name": "Send a batch message from an automation template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "automationtemplates",
+                ":key",
+                "send"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Delivery template key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed82ad03-9e2e-41ee-8b4e-cdfd6f6d72ff",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountID\": \"string\",\n  \"key\": \"string\",\n  \"channel\": \"string\",\n  \"classification\": \"transactional\",\n  \"baseAggregation\": \"hourly\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"string\",\n  \"stats\": {},\n  \"priority\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6c054ef-ab8a-435b-8bab-10ffb31e53da",
+              "name": "Template not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f9845e6-6dc1-4c3a-ae81-909a7b97c2e8",
+          "name": "Send a draft message of an automation template",
+          "request": {
+            "name": "Send a draft message of an automation template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "automationtemplates",
+                ":key",
+                "senddraft"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Delivery template key"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b07e57ee-9c99-4f0c-8a98-5fe058db530d",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key",
+                    "senddraft"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountID\": \"string\",\n  \"key\": \"string\",\n  \"channel\": \"string\",\n  \"classification\": \"transactional\",\n  \"baseAggregation\": \"hourly\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"string\",\n  \"stats\": {},\n  \"priority\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a08b863a-35cd-4363-83ba-e6d2f0ea75a8",
+              "name": "Template not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key",
+                    "senddraft"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"value\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9d7103c-fdcc-4ace-b696-24dbef58febb",
+          "name": "Publish a single automation template",
+          "request": {
+            "name": "Publish a single automation template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "automationtemplates",
+                ":key",
+                "publish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Delivery template key"
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e91fec5d-9a50-40a7-a4de-6b2847145bfe",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db6641e4-00ef-4c8f-b707-e46156b8c485",
+              "name": "Template not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "543f9fc0-e03b-41ae-8854-58d5011499f8",
+              "name": "Unable to publish template. Ensure a draft exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0019f8c-a0b9-4a65-a6c8-62f211fb598b",
+          "name": "Render draft content of a single automation template",
+          "request": {
+            "name": "Render draft content of a single automation template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "automationtemplates",
+                ":key",
+                "renderdraft",
+                ":contactID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "experiment",
+                  "value": "<string>",
+                  "description": "Name of experiment "
+                },
+                {
+                  "disabled": false,
+                  "key": "variant",
+                  "value": "<string>",
+                  "description": "Variant name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Delivery template key"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contactID",
+                  "description": "(Required) Contact ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4100dab8-87b9-482f-babd-23b3ac5c9a4b",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key",
+                    "renderdraft",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Contact ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7cc51c57-cffb-4385-ba78-9aa6db9b55bc",
+              "name": "Record is not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key",
+                    "renderdraft",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Contact ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa03b3cf-a9ce-4341-87b9-f9e97d21b173",
+          "name": "Render published content of a single automation template",
+          "request": {
+            "name": "Render published content of a single automation template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "automationtemplates",
+                ":key",
+                "renderpublished",
+                ":contactID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "experiment",
+                  "value": "<string>",
+                  "description": "Name of experiment "
+                },
+                {
+                  "disabled": false,
+                  "key": "variant",
+                  "value": "<string>",
+                  "description": "Variant name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Delivery template key"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contactID",
+                  "description": "(Required) Contact ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b16f56e3-80fc-43e0-8918-6f7e436a90fb",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key",
+                    "renderpublished",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Contact ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aadf0862-f487-4c8c-8687-bbe3c40bd4fb",
+              "name": "Record is not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "automationtemplates",
+                    ":key",
+                    "renderpublished",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Delivery template key"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Contact ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffc954c3-06a5-4715-9f3e-a5d22e3f0b56",
+          "name": "Get a single automation template",
+          "request": {
+            "name": "Get a single automation template",
+            "description": {
+              "content": "Retrieves the specified automation template. The automation template record is defined by its unique `key` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "automationtemplates",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields to include (can be many, comma-separated)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Automation template key value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7d520106-865e-4e8c-b6cf-a610d0bc883d",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountID\": \"string\",\n  \"key\": \"string\",\n  \"channel\": \"string\",\n  \"classification\": \"promotional\",\n  \"baseAggregation\": \"hourly\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"string\",\n  \"stats\": {},\n  \"priority\": 2,\n  \"bcc\": \"string\",\n  \"bccEnabled\": true,\n  \"alerts\": {\n    \"id\": \"string\",\n    \"type\": \"total-sent\",\n    \"msID\": \"string\",\n    \"mdtID\": \"string\",\n    \"enabled\": false,\n    \"notify\": [\n      \"string\",\n      \"string\"\n    ],\n    \"conditions\": [\n      {\n        \"operator\": \"lt\",\n        \"value\": 6988,\n        \"type\": \"string\",\n        \"period\": \"string\"\n      },\n      {\n        \"operator\": \"gte\",\n        \"value\": 5545,\n        \"type\": 9057.444146732474,\n        \"period\": 3207.609726992108\n      }\n    ],\n    \"period\": 9148\n  },\n  \"triggerTypesEnabled\": [\n    \"string\",\n    \"string\"\n  ],\n  \"recurringSchedule\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1469a8a6-eeea-4b7c-b570-b9def5873a89",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9179eb12-d8c2-4d1c-add2-1d0b548eb0eb",
+          "name": "Update an automation template",
+          "request": {
+            "name": "Update an automation template",
+            "description": {
+              "content": "Updates automation template fields. The automation template record is defined by its unique `key` value. For example, /automationtemplates/promo_01_20_2018 allows the template with the key value of <b>promo_01_20_2018</b> to be updated using the appropriate JSON body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "automationtemplates",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Automation template key value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3fb7ad43-7665-4038-9fa6-ffab1be6a2e1",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7ff9859-b5f4-4654-a166-fb49bd5bc5ae",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8071cc53-9955-44a0-a556-95b6c85faac3",
+          "name": "Delete an automation template",
+          "request": {
+            "name": "Delete an automation template",
+            "description": {
+              "content": "Deletes an existing automation template. The automation template is defined by its unique `key` value. For example, /automationtemplate/newsletter_week1 would delete the template with the key value of <b>newsletter_week1</b>.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "automationtemplates",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Automation template key value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c4afd880-af9d-4528-aa08-86cdab673644",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"<mdtID>\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25384432-f398-4a06-8593-e1f025a52096",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92c69073-a7c1-4645-ace3-91f55563580c",
+          "name": "Add a new automation template",
+          "request": {
+            "name": "Add a new automation template",
+            "description": {
+              "content": "Creates a new automation template using the appropriate JSON body. Posting more than once for the same template key will generate an error. Use the PUT method to change or update fields once the template is created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "automationtemplates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"name\": \"<string>\",\n  \"baseAggregation\": \"<string>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\",\n  \"vanityDomainKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b619676-c455-48db-b812-65b370d9251e",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"name\": \"<string>\",\n  \"baseAggregation\": \"<string>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\",\n  \"vanityDomainKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"record created\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20c1039c-0643-4042-9698-f0d09e8d735e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"name\": \"<string>\",\n  \"baseAggregation\": \"<string>\",\n  \"message\": {\n    \"headers\": {\n      \"subject\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"fromDesc\": \"<string>\",\n      \"replyEmail\": \"<string>\"\n    },\n    \"content\": {\n      \"text/html\": \"<string>\"\n    }\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"classification\": \"<string>\",\n  \"transportID\": \"<string>\",\n  \"draftContent\": \"<boolean>\",\n  \"trackLinks\": \"<string>\",\n  \"priority\": 2,\n  \"bcc\": \"<string>\",\n  \"bccEnabled\": \"<boolean>\",\n  \"vanityDomainKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"error\": true,\n  \"message\": \"KEY must be unique\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4cb146b-a4f0-4c38-99f4-9ebe55f8dfb9",
+          "name": "Get automation templates",
+          "request": {
+            "name": "Get automation templates",
+            "description": {
+              "content": "Retrieves automation templates. Response data can be filtered using template `fields`, message `tags`, and `timestamp` values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "automationtemplates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields to include (can be many, comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[gt]",
+                  "value": "<string>",
+                  "description": "Create date is greater than."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[gte]",
+                  "value": "<string>",
+                  "description": "Create date is greater than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[lt]",
+                  "value": "<string>",
+                  "description": "Create date is less than."
+                },
+                {
+                  "disabled": false,
+                  "key": "ct[lte]",
+                  "value": "<string>",
+                  "description": "Create date is less than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[gt]",
+                  "value": "<string>",
+                  "description": "Last modified date is greater than."
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[gte]",
+                  "value": "<string>",
+                  "description": "Last modified date is greater than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[lt]",
+                  "value": "<string>",
+                  "description": "Last modified date is less than."
+                },
+                {
+                  "disabled": false,
+                  "key": "lm[lte]",
+                  "value": "<string>",
+                  "description": "Last modified date is less than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Returns automation templates that contain specified message tags (can be many, comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "orchestrationID",
+                  "value": "<string>",
+                  "description": "Returns automation templates tied to specified orchestration."
+                },
+                {
+                  "disabled": false,
+                  "key": "compositionID",
+                  "value": "<string>",
+                  "description": "Returns automation templates tied to specific version of orchestration."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Specific page number to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Number or records per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "91455456-a00c-49e6-b1df-15ce246571d9",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ct[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lm[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orchestrationID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "compositionID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"accountID\": \"string\",\n    \"key\": \"string\",\n    \"channel\": \"string\",\n    \"classification\": \"promotional\",\n    \"baseAggregation\": \"hourly\",\n    \"message\": {\n      \"headers\": {\n        \"subject\": \"<string>\",\n        \"fromEmail\": \"<string>\",\n        \"fromDesc\": \"<string>\",\n        \"replyEmail\": \"<string>\"\n      },\n      \"content\": {\n        \"text/html\": \"<string>\"\n      }\n    },\n    \"transportID\": \"string\",\n    \"stats\": {},\n    \"priority\": 2,\n    \"bcc\": \"string\",\n    \"bccEnabled\": false,\n    \"alerts\": {\n      \"id\": \"string\",\n      \"type\": \"total-sent\",\n      \"msID\": \"string\",\n      \"mdtID\": \"string\",\n      \"enabled\": false,\n      \"notify\": [\n        \"string\",\n        \"string\"\n      ],\n      \"conditions\": [\n        {\n          \"operator\": \"gt\",\n          \"value\": 7474,\n          \"type\": true,\n          \"period\": 5540.662060110098\n        },\n        {\n          \"operator\": \"gt\",\n          \"value\": 7818,\n          \"type\": 9326.134391976224,\n          \"period\": true\n        }\n      ],\n      \"period\": 137\n    },\n    \"triggerTypesEnabled\": [\n      \"string\",\n      \"string\"\n    ],\n    \"recurringSchedule\": \"string\"\n  },\n  {\n    \"accountID\": \"string\",\n    \"key\": \"string\",\n    \"channel\": \"string\",\n    \"classification\": \"promotional\",\n    \"baseAggregation\": \"hourly\",\n    \"message\": {\n      \"headers\": {\n        \"subject\": \"<string>\",\n        \"fromEmail\": \"<string>\",\n        \"fromDesc\": \"<string>\",\n        \"replyEmail\": \"<string>\"\n      },\n      \"content\": {\n        \"text/html\": \"<string>\"\n      }\n    },\n    \"transportID\": \"string\",\n    \"stats\": {},\n    \"priority\": 2,\n    \"bcc\": \"string\",\n    \"bccEnabled\": false,\n    \"alerts\": {\n      \"id\": \"string\",\n      \"type\": \"total-sent\",\n      \"msID\": \"string\",\n      \"mdtID\": \"string\",\n      \"enabled\": true,\n      \"notify\": [\n        \"string\",\n        \"string\"\n      ],\n      \"conditions\": [\n        {\n          \"operator\": \"lte\",\n          \"value\": 6034,\n          \"type\": \"string\",\n          \"period\": true\n        },\n        {\n          \"operator\": \"gte\",\n          \"value\": 2021,\n          \"type\": \"string\",\n          \"period\": 8946.13128413057\n        }\n      ],\n      \"period\": 5570\n    },\n    \"triggerTypesEnabled\": [\n      \"string\",\n      \"string\"\n    ],\n    \"recurringSchedule\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d34e6b4-6ac9-4073-8103-e0fbb8f74f5a",
+          "name": "Send a batch message from an automation template",
+          "request": {
+            "name": "Send a batch message from an automation template",
+            "description": {
+              "content": "Sends an existing automation template. The template can be sent to one or more contacts, as specified within the JSON body. This endpoint will successfully create a new contact record if the contact key value in the request does not already exist. The newly added contact will have a subscribe status of <b>none</b> and will not receive promotional messages until subscribed to the appropriate channel. If the contact key exists, data passed in the contact object will upsert corresponding contact attributes in the Cordial database.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "automationtemplates",
+                ":key",
+                "send"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Automation template key value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"value\"\n    }\n  },\n  \"identifyBy\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "81975fe4-95fc-425d-b8c9-d5ff34dc1820",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"value\"\n    }\n  },\n  \"identifyBy\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"messages sent\",\n  \"messagecontacts\": [\n    {\n      \"accepted\": true,\n      \"cID\": \"string\",\n      \"mcID\": \"string\",\n      \"primary_key\": \"string\",\n      \"address\": \"string\"\n    },\n    {\n      \"accepted\": true,\n      \"cID\": \"string\",\n      \"mcID\": \"string\",\n      \"primary_key\": \"string\",\n      \"address\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6a4d294-363d-403d-b431-2e47bdd6557b",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "send"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"value\"\n    }\n  },\n  \"identifyBy\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9752675-c451-407d-b5bf-b57f53ff2ae2",
+          "name": "Send a draft message of an automation template",
+          "request": {
+            "name": "Send a draft message of an automation template",
+            "description": {
+              "content": "Sends an existing automation template draft for testing purposes. For example, /automationtemplates/promo_01_20_2018/senddraft allows the draft automation template with the key value of <b>promo_01_20_2018</b> to be sent using the appropriate JSON body. The template can be sent to one or more contacts, as specified within the JSON body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "automationtemplates",
+                ":key",
+                "senddraft"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Automation template key value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d2d7afe2-a700-4110-b48b-d5502e25e9e3",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "senddraft"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contactIdentifier\": {\n    \"success\": true,\n    \"message\": \"Test message has been sent\",\n    \"response\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46fab15b-d4f5-4e31-8cad-6b2468c26f4f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "senddraft"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"to\": {\n    \"contact\": {\n      \"email\": \"<string>\"\n    },\n    \"extVars\": {\n      \"key\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"error\": true,\n  \"message\": \"KEY must be unique\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "674150fd-c09e-4aca-a9a6-69ac50cf76d6",
+          "name": "Publish a single automation template",
+          "request": {
+            "name": "Publish a single automation template",
+            "description": {
+              "content": "Publishes an existing automation template draft. The automation template record is defined by its unique `key` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "automationtemplates",
+                ":key",
+                "publish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Automation template key value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "07a55fe1-296c-4d1b-903f-1441d257a406",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e5d8c7f-e3d4-4de6-866b-b0aaf83f7de5",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f8e55b8-19dc-48af-9aeb-4bba0840290b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "publish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"error\": true,\n  \"message\": \"KEY must be unique\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7edc905-71dc-4c85-a530-61978c502714",
+          "name": "Render draft content of a single automation template",
+          "request": {
+            "name": "Render draft content of a single automation template",
+            "description": {
+              "content": "Retrieves the message headers, the rendered HTML, and experiment name and variants of an automated template draft for a specified contact. Additionally, experiment names and variants can be passed using a query string.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "automationtemplates",
+                ":key",
+                "renderdraft",
+                ":contactID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "experiment",
+                  "value": "<string>",
+                  "description": "Returns the automation template that contains the specified experiment name. Variant is required if experiment is specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "variant",
+                  "value": "<string>",
+                  "description": "Returns the automation template that contains the specified experiment variant. Experiment is required if variant is specified."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Automation template key value."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contactID",
+                  "description": "(Required) Cordial database contact ID (cID) value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "67d7954c-3137-496d-a687-85559ada8ec2",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "renderdraft",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Cordial database contact ID (cID) value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"wip\": {},\n  \"headers\": {},\n  \"content\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c86df550-6709-44b6-89aa-549f6b2bb254",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "renderdraft",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Cordial database contact ID (cID) value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f233fcbd-49e0-4049-93f8-84e1ee9b69af",
+          "name": "Render published content of a single automation template",
+          "request": {
+            "name": "Render published content of a single automation template",
+            "description": {
+              "content": "Retrieves the message headers, the rendered HTML, and experiment name and variants of a published automated template for a specified contact. Additionally, experiment names and variants can be passed using a query string.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "automationtemplates",
+                ":key",
+                "renderpublished",
+                ":contactID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "experiment",
+                  "value": "<string>",
+                  "description": "Returns the automation template that contains the specified experiment name. Variant is required if experiment is specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "variant",
+                  "value": "<string>",
+                  "description": "Returns the automation template that contains the specified experiment variant. Experiment is required if variant is specified."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Automation template key value."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contactID",
+                  "description": "(Required) Cordial database contact ID (cID) value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "89d37190-c957-4d6e-a2f7-9f23299e51cf",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "renderpublished",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Cordial database contact ID (cID) value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"headers\": {},\n  \"content\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ae66a36-33dd-4a0a-8790-d12307df066d",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "renderpublished",
+                    ":contactID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "experiment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "variant",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contactID",
+                      "description": "(Required) Cordial database contact ID (cID) value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55c3c500-6649-43c4-b4c4-b15f2824ec8b",
+          "name": "Get experiment performance for the published version of a single automation template",
+          "request": {
+            "name": "Get experiment performance for the published version of a single automation template",
+            "description": {
+              "content": "Retrieves experiment performance for the published version of a single automation template. The automation template record is defined by its unique template `key` value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "automationtemplates",
+                ":key",
+                "experimentperformance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) Automation template key value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a8b8a6dd-d1d8-4a41-b48b-a65541e638dd",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "experimentperformance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"variants\": [\n    {\n      \"stats\": {\n        \"ts\": 2616,\n        \"tc\": 5901,\n        \"uc\": 4002,\n        \"to\": 9833,\n        \"uo\": 7194,\n        \"tci\": 529,\n        \"uci\": 3363,\n        \"tb\": 8256,\n        \"tr\": 8922,\n        \"tri\": 1822,\n        \"or\": 9503,\n        \"ori\": 5398,\n        \"cmp\": 6601,\n        \"oo\": 6078\n      },\n      \"name\": \"string\"\n    },\n    {\n      \"stats\": {\n        \"ts\": 8989,\n        \"tc\": 6125,\n        \"uc\": 475,\n        \"to\": 1459,\n        \"uo\": 5436,\n        \"tci\": 3066,\n        \"uci\": 1169,\n        \"tb\": 9465,\n        \"tr\": 7079,\n        \"tri\": 2443,\n        \"or\": 9058,\n        \"ori\": 2048,\n        \"cmp\": 6569,\n        \"oo\": 3431\n      },\n      \"name\": \"string\"\n    }\n  ],\n  \"strategy\": 8177,\n  \"conversions\": 9053,\n  \"totalAudience\": 4106\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ece212e6-5168-4cc4-9a11-0f05787340d5",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "automationtemplates",
+                    ":key",
+                    "experimentperformance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) Automation template key value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dbebfa70-2b20-494c-8c05-b5f0a9f2e988",
+    "name": "Cordial automation templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged automation templates across 2 of this provider's published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

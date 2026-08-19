@@ -1,0 +1,378 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial Orders API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Order ID"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields (can be many, separate by comma)"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a single order"
+        },
+        {
+          "info": {
+            "name": "Update a single order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Order ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update a single order"
+        },
+        {
+          "info": {
+            "name": "Delete order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v1/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Order ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete order"
+        },
+        {
+          "info": {
+            "name": "Get orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/orders",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields (can be many, separate by comma)"
+              },
+              {
+                "name": "cID",
+                "value": "",
+                "type": "query",
+                "description": "Contact ID"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Search by contact primary key"
+              },
+              {
+                "name": "purchaseDate",
+                "value": "",
+                "type": "query",
+                "description": "Purchase Date used in conjunction with eq, lt, gt (YYYY-MM-DD HH:ii:ss)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Number of page"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Count orders on page"
+              },
+              {
+                "name": "return_count",
+                "value": "",
+                "type": "query",
+                "description": "Return count of records"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get orders"
+        },
+        {
+          "info": {
+            "name": "Add a new order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a new order"
+        },
+        {
+          "info": {
+            "name": "Get a single order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Order id value."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to include (can be many, comma-separated)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the specified order from the Cordial database. The order is defined by its unique order `id` value. For example, /orders/112233 would return the response data for the order with the orderID value of <b>112233</b>."
+        },
+        {
+          "info": {
+            "name": "Update a single order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Order id value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates the specified order in the Cordial database using the appropriate JSON body."
+        },
+        {
+          "info": {
+            "name": "Delete order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v2/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Order id value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes an order from the Cordial database. The order is defined by its unique order `id` value. For example, /orders/22345 would delete the order with the orderID value of <b>22345</b>."
+        },
+        {
+          "info": {
+            "name": "Get orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/orders",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to include (can be many, comma-separated)."
+              },
+              {
+                "name": "cID",
+                "value": "",
+                "type": "query",
+                "description": "Filter records for a specific contact using the Cordial database contact ID (cID) value."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter records for a specific contact using the email address value."
+              },
+              {
+                "name": "purchaseDate",
+                "value": "",
+                "type": "query",
+                "description": "Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+              },
+              {
+                "name": "purchaseDate[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter orders that occurred before this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+              },
+              {
+                "name": "purchaseDate[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter orders that occurred after this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+              },
+              {
+                "name": "purchaseDate[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Filter orders that occurred before or at this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+              },
+              {
+                "name": "purchaseDate[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Filter orders that occurred after or at this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Specific page number to be returned."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number or records per page."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field by which results should be sorted."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "Direction to sort by. Works in conjunction with `sort_by` (e.g. asc, desc)."
+              },
+              {
+                "name": "return_count",
+                "value": "",
+                "type": "query",
+                "description": "Show the total count of records returned."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves orders from the Cordial database. Using query string parameters, it is possible to filter the response by contact ID (`cID`) or `email` address value to retrieve all orders for a single contact. In addition, the response can be filtered by a specified order purchase date or date range. The GET /orders endpoint can retrieve up to 10,000 records at a time. To page through more than 10,000 records, multiple queries must be made with manually adjusted parameters for each."
+        },
+        {
+          "info": {
+            "name": "Add an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a new order in the Cordial database using the appropriate JSON body. An order can include one or more items. Posting more than once for the same \"orderID\" will generate an error."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

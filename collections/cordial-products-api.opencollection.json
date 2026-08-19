@@ -1,0 +1,294 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial Products API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/products/:productID",
+            "params": [
+              {
+                "name": "productID",
+                "value": "",
+                "type": "path",
+                "description": "Key for attribute"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a single product"
+        },
+        {
+          "info": {
+            "name": "Update an existing product",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/products/:productID",
+            "params": [
+              {
+                "name": "productID",
+                "value": "",
+                "type": "path",
+                "description": "Product ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an existing product"
+        },
+        {
+          "info": {
+            "name": "Delete a single product",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v1/products/:productID",
+            "params": [
+              {
+                "name": "productID",
+                "value": "",
+                "type": "path",
+                "description": "Product id to delete"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a single product"
+        },
+        {
+          "info": {
+            "name": "Get products list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/products",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Number of page"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Count products on page"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields (can be many, separate by comma)"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get products list"
+        },
+        {
+          "info": {
+            "name": "Add new products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/products",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add new products"
+        },
+        {
+          "info": {
+            "name": "Get a single product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/products/:productID",
+            "params": [
+              {
+                "name": "productID",
+                "value": "",
+                "type": "path",
+                "description": "Product id value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the specified product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would return the response data for the product with the productID value of <b>112233</b>."
+        },
+        {
+          "info": {
+            "name": "Update an existing product",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/products/:productID",
+            "params": [
+              {
+                "name": "productID",
+                "value": "",
+                "type": "path",
+                "description": "Product id value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates a product in the Cordial database using the appropriate JSON body. The product is defined by its unique product `id` value. For example, /products/112233 would update the the product with the productID value of <b>112233</b>."
+        },
+        {
+          "info": {
+            "name": "Delete a single product",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v2/products/:productID",
+            "params": [
+              {
+                "name": "productID",
+                "value": "",
+                "type": "path",
+                "description": "Product id value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes a product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would remove the product with the productID value of <b>112233</b>."
+        },
+        {
+          "info": {
+            "name": "Get products list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/products",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Specific page number to be returned."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number or records per page."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to include (can be many, comma-separated)."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field by which results should be sorted."
+              },
+              {
+                "name": "sort_dir",
+                "value": "",
+                "type": "query",
+                "description": "Direction to sort by. Works in conjunction with `sort_by` (e.g. asc, desc)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves all products from the Cordial database. Using query string parameters, it is possible to filter the field set returned using a query string for the `fields` parameter."
+        },
+        {
+          "info": {
+            "name": "Add new products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/products",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a new product in the Cordial database using the appropriate JSON body. A product can include one or more variants. Posting the same product more than once with the same `productID` value will update the existing product. This is helpful for reloading and/or updating product information when batch processing multiple records."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

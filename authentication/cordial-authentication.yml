@@ -1,6 +1,6 @@
 generated: '2026-08-04'
 method: searched
-source: openapi/cordial-v1-openapi-original.json, openapi/cordial-v2-openapi-original.json
+source: openapi/_original/cordial-v1-openapi-original.json, openapi/_original/cordial-v2-openapi-original.json
 docs: https://support.cordial.com/hc/en-us/articles/203885498-RESTful-API-summary-and-usage
 note: >-
   Derived mechanically from both published Swagger documents, then upgraded from the provider's own
@@ -31,8 +31,8 @@ schemes:
   expiring: false
   rotation_api: false
   sources:
-  - openapi/cordial-v1-openapi-original.json
-  - openapi/cordial-v2-openapi-original.json
+  - openapi/_original/cordial-v1-openapi-original.json
+  - openapi/_original/cordial-v2-openapi-original.json
   applied_to: all 106 v2 operations and all 83 v1 operations
   failure_response:
     status: 401

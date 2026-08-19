@@ -1,0 +1,197 @@
+{
+  "item": [
+    {
+      "id": "74c48764-c0d2-4eaa-8e7e-7af5c3fc8270",
+      "name": "account monitor export",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0bb44846-b787-4b22-97f5-c9bf4e094b2d",
+          "name": "Export logs from your account monitor",
+          "request": {
+            "name": "Export logs from your account monitor",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "accountmonitorexport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"selected_timeframe_start\": \"<dateTime>\",\n  \"selected_timeframe_end\": \"<dateTime>\",\n  \"selected_category\": \"<string>\",\n  \"selected_level\": \"<string>\",\n  \"limitRecordsPerFile\": \"<integer>\",\n  \"compress\": \"<boolean>\",\n  \"confirmEmail\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "77e0e02d-7418-4c46-a2d1-1d3708351ce1",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accountmonitorexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"sftp.example.com\",\n    \"port\": 22,\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"selected_timeframe_start\": \"<dateTime>\",\n  \"selected_timeframe_end\": \"<dateTime>\",\n  \"selected_category\": \"API\",\n  \"selected_level\": \"Error\",\n  \"limitRecordsPerFile\": 1000,\n  \"compress\": \"<boolean>\",\n  \"confirmEmail\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1948a78e-2626-446b-bd75-186d2880fcaf",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accountmonitorexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"sftp.example.com\",\n    \"port\": 22,\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"selected_timeframe_start\": \"<dateTime>\",\n  \"selected_timeframe_end\": \"<dateTime>\",\n  \"selected_category\": \"API\",\n  \"selected_level\": \"Error\",\n  \"limitRecordsPerFile\": 1000,\n  \"compress\": \"<boolean>\",\n  \"confirmEmail\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"message\": \"Error validation message\",\n  \"fieldErrors\": {\n    \"<field>\": [\n      \"The destination field is required.\",\n      \"The destination field is required.\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "17f8968c-3b75-478a-b4cd-72bfc894c639",
+    "name": "Cordial account monitor export API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the Cordial API documentation! This interactive API documentation allows you to test API calls from the Swagger interface. Authenticate yourself with the API key from your Cordial account and then make API calls. Keep in mind that testing in Swagger will directly affect your production data.",
+      "type": "text/plain"
+    }
+  }
+}

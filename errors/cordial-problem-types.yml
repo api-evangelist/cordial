@@ -1,6 +1,6 @@
 generated: '2026-08-04'
 method: derived
-source: openapi/cordial-v2-openapi-original.json, openapi/cordial-v1-openapi-original.json
+source: openapi/_original/cordial-v2-openapi-original.json, openapi/_original/cordial-v1-openapi-original.json
 format: vendor
 rfc9457: false
 note: Cordial does NOT use RFC 9457 problem+json. Errors are returned as application/json with a vendor envelope.
@@ -56,23 +56,23 @@ problems:
   - Invalid status value
   - Order not found
   source_operations:
-  - openapi/cordial-v2-openapi-original.json#exportAccountMonitor
-  - openapi/cordial-v2-openapi-original.json#audiencetrendsexport
-  - openapi/cordial-v2-openapi-original.json#addActivity
-  - openapi/cordial-v2-openapi-original.json#createExportCAJob
-  - openapi/cordial-v2-openapi-original.json#createExportJob
-  - openapi/cordial-v2-openapi-original.json#onetimeStats
+  - openapi/_original/cordial-v2-openapi-original.json#exportAccountMonitor
+  - openapi/_original/cordial-v2-openapi-original.json#audiencetrendsexport
+  - openapi/_original/cordial-v2-openapi-original.json#addActivity
+  - openapi/_original/cordial-v2-openapi-original.json#createExportCAJob
+  - openapi/_original/cordial-v2-openapi-original.json#createExportJob
+  - openapi/_original/cordial-v2-openapi-original.json#onetimeStats
 - status: 401
   title: Unauthorized
   occurrences: 13
   documented_descriptions: null
   source_operations:
-  - openapi/cordial-v2-openapi-original.json#getListAccountAttributes
-  - openapi/cordial-v2-openapi-original.json#addattribute
-  - openapi/cordial-v2-openapi-original.json#getAttribute
-  - openapi/cordial-v2-openapi-original.json#updateAttribute
-  - openapi/cordial-v2-openapi-original.json#addList
-  - openapi/cordial-v2-openapi-original.json#getLists
+  - openapi/_original/cordial-v2-openapi-original.json#getListAccountAttributes
+  - openapi/_original/cordial-v2-openapi-original.json#addattribute
+  - openapi/_original/cordial-v2-openapi-original.json#getAttribute
+  - openapi/_original/cordial-v2-openapi-original.json#updateAttribute
+  - openapi/_original/cordial-v2-openapi-original.json#addList
+  - openapi/_original/cordial-v2-openapi-original.json#getLists
 - status: 403
   title: Forbidden
   occurrences: 2
@@ -80,8 +80,8 @@ problems:
   - When an account does not have an ability to merge contacts
   - When the contacts split feature is not available for an account
   source_operations:
-  - openapi/cordial-v2-openapi-original.json#mergecontacts
-  - openapi/cordial-v2-openapi-original.json#splitContact
+  - openapi/_original/cordial-v2-openapi-original.json#mergecontacts
+  - openapi/_original/cordial-v2-openapi-original.json#splitContact
 - status: 404
   title: Not Found
   occurrences: 115
@@ -94,19 +94,19 @@ problems:
   - When the contact cannot be found
   - record not found
   source_operations:
-  - openapi/cordial-v2-openapi-original.json#getListAccountAttributes
-  - openapi/cordial-v2-openapi-original.json#deleteattribute
-  - openapi/cordial-v2-openapi-original.json#getLists
-  - openapi/cordial-v2-openapi-original.json#getlist
-  - openapi/cordial-v2-openapi-original.json#updatelist
-  - openapi/cordial-v2-openapi-original.json#deletelist
+  - openapi/_original/cordial-v2-openapi-original.json#getListAccountAttributes
+  - openapi/_original/cordial-v2-openapi-original.json#deleteattribute
+  - openapi/_original/cordial-v2-openapi-original.json#getLists
+  - openapi/_original/cordial-v2-openapi-original.json#getlist
+  - openapi/_original/cordial-v2-openapi-original.json#updatelist
+  - openapi/_original/cordial-v2-openapi-original.json#deletelist
 - status: 405
   title: Method Not Allowed
   occurrences: 1
   documented_descriptions:
   - Invalid input
   source_operations:
-  - openapi/cordial-v1-openapi-original.json#addContact
+  - openapi/_original/cordial-v1-openapi-original.json#addContact
 - status: 406
   title: Not Acceptable
   occurrences: 5
@@ -114,19 +114,19 @@ problems:
   - Export configuration error
   - Import configuration error
   source_operations:
-  - openapi/cordial-v2-openapi-original.json#audiencetrendsexport
-  - openapi/cordial-v2-openapi-original.json#createExportCAJob
-  - openapi/cordial-v2-openapi-original.json#createImportJob
-  - openapi/cordial-v2-openapi-original.json#ordersimport
-  - openapi/cordial-v2-openapi-original.json#importsupplementrecords
+  - openapi/_original/cordial-v2-openapi-original.json#audiencetrendsexport
+  - openapi/_original/cordial-v2-openapi-original.json#createExportCAJob
+  - openapi/_original/cordial-v2-openapi-original.json#createImportJob
+  - openapi/_original/cordial-v2-openapi-original.json#ordersimport
+  - openapi/_original/cordial-v2-openapi-original.json#importsupplementrecords
 - status: 415
   title: Unsupported Media Type
   occurrences: 2
   documented_descriptions:
   - Unsupported Media Type
   source_operations:
-  - openapi/cordial-v2-openapi-original.json#createExportCAJob
-  - openapi/cordial-v2-openapi-original.json#createExportJob
+  - openapi/_original/cordial-v2-openapi-original.json#createExportCAJob
+  - openapi/_original/cordial-v2-openapi-original.json#createExportJob
 - status: 422
   title: Unprocessable Entity
   occurrences: 71
@@ -140,12 +140,12 @@ problems:
   - Name must be unique
   - Supplement does not exist
   source_operations:
-  - openapi/cordial-v2-openapi-original.json#getListAccountAttributes
-  - openapi/cordial-v2-openapi-original.json#addattribute
-  - openapi/cordial-v2-openapi-original.json#getAttribute
-  - openapi/cordial-v2-openapi-original.json#updateAttribute
-  - openapi/cordial-v2-openapi-original.json#addList
-  - openapi/cordial-v2-openapi-original.json#updatelist
+  - openapi/_original/cordial-v2-openapi-original.json#getListAccountAttributes
+  - openapi/_original/cordial-v2-openapi-original.json#addattribute
+  - openapi/_original/cordial-v2-openapi-original.json#getAttribute
+  - openapi/_original/cordial-v2-openapi-original.json#updateAttribute
+  - openapi/_original/cordial-v2-openapi-original.json#addList
+  - openapi/_original/cordial-v2-openapi-original.json#updatelist
 - status: 500
   title: Internal Server Error
   occurrences: 2
@@ -153,8 +153,8 @@ problems:
   - Something went wrong on the application side
   - When an unexpected internal error occurs
   source_operations:
-  - openapi/cordial-v2-openapi-original.json#mergecontacts
-  - openapi/cordial-v2-openapi-original.json#splitContact
+  - openapi/_original/cordial-v2-openapi-original.json#mergecontacts
+  - openapi/_original/cordial-v2-openapi-original.json#splitContact
 - status: 429
   title: Too Many Requests
   occurrences: 0

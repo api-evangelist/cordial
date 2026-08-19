@@ -1,0 +1,354 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Cordial API documentation! This interactive API documentation allows you to test API calls from the Swagger interface. Authenticate yourself with the API key from your Cordial account and then make API calls. Keep in mind that testing in Swagger will directly affect your production data.
+  version: 2.0.0
+  title: Cordial Programs API
+  termsOfService: https://cordial.zendesk.com
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: programs
+paths:
+  /v2/programs/{id}/summary:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a summary of stats for a given program
+      description: Validates if program exists and returns summary stats for it. <b>Note:</b> Programs endpoints are a beta feature. Please contact your CSM or Solutions representative for more information.
+      operationId: getProgramSummary
+      tags:
+      - programs
+      parameters:
+      - name: id
+        description: Program id
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: start_date
+        description: Period start date (YYYY-MM-DD)
+        required: true
+        in: query
+        schema:
+          type: string
+      - name: end_date
+        description: Period end date (YYYY-MM-DD)
+        required: true
+        in: query
+        schema:
+          type: string
+      - name: channel_key
+        description: Channel key
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: channel_type
+        description: Channel type
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgramSummaryResponse'
+        '401':
+          $ref: '#/components/responses/AuthenticationFailure'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/programs/{id}/stats:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get time series data for a messages in a given program
+      description: Validates if program exists and returns program messages with stats. <b>Note:</b> Programs endpoints are a beta feature. Please contact your CSM or Solutions representative for more information.
+      operationId: getProgramStats
+      tags:
+      - programs
+      parameters:
+      - name: id
+        description: Program id
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: start_date
+        description: Period start date (YYYY-MM-DD)
+        required: true
+        in: query
+        schema:
+          type: string
+      - name: end_date
+        description: Period end date (YYYY-MM-DD)
+        required: true
+        in: query
+        schema:
+          type: string
+      - name: channel_key
+        description: Channel key
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: channel_type
+        description: Channel type
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: page
+        description: Current page
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgramStatsResponse'
+        '401':
+          $ref: '#/components/responses/AuthenticationFailure'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+components:
+  schemas:
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    ProgramMessageStats:
+      type: object
+      title: Message Send Stats
+      properties:
+        message_id:
+          type: string
+          example: 64ad5b5725623b7a6d0cb1f6
+          description: Message id.
+        orchestration_id:
+          type: string
+          example: 64ad5b5725623b7a6d0cb1f6
+          description: Orchestration id.
+        orchestration_name:
+          type: string
+          example: some_name
+          description: Orchestration name.
+        message_key:
+          type: string
+          example: some_key
+          description: Message key.
+        subject:
+          type: string
+          example: some_subject
+          description: Message subject.
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags
+        channel_key:
+          type: string
+          example: some_key
+          description: Channel key.
+        channel_type:
+          type: string
+          example: some_type
+          description: Channel type.
+        sent_at:
+          type: string
+          example: '2022-08-26 12:41:40.219Z'
+          description: Send date.
+        stats:
+          title: Aggregated stats for program
+          type: object
+    ProgramSummaryResponse:
+      title: Program summary
+      properties:
+        name:
+          type: string
+          example: Program-31
+          description: Program name.
+        stats:
+          title: Aggregated stats for program
+          type: object
+          properties:
+            delivered:
+              type: number
+              example: 22
+            delivered_rate:
+              type: number
+              example: 22.95
+            revenue:
+              type: number
+              format: float
+              example: 22.95
+            orders:
+              type: number
+              format: float
+              example: 22.95
+            clicks:
+              type: number
+              example: 22
+            clicks_unique:
+              type: number
+              example: 22
+            click_through_rate:
+              type: number
+              example: 22.95
+            click_to_open_rate:
+              type: number
+              example: 22.95
+            opt_outs:
+              type: number
+              example: 22
+            opt_out_rate:
+              type: number
+              example: 22.95
+            opens:
+              type: number
+              example: 22
+            opens_unique:
+              type: number
+              example: 22
+            open_rate:
+              type: number
+              example: 22.95
+            complaints:
+              type: number
+              example: 22
+            complaint_rate:
+              type: number
+              example: 22.95
+            bounce_rate:
+              type: number
+              example: 22.95
+            bounce_hard:
+              type: number
+              example: 22
+            bounce_soft:
+              type: number
+              example: 22
+            bounce_total:
+              type: number
+              example: 22
+        query:
+          title: Query data
+          type: object
+          properties:
+            start_date:
+              type: string
+              example: '2018-01-01'
+            end_date:
+              type: string
+              example: '2018-01-01'
+            channel_key:
+              type: string
+            channel_type:
+              type: string
+        ct:
+          type: string
+          format: date-time
+          description: Date created.
+        lm:
+          type: string
+          format: date-time
+          description: Last modified date.
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    ProgramStatsResponse:
+      title: Program stats
+      properties:
+        data:
+          title: List of messages.
+          type: array
+          items:
+            $ref: '#/components/schemas/ProgramMessageStats'
+        query:
+          title: Query parameters
+          type: object
+          properties:
+            start_date:
+              type: string
+              example: '2018-01-01'
+            end_date:
+              type: string
+              example: '2018-01-01'
+            channel_type:
+              type: string
+            channel_key:
+              type: string
+        pagination:
+          title: Pagination data
+          type: object
+          $ref: '#/components/schemas/PaginatedResponse'
+    PaginatedResponse:
+      properties:
+        total:
+          type: number
+        per_page:
+          type: number
+        current_page:
+          type: number
+        last_page:
+          type: number
+        first_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=1
+        last_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=2
+        prev_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=1
+        next_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=2
+        path:
+          type: string
+        from:
+          type: number
+        to:
+          type: number
+  responses:
+    AuthenticationFailure:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationFailed'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS

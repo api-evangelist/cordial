@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial analytics messages API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "analytics messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a message report export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/messageanalyticsexport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a message report export job"
+        },
+        {
+          "info": {
+            "name": "Create a message report export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/messageanalyticsexport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates an export job to download and store a file of message analytics to an external location. The exported file can be downloaded via Cordial UI, FTP/SFTP, sent to Amazon S3 bucket, or sent to Google Cloud Storage bucket.<ul><li>Export status information is available through the jobs resource. To access the Jobs page via Cordial UI, click on the jobs icon at the top right of the application header.</li><li>Supported export file types are <b>CSV</b> and <b>JSON</b>.</li><li>Export files made a"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

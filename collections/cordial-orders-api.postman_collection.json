@@ -1,0 +1,2034 @@
+{
+  "item": [
+    {
+      "id": "0b0bbf9e-f4a3-45aa-b519-1e4cd0c466ed",
+      "name": "orders",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7b580aa2-b023-4d63-8d23-6da2a142349d",
+          "name": "Update a single order",
+          "request": {
+            "name": "Update a single order",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Order ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderID\": \"<string>\",\n  \"purchaseDate\": \"<datetime>\",\n  \"cID\": \"<string>\",\n  \"linkID\": \"<string>\",\n  \"status\": \"<string>\",\n  \"mcID\": \"<string>\",\n  \"storeID\": \"<string>\",\n  \"customerID\": \"<integer>\",\n  \"shippingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  },\n  \"tax\": \"<integer>\",\n  \"shippingAndHandling\": \"<string>\",\n  \"properties\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "11846fd3-a6a7-4d80-bc94-2b6f251c01e3",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderID\": \"<string>\",\n  \"purchaseDate\": \"<datetime>\",\n  \"cID\": \"<string>\",\n  \"linkID\": \"<string>\",\n  \"status\": \"<string>\",\n  \"mcID\": \"<string>\",\n  \"storeID\": \"<string>\",\n  \"customerID\": \"<integer>\",\n  \"shippingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  },\n  \"tax\": \"<integer>\",\n  \"shippingAndHandling\": \"<string>\",\n  \"properties\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"linkID\": \"string\",\n  \"mcID\": \"string\",\n  \"storeID\": \"string\",\n  \"customerID\": 3656,\n  \"purchaseDate\": \"string\",\n  \"shippingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"tax\": 1261,\n  \"shippingAndHandling\": \"string\",\n  \"properties\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41463179-975a-42b5-ae6c-6875426abc95",
+              "name": "record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderID\": \"<string>\",\n  \"purchaseDate\": \"<datetime>\",\n  \"cID\": \"<string>\",\n  \"linkID\": \"<string>\",\n  \"status\": \"<string>\",\n  \"mcID\": \"<string>\",\n  \"storeID\": \"<string>\",\n  \"customerID\": \"<integer>\",\n  \"shippingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  },\n  \"tax\": \"<integer>\",\n  \"shippingAndHandling\": \"<string>\",\n  \"properties\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6d92ea7-c61f-4458-9b04-ab5426026a68",
+          "name": "Get a single order",
+          "request": {
+            "name": "Get a single order",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields (can be many, separate by comma)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Order ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2ad21fed-fc0e-4c2b-9900-bfc515e48eea",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderID\": \"<string>\",\n  \"purchaseDate\": \"<datetime>\",\n  \"cID\": \"<string>\",\n  \"linkID\": \"<string>\",\n  \"status\": \"<string>\",\n  \"mcID\": \"<string>\",\n  \"storeID\": \"<string>\",\n  \"customerID\": \"<integer>\",\n  \"shippingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  },\n  \"tax\": \"<integer>\",\n  \"shippingAndHandling\": \"<string>\",\n  \"properties\": \"<object>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dce6b6a-8cca-4fb7-902b-302197c12d33",
+              "name": "record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4fcd82e1-f8c2-4cd2-adee-fa57ceb39141",
+          "name": "Delete order",
+          "request": {
+            "name": "Delete order",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Order ID"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9dc58429-37d3-4c4d-b7c8-f9febc42a878",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bcf4e976-2ff6-4cc9-b848-571fa969e41b",
+              "name": "record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f4eb337-45e0-498c-9564-01e2681afddc",
+          "name": "Add a new order",
+          "request": {
+            "name": "Add a new order",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderID\": \"<string>\",\n  \"purchaseDate\": \"<datetime>\",\n  \"cID\": \"<string>\",\n  \"linkID\": \"<string>\",\n  \"status\": \"<string>\",\n  \"mcID\": \"<string>\",\n  \"storeID\": \"<string>\",\n  \"customerID\": \"<integer>\",\n  \"shippingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  },\n  \"tax\": \"<integer>\",\n  \"shippingAndHandling\": \"<string>\",\n  \"properties\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c36a536-0070-4cee-a5c3-500a01de1a2e",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderID\": \"<string>\",\n  \"purchaseDate\": \"<datetime>\",\n  \"cID\": \"<string>\",\n  \"linkID\": \"<string>\",\n  \"status\": \"<string>\",\n  \"mcID\": \"<string>\",\n  \"storeID\": \"<string>\",\n  \"customerID\": \"<integer>\",\n  \"shippingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  },\n  \"tax\": \"<integer>\",\n  \"shippingAndHandling\": \"<string>\",\n  \"properties\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a7d124d-1cbe-4035-9c34-db27c0516ccc",
+              "name": "record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderID\": \"<string>\",\n  \"purchaseDate\": \"<datetime>\",\n  \"cID\": \"<string>\",\n  \"linkID\": \"<string>\",\n  \"status\": \"<string>\",\n  \"mcID\": \"<string>\",\n  \"storeID\": \"<string>\",\n  \"customerID\": \"<integer>\",\n  \"shippingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<integer>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  },\n  \"tax\": \"<integer>\",\n  \"shippingAndHandling\": \"<string>\",\n  \"properties\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b705399d-09ad-4aa3-a20a-da8efc37bbbc",
+          "name": "Get orders",
+          "request": {
+            "name": "Get orders",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields (can be many, separate by comma)"
+                },
+                {
+                  "disabled": false,
+                  "key": "cID",
+                  "value": "<string>",
+                  "description": "Contact ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "Search by contact primary key"
+                },
+                {
+                  "disabled": false,
+                  "key": "purchaseDate",
+                  "value": "<string>",
+                  "description": "Purchase Date used in conjunction with eq, lt, gt (YYYY-MM-DD HH:ii:ss)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Number of page"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Count orders on page"
+                },
+                {
+                  "disabled": false,
+                  "key": "return_count",
+                  "value": "false",
+                  "description": "Return count of records"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ee2aa738-71b9-46e6-82f8-77510df02437",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_count",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"orderID\": \"<string>\",\n    \"purchaseDate\": \"<datetime>\",\n    \"cID\": \"<string>\",\n    \"linkID\": \"<string>\",\n    \"status\": \"<string>\",\n    \"mcID\": \"<string>\",\n    \"storeID\": \"<string>\",\n    \"customerID\": \"<integer>\",\n    \"shippingAddress\": {\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postalCode\": \"<integer>\",\n      \"country\": \"<string>\"\n    },\n    \"billingAddress\": {\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postalCode\": \"<integer>\",\n      \"country\": \"<string>\"\n    },\n    \"items\": [\n      {\n        \"productID\": \"<string>\",\n        \"sku\": \"<string>\",\n        \"category\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"qty\": \"<integer>\",\n        \"itemPrice\": \"<float>\",\n        \"url\": \"<string>\",\n        \"attr\": \"<object>\",\n        \"productType\": \"<string>\",\n        \"manufacturerName\": \"<string>\",\n        \"UPCCode\": \"<string>\",\n        \"images\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"properties\": \"<object>\",\n        \"inStock\": \"<boolean>\",\n        \"taxable\": \"<boolean>\",\n        \"enabled\": \"<boolean>\"\n      },\n      {\n        \"productID\": \"<string>\",\n        \"sku\": \"<string>\",\n        \"category\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"qty\": \"<integer>\",\n        \"itemPrice\": \"<float>\",\n        \"url\": \"<string>\",\n        \"attr\": \"<object>\",\n        \"productType\": \"<string>\",\n        \"manufacturerName\": \"<string>\",\n        \"UPCCode\": \"<string>\",\n        \"images\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"properties\": \"<object>\",\n        \"inStock\": \"<boolean>\",\n        \"taxable\": \"<boolean>\",\n        \"enabled\": \"<boolean>\"\n      }\n    ],\n    \"discountApplication\": {\n      \"type\": \"<string>\",\n      \"amount\": \"<float>\"\n    },\n    \"tax\": \"<integer>\",\n    \"shippingAndHandling\": \"<string>\",\n    \"properties\": \"<object>\"\n  },\n  {\n    \"orderID\": \"<string>\",\n    \"purchaseDate\": \"<datetime>\",\n    \"cID\": \"<string>\",\n    \"linkID\": \"<string>\",\n    \"status\": \"<string>\",\n    \"mcID\": \"<string>\",\n    \"storeID\": \"<string>\",\n    \"customerID\": \"<integer>\",\n    \"shippingAddress\": {\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postalCode\": \"<integer>\",\n      \"country\": \"<string>\"\n    },\n    \"billingAddress\": {\n      \"name\": \"<string>\",\n      \"address\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postalCode\": \"<integer>\",\n      \"country\": \"<string>\"\n    },\n    \"items\": [\n      {\n        \"productID\": \"<string>\",\n        \"sku\": \"<string>\",\n        \"category\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"qty\": \"<integer>\",\n        \"itemPrice\": \"<float>\",\n        \"url\": \"<string>\",\n        \"attr\": \"<object>\",\n        \"productType\": \"<string>\",\n        \"manufacturerName\": \"<string>\",\n        \"UPCCode\": \"<string>\",\n        \"images\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"properties\": \"<object>\",\n        \"inStock\": \"<boolean>\",\n        \"taxable\": \"<boolean>\",\n        \"enabled\": \"<boolean>\"\n      },\n      {\n        \"productID\": \"<string>\",\n        \"sku\": \"<string>\",\n        \"category\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"qty\": \"<integer>\",\n        \"itemPrice\": \"<float>\",\n        \"url\": \"<string>\",\n        \"attr\": \"<object>\",\n        \"productType\": \"<string>\",\n        \"manufacturerName\": \"<string>\",\n        \"UPCCode\": \"<string>\",\n        \"images\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"properties\": \"<object>\",\n        \"inStock\": \"<boolean>\",\n        \"taxable\": \"<boolean>\",\n        \"enabled\": \"<boolean>\"\n      }\n    ],\n    \"discountApplication\": {\n      \"type\": \"<string>\",\n      \"amount\": \"<float>\"\n    },\n    \"tax\": \"<integer>\",\n    \"shippingAndHandling\": \"<string>\",\n    \"properties\": \"<object>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f19a4f78-2191-42de-b4df-4f336ce1ed08",
+              "name": "record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_count",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14008fd7-b442-4ab3-966b-1ab0b38e19e5",
+          "name": "Update a single order",
+          "request": {
+            "name": "Update a single order",
+            "description": {
+              "content": "Updates the specified order in the Cordial database using the appropriate JSON body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Order id value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cID\": \"<string>\",\n  \"linkID\": \"<string>\",\n  \"mcID\": \"<string>\",\n  \"storeID\": \"<string>\",\n  \"customerID\": \"<string>\",\n  \"purchaseDate\": \"<dateTime>\",\n  \"shippingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"salePrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"salePrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"tax\": \"<float>\",\n  \"shippingAndHandling\": \"<number>\",\n  \"properties\": \"<object>\",\n  \"suppressTriggers\": \"<boolean>\",\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4efd02e0-3c1f-4eac-849d-763fb51949b1",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cID\": \"5f5f89b88b265d3b6563c3b5\",\n  \"linkID\": \"5f5f89b88b265d3b6563c3b5\",\n  \"mcID\": \"1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1\",\n  \"storeID\": \"abc123\",\n  \"customerID\": \"abc123\",\n  \"purchaseDate\": \"<dateTime>\",\n  \"shippingAddress\": {\n    \"name\": \"Mark Smith\",\n    \"address\": \"13130 Silverlake Road\",\n    \"city\": \"Hollywood\",\n    \"state\": \"CA\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"USA\"\n  },\n  \"billingAddress\": {\n    \"name\": \"Mark Smith\",\n    \"address\": \"13130 Silverlake Road\",\n    \"city\": \"Hollywood\",\n    \"state\": \"CA\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"USA\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"1234abcd\",\n      \"sku\": \"RF-WP33286-21\",\n      \"category\": \"Office Supplies\",\n      \"name\": \"S22-Refrigerator\",\n      \"description\": \"Great product!\",\n      \"qty\": 2,\n      \"itemPrice\": 22.95,\n      \"salePrice\": 20.99,\n      \"url\": \"http://myproduct.com\",\n      \"attr\": {\n        \"size\": \"large\",\n        \"color\": \"red\"\n      },\n      \"productType\": \"physical\",\n      \"manufacturerName\": \"Acme Supplies\",\n      \"UPCCode\": \"8 34460 00372 4\",\n      \"images\": [\n        \"http://example.com/image1.jpg\",\n        \"http://example.com/image2.jpg\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": true,\n      \"taxable\": true,\n      \"enabled\": true\n    },\n    {\n      \"productID\": \"1234abcd\",\n      \"sku\": \"RF-WP33286-21\",\n      \"category\": \"Office Supplies\",\n      \"name\": \"S22-Refrigerator\",\n      \"description\": \"Great product!\",\n      \"qty\": 2,\n      \"itemPrice\": 22.95,\n      \"salePrice\": 20.99,\n      \"url\": \"http://myproduct.com\",\n      \"attr\": {\n        \"size\": \"large\",\n        \"color\": \"red\"\n      },\n      \"productType\": \"physical\",\n      \"manufacturerName\": \"Acme Supplies\",\n      \"UPCCode\": \"8 34460 00372 4\",\n      \"images\": [\n        \"http://example.com/image1.jpg\",\n        \"http://example.com/image2.jpg\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": true,\n      \"taxable\": true,\n      \"enabled\": true\n    }\n  ],\n  \"tax\": 22.5,\n  \"shippingAndHandling\": 0,\n  \"properties\": {\n    \"currency\": \"USD\"\n  },\n  \"suppressTriggers\": false,\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d12d93a8-6d90-46cb-ba84-d118582af1f1",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cID\": \"5f5f89b88b265d3b6563c3b5\",\n  \"linkID\": \"5f5f89b88b265d3b6563c3b5\",\n  \"mcID\": \"1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1\",\n  \"storeID\": \"abc123\",\n  \"customerID\": \"abc123\",\n  \"purchaseDate\": \"<dateTime>\",\n  \"shippingAddress\": {\n    \"name\": \"Mark Smith\",\n    \"address\": \"13130 Silverlake Road\",\n    \"city\": \"Hollywood\",\n    \"state\": \"CA\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"USA\"\n  },\n  \"billingAddress\": {\n    \"name\": \"Mark Smith\",\n    \"address\": \"13130 Silverlake Road\",\n    \"city\": \"Hollywood\",\n    \"state\": \"CA\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"USA\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"1234abcd\",\n      \"sku\": \"RF-WP33286-21\",\n      \"category\": \"Office Supplies\",\n      \"name\": \"S22-Refrigerator\",\n      \"description\": \"Great product!\",\n      \"qty\": 2,\n      \"itemPrice\": 22.95,\n      \"salePrice\": 20.99,\n      \"url\": \"http://myproduct.com\",\n      \"attr\": {\n        \"size\": \"large\",\n        \"color\": \"red\"\n      },\n      \"productType\": \"physical\",\n      \"manufacturerName\": \"Acme Supplies\",\n      \"UPCCode\": \"8 34460 00372 4\",\n      \"images\": [\n        \"http://example.com/image1.jpg\",\n        \"http://example.com/image2.jpg\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": true,\n      \"taxable\": true,\n      \"enabled\": true\n    },\n    {\n      \"productID\": \"1234abcd\",\n      \"sku\": \"RF-WP33286-21\",\n      \"category\": \"Office Supplies\",\n      \"name\": \"S22-Refrigerator\",\n      \"description\": \"Great product!\",\n      \"qty\": 2,\n      \"itemPrice\": 22.95,\n      \"salePrice\": 20.99,\n      \"url\": \"http://myproduct.com\",\n      \"attr\": {\n        \"size\": \"large\",\n        \"color\": \"red\"\n      },\n      \"productType\": \"physical\",\n      \"manufacturerName\": \"Acme Supplies\",\n      \"UPCCode\": \"8 34460 00372 4\",\n      \"images\": [\n        \"http://example.com/image1.jpg\",\n        \"http://example.com/image2.jpg\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": true,\n      \"taxable\": true,\n      \"enabled\": true\n    }\n  ],\n  \"tax\": 22.5,\n  \"shippingAndHandling\": 0,\n  \"properties\": {\n    \"currency\": \"USD\"\n  },\n  \"suppressTriggers\": false,\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6550e7a3-9b75-442e-b92f-92232ac042af",
+          "name": "Get a single order",
+          "request": {
+            "name": "Get a single order",
+            "description": {
+              "content": "Retrieves the specified order from the Cordial database. The order is defined by its unique order `id` value. For example, /orders/112233 would return the response data for the order with the orderID value of <b>112233</b>.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields to include (can be many, comma-separated)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Order id value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eec24fbd-c842-4a2e-beae-d0af1e04559f",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderID\": \"33451\",\n  \"purchaseDate\": \"1998-04-20T07:14:09.305Z\",\n  \"cID\": \"5f5f89b88b265d3b6563c3b5\",\n  \"linkID\": \"5f5f89b88b265d3b6563c3b5\",\n  \"status\": \"string\",\n  \"mcID\": \"1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1\",\n  \"storeID\": \"abc123\",\n  \"customerID\": \"string\",\n  \"shippingAddress\": {\n    \"name\": \"Mark Smith\",\n    \"address\": \"13130 Silverlake Road\",\n    \"city\": \"Hollywood\",\n    \"state\": \"CA\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"USA\"\n  },\n  \"billingAddress\": {\n    \"name\": \"Mark Smith\",\n    \"address\": \"13130 Silverlake Road\",\n    \"city\": \"Hollywood\",\n    \"state\": \"CA\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"USA\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"1234abcd\",\n      \"sku\": \"RF-WP33286-21\",\n      \"category\": \"Office Supplies\",\n      \"name\": \"S22-Refrigerator\",\n      \"description\": \"Great product!\",\n      \"qty\": 2,\n      \"itemPrice\": 22.95,\n      \"salePrice\": 20.99,\n      \"url\": \"http://myproduct.com\",\n      \"attr\": {\n        \"size\": \"large\",\n        \"color\": \"red\"\n      },\n      \"productType\": \"physical\",\n      \"manufacturerName\": \"Acme Supplies\",\n      \"UPCCode\": \"8 34460 00372 4\",\n      \"images\": [\n        \"http://example.com/image1.jpg\",\n        \"http://example.com/image2.jpg\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": true,\n      \"taxable\": true,\n      \"enabled\": true\n    },\n    {\n      \"productID\": \"1234abcd\",\n      \"sku\": \"RF-WP33286-21\",\n      \"category\": \"Office Supplies\",\n      \"name\": \"S22-Refrigerator\",\n      \"description\": \"Great product!\",\n      \"qty\": 2,\n      \"itemPrice\": 22.95,\n      \"salePrice\": 20.99,\n      \"url\": \"http://myproduct.com\",\n      \"attr\": {\n        \"size\": \"large\",\n        \"color\": \"red\"\n      },\n      \"productType\": \"physical\",\n      \"manufacturerName\": \"Acme Supplies\",\n      \"UPCCode\": \"8 34460 00372 4\",\n      \"images\": [\n        \"http://example.com/image1.jpg\",\n        \"http://example.com/image2.jpg\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": true,\n      \"taxable\": true,\n      \"enabled\": true\n    }\n  ],\n  \"totalDiscountAmount\": 6620.21454294327,\n  \"discountApplication\": {\n    \"type\": \"fixed\",\n    \"amount\": 5469.764144454725\n  },\n  \"tax\": 22.5,\n  \"shippingAndHandling\": 0,\n  \"properties\": {\n    \"currency\": \"USD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00163da0-7792-4c61-af73-7673a1f0aaff",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af62c059-3cf1-465e-ac8b-68f41c73f1bf",
+          "name": "Delete order",
+          "request": {
+            "name": "Delete order",
+            "description": {
+              "content": "Deletes an order from the Cordial database. The order is defined by its unique order `id` value. For example, /orders/22345 would delete the order with the orderID value of <b>22345</b>.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Order id value."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b0a63f0c-9386-4aa8-86fc-31f360100f33",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c649ba39-bcc7-4fc8-aa9c-f924b487ff95",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Order id value."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86bd78ca-8af7-46d9-ba7e-6c50ffb5a643",
+          "name": "Add an order",
+          "request": {
+            "name": "Add an order",
+            "description": {
+              "content": "Creates a new order in the Cordial database using the appropriate JSON body. An order can include one or more items. Posting more than once for the same \"orderID\" will generate an error.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderID\": \"<string>\",\n  \"purchaseDate\": \"<dateTime>\",\n  \"cID\": \"<string>\",\n  \"linkID\": \"<string>\",\n  \"status\": \"<string>\",\n  \"mcID\": \"<string>\",\n  \"storeID\": \"<string>\",\n  \"customerID\": \"<string>\",\n  \"shippingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"billingAddress\": {\n    \"name\": \"<string>\",\n    \"address\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"salePrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    },\n    {\n      \"productID\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"category\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"qty\": \"<integer>\",\n      \"itemPrice\": \"<float>\",\n      \"salePrice\": \"<float>\",\n      \"url\": \"<string>\",\n      \"attr\": \"<object>\",\n      \"productType\": \"<string>\",\n      \"manufacturerName\": \"<string>\",\n      \"UPCCode\": \"<string>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": \"<boolean>\",\n      \"taxable\": \"<boolean>\",\n      \"enabled\": \"<boolean>\"\n    }\n  ],\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  },\n  \"tax\": \"<float>\",\n  \"shippingAndHandling\": \"<number>\",\n  \"properties\": \"<object>\",\n  \"suppressTriggers\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "15c9440a-17c5-4511-973a-a930d488ef79",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderID\": \"33451\",\n  \"purchaseDate\": \"<dateTime>\",\n  \"cID\": \"5f5f89b88b265d3b6563c3b5\",\n  \"linkID\": \"5f5f89b88b265d3b6563c3b5\",\n  \"status\": \"<string>\",\n  \"mcID\": \"1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1\",\n  \"storeID\": \"abc123\",\n  \"customerID\": \"<string>\",\n  \"shippingAddress\": {\n    \"name\": \"Mark Smith\",\n    \"address\": \"13130 Silverlake Road\",\n    \"city\": \"Hollywood\",\n    \"state\": \"CA\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"USA\"\n  },\n  \"billingAddress\": {\n    \"name\": \"Mark Smith\",\n    \"address\": \"13130 Silverlake Road\",\n    \"city\": \"Hollywood\",\n    \"state\": \"CA\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"USA\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"1234abcd\",\n      \"sku\": \"RF-WP33286-21\",\n      \"category\": \"Office Supplies\",\n      \"name\": \"S22-Refrigerator\",\n      \"description\": \"Great product!\",\n      \"qty\": 2,\n      \"itemPrice\": 22.95,\n      \"salePrice\": 20.99,\n      \"url\": \"http://myproduct.com\",\n      \"attr\": {\n        \"size\": \"large\",\n        \"color\": \"red\"\n      },\n      \"productType\": \"physical\",\n      \"manufacturerName\": \"Acme Supplies\",\n      \"UPCCode\": \"8 34460 00372 4\",\n      \"images\": [\n        \"http://example.com/image1.jpg\",\n        \"http://example.com/image2.jpg\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": true,\n      \"taxable\": true,\n      \"enabled\": true\n    },\n    {\n      \"productID\": \"1234abcd\",\n      \"sku\": \"RF-WP33286-21\",\n      \"category\": \"Office Supplies\",\n      \"name\": \"S22-Refrigerator\",\n      \"description\": \"Great product!\",\n      \"qty\": 2,\n      \"itemPrice\": 22.95,\n      \"salePrice\": 20.99,\n      \"url\": \"http://myproduct.com\",\n      \"attr\": {\n        \"size\": \"large\",\n        \"color\": \"red\"\n      },\n      \"productType\": \"physical\",\n      \"manufacturerName\": \"Acme Supplies\",\n      \"UPCCode\": \"8 34460 00372 4\",\n      \"images\": [\n        \"http://example.com/image1.jpg\",\n        \"http://example.com/image2.jpg\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": true,\n      \"taxable\": true,\n      \"enabled\": true\n    }\n  ],\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  },\n  \"tax\": 22.5,\n  \"shippingAndHandling\": 0,\n  \"properties\": {\n    \"currency\": \"USD\"\n  },\n  \"suppressTriggers\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6939d0b-0c0d-470e-9b18-17720e4be073",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderID\": \"33451\",\n  \"purchaseDate\": \"<dateTime>\",\n  \"cID\": \"5f5f89b88b265d3b6563c3b5\",\n  \"linkID\": \"5f5f89b88b265d3b6563c3b5\",\n  \"status\": \"<string>\",\n  \"mcID\": \"1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1\",\n  \"storeID\": \"abc123\",\n  \"customerID\": \"<string>\",\n  \"shippingAddress\": {\n    \"name\": \"Mark Smith\",\n    \"address\": \"13130 Silverlake Road\",\n    \"city\": \"Hollywood\",\n    \"state\": \"CA\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"USA\"\n  },\n  \"billingAddress\": {\n    \"name\": \"Mark Smith\",\n    \"address\": \"13130 Silverlake Road\",\n    \"city\": \"Hollywood\",\n    \"state\": \"CA\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"USA\"\n  },\n  \"items\": [\n    {\n      \"productID\": \"1234abcd\",\n      \"sku\": \"RF-WP33286-21\",\n      \"category\": \"Office Supplies\",\n      \"name\": \"S22-Refrigerator\",\n      \"description\": \"Great product!\",\n      \"qty\": 2,\n      \"itemPrice\": 22.95,\n      \"salePrice\": 20.99,\n      \"url\": \"http://myproduct.com\",\n      \"attr\": {\n        \"size\": \"large\",\n        \"color\": \"red\"\n      },\n      \"productType\": \"physical\",\n      \"manufacturerName\": \"Acme Supplies\",\n      \"UPCCode\": \"8 34460 00372 4\",\n      \"images\": [\n        \"http://example.com/image1.jpg\",\n        \"http://example.com/image2.jpg\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": true,\n      \"taxable\": true,\n      \"enabled\": true\n    },\n    {\n      \"productID\": \"1234abcd\",\n      \"sku\": \"RF-WP33286-21\",\n      \"category\": \"Office Supplies\",\n      \"name\": \"S22-Refrigerator\",\n      \"description\": \"Great product!\",\n      \"qty\": 2,\n      \"itemPrice\": 22.95,\n      \"salePrice\": 20.99,\n      \"url\": \"http://myproduct.com\",\n      \"attr\": {\n        \"size\": \"large\",\n        \"color\": \"red\"\n      },\n      \"productType\": \"physical\",\n      \"manufacturerName\": \"Acme Supplies\",\n      \"UPCCode\": \"8 34460 00372 4\",\n      \"images\": [\n        \"http://example.com/image1.jpg\",\n        \"http://example.com/image2.jpg\"\n      ],\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"properties\": \"<object>\",\n      \"inStock\": true,\n      \"taxable\": true,\n      \"enabled\": true\n    }\n  ],\n  \"discountApplication\": {\n    \"type\": \"<string>\",\n    \"amount\": \"<float>\"\n  },\n  \"tax\": 22.5,\n  \"shippingAndHandling\": 0,\n  \"properties\": {\n    \"currency\": \"USD\"\n  },\n  \"suppressTriggers\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5332bfc-6211-4ad6-bdb2-822144fdfb71",
+          "name": "Get orders",
+          "request": {
+            "name": "Get orders",
+            "description": {
+              "content": "Retrieves orders from the Cordial database. Using query string parameters, it is possible to filter the response by contact ID (`cID`) or `email` address value to retrieve all orders for a single contact. In addition, the response can be filtered by a specified order purchase date or date range. The GET /orders endpoint can retrieve up to 10,000 records at a time. To page through more than 10,000 records, multiple queries must be made with manually adjusted parameters for each.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields to include (can be many, comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "cID",
+                  "value": "<string>",
+                  "description": "Filter records for a specific contact using the Cordial database contact ID (cID) value."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "Filter records for a specific contact using the email address value."
+                },
+                {
+                  "disabled": false,
+                  "key": "purchaseDate",
+                  "value": "<string>",
+                  "description": "Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+                },
+                {
+                  "disabled": false,
+                  "key": "purchaseDate[lt]",
+                  "value": "<string>",
+                  "description": "Filter orders that occurred before this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+                },
+                {
+                  "disabled": false,
+                  "key": "purchaseDate[gt]",
+                  "value": "<string>",
+                  "description": "Filter orders that occurred after this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+                },
+                {
+                  "disabled": false,
+                  "key": "purchaseDate[lte]",
+                  "value": "<string>",
+                  "description": "Filter orders that occurred before or at this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+                },
+                {
+                  "disabled": false,
+                  "key": "purchaseDate[gte]",
+                  "value": "<string>",
+                  "description": "Filter orders that occurred after or at this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Specific page number to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Number or records per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "Field by which results should be sorted."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_dir",
+                  "value": "<string>",
+                  "description": "Direction to sort by. Works in conjunction with `sort_by` (e.g. asc, desc)."
+                },
+                {
+                  "disabled": false,
+                  "key": "return_count",
+                  "value": "false",
+                  "description": "Show the total count of records returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9bdf7289-d480-41aa-b5bd-1deac171fc39",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_dir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_count",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"orderID\": \"33451\",\n    \"purchaseDate\": \"1962-08-12T16:24:35.077Z\",\n    \"cID\": \"5f5f89b88b265d3b6563c3b5\",\n    \"linkID\": \"5f5f89b88b265d3b6563c3b5\",\n    \"status\": \"string\",\n    \"mcID\": \"1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1\",\n    \"storeID\": \"abc123\",\n    \"customerID\": \"string\",\n    \"shippingAddress\": {\n      \"name\": \"Mark Smith\",\n      \"address\": \"13130 Silverlake Road\",\n      \"city\": \"Hollywood\",\n      \"state\": \"CA\",\n      \"postalCode\": \"<string>\",\n      \"country\": \"USA\"\n    },\n    \"billingAddress\": {\n      \"name\": \"Mark Smith\",\n      \"address\": \"13130 Silverlake Road\",\n      \"city\": \"Hollywood\",\n      \"state\": \"CA\",\n      \"postalCode\": \"<string>\",\n      \"country\": \"USA\"\n    },\n    \"items\": [\n      {\n        \"productID\": \"1234abcd\",\n        \"sku\": \"RF-WP33286-21\",\n        \"category\": \"Office Supplies\",\n        \"name\": \"S22-Refrigerator\",\n        \"description\": \"Great product!\",\n        \"qty\": 2,\n        \"itemPrice\": 22.95,\n        \"salePrice\": 20.99,\n        \"url\": \"http://myproduct.com\",\n        \"attr\": {\n          \"size\": \"large\",\n          \"color\": \"red\"\n        },\n        \"productType\": \"physical\",\n        \"manufacturerName\": \"Acme Supplies\",\n        \"UPCCode\": \"8 34460 00372 4\",\n        \"images\": [\n          \"http://example.com/image1.jpg\",\n          \"http://example.com/image2.jpg\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"properties\": \"<object>\",\n        \"inStock\": true,\n        \"taxable\": true,\n        \"enabled\": true\n      },\n      {\n        \"productID\": \"1234abcd\",\n        \"sku\": \"RF-WP33286-21\",\n        \"category\": \"Office Supplies\",\n        \"name\": \"S22-Refrigerator\",\n        \"description\": \"Great product!\",\n        \"qty\": 2,\n        \"itemPrice\": 22.95,\n        \"salePrice\": 20.99,\n        \"url\": \"http://myproduct.com\",\n        \"attr\": {\n          \"size\": \"large\",\n          \"color\": \"red\"\n        },\n        \"productType\": \"physical\",\n        \"manufacturerName\": \"Acme Supplies\",\n        \"UPCCode\": \"8 34460 00372 4\",\n        \"images\": [\n          \"http://example.com/image1.jpg\",\n          \"http://example.com/image2.jpg\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"properties\": \"<object>\",\n        \"inStock\": true,\n        \"taxable\": true,\n        \"enabled\": true\n      }\n    ],\n    \"totalDiscountAmount\": 3726.9877189756016,\n    \"discountApplication\": {\n      \"type\": \"fixed\",\n      \"amount\": 1046.2594785043443\n    },\n    \"tax\": 22.5,\n    \"shippingAndHandling\": 0,\n    \"properties\": {\n      \"currency\": \"USD\"\n    }\n  },\n  {\n    \"orderID\": \"33451\",\n    \"purchaseDate\": \"1960-06-10T14:23:28.863Z\",\n    \"cID\": \"5f5f89b88b265d3b6563c3b5\",\n    \"linkID\": \"5f5f89b88b265d3b6563c3b5\",\n    \"status\": \"string\",\n    \"mcID\": \"1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1\",\n    \"storeID\": \"abc123\",\n    \"customerID\": \"string\",\n    \"shippingAddress\": {\n      \"name\": \"Mark Smith\",\n      \"address\": \"13130 Silverlake Road\",\n      \"city\": \"Hollywood\",\n      \"state\": \"CA\",\n      \"postalCode\": \"<string>\",\n      \"country\": \"USA\"\n    },\n    \"billingAddress\": {\n      \"name\": \"Mark Smith\",\n      \"address\": \"13130 Silverlake Road\",\n      \"city\": \"Hollywood\",\n      \"state\": \"CA\",\n      \"postalCode\": \"<string>\",\n      \"country\": \"USA\"\n    },\n    \"items\": [\n      {\n        \"productID\": \"1234abcd\",\n        \"sku\": \"RF-WP33286-21\",\n        \"category\": \"Office Supplies\",\n        \"name\": \"S22-Refrigerator\",\n        \"description\": \"Great product!\",\n        \"qty\": 2,\n        \"itemPrice\": 22.95,\n        \"salePrice\": 20.99,\n        \"url\": \"http://myproduct.com\",\n        \"attr\": {\n          \"size\": \"large\",\n          \"color\": \"red\"\n        },\n        \"productType\": \"physical\",\n        \"manufacturerName\": \"Acme Supplies\",\n        \"UPCCode\": \"8 34460 00372 4\",\n        \"images\": [\n          \"http://example.com/image1.jpg\",\n          \"http://example.com/image2.jpg\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"properties\": \"<object>\",\n        \"inStock\": true,\n        \"taxable\": true,\n        \"enabled\": true\n      },\n      {\n        \"productID\": \"1234abcd\",\n        \"sku\": \"RF-WP33286-21\",\n        \"category\": \"Office Supplies\",\n        \"name\": \"S22-Refrigerator\",\n        \"description\": \"Great product!\",\n        \"qty\": 2,\n        \"itemPrice\": 22.95,\n        \"salePrice\": 20.99,\n        \"url\": \"http://myproduct.com\",\n        \"attr\": {\n          \"size\": \"large\",\n          \"color\": \"red\"\n        },\n        \"productType\": \"physical\",\n        \"manufacturerName\": \"Acme Supplies\",\n        \"UPCCode\": \"8 34460 00372 4\",\n        \"images\": [\n          \"http://example.com/image1.jpg\",\n          \"http://example.com/image2.jpg\"\n        ],\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"properties\": \"<object>\",\n        \"inStock\": true,\n        \"taxable\": true,\n        \"enabled\": true\n      }\n    ],\n    \"totalDiscountAmount\": 1084.2926400735853,\n    \"discountApplication\": {\n      \"type\": \"fixed\",\n      \"amount\": 8678.554316255022\n    },\n    \"tax\": 22.5,\n    \"shippingAndHandling\": 0,\n    \"properties\": {\n      \"currency\": \"USD\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3e20a2c-9d5c-4a92-b9a2-5da3ed845a87",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_dir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_count",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f53445ad-8b1d-452a-b977-35af51a7ef72",
+              "name": "Filter incorrect",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "purchaseDate[gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_dir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "return_count",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"message\": \"Time value is incorrect\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9d058350-5b43-41d2-9069-6b742e58e268",
+    "name": "Cordial Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged orders across 2 of this provider's published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

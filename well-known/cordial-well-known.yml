@@ -1,11 +1,16 @@
-generated: '2026-08-04'
+generated: '2026-08-14'
 method: searched
 source: live probes of every host in apis.yml and every OpenAPI servers[] host
 note: >-
-  Four hosts were probed against six well-known paths each (24 probes). Only the MCP host publishes
-  anything. api.cordial.io answers 401 for every path including /.well-known/*, which is a blanket auth
-  gate rather than a published document — recorded as 401, not as a hit. developers.cordial.com and
-  cordial.com return 404 HTML.
+  Re-probed 2026-08-14, adding the three hosts the 2026-08-04 pass had not covered
+  (admin.cordial.io, support.cordial.com, help.cordial.com). Seven hosts, eight paths each.
+  Only the MCP host publishes anything, and only the two OAuth documents. api.cordial.io answers
+  401 for every path including /.well-known/*, which is a blanket auth gate rather than a published
+  document — recorded as 401, not as a hit. admin.cordial.io answers 200 with an SPA HTML shell for
+  every path probed, which is the dominant well-known false positive and is recorded as a miss, not
+  a hit. help.cordial.com (the new docs host linked from developers.cordial.com) resets the
+  connection after serving an SPA shell — no path is machine-readable. developers.cordial.com,
+  support.cordial.com and cordial.com return 404 HTML.
 
 hosts:
 - host: https://mcp.cordial.io
@@ -53,13 +58,56 @@ hosts:
   - {path: /.well-known/agent-card.json, status: 401}
   - {path: /.well-known/agent.json, status: 401}
 
+- host: https://admin.cordial.io
+  note: >-
+    FALSE POSITIVE — REJECTED. The Cordial application login answers HTTP 200 with the same
+    single-page-app HTML shell (`<html data-frontend="https://static.cordial.io/...">`) for every
+    /.well-known/* path, including /.well-known/agent-card.json and /.well-known/agent.json. A 200
+    that returns an HTML shell is not a document; none of these is counted as a hit, and no
+    AgentCard or SecurityTxt pointer is emitted from this host.
+  spa_catch_all: true
+  documents:
+  - {path: /.well-known/security.txt, status: 200, content: html-spa-shell, hit: false}
+  - {path: /.well-known/openid-configuration, status: 200, content: html-spa-shell, hit: false}
+  - {path: /.well-known/oauth-authorization-server, status: 200, content: html-spa-shell, hit: false}
+  - {path: /.well-known/oauth-protected-resource, status: 200, content: html-spa-shell, hit: false}
+  - {path: /.well-known/api-catalog, status: 200, content: html-spa-shell, hit: false}
+  - {path: /.well-known/ai-plugin.json, status: 200, content: html-spa-shell, hit: false}
+  - {path: /.well-known/agent-card.json, status: 200, content: html-spa-shell, hit: false}
+  - {path: /.well-known/agent.json, status: 200, content: html-spa-shell, hit: false}
+
+- host: https://support.cordial.com
+  note: 'Zendesk knowledge base. Clean 404 HTML on every path.'
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+
+- host: https://help.cordial.com
+  note: >-
+    New docs host linked from developers.cordial.com. Serves a JS-rendered SPA shell and then
+    resets the connection (curl exit 000, no final status code) on every path, including /llms.txt.
+    Not a discovery surface; nothing machine-readable was recoverable.
+  documents:
+  - {path: /.well-known/security.txt, status: null, result: connection-reset, content: html-spa-shell}
+  - {path: /.well-known/agent-card.json, status: null, result: connection-reset, content: html-spa-shell}
+  - {path: /.well-known/agent.json, status: null, result: connection-reset, content: html-spa-shell}
+  - {path: /llms.txt, status: null, result: connection-reset, content: html-spa-shell}
+
 summary:
-  hosts_probed: 4
+  hosts_probed: 7
   paths_probed_per_host: 8
   documents_found: 2
   security_txt: none
   api_catalog: none
   agent_card: none
+  spa_false_positives: [admin.cordial.io]
 
 x-evidence:
-  fetched: '2026-08-04'
+  fetched: '2026-08-14'
+  previous_pass: '2026-08-04'

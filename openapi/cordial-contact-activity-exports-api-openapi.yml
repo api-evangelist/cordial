@@ -1,0 +1,442 @@
+openapi: 3.2.0
+info:
+  title: Cordial contact activity exports API
+  termsOfService: https://cordial.zendesk.com
+  version: '1.0'
+  description: 'Operations tagged contact activity exports across 2 of this provider''s published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: contact activity exports
+paths:
+  /v1/contactactivityexport:
+    post:
+      security:
+      - basicAuth: []
+      summary: Create an event export job
+      operationId: createExportCAJob
+      tags:
+      - contact activity exports
+      responses:
+        '200':
+          description: jobId
+        '422':
+          description: Unprocessable Entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceCAE'
+        description: Export object that needs to be getting from the system
+        required: true
+  /v2/contactactivityexport:
+    post:
+      security:
+      - basicAuth: []
+      description: Creates an export job to download and store a file of contact activities to an external location. The exported file can be downloaded via Cordial UI, via FTP/SFTP, sent to Amazon S3 bucket, or sent to Google Cloud Storage bucket.
+      summary: Create an event export job
+      operationId: createExportCAJob
+      tags:
+      - contact activity exports
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsExportResponse'
+        '400':
+          description: Import destination config error
+          $ref: '#/components/responses/EventsExportDestinationConfigError'
+        '406':
+          description: Import configuration error
+          $ref: '#/components/responses/EventsExportConfigError'
+        '415':
+          description: Unsupported Media Type
+          $ref: '#/components/responses/incorrectmediatype'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceCAE_2'
+        description: JSON body information to create the export job.
+        required: true
+components:
+  schemas:
+    SourceCAE_2:
+      title: Source contactactivity export
+      type: object
+      required:
+      - exportType
+      - name
+      - destination
+      - selected_timeframe_start
+      - selected_timeframe_end
+      properties:
+        name:
+          type: string
+          description: Defines the export file name. If provided, this value will be displayed next to the job ID on the Jobs status page.
+        exportType:
+          description: 'Defines the file type to be exported. Possible values: CSV, JSON, TXT.'
+          type: string
+          example: csv
+        delimiter:
+          type: string
+          description: Character used to break up export file columns. Only used if ExportType is set to TXT. Defaults to `,` if not specified.
+          example: ','
+        destination:
+          description: This parameter is only required if SFTP, FTP, S3, or Google Cloud Storage (GCS) is used as the destination. Destination type "AWS" should be used if the file is to be downloaded via the UI.
+          $ref: '#/components/schemas/DestinationObject'
+        columnHeaders:
+          type: array
+          description: For use when explicitly defining the export file column headers. A <b>JSON</b> file type will export all column headers if none are specified.
+          items:
+            $ref: '#/components/schemas/ColumnHeaders_2'
+        showHeader:
+          type: boolean
+          description: 'For use when export file type is <b>CSV</b> to determine if the first row will display column names. Possible values: true, false.'
+        selected_timeframe_start:
+          type: string
+          format: date-time
+          description: Start time for the export time period (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        selected_timeframe_end:
+          type: string
+          format: date-time
+          description: End time for the export time period (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        selected_action_name:
+          type: string
+          description: 'Defines the message or custom event to be exported. For use when exporting a <b>single</b> action type. Possible values: message-sent, open, click, optout, bounce, complaint, custom.'
+          example: message-sent
+        selected_action_names:
+          type: array
+          items:
+            type: string
+          description: An array of message or custom events to be exported. For use when exporting <b>more than one</b> event (e.g. ["message-sent","open","click","customEvent"].
+          example:
+          - open
+          - click
+          - bounce
+          - optout
+        selected_message_type:
+          type: string
+          description: 'Defines the message type for which events are to be exported. Possible values: batch, automation.'
+        showAllProperties:
+          type: boolean
+          description: 'For use when `selected_action_name` is supplied (ex: bounce). When true, will export columns for all event system properties. Event system properties can also be defined in the `columnHeaders` object. Possible values: true, false.'
+        selected_message_id:
+          type: string
+          description: 'Defines the message ID for which events are to to be exported. Possible values: bmID, mdtID.'
+        limitRecordsPerFile:
+          type: integer
+          description: Defines the number of exported records per file. If no value is passed, all records that match the filters will be exported in one file. Default is `0`.
+          example: '1000'
+        compress:
+          type: boolean
+          description: 'Compresses the exported file. If set to `true`, the file is compressed using GZIP with the file extension <b>.gz</b> added to the filename(s). Possible values: true, false.'
+        selected_contact:
+          type: string
+          description: 'Export only the activities associated with the specified contact record. Possible values: a valid contact identifier value.'
+        selected_audience_key:
+          type: string
+          description: Limit export results to a specific audience using a saved audience rule name (e.g. 30_Day_Engaged).
+          example: vip_members
+        confirmEmail:
+          type: string
+          description: Email address to send an administrative alert when the job is done running.
+        additionalJsonlFields:
+          type: array
+          items:
+            type: string
+          description: Additional fields to append to each object in the JSON export. Supported only with JSON file type exports.
+        contactFields:
+          type: array
+          items:
+            type: string
+          example:
+          - channels.sms.address
+          - extPK
+          - first_name
+          description: Additional contact attributes to append to each object in the export.
+        selected_channel:
+          type: string
+          example: email
+          description: Channel name available on account.
+        sendType:
+          type: string
+          example: sms
+          description: 'SendType for sms channel type. Possible values: sms, mms'
+    EventsExportDestinationConfigError:
+      title: Export destination config error
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: The source.transport field is required.
+          description: 'Field is present if export destination configuration is wrong. Possible errors: [''The destination.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'', ''The destination.path field is required.'', ''The destination.transport field is required.'', ''The selected destination.transport is invalid.'', ''The destination.aws access key id field is required.'', ''The destination.aws secret access key field is required.'', ''The destination.aws bucket field is required.'', ''The destination.aws region field is required.'', ''The columns field is required.'']'
+    MediaTypeIsIncorrect:
+      title: Unsupported Media Type
+      description: Unsupported Media Type
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: UNSUPPORTED_MEDIA_TYPE
+        message:
+          type: string
+          example: 'Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.'
+    ColumnHeaders:
+      title: Source
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: 'Name of column in system (ats - action date, message_sent - message sent time, msID - message ID, a - event name, email - contact) '
+        label:
+          type: string
+          description: Label for column which will be represented in file
+    EventsExportResponse:
+      title: Contact activity export
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
+    DestinationCAE:
+      title: Destination
+      type: object
+      required:
+      - type
+      - port
+      properties:
+        type:
+          type: string
+          description: Type of report
+          enum:
+          - aws
+          - ftp
+          - sftp
+          - s3
+        server:
+          type: string
+          description: (required for ftp or sftp)
+        port:
+          type: integer
+          description: (required for ftp or sftp)
+        username:
+          type: string
+          description: (required for ftp or sftp)
+        password:
+          type: string
+          description: (required for ftp or sftp)
+        path:
+          type: string
+          description: (required for ftp,sftp,s3)
+        aws_access_key_id:
+          type: string
+          description: (required for s3)
+        aws_secret_access_key:
+          type: string
+          description: (required for s3)
+        aws_bucket:
+          type: string
+          description: (required for s3)
+        aws_region:
+          type: string
+          description: (required for s3)
+    DestinationObject:
+      title: Destination
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: 'Defines the destination type. Possible values: AWS (should be used if the file is to be downloaded via the Cordial UI), FTP, SFTP, S3, GCS, AZUREBLOB.'
+        aws_access_key_id:
+          type: string
+          description: Defines the public AWS access key ID. Required if destination is S3 and IAM role is not configured.
+        aws_secret_access_key:
+          type: string
+          description: Defines the secret AWS access key. Required if destination is S3 and IAM role is not configured.
+        aws_bucket:
+          type: string
+          description: Defines the AWS bucket name. Required if destination is S3.
+        aws_region:
+          type: string
+          description: Defines the AWS region (e.g. us-west-2). Required if destination is S3.
+        server:
+          type: string
+          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP destinations.
+          example: sftp.example.com
+        port:
+          type: integer
+          description: Defines the port number for the FTP or SFTP server (e.g. 22).
+          example: 22
+        username:
+          type: string
+          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        password:
+          type: string
+          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        savedKey:
+          type: string
+          description: SFTP public key authentication key `name` if using SFTP public key authentication instead of password.
+        path:
+          type: string
+          description: Path to folder where the export file will be stored. Required if destination is FTP, SFTP, S3, GCS, or AZUREBLOB.
+        gcs_bucket:
+          type: string
+          description: Defines the GCS bucket name. Required if destination is GCS.
+        account:
+          type: string
+          description: Defines the Azure Blob Storage account name. Required if destination is AZUREBLOB.
+        container:
+          type: string
+          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
+    ColumnHeaders_2:
+      title: Source
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Data field name as it appears in the Cordial database (e.g. ats, email msID, a). For use when explicitly defining the output column headers.
+        label:
+          type: string
+          description: Custom column header label to accompany the field name (e.g. action timestamp, email address, message ID, action name).
+    SourceCAE:
+      title: Source contactactivity  export
+      type: object
+      required:
+      - name
+      - destination
+      - selected_timeframe_start
+      - selected_timeframe_end
+      properties:
+        name:
+          type: string
+          description: File name
+        exportType:
+          description: Type of report
+          type: string
+          enum:
+          - csv
+          - json
+        destination:
+          $ref: '#/components/schemas/DestinationCAE'
+        columnHeaders:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnHeaders'
+        showHeader:
+          type: boolean
+          description: Add header in export file
+        selected_timeframe_start:
+          type: string
+          format: date-time
+        selected_timeframe_end:
+          type: string
+          format: date-time
+        selected_action_name:
+          type: string
+          description: Messages or Custom events ('open','click' etc.)
+        selected_action_names:
+          type: array
+          items:
+            type: string
+          description: Array of messages or custom events ['open','click' etc.]
+        selected_message_type:
+          type: string
+          enum:
+          - batch
+          - automation
+        showAllProperties:
+          type: boolean
+          default: false
+          description: If  when true AND 'selected_action_name' is specified, will export columns for all event properties
+        selected_message_id:
+          type: string
+          description: Depends of `selected_message_type` can be bmID or mdtID
+        limitRecordsPerFile:
+          type: integer
+          description: Count of records per file, default `0`
+        compress:
+          type: boolean
+          default: false
+          description: If true then gzip and add .gz to filename(s)
+        selected_contact:
+          type: string
+          description: Primary key of contact
+        selected_audience_key:
+          type: string
+          description: 'Audience name for filtering '
+        confirmEmail:
+          type: string
+        additionalJsonlFields:
+          type: array
+          items:
+            type: string
+          description: Additional fields to append to each object in the JSON export, supported only with json export.
+    EventsExportConfigError:
+      title: Export config error
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Please use only one from existing filters 'selected_action_name' OR 'selected_action_names'
+          description: 'Field is present if export configuration is wrong. Possible errors: [''Please use only one from existing filters ''selected_action_name'' OR ''selected_action_names'''', ''Field ''selected_message_type'' should be specified'', ''Incorrect format for ''selected_action_names'''', ''Incorrect format for ''additionalJsonlFields''.'', ''Please use only one from existing filters ''selected_audience_key'' OR ''selected_contact'''', ''Such contact :selected_contact does not exist.'', ''Audience with name :selected_audience_key does not exist.'', ''Field ''exportType'' should be specified'', ''''selected_timeframe_end'' cannot be in past in comparison with ''selected_timeframe_start'''']'
+  responses:
+    incorrectmediatype:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MediaTypeIsIncorrect'
+    EventsExportDestinationConfigError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EventsExportDestinationConfigError'
+    EventsExportConfigError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EventsExportConfigError'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
+x-refined-from:
+- cordial-v1-openapi-original.json
+- cordial-v2-openapi-original.json

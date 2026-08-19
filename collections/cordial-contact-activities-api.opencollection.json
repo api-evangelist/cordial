@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial contact activities API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "contact activities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/contactactivities",
+            "params": [
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "can be searched with modifiers (lt, gt, lte, gte, between.start, between.end)"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "can be click, open, send, or any user defined actions"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "search contact primary key"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Number of page"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Count items on page"
+              },
+              {
+                "name": "return_count",
+                "value": "",
+                "type": "query",
+                "description": "Return count of records"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get events"
+        },
+        {
+          "info": {
+            "name": "Add a new event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/contactactivities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a new event"
+        },
+        {
+          "info": {
+            "name": "Get events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/contactactivities",
+            "params": [
+              {
+                "name": "time[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities that occurred before this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+              },
+              {
+                "name": "time[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities that occurred after this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+              },
+              {
+                "name": "time[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities that occurred before or at this time (ISO 08601 format e.g. YYYY-MM-DDThh:mm:ss)."
+              },
+              {
+                "name": "time[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities that occurred after or at this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss)."
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a specific event (e.g. click, open, send, or a custom-named event)."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by contact email address value."
+              },
+              {
+                "name": "mdtID",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by automation message delivery template ID (mdtID)."
+              },
+              {
+                "name": "mcID",
+                "value": "",
+                "type": "query",
+                "description": "Filter by message contact ID (mcID)."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number or records per page."
+              },
+              {
+                "name": "return_count",
+                "value": "",
+                "type": "query",
+                "description": "Show the total count of records returned."
+              },
+              {
+                "name": "contactFields",
+                "value": "",
+                "type": "query",
+                "description": "Specify additional contact attributes that should be added in each event."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves contact activities. Response data can be filtered for a specific contact using the `email` and `mcID` query string parameters."
+        },
+        {
+          "info": {
+            "name": "Add a new event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/contactactivities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a new contact activity using the appropriate JSON body."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

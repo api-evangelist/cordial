@@ -1,0 +1,374 @@
+openapi: 3.2.0
+info:
+  title: Cordial analytics messages API
+  termsOfService: https://cordial.zendesk.com
+  version: '1.0'
+  description: 'Operations tagged analytics messages across 2 of this provider''s published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: analytics messages
+paths:
+  /v1/messageanalyticsexport:
+    post:
+      security:
+      - basicAuth: []
+      tags:
+      - analytics messages
+      operationId: exportMessageAnalytics
+      summary: Create a message report export job
+      responses:
+        '200':
+          description: jobId
+        '400':
+          description: Invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceAnalyticsMessage'
+        description: Attribute object that needs to be added to the system
+        required: true
+  /v2/messageanalyticsexport:
+    post:
+      security:
+      - basicAuth: []
+      tags:
+      - analytics messages
+      summary: Create a message report export job
+      description: Creates an export job to download and store a file of message analytics to an external location. The exported file can be downloaded via Cordial UI, FTP/SFTP, sent to Amazon S3 bucket, or sent to Google Cloud Storage bucket.<ul><li>Export status information is available through the jobs resource. To access the Jobs page via Cordial UI, click on the jobs icon at the top right of the application header.</li><li>Supported export file types are <b>CSV</b> and <b>JSON</b>.</li><li>Export files made available for download via the UI will be stored for 30 days from the export date.</li></ul>
+      operationId: exportMessageAnalytics
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageAnalyticsExportResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageAnalyticsExportError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceAnalyticsMessage_2'
+        description: JSON body information to create the export job.
+        required: true
+components:
+  schemas:
+    MessageAnalyticsExportError:
+      title: MessageAnalyticsExportError
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Error validation message
+          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
+    ColumnHeaders:
+      title: Source
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: 'Name of column in system (ats - action date, message_sent - message sent time, msID - message ID, a - event name, email - contact) '
+        label:
+          type: string
+          description: Label for column which will be represented in file
+    DestinationObject:
+      title: Destination
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: 'Defines the destination type. Possible values: AWS (should be used if the file is to be downloaded via the Cordial UI), FTP, SFTP, S3, GCS, AZUREBLOB.'
+        aws_access_key_id:
+          type: string
+          description: Defines the public AWS access key ID. Required if destination is S3 and IAM role is not configured.
+        aws_secret_access_key:
+          type: string
+          description: Defines the secret AWS access key. Required if destination is S3 and IAM role is not configured.
+        aws_bucket:
+          type: string
+          description: Defines the AWS bucket name. Required if destination is S3.
+        aws_region:
+          type: string
+          description: Defines the AWS region (e.g. us-west-2). Required if destination is S3.
+        server:
+          type: string
+          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP destinations.
+          example: sftp.example.com
+        port:
+          type: integer
+          description: Defines the port number for the FTP or SFTP server (e.g. 22).
+          example: 22
+        username:
+          type: string
+          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        password:
+          type: string
+          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        savedKey:
+          type: string
+          description: SFTP public key authentication key `name` if using SFTP public key authentication instead of password.
+        path:
+          type: string
+          description: Path to folder where the export file will be stored. Required if destination is FTP, SFTP, S3, GCS, or AZUREBLOB.
+        gcs_bucket:
+          type: string
+          description: Defines the GCS bucket name. Required if destination is GCS.
+        account:
+          type: string
+          description: Defines the Azure Blob Storage account name. Required if destination is AZUREBLOB.
+        container:
+          type: string
+          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
+    SourceAnalyticsMessage_2:
+      title: Source message analytics export
+      type: object
+      required:
+      - name
+      - destination
+      - selected_timeframe_start
+      - selected_timeframe_end
+      properties:
+        name:
+          type: string
+          description: Defines the export job name. If provided, this value will be displayed next to the job ID on the Jobs status page.
+        fileName:
+          type: string
+          description: Defines the export file name.
+        exportType:
+          description: 'Defines the file type to be exported. Possible values: CSV, JSON.'
+          type: string
+        destination:
+          $ref: '#/components/schemas/DestinationObject'
+        selected_timeframe_start:
+          type: string
+          description: Start time for the export time period (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+          format: date-time
+        selected_timeframe_end:
+          type: string
+          description: End time for the export time period (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+          format: date-time
+        type:
+          type: string
+          enum:
+          - all
+          - both
+          - batch
+          - automation
+          - orchestration
+          description: 'Defines the message type for which the analysis is to be exported. Possible values: all, automation, batch, both (deprecated), orchestration.'
+        selected_channel:
+          type: string
+          description: Filter export results by the messaging channel (e.g. email). Note that some of your channels may have custom keys.
+        selected_message_name:
+          type: string
+          description: The name of a specific message for which the analysis is to be exported (e.g. April Promo).
+        selected_message_tags:
+          type: array
+          items:
+            type: string
+          description: Export analysis for messages with specific message tags (e.g. [“welcome”, “promo”]).
+        selected_message_tags_operator:
+          type: string
+          description: 'Export analysis for messages with any or all of the provided message tags. Possible values: any, all.'
+        selected_orchestration_name:
+          type: string
+          description: Orchestration name to filter messages. Not available when type is batch.
+        selected_orchestration_id:
+          type: string
+          description: Orchestration id to filter messages. Not available when type is batch.
+        selected_audience_names:
+          type: array
+          items:
+            type: string
+          description: Audience names to compare message KPIs by audiences (e.g. [“email_audience”, “sms_audience”]).
+        selected_audience_ids:
+          type: array
+          items:
+            type: string
+          description: Audience ids to compare message KPIs by audiences (e.g. [“6308c4ab4aa0aa5e7e0ff1811”, “3680c4ab4aa0aa5e7e0ff1812”]).
+        columnHeaders:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnHeaders_2'
+        showHeader:
+          type: boolean
+          description: 'For use when export file type is <b>CSV</b> to determine if the first row will display column names. Possible values: true, false.'
+        confirmEmail:
+          type: string
+          description: Email address to send an administrative alert when the job is done running.
+        limitRecordsPerFile:
+          type: integer
+          description: Defines the number of exported records per file. If no value is passed, all records that match the filters will be exported in one file. Default is `0`.
+        compress:
+          type: boolean
+          description: 'Compresses the exported file. If set to `true`, the file is compressed using GZIP with the file extension <b>.gz</b> added to the filename(s). Possible values: true, false.'
+        rollupAutomations:
+          type: boolean
+          description: Aggregate automation messages by template id.
+          example: false
+        viewMode:
+          type: string
+          enum:
+          - by_message
+          - by_message_type
+          - as_total
+          description: Show results as list of messages, list of message types, or as totals.
+        includeTotalsRow:
+          type: boolean
+          description: Include totals row at the bottom of the results.
+    MessageAnalyticsExportResponse:
+      title: MessageAnalyticsExport
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
+    SourceAnalyticsMessage:
+      title: Source message analytics export
+      type: object
+      required:
+      - name
+      - destination
+      - selected_timeframe_start
+      - selected_timeframe_end
+      properties:
+        name:
+          type: string
+          description: Export name, will be used as file name if fileName will be empty.
+        fileName:
+          type: string
+          description: File name
+        exportType:
+          description: Type of report
+          type: string
+          enum:
+          - csv
+        destination:
+          $ref: '#/components/schemas/DestinationAME'
+        selected_timeframe_start:
+          type: string
+          format: date-time
+        selected_timeframe_end:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+          - both
+          - batch
+          - automation
+          description: 'Defines the message type for which the analysis is to be exported. Possible values: batch, automation, both.'
+        selected_channel:
+          type: string
+          description: 'Channel name: ''email'' etc. '
+        selected_message_name:
+          type: string
+          description: Message name
+        selected_message_tags:
+          type: array
+          items:
+            type: string
+          description: Array of message tags
+        selected_message_tags_operator:
+          type: string
+          enum:
+          - any
+          - all
+        columnHeaders:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnHeaders'
+        showHeader:
+          type: boolean
+          description: Add header in export file
+        confirmEmail:
+          type: string
+        limitRecordsPerFile:
+          type: integer
+          description: Count of records per file, default `0`
+        compress:
+          type: boolean
+          default: false
+          description: If true then gzip and add .gz to filename(s)
+    ColumnHeaders_2:
+      title: Source
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Data field name as it appears in the Cordial database (e.g. ats, email msID, a). For use when explicitly defining the output column headers.
+        label:
+          type: string
+          description: Custom column header label to accompany the field name (e.g. action timestamp, email address, message ID, action name).
+    DestinationAME:
+      title: Destination
+      type: object
+      required:
+      - type
+      - port
+      properties:
+        type:
+          type: string
+          description: Type of report
+          enum:
+          - s3
+          - ftp
+          - sftp
+        server:
+          type: string
+          description: (required for ftp or sftp)
+        port:
+          type: integer
+        username:
+          type: string
+          description: (required for ftp or sftp)
+        password:
+          type: string
+          description: (required for ftp or sftp)
+        path:
+          type: string
+          description: (required for ftp,sftp,s3)
+        aws_access_key_id:
+          type: string
+          description: (required for s3)
+        aws_secret_access_key:
+          type: string
+          description: (required for s3)
+        aws_bucket:
+          type: string
+          description: (required for s3)
+        aws_region:
+          type: string
+          description: (required for s3)
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
+x-refined-from:
+- cordial-v1-openapi-original.json
+- cordial-v2-openapi-original.json

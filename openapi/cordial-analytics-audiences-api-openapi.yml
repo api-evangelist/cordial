@@ -1,0 +1,263 @@
+openapi: 3.2.0
+info:
+  title: Cordial analytics audiences API
+  termsOfService: https://cordial.zendesk.com
+  version: '1.0'
+  description: 'Operations tagged analytics audiences across 2 of this provider''s published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: analytics audiences
+paths:
+  /v1/audiencetrendsexport:
+    post:
+      security:
+      - basicAuth: []
+      summary: Create an audience trends export job
+      tags:
+      - analytics audiences
+      operationId: audiencetrendsexport
+      responses:
+        '200':
+          description: jobId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceAE'
+        description: Export object that needs to be getting from the system
+        required: true
+  /v2/audiencetrendsexport:
+    post:
+      security:
+      - basicAuth: []
+      summary: Create an audience trends export job
+      tags:
+      - analytics audiences
+      operationId: audiencetrendsexport
+      responses:
+        '200':
+          description: jobId
+        '400':
+          description: Export destination config error
+          $ref: '#/components/responses/AudienceTrendsExportDestinationConfigError'
+        '406':
+          description: Export configuration error
+          $ref: '#/components/responses/AudienceTrendsExportConfigError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceAE_2'
+        description: Export object to be retrieved from the system.
+        required: true
+components:
+  responses:
+    AudienceTrendsExportDestinationConfigError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AudienceTrendsExportDestinationConfigError'
+    AudienceTrendsExportConfigError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AudienceTrendsExportConfigError'
+  schemas:
+    AudienceTrendsExportDestinationConfigError:
+      title: Export destination config error
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: The destination.type field is required.
+          description: 'Field is present if export destination configuration is wrong. Possible errors: [''The destination.username field is required.'', ''Parameter password is not set'', ''The destination.path field is required.'', ''The destination.transport field is required.'', ''The selected destination.transport is invalid.'', ''The destination.aws access key id field is required.'', ''The destination.aws secret access key field is required.'', ''The destination.aws bucket field is required.'', ''The destination.aws region field is required.'']'
+    SourceAE:
+      title: Source
+      type: object
+      required:
+      - exportType
+      - destination
+      - fields
+      - accountId
+      properties:
+        name:
+          type: string
+        exportType:
+          description: Type of report
+          type: string
+          enum:
+          - csv
+        destination:
+          $ref: '#/components/schemas/DestinationCE'
+        selected_timeframe_start:
+          type: string
+          format: date
+          description: selected_timeframe_start (>=)
+        selected_timeframe_end:
+          type: string
+          format: date
+          description: selected_timeframe_end (<=)
+        audiences:
+          type: array
+          items:
+            type: string
+          description: Array of audience names
+    AudienceTrendsExportConfigError:
+      title: Export config error
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Audience 'fakeAudience' does not exist.
+          description: 'Field is present if export configuration is wrong. Possible errors: [''selected_timeframe_end'' cannot be in past in comparison with ''selected_timeframe_start'', ''Field ''audiences'' should be provided.'', ''The ''selected_timeframe_end'' is invalid. ISO-8601 is a recommended format.'', ''The ''selected_timeframe_start'' is invalid. ISO-8601 is a recommended format.'', ''Audience '':audience'' does not exist.'', ''For Audience '':audience'' analytics disabled.'', ''Field ''name'' should be provided.'', ''Both fields ''selected_timeframe_start'' and ''selected_timeframe_end'' should be present.'']'
+    DestinationObject:
+      title: Destination
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: 'Defines the destination type. Possible values: AWS (should be used if the file is to be downloaded via the Cordial UI), FTP, SFTP, S3, GCS, AZUREBLOB.'
+        aws_access_key_id:
+          type: string
+          description: Defines the public AWS access key ID. Required if destination is S3 and IAM role is not configured.
+        aws_secret_access_key:
+          type: string
+          description: Defines the secret AWS access key. Required if destination is S3 and IAM role is not configured.
+        aws_bucket:
+          type: string
+          description: Defines the AWS bucket name. Required if destination is S3.
+        aws_region:
+          type: string
+          description: Defines the AWS region (e.g. us-west-2). Required if destination is S3.
+        server:
+          type: string
+          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP destinations.
+          example: sftp.example.com
+        port:
+          type: integer
+          description: Defines the port number for the FTP or SFTP server (e.g. 22).
+          example: 22
+        username:
+          type: string
+          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        password:
+          type: string
+          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        savedKey:
+          type: string
+          description: SFTP public key authentication key `name` if using SFTP public key authentication instead of password.
+        path:
+          type: string
+          description: Path to folder where the export file will be stored. Required if destination is FTP, SFTP, S3, GCS, or AZUREBLOB.
+        gcs_bucket:
+          type: string
+          description: Defines the GCS bucket name. Required if destination is GCS.
+        account:
+          type: string
+          description: Defines the Azure Blob Storage account name. Required if destination is AZUREBLOB.
+        container:
+          type: string
+          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
+    DestinationCE:
+      title: Destination
+      type: object
+      required:
+      - type
+      - port
+      properties:
+        type:
+          type: string
+          description: Type of report
+          enum:
+          - ftp
+          - aws
+          - sftp
+          - s3
+        aws_access_key_id:
+          type: string
+          description: (required for s3)
+        aws_secret_access_key:
+          type: string
+          description: (required for s3)
+        aws_bucket:
+          type: string
+          description: (required for s3)
+        aws_region:
+          type: string
+          description: (required for s3)
+        server:
+          type: string
+          description: (required for ftp or sftp)
+        port:
+          type: integer
+        username:
+          type: string
+          description: (required for ftp or sftp)
+        password:
+          type: string
+          description: (required for ftp or sftp)
+        path:
+          type: string
+          description: (required for ftp,sftp,s3)
+    SourceAE_2:
+      title: Source
+      type: object
+      required:
+      - exportType
+      - destination
+      - fields
+      - accountId
+      properties:
+        name:
+          type: string
+        exportType:
+          description: Type of report.
+          type: string
+          enum:
+          - csv
+        destination:
+          $ref: '#/components/schemas/DestinationObject'
+        selected_timeframe_start:
+          type: string
+          format: date
+          description: selected_timeframe_start (>=)
+        selected_timeframe_end:
+          type: string
+          format: date
+          description: selected_timeframe_end (<=)
+        audiences:
+          type: array
+          items:
+            type: string
+          description: Array of audience names.
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
+x-refined-from:
+- cordial-v1-openapi-original.json
+- cordial-v2-openapi-original.json

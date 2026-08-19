@@ -1,6 +1,6 @@
 generated: '2026-08-04'
 method: derived
-source: openapi/cordial-v2-openapi-original.json
+source: openapi/_original/cordial-v2-openapi-original.json
 note: >-
   The non-payments sibling of a decline-code registry. Cordial's machine-actionable error
   discriminator is the `errorKey` string on the error envelope (see errors/cordial-problem-types.yml).

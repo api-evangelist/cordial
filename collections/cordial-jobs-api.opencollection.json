@@ -1,0 +1,264 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial Jobs API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a single job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Job id"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a single job"
+        },
+        {
+          "info": {
+            "name": "Get jobs list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/jobs",
+            "params": [
+              {
+                "name": "jobName",
+                "value": "",
+                "type": "query",
+                "description": "Name given to the job"
+              },
+              {
+                "name": "times[start][gt]",
+                "value": "",
+                "type": "query",
+                "description": "Start Time greater "
+              },
+              {
+                "name": "times[start][gte]",
+                "value": "",
+                "type": "query",
+                "description": "Start Time greater or equal"
+              },
+              {
+                "name": "times[start][lt]",
+                "value": "",
+                "type": "query",
+                "description": "Start Time less"
+              },
+              {
+                "name": "times[start][lte]",
+                "value": "",
+                "type": "query",
+                "description": "Start Time less or equal"
+              },
+              {
+                "name": "times[end][gt]",
+                "value": "",
+                "type": "query",
+                "description": "End Time greater "
+              },
+              {
+                "name": "times[end][gte]",
+                "value": "",
+                "type": "query",
+                "description": "End Time greater or equal"
+              },
+              {
+                "name": "times[end][lt]",
+                "value": "",
+                "type": "query",
+                "description": "End Time less"
+              },
+              {
+                "name": "times[end][lte]",
+                "value": "",
+                "type": "query",
+                "description": "End Time less or equal"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Active status for job"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Number of page"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Count items on page"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get jobs list"
+        },
+        {
+          "info": {
+            "name": "Get a single job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/jobs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique job id."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Fields to include (can be many, comma-separated)."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of optional related resources to attach to the response. Supported values: `statistic` (only meaningful for data automation jobs: `DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration` — adds the `run` and `statistic` blocks with the data automation run's normalized status, start/end times, and full aggregation counters)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the specified job record from the Cordial database. The job record is defined by its unique `id` value. For example, /jobs/548817d0367df1ef518b4567 would return the response data for the job with the id of <b>548817d0367df1ef518b4567</b>."
+        },
+        {
+          "info": {
+            "name": "Get jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/jobs",
+            "params": [
+              {
+                "name": "jobName",
+                "value": "",
+                "type": "query",
+                "description": "Name given to the job. Job names are assigned automatically based on the API initiating the job. For example, contactimports will assign the value of <b>ImportContacts</b> to the `jobName`."
+              },
+              {
+                "name": "times[start][gt]",
+                "value": "",
+                "type": "query",
+                "description": "Start time is greater than."
+              },
+              {
+                "name": "times[start][gte]",
+                "value": "",
+                "type": "query",
+                "description": "Start time is greater than or equal to."
+              },
+              {
+                "name": "times[start][lt]",
+                "value": "",
+                "type": "query",
+                "description": "Start time is less than."
+              },
+              {
+                "name": "times[start][lte]",
+                "value": "",
+                "type": "query",
+                "description": "Start time is less than or equal to."
+              },
+              {
+                "name": "times[end][gt]",
+                "value": "",
+                "type": "query",
+                "description": "End time is greater than."
+              },
+              {
+                "name": "times[end][gte]",
+                "value": "",
+                "type": "query",
+                "description": "End time is greater than or equal to."
+              },
+              {
+                "name": "times[end][lt]",
+                "value": "",
+                "type": "query",
+                "description": "End time is less than."
+              },
+              {
+                "name": "times[end][lte]",
+                "value": "",
+                "type": "query",
+                "description": "End time is less than or equal to."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The current job status."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Specific page number to be returned."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page. When `include=statistic` is requested, `per_page` must not exceed 25; a larger value returns a 400 error."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of optional related resources to attach to each job in the response. Supported values: `statistic` (only meaningful for data automation jobs: `DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration` — adds the `run` and `statistic` blocks with the data automation run's normalized status, start/end times, and full aggregation counters). Note: requesting `statistic` is a heavy operation, so the page size is capped at 25 — `per_page` values above 25 are rejected with a 400 error."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves all jobs from the Cordial database. Response data can be filtered by job name, job start/end time and job status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

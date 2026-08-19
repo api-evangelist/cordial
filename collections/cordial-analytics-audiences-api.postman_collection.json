@@ -1,0 +1,342 @@
+{
+  "item": [
+    {
+      "id": "666495ce-1f3b-4362-94a6-2e88c7d98ba5",
+      "name": "analytics audiences",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8733c176-4aba-4bdf-969b-6da466415085",
+          "name": "Create an audience trends export job",
+          "request": {
+            "name": "Create an audience trends export job",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "audiencetrendsexport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"exportType\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"path\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"selected_timeframe_start\": \"<date>\",\n  \"selected_timeframe_end\": \"<date>\",\n  \"audiences\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8b549601-63f7-454b-92c4-88553a327659",
+              "name": "jobId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audiencetrendsexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"exportType\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"path\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"selected_timeframe_start\": \"<date>\",\n  \"selected_timeframe_end\": \"<date>\",\n  \"audiences\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e304584-1451-4ce8-85be-b4ce23c831cd",
+          "name": "Create an audience trends export job",
+          "request": {
+            "name": "Create an audience trends export job",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "audiencetrendsexport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"exportType\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"selected_timeframe_start\": \"<date>\",\n  \"selected_timeframe_end\": \"<date>\",\n  \"audiences\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4dc136c8-2cbe-4916-9da4-cddedfdf2c91",
+              "name": "jobId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "audiencetrendsexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"exportType\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"sftp.example.com\",\n    \"port\": 22,\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"selected_timeframe_start\": \"<date>\",\n  \"selected_timeframe_end\": \"<date>\",\n  \"audiences\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd80a4da-23ec-42dd-a251-712dd58b1bfc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "audiencetrendsexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"exportType\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"sftp.example.com\",\n    \"port\": 22,\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"selected_timeframe_start\": \"<date>\",\n  \"selected_timeframe_end\": \"<date>\",\n  \"audiences\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"The destination.type field is required.\",\n  \"errorKey\": \"GENERIC_ERROR_KEY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcb33736-b2de-4cc1-9fc9-1ab113088f87",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "audiencetrendsexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"exportType\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"sftp.example.com\",\n    \"port\": 22,\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"selected_timeframe_start\": \"<date>\",\n  \"selected_timeframe_end\": \"<date>\",\n  \"audiences\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"Audience 'fakeAudience' does not exist.\",\n  \"errorKey\": \"GENERIC_ERROR_KEY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a57e6d94-3988-48a3-8680-5caa161e339c",
+    "name": "Cordial analytics audiences API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged analytics audiences across 2 of this provider's published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

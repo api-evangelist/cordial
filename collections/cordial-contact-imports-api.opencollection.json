@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial contact imports API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "contact imports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add a new contact import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/contactimports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a new contact import job"
+        },
+        {
+          "info": {
+            "name": "Add a new contact import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/contactimports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates an import job to batch load a file of contact records to the Cordial database from an external location. The import file can be retrieved via HTTP/HTTPS, FTP/SFTP, from the Amazon S3 bucket, and from the Google Cloud Storage bucket. Supported import file types include CSV, TSV and TXT."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

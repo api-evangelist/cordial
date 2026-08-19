@@ -1,0 +1,270 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial account attributes API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "account attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get contact attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/accountcontactattributes",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter attributes by type"
+              },
+              {
+                "name": "indexed",
+                "value": "",
+                "type": "query",
+                "description": "Retrieves attributes based on their index status. Options are 1 or 0"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves attributes by type. Options are string, number, date, geo or array."
+        },
+        {
+          "info": {
+            "name": "Add a new attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/accountcontactattributes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add a new attribute"
+        },
+        {
+          "info": {
+            "name": "Get a single attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/accountcontactattributes/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Key for attribute"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get a single attribute"
+        },
+        {
+          "info": {
+            "name": "Update an existing attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/accountcontactattributes/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Key for attribute"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an existing attribute"
+        },
+        {
+          "info": {
+            "name": "Delete an existing attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v1/accountcontactattributes/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Key for attribute"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete an existing attribute"
+        },
+        {
+          "info": {
+            "name": "Get contact attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/accountcontactattributes",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by attribute type."
+              },
+              {
+                "name": "indexed",
+                "value": "",
+                "type": "query",
+                "description": "Filter attributes by index status. Possible values: 1 for indexed or 0 for non-indexed."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves contact attributes. It is possible to filter the response using query string parameters for attribute type (string, number, date, geo, or array) and index status. For example, you may want to retrieve all <b>non-indexed</b> <b>string</b> type attributes."
+        },
+        {
+          "info": {
+            "name": "Add an attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/accountcontactattributes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a new contact attribute using the appropriate JSON body. Posting more than once for the same attribute name or key value will generate an error. Use the PUT method to change or update fields once the attribute is created. Attributes may be added at any time to your database and are immediately available to all contacts once created. Attributes must exist before contact data for those attributes can be added.\n\nAttributes can be optionally indexed, and if the data is strictly used for pers"
+        },
+        {
+          "info": {
+            "name": "Get a single attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/accountcontactattributes/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Attribute key value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the specified contact attribute based on its unique `key` value. For example, /accountcontactattributes/first_name would return the response data for the attribute with the key value of <b>first_name</b>."
+        },
+        {
+          "info": {
+            "name": "Update an attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/accountcontactattributes/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Attribute key value."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates existing contact attribute fields using the appropriate JSON body. For example, /accountcontactattributes/first_name allows the attribute with the key value of <b>first_name</b> to be updated."
+        },
+        {
+          "info": {
+            "name": "Delete an attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v2/accountcontactattributes/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Attribute key value."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes an existing contact attribute. For example, /accountcontactattributes/points would delete the attribute with the key of <b>points</b>."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

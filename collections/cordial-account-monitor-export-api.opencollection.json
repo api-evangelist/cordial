@@ -1,0 +1,38 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial account monitor export API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "account monitor export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export logs from your account monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/accountmonitorexport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Export logs from your account monitor"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

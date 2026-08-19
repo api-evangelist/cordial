@@ -2,18 +2,15 @@ generated: '2026-08-04'
 method: searched
 status: published
 source: https://developers.cordial.com/mcp
-
 server:
   name: cordial
   transport: http
   url: https://mcp.cordial.io/mcp
   access: read-only
-  note: >-
-    Cordial ships a hosted, first-party MCP server that gives an MCP client secure read access to a
-    Cordial account. The provider describes the scope as "Read (writes coming soon with human
-    approval)". It was announced in the June 2026 monthly release notes as "a new and significantly
-    more powerful version of the Cordial MCP Server".
-
+  note: Cordial ships a hosted, first-party MCP server that gives an MCP client secure read access to
+    a Cordial account. The provider describes the scope as "Read (writes coming soon with human approval)".
+    It was announced in the June 2026 monthly release notes as "a new and significantly more powerful
+    version of the Cordial MCP Server".
 authentication:
   type: oauth2
   profile: OAuth 2.1
@@ -22,10 +19,18 @@ authentication:
   token_endpoint: https://mcp.cordial.io/oauth/token
   registration_endpoint: https://mcp.cordial.io/oauth/register
   dynamic_client_registration: true
-  grant_types: [authorization_code, refresh_token]
-  pkce: [S256, plain]
-  token_endpoint_auth_methods: [client_secret_basic, client_secret_post]
-  scopes: [read, profile]
+  grant_types:
+  - authorization_code
+  - refresh_token
+  pkce:
+  - S256
+  - plain
+  token_endpoint_auth_methods:
+  - client_secret_basic
+  - client_secret_post
+  scopes:
+  - read
+  - profile
   discovery:
   - path: /.well-known/oauth-authorization-server
     status: 200
@@ -33,119 +38,218 @@ authentication:
   - path: /.well-known/oauth-protected-resource
     status: 200
     file: well-known/cordial-oauth-protected-resource.json
-
 introspection:
   attempted: '2026-08-04'
-  method: 'POST tools/list (jsonrpc 2.0)'
+  method: POST tools/list (jsonrpc 2.0)
   http_status: 401
   result: gated
-  challenge: >-
-    WWW-Authenticate: Bearer resource_metadata="https://mcp.cordial.io/.well-known/oauth-protected-resource",
-    error="invalid_token"
-  note: >-
-    The live tool schemas require an authenticated OAuth session against a real Cordial account. The
-    tools recorded below are the provider's own published catalogue from
-    https://developers.cordial.com/mcp — names, descriptions and domain grouping only. Input schemas
-    were NOT captured and would require authenticated introspection; nothing here is inferred.
-
+  challenge: 'WWW-Authenticate: Bearer resource_metadata="https://mcp.cordial.io/.well-known/oauth-protected-resource",
+    error="invalid_token"'
+  note: The live tool schemas require an authenticated OAuth session against a real Cordial account. The
+    tools recorded below are the provider's own published catalogue from https://developers.cordial.com/mcp
+    — names, descriptions and domain grouping only. Input schemas were NOT captured and would require
+    authenticated introspection; nothing here is inferred.
 tool_count: 56
 domain_count: 17
-
 tools:
-- {name: whoami, domain: identity, description: Current user identity and account info}
-
-- {name: get_account_overview_document, domain: account-context, description: 'Comprehensive account context: channels, attributes, audiences, config'}
-- {name: describe_contact_schema, domain: account-context, description: All contact attribute definitions with types and validation rules}
-- {name: get_account_supplements, domain: account-context, description: Overview of supplement (data) tables in the account}
-- {name: get_account_products_config, domain: account-context, description: Product catalog configuration overview}
-- {name: describe_account_events, domain: account-context, description: Event definitions (system and custom) for behavior tracking}
-- {name: get_account_audience_samples, domain: account-context, description: Sample audiences with criteria and counts}
-
-- {name: list_audiences, domain: audiences, description: List audiences with search and pagination}
-- {name: get_audience, domain: audiences, description: 'Audience detail: criteria, translation, attributes'}
-- {name: get_audience_count, domain: audiences, description: Current contact count for a saved audience}
-- {name: estimate_audience, domain: audiences, description: Estimate count for ad-hoc criteria without saving}
-- {name: describe_audience, domain: audiences, description: 'Full description: criteria, translation, and count'}
-
-- {name: list_messages, domain: messages, description: Batch sends or automated templates}
-- {name: list_child_sends, domain: messages, description: Individual sends of an automated template}
-- {name: get_message, domain: messages, description: Message detail with content and performance dashboard}
-- {name: export_message_stats, domain: messages, description: Export performance stats as CSV}
-
-- {name: get_account_overview, domain: analytics, description: Subscriber counts and per-channel stats}
-- {name: get_message_report, domain: analytics, description: Delivery and engagement rates by message}
-- {name: get_audience_trends, domain: analytics, description: Audience size trends over time}
-- {name: list_insight_reports, domain: analytics, description: AI-generated batch message insight reports}
-- {name: get_insight_report, domain: analytics, description: Executive summary and recommendations}
-
-- {name: list_html_includes, domain: content, description: Reusable HTML content snippets}
-- {name: get_html_include, domain: content, description: HTML include by ID or key}
-- {name: search_images, domain: content, description: Search uploaded images by query and tags}
-- {name: get_image, domain: content, description: Image details by ID}
-
-- {name: list_orchestrations, domain: orchestrations, description: Journey/lifecycle automations}
-- {name: get_orchestration, domain: orchestrations, description: Detail with DAG and Mermaid flowchart}
-
-- {name: list_sculpt_blocks, domain: sculpt, description: Reusable email content components}
-- {name: get_sculpt_block, domain: sculpt, description: Block detail with content schema}
-- {name: list_sculpt_templates, domain: sculpt, description: Full email layouts built from blocks}
-- {name: get_sculpt_template, domain: sculpt, description: Template detail with body content}
-
-- {name: list_saved_reports, domain: reports, description: Saved message reports}
-- {name: run_saved_report, domain: reports, description: Execute and return current data}
-- {name: describe_report_export_columns, domain: reports, description: Available export columns for a channel}
-- {name: describe_report_entities, domain: reports, description: Entity values for a report filter dimension}
-
-- {name: list_channel_types, domain: channels, description: Configured messaging channels}
-- {name: list_message_transports, domain: channels, description: Delivery providers for channels}
-- {name: get_message_transport, domain: channels, description: Transport detail by ID}
-
-- {name: list_data_automations, domain: data-operations, description: Triggered and recurring automations}
-- {name: get_data_automation, domain: data-operations, description: Triggers and schedule}
-- {name: list_data_batches, domain: data-operations, description: Batch data jobs}
-- {name: get_data_batch, domain: data-operations, description: Batch job detail with transform config}
-
-- {name: list_supplements, domain: supplements, description: Supplement (custom data) tables}
-- {name: get_supplement, domain: supplements, description: Supplement table detail by key}
-- {name: list_supplement_records, domain: supplements, description: Records in a supplement table}
-
-- {name: list_products, domain: products-and-tags, description: Products in the catalog}
-- {name: get_product, domain: products-and-tags, description: Product details by ID}
-- {name: list_tags, domain: products-and-tags, description: Tags for organizing content assets}
-- {name: get_tag, domain: products-and-tags, description: Tag details with asset counts}
-
-- {name: search_audience_examples, domain: semantic-search, description: Semantic search for audiences}
-- {name: search_orchestration_examples, domain: semantic-search, description: Semantic search for orchestrations}
-
-- {name: get_audience_health, domain: composite, description: Detail + count + size trends}
-- {name: get_message_performance, domain: composite, description: Dashboard stats + report context}
-- {name: get_recent_account_activity, domain: composite, description: Latest jobs and recent batch messages}
-- {name: compare_insight_reports, domain: composite, description: Compare multiple insight reports}
-- {name: explain_message_performance, domain: composite, description: Full dashboard stats for analysis}
-
+- name: whoami
+  domain: identity
+  description: Current user identity and account info
+- name: get_account_overview_document
+  domain: account-context
+  description: 'Comprehensive account context: channels, attributes, audiences, config'
+- name: describe_contact_schema
+  domain: account-context
+  description: All contact attribute definitions with types and validation rules
+- name: get_account_supplements
+  domain: account-context
+  description: Overview of supplement (data) tables in the account
+- name: get_account_products_config
+  domain: account-context
+  description: Product catalog configuration overview
+- name: describe_account_events
+  domain: account-context
+  description: Event definitions (system and custom) for behavior tracking
+- name: get_account_audience_samples
+  domain: account-context
+  description: Sample audiences with criteria and counts
+- name: list_audiences
+  domain: audiences
+  description: List audiences with search and pagination
+- name: get_audience
+  domain: audiences
+  description: 'Audience detail: criteria, translation, attributes'
+- name: get_audience_count
+  domain: audiences
+  description: Current contact count for a saved audience
+- name: estimate_audience
+  domain: audiences
+  description: Estimate count for ad-hoc criteria without saving
+- name: describe_audience
+  domain: audiences
+  description: 'Full description: criteria, translation, and count'
+- name: list_messages
+  domain: messages
+  description: Batch sends or automated templates
+- name: list_child_sends
+  domain: messages
+  description: Individual sends of an automated template
+- name: get_message
+  domain: messages
+  description: Message detail with content and performance dashboard
+- name: export_message_stats
+  domain: messages
+  description: Export performance stats as CSV
+- name: get_account_overview
+  domain: analytics
+  description: Subscriber counts and per-channel stats
+- name: get_message_report
+  domain: analytics
+  description: Delivery and engagement rates by message
+- name: get_audience_trends
+  domain: analytics
+  description: Audience size trends over time
+- name: list_insight_reports
+  domain: analytics
+  description: AI-generated batch message insight reports
+- name: get_insight_report
+  domain: analytics
+  description: Executive summary and recommendations
+- name: list_html_includes
+  domain: content
+  description: Reusable HTML content snippets
+- name: get_html_include
+  domain: content
+  description: HTML include by ID or key
+- name: search_images
+  domain: content
+  description: Search uploaded images by query and tags
+- name: get_image
+  domain: content
+  description: Image details by ID
+- name: list_orchestrations
+  domain: orchestrations
+  description: Journey/lifecycle automations
+- name: get_orchestration
+  domain: orchestrations
+  description: Detail with DAG and Mermaid flowchart
+- name: list_sculpt_blocks
+  domain: sculpt
+  description: Reusable email content components
+- name: get_sculpt_block
+  domain: sculpt
+  description: Block detail with content schema
+- name: list_sculpt_templates
+  domain: sculpt
+  description: Full email layouts built from blocks
+- name: get_sculpt_template
+  domain: sculpt
+  description: Template detail with body content
+- name: list_saved_reports
+  domain: reports
+  description: Saved message reports
+- name: run_saved_report
+  domain: reports
+  description: Execute and return current data
+- name: describe_report_export_columns
+  domain: reports
+  description: Available export columns for a channel
+- name: describe_report_entities
+  domain: reports
+  description: Entity values for a report filter dimension
+- name: list_channel_types
+  domain: channels
+  description: Configured messaging channels
+- name: list_message_transports
+  domain: channels
+  description: Delivery providers for channels
+- name: get_message_transport
+  domain: channels
+  description: Transport detail by ID
+- name: list_data_automations
+  domain: data-operations
+  description: Triggered and recurring automations
+- name: get_data_automation
+  domain: data-operations
+  description: Triggers and schedule
+- name: list_data_batches
+  domain: data-operations
+  description: Batch data jobs
+- name: get_data_batch
+  domain: data-operations
+  description: Batch job detail with transform config
+- name: list_supplements
+  domain: supplements
+  description: Supplement (custom data) tables
+- name: get_supplement
+  domain: supplements
+  description: Supplement table detail by key
+- name: list_supplement_records
+  domain: supplements
+  description: Records in a supplement table
+- name: list_products
+  domain: products-and-tags
+  description: Products in the catalog
+- name: get_product
+  domain: products-and-tags
+  description: Product details by ID
+- name: list_tags
+  domain: products-and-tags
+  description: Tags for organizing content assets
+- name: get_tag
+  domain: products-and-tags
+  description: Tag details with asset counts
+- name: search_audience_examples
+  domain: semantic-search
+  description: Semantic search for audiences
+- name: search_orchestration_examples
+  domain: semantic-search
+  description: Semantic search for orchestrations
+- name: get_audience_health
+  domain: composite
+  description: Detail + count + size trends
+- name: get_message_performance
+  domain: composite
+  description: Dashboard stats + report context
+- name: get_recent_account_activity
+  domain: composite
+  description: Latest jobs and recent batch messages
+- name: compare_insight_reports
+  domain: composite
+  description: Compare multiple insight reports
+- name: explain_message_performance
+  domain: composite
+  description: Full dashboard stats for analysis
 clients:
 - name: Claude Desktop
   config: ~/Library/Application Support/Claude/claude_desktop_config.json
 - name: Cursor
   config: .cursor/mcp.json
-
 related_servers:
 - name: SAM MCP
   url: https://sam-mcp.cordial.com/mcp
-  description: >-
-    Cordial SAM (Smart Asset Manager) MCP endpoint, listed on the provider's agentic tools page.
-    Probed 2026-08-04 and did not resolve/connect anonymously (curl exit 000); not catalogued as a
-    separate API entry until it answers.
-  probe: {fetched: '2026-08-04', result: no-response}
+  description: Cordial SAM (Smart Asset Manager) MCP endpoint, listed on the provider's agentic tools
+    page. Probed 2026-08-04 and did not resolve/connect anonymously (curl exit 000); not catalogued as
+    a separate API entry until it answers.
+  probe:
+    fetched: '2026-08-04'
+    result: no-response
 - name: Understand.email MCP
   url: https://understand.email/mcp
-  description: >-
-    A Cordial Foundry property listed on the provider's agentic tools page. Its host answers 200 with
-    an SPA HTML shell for every path probed, so no machine-readable manifest was recoverable.
-  probe: {fetched: '2026-08-04', result: html-shell}
-
+  description: A Cordial Foundry property listed on the provider's agentic tools page. Its host answers
+    200 with an SPA HTML shell for every path probed, so no machine-readable manifest was recoverable.
+  probe:
+    fetched: '2026-08-04'
+    result: html-shell
 skills:
   published: true
   url: https://github.com/CordialExperience/agentic-cookbook
   count: 16
   artifact: skills/_index.yml
+deployment:
+  mode: remote
+  endpoint: https://mcp.cordial.io/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,1428 @@
+openapi: 3.2.0
+info:
+  title: Cordial batch messages API
+  termsOfService: https://cordial.zendesk.com
+  version: '1.0'
+  description: 'Operations tagged batch messages across 2 of this provider''s published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: batch messages
+paths:
+  /v1/batchmessages:
+    post:
+      security:
+      - basicAuth: []
+      summary: Create a batch message
+      operationId: addBatch
+      tags:
+      - batch messages
+      responses:
+        '201':
+          description: successful operation
+        '422':
+          description: Validation errors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageSendBatchPost'
+        description: Send message
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get batch messages
+      operationId: getBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: sendTime[gt]
+        description: 'Send Time greater '
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sendTime[gte]
+        description: Send Time greater or equal
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sendTime[lt]
+        description: Send Time less
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sendTime[lte]
+        description: Send Time less or equal
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: status
+        description: Message status
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: triggers[api][enabled]
+        description: API trigger
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+      - name: triggers[event][enabled]
+        description: Event trigger
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+      - name: triggers[recurring][enabled]
+        description: Recurring trigger
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+      - name: tags
+        required: false
+        in: query
+        description: Message tags (can be many, separate by comma)
+        schema:
+          type: string
+      - name: mdtID
+        description: Automation template ID
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[gt]
+        description: 'Create date greater '
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[gte]
+        description: Create date greater or equal
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[lt]
+        description: Create date less
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[lte]
+        description: Create date less or equal
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: page
+        description: Page number
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Number of records returned
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MessageSendBatch'
+        '404':
+          description: Record not found
+  /v1/batchmessages/{id}:
+    put:
+      security:
+      - basicAuth: []
+      summary: Update an existing message
+      operationId: updateBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Message send ID
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful operation
+        '400':
+          description: Invalid ID supplied
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageSendBatchPost'
+        description: Contact object that needs to be updated in the system
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: GET single message by msID
+      operationId: getSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Message send ID
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageSendBatch'
+        '404':
+          description: Record not found
+    delete:
+      security:
+      - basicAuth: []
+      summary: Delete a single contact
+      operationId: deleteSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Message send ID
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful operation
+        '404':
+          description: Record not found
+  /v1/batchmessages/{id}/send:
+    put:
+      security:
+      - basicAuth: []
+      summary: Send Manual Messagesend
+      operationId: sendSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Message send ID
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful operation
+        '404':
+          description: Record not found
+        '400':
+          description: Count not create SendBatchMessage job
+  /v1/batchmessages/{id}/sendtest:
+    put:
+      security:
+      - basicAuth: []
+      summary: Send a test batch message
+      operationId: sendTestSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Message send ID
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Successful operation
+        '404':
+          description: Record is not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipientsTestBatch'
+        description: Array of contacts
+        required: true
+  /v1/batchmessages/{id}/renderedwip/{contactID}:
+    get:
+      security:
+      - basicAuth: []
+      summary: Render preview of a batch message
+      operationId: renderPreviewSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Message send ID
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: contactID
+        description: Contact ID
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: experiment
+        description: 'Name of experiment '
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: variant
+        description: Variant name
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Successful operation
+        '404':
+          description: Record is not found
+  /v1/batchmessages/{id}/pause:
+    put:
+      security:
+      - basicAuth: []
+      summary: Pause a batch message sending
+      operationId: pauseSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Message send ID
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Successful operation
+        '404':
+          description: Record is not found
+  /v1/batchmessages/{id}/cancel:
+    put:
+      security:
+      - basicAuth: []
+      summary: Cancel a batch message sending
+      operationId: cancelSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Message send ID
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Successful operation
+        '404':
+          description: Record is not found
+  /v1/batchmessages/{id}/resume:
+    put:
+      security:
+      - basicAuth: []
+      summary: Resume a batch message sending
+      operationId: resumeSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Message send ID
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Successful operation
+        '404':
+          description: Record is not found
+  /v2/batchmessages:
+    post:
+      security:
+      - basicAuth: []
+      summary: Create a batch message
+      description: Creates a batch message template using the appropriate JSON body. Posting more than once will create subsequent batch message templates. Use PUT to change or update a batch message template that has not been sent yet.
+      operationId: addBatch
+      tags:
+      - batch messages
+      responses:
+        '201':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchMessageCreated'
+        '422':
+          description: Creation batch message errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchMessageError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageSendBatchPost_2'
+        description: Template object that needs to be added.
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get batch messages
+      description: Retrieves batch messages. Note that info and stats on daily message <b>automation</b> sends are retrieved using the <b>GET /batchmessages</b> method. The response for automation sends can be filtered using the automation trigger sending method status, the creation time, and automation message delivery template ID (mdtID).
+      operationId: getBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: sendTime[gt]
+        description: Send time is greater than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sendTime[gte]
+        description: Send time is greater than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sendTime[lt]
+        description: Send time is less than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sendTime[lte]
+        description: Send time is less than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: status
+        description: Message status (e.g. sent, canceled, paused, processing, pending).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: triggers[api][enabled]
+        description: API trigger sending method status. True for enabled and false for disabled.
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+      - name: triggers[event][enabled]
+        description: Event trigger sending method status. True for enabled and false for disabled.
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+      - name: triggers[recurring][enabled]
+        description: Recurring trigger sending method status. True for enabled and false for disabled.
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+      - name: tags
+        required: false
+        in: query
+        description: Filter results by messages that contain specified message tags (can be many, comma-separated).
+        schema:
+          type: string
+      - name: mdtID
+        description: Automation message delivery template ID (mdtID). Represents both the published and draft versions of an automation template.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[gt]
+        description: Create date is greater than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[gte]
+        description: Create date is greater than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[lt]
+        description: Create date is less than.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: ct[lte]
+        description: Create date less than or equal to.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: page
+        description: Specific page number to be returned.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Number or records per page.
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MessageSendBatch_2'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/batchmessages/{id}:
+    put:
+      security:
+      - basicAuth: []
+      summary: Update a batch message draft
+      description: Updates a batch message draft using the appropriate JSON body. The batch message record is defined by its unique message `id` value (generated by the POST method). The PUT method can only be used if the message status is `draft`.
+      operationId: updateBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Batch message ID (msID).
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '422':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchMessageError'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageSendBatchPost_2'
+        description: Template object that needs to be updated.
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single batch message
+      description: Retrieves a batch message. The batch message record is defined by its unique message `id` value.
+      operationId: getSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Batch message ID (msID).
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageSendBatch_2'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+    delete:
+      security:
+      - basicAuth: []
+      summary: Delete a batch message
+      description: Deletes an existing draft or scheduled batch message. The batch message record is defined by its unique message `id` value.
+      operationId: deleteSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Batch message ID (msID).
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/batchmessages/{id}/send:
+    put:
+      security:
+      - basicAuth: []
+      summary: Send or schedule a batch message
+      description: Sends or schedules an existing batch message draft. If the draft is scheduled for a future send date, the message will be scheduled and sent on that date and time. The batch message record is defined by its unique message `id` value.
+      operationId: sendSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Batch message ID (msID).
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '422':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchSendMessageError'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/batchmessages/{id}/sendtest:
+    put:
+      security:
+      - basicAuth: []
+      summary: Send a test batch message
+      description: Sends a test batch message. The batch message record is defined by its unique message `id` value.
+      operationId: sendTestSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Batch message ID (msID).
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '422':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchSendTestMessageError'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipientsTestBatch_2'
+        description: An array of contact identifier key/value pairs.
+        required: true
+  /v2/batchmessages/{id}/experimentperformance:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get experiment performance for single batch message
+      description: Retrieves experiment performance for single batch message. The batch message record is defined by its unique message `id` value.
+      operationId: geBatchExperimentPerformance
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Batch message ID (msID).
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExperimentsStats'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/batchmessages/{id}/renderedwip/{contactID}:
+    get:
+      security:
+      - basicAuth: []
+      summary: Render preview of a batch message
+      description: Retrieves the message headers, the rendered HTML, and experiment name and variants of a batch message for a specified contact. The batch message record is defined by its unique message `id` value. The contact record is defined by its unique contact ID (cID) value.
+      operationId: renderPreviewSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Batch message ID (msID).
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: contactID
+        description: Cordial database contact ID (cID) value.
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: experiment
+        description: Returns the batch message that contains the specified experiment name. Variant is required if experiment is specified.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: variant
+        description: Returns the batch message that contains the specified experiment variant. Experiment is required if variant is specified.
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessRenderMessage'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+        '422':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchRenderMessageError'
+  /v2/batchmessages/{id}/pause:
+    put:
+      security:
+      - basicAuth: []
+      summary: Pause batch message sending
+      description: Pauses the sending of a batch message. The batch message record is defined by its unique message `id` value.
+      operationId: pauseSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Batch message ID (msID).
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/batchmessages/{id}/cancel:
+    put:
+      security:
+      - basicAuth: []
+      summary: Cancel batch message sending
+      description: Cancels the sending of a batch message. A paused message may also be canceled. The batch message record is defined by its unique message `id` value.
+      operationId: cancelSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Batch message ID (msID).
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/batchmessages/{id}/resume:
+    put:
+      security:
+      - basicAuth: []
+      summary: Resume batch message sending
+      description: Resumes the sending of a batch message. The batch message record is defined by its unique message `id` value.
+      operationId: resumeSingleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Batch message ID (msID).
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/batchmessages/{id}/unschedule:
+    put:
+      security:
+      - basicAuth: []
+      summary: Unschedule a batch message
+      description: Unschedule a scheduled batch message. Unscheduled messages will revert to draft status and can be edited. Messages that are in the processing status cannot be unscheduled. The batch message record is defined by its unique message `id` value.
+      operationId: unscheduleBatch
+      tags:
+      - batch messages
+      parameters:
+      - name: id
+        description: Batch message ID (msID).
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+components:
+  schemas:
+    MessageSendBatchPost_2:
+      title: MessageSend
+      type: object
+      required:
+      - channel
+      - classification
+      properties:
+        channel:
+          type: string
+          description: Messaging channel key (e.g. email). Note that some of your channels may have custom keys.
+        classification:
+          type: string
+          description: If applicable, classifies the message as transactional or promotional.
+        name:
+          type: string
+          description: Batch message template name.
+        tags:
+          type: array
+          description: An array of batch template tags (e.g. ["birthday","promo"]). Tags are case-sensitive.
+          items:
+            type: string
+        audience:
+          type: object
+          description: See audience-key.
+        audience-key:
+          type: string
+          description: Set the batch template audience using a saved audience rule name (e.g. 30_Day_Engaged).
+        schedule:
+          type: string
+          description: Set a future batch template send date and time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+          format: date-time
+        message:
+          $ref: '#/components/schemas/MessageBatch'
+        transportID:
+          type: string
+          description: Defines the transportID if overriding the default.
+        trackLinks:
+          type: string
+          description: 'Determines if link performance will be tracked. Link tracking is `enabled` by default. Possible values: enabled, disabled.'
+        scheduleType:
+          type: string
+          description: 'Indicates if the scheduled send time should recpect contact''s own time zone. If not specified, the template will send using the Cordial account default time zone. Possible values: contactTZ.'
+        sendTimeType:
+          type: string
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tests_2'
+        priority:
+          type: number
+          default: 2
+          description: Messages with a higher priority will be processed before those with a lower priority. 1 - Low, 2 - Standard, 3 - High, 4 - Highest.
+        bcc:
+          type: string
+          description: Defines BCC email address that will receive a copy of every email. Only works with the 'enable-bcc' feature.
+        bccEnabled:
+          type: boolean
+          description: Determines if the BCC enabled/disabled. Only works with the 'enable-bcc' feature.
+        vanityDomainKey:
+          type: string
+          description: Defines the vanity domain key for email messages.
+    ContentBatch:
+      title: Content
+      type: object
+      required:
+      - text/html
+      properties:
+        text/html:
+          type: string
+    AlertResponse:
+      title: AlertResponse
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          default: total-sent
+          description: ''
+        msID:
+          type: string
+          description: 'Message send ID where alert is applied. Required if mdtID not present. '
+        mdtID:
+          type: string
+          description: 'Automation template ID where alert is applied. Required if msID not present. '
+        enabled:
+          type: boolean
+          description: Automation template name.
+        notify:
+          type: array
+          items:
+            type: string
+          description: Destination email for the alert.
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertConditions'
+        period:
+          type: integer
+          description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
+    BatchMessageCreated:
+      title: New batch message created
+      type: object
+      required:
+      - success
+      - bmID
+      properties:
+        success:
+          type: boolean
+          example: true
+        bmID:
+          type: string
+          example: bmID
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    RecipientsTestBatch:
+      title: Recipients
+      type: object
+      required:
+      - <primaryKey>
+      properties:
+        <primaryKey>:
+          type: array
+          items:
+            type: string
+          description: Array of primaryKeys emails etc.
+    AlertConditions:
+      title: conditions
+      required:
+      - type
+      - operator
+      - value
+      - period
+      type: object
+      properties:
+        operator:
+          type: string
+          enum:
+          - lt
+          - lte
+          - gt
+          - gte
+        value:
+          type: integer
+          description: ''
+    ExperimentsStats:
+      title: ExperimentsStats
+      type: object
+      required:
+      - name
+      - variants
+      - strategy
+      - conversions
+      - totalAudience
+      properties:
+        name:
+          type: string
+          description: Experiment name.
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExperimentVariants'
+          description: Experiment variants
+        strategy:
+          type: integer
+          description: 'Strategy of experiment. Possible values: split, split-with-champion, 2 - Multi-armed bandit.'
+        conversions:
+          type: integer
+          description: Number of conversions for the variant.
+        totalAudience:
+          type: integer
+          description: Total audience for the experiment.
+    HeadersBatch_2:
+      title: Headers
+      type: object
+      required:
+      - subject
+      - fromEmail
+      - fromDesc
+      - replyEmail
+      properties:
+        subject:
+          type: string
+          description: Message subject line.
+        fromEmail:
+          type: string
+          description: Sender email address.
+        replyEmail:
+          type: string
+          description: '"Reply to" email address.'
+        fromDesc:
+          type: string
+          description: The sender "from" description.
+    BatchRenderMessageError:
+      title: Batch send test message error
+      required:
+      - message
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: object
+          example: 'Object with error explanation what happen when try ot render a message. Possible errors: [''Message ID is not found'', ''Contact is not found'']'
+    ContentBatch_2:
+      title: Content
+      type: object
+      required:
+      - text/html
+      properties:
+        text/html:
+          type: string
+          description: Message content. Can contain HTML markup or plain text depending on message type and channel.
+    ExperimentStats:
+      title: ExperimentStats
+      type: object
+      required: []
+      properties:
+        ts:
+          type: integer
+          description: Number of total sends for the variant.
+        tc:
+          type: integer
+          description: Number of total click for the variant.
+        uc:
+          type: integer
+          description: Unique clicks for the variant.
+        to:
+          type: integer
+          description: Number of total opens for the variant.
+        uo:
+          type: integer
+          description: Number of unique opens for the variant.
+        tci:
+          type: integer
+          description: If there is a variant attached to the link and it aligns with our recorded variant
+        uci:
+          type: integer
+          description: If there is a variant attached to the link and it aligns with our recorded variant first time
+        tb:
+          type: integer
+          description: Total bounce.
+        tr:
+          type: integer
+          description: Total revenue.
+        tri:
+          type: integer
+          description: Total revenue indirect
+        or:
+          type: integer
+          description: Total orders.
+        ori:
+          type: integer
+          description: Total orders indirect
+        cmp:
+          type: integer
+          description: Total complaints.
+        oo:
+          type: integer
+          description: Total optout.
+    MessageBatch:
+      title: Message
+      type: object
+      required:
+      - headers
+      - content
+      properties:
+        headers:
+          $ref: '#/components/schemas/HeadersBatch'
+        content:
+          $ref: '#/components/schemas/ContentBatch'
+    Tests:
+      title: tests
+      type: object
+      required:
+      - type
+      - enabled
+      properties:
+        type:
+          type: string
+        enabled:
+          type: boolean
+    MessageSendBatch_2:
+      title: MessageSend
+      type: object
+      required:
+      - channel
+      - classification
+      properties:
+        channel:
+          type: string
+          description: Messaging channel key (e.g. email). Note that some of your channels may have custom keys.
+        classification:
+          type: string
+          description: If applicable, classifies the message as transactional or promotional.
+        name:
+          type: string
+          description: Batch message template name.
+        audience:
+          type: object
+          description: See audience-key.
+        schedule:
+          type: string
+          description: Set a future batch template send date and time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+          format: date
+        message:
+          $ref: '#/components/schemas/MessageBatch'
+        transportID:
+          type: string
+          description: Defines the transportID if overriding the default.
+        trackLinks:
+          type: string
+          description: 'Determines if link performance will be tracked. Link tracking is `enabled` by default. Possible values: enabled, disabled.'
+        priority:
+          type: number
+          default: 2
+          description: Messages with a higher priority will be processed before those with a lower priority. 1 - Low, 2 - Standard, 3 - High, 4 - Highest.
+        bcc:
+          type: string
+          description: Defines BCC email address that will receive a copy of every email. Only works with the 'enable-bcc' feature.
+        bccEnabled:
+          type: boolean
+          description: Determines if the BCC enabled/disabled. Only works with the 'enable-bcc' feature.
+        alerts:
+          $ref: '#/components/schemas/AlertResponse'
+    MessageSendBatchPost:
+      title: MessageSend
+      type: object
+      required:
+      - channel
+      - classification
+      properties:
+        channel:
+          type: string
+        classification:
+          type: string
+          enum:
+          - transactional
+          - promotional
+        name:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        audience:
+          type: object
+        audience-key:
+          type: string
+        schedule:
+          type: string
+          format: date-time
+        message:
+          $ref: '#/components/schemas/MessageBatch'
+        transportID:
+          type: string
+        trackLinks:
+          type: string
+          enum:
+          - enabled
+          - disabled
+        scheduleType:
+          type: string
+          description: Empty for sending through account time zone and `contactTZ` for sending through contact time zone
+        sendTimeType:
+          type: string
+          default: after
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tests'
+        priority:
+          type: number
+          default: 2
+          description: Messages with a higher priority will be processed before those with a lower priority, 1 - Low, 2 - Standard, 3 - High,4 - Highest
+    MessageSendBatch:
+      title: MessageSend
+      type: object
+      required:
+      - channel
+      - classification
+      properties:
+        channel:
+          type: string
+          description: can be 'email', 'push' etc.
+        classification:
+          type: string
+          enum:
+          - transactional
+          - promotional
+        name:
+          type: string
+        audience:
+          type: object
+        schedule:
+          type: string
+          format: date
+        message:
+          $ref: '#/components/schemas/MessageBatch'
+        transportID:
+          type: string
+        trackLinks:
+          type: string
+          enum:
+          - enabled
+          - disabled
+        priority:
+          type: number
+          default: 2
+          description: Messages with a higher priority will be processed before those with a lower priority, 1 - Low, 2 - Standard, 3 - High,4 - Highest
+    BatchSendTestMessageError:
+      title: Batch send test message error
+      required:
+      - message
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: object
+          example: 'Object with error explanation what happen when try ot send a message. Possible errors: [''Contact not support message channel'']'
+    HeadersBatch:
+      title: Headers
+      type: object
+      required:
+      - subject
+      - fromEmail
+      - fromDesc
+      - replyEmail
+      properties:
+        subject:
+          type: string
+        fromEmail:
+          type: string
+        replyEmail:
+          type: string
+        fromDesc:
+          type: string
+    RecipientsTestBatch_2:
+      title: Recipients
+      type: object
+      required:
+      - primaryKey
+      properties:
+        primaryKey:
+          type: array
+          items:
+            type: string
+          description: 'An array of contact identifier key/value pairs. Use the "identifierKey": ["identifierValue1", "identifierValue2"] format.'
+    SuccessRenderMessage:
+      title: Successful operation
+      type: object
+      required:
+      - content
+      properties:
+        headers:
+          $ref: '#/components/schemas/HeadersBatch_2'
+        content:
+          $ref: '#/components/schemas/ContentBatch_2'
+        experiments:
+          type: object
+          example:
+            experimentName:
+            - varaint1
+            - varaint2
+            - variantN
+    ExperimentVariants:
+      title: experimentVariants
+      type: object
+      required:
+      - stats
+      - name
+      properties:
+        stats:
+          type: object
+          $ref: '#/components/schemas/ExperimentStats'
+        name:
+          type: string
+          description: Variant name.
+    Tests_2:
+      title: tests
+      type: object
+      required:
+      - type
+      - enabled
+      properties:
+        type:
+          type: string
+          description: Defines which test to run.
+        enabled:
+          type: boolean
+          description: Flag to determine if the test is enabled or disabled. Tests are `disabled` by default.
+    BatchSendMessageError:
+      title: Batch send message error
+      required:
+      - message
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: object
+          example: 'Object with error explanation what happen when try ot send a message. Possible errors: [''Transport should be selected before sending'']'
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    BatchMessageError:
+      title: Contact error
+      required:
+      - message
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: object
+          example: 'Object with error explanation what happen with payload. Possible errors: [''Could not create SendBatchMessage job'']'
+  responses:
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
+x-refined-from:
+- cordial-v1-openapi-original.json
+- cordial-v2-openapi-original.json

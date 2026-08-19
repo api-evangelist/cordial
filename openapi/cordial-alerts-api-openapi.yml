@@ -1,0 +1,352 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Cordial API documentation! This interactive API documentation allows you to test API calls from the Swagger interface. Authenticate yourself with the API key from your Cordial account and then make API calls. Keep in mind that testing in Swagger will directly affect your production data.
+  version: 2.0.0
+  title: Cordial Alerts API
+  termsOfService: https://cordial.zendesk.com
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: alerts
+paths:
+  /v2/alerts/{id}:
+    get:
+      security:
+      - basicAuth: []
+      summary: Get a single alert
+      description: Retrieves the specified alert.
+      operationId: getalert
+      tags:
+      - alerts
+      parameters:
+      - name: id
+        description: Alert id value.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertResponse'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+    put:
+      security:
+      - basicAuth: []
+      summary: Update a single alert
+      description: Update alert
+      operationId: updatealert
+      tags:
+      - alerts
+      parameters:
+      - name: id
+        description: Alert id value.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+        '422':
+          description: validation error
+          $ref: '#/components/responses/AlertErrorValidation'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlertI'
+        description: Alert object that needs to be updated.
+        required: true
+    delete:
+      security:
+      - basicAuth: []
+      summary: Delete an alert
+      description: Deletes alerts.
+      operationId: removealert
+      tags:
+      - alerts
+      parameters:
+      - name: id
+        description: Alert id value.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessOperation'
+        '422':
+          $ref: '#/components/responses/AlertRemoveImpossible'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+  /v2/alerts:
+    post:
+      security:
+      - basicAuth: []
+      summary: Add alert
+      description: Adds a new alert using the appropriate JSON body.
+      operationId: addalert
+      tags:
+      - alerts
+      responses:
+        '201':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertCreationSuccess'
+        '422':
+          description: validation error
+          $ref: '#/components/responses/AlertErrorValidation'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlertI'
+        description: Alert object that needs to be added.
+        required: true
+    get:
+      security:
+      - basicAuth: []
+      summary: Get content includes
+      description: Retrieves alerts list. Using query string parameters, it is possible to filter the response mdtID or msID to retrieve information for particular messages or templates.
+      operationId: getincludes
+      tags:
+      - alerts
+      parameters:
+      - name: mdtID
+        description: Filter alerts by automation message delivery template ID (mdtID).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: msID
+        description: Filter alerts by message send ID (mdtID).
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: entity
+        description: Filter alerts by entity. Possible values message-automation or batch-message
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - batch-message
+          - message-automation
+      - name: page
+        description: Specific page number to be returned.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: per_page
+        description: Number of records per page.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sort_by
+        description: Field by which results should be sorted.
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: sort_dir
+        description: Direction to sort by. Works in conjunction with `sort_by` (e.g. asc, desc).
+        required: false
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AlertResponse'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+components:
+  schemas:
+    AlertCreationSuccess:
+      title: AlertCreationSuccess
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        id:
+          type: number
+          example: 123
+    AlertErrorValidation:
+      title: AlertErrorValidation
+      type: object
+      properties:
+        errors:
+          type: object
+          example:
+            for:
+            - The for field is required
+        error:
+          type: boolean
+        errorKey:
+          type: string
+          enum:
+          - VALIDATION_ERROR
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    AlertResponse:
+      title: AlertResponse
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          default: total-sent
+          description: ''
+        msID:
+          type: string
+          description: 'Message send ID where alert is applied. Required if mdtID not present. '
+        mdtID:
+          type: string
+          description: 'Automation template ID where alert is applied. Required if msID not present. '
+        enabled:
+          type: boolean
+          description: Automation template name.
+        notify:
+          type: array
+          items:
+            type: string
+          description: Destination email for the alert.
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertConditions'
+        period:
+          type: integer
+          description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
+    AlertConditions:
+      title: conditions
+      required:
+      - type
+      - operator
+      - value
+      - period
+      type: object
+      properties:
+        operator:
+          type: string
+          enum:
+          - lt
+          - lte
+          - gt
+          - gte
+        value:
+          type: integer
+          description: ''
+    AlertI:
+      title: Alerts
+      type: object
+      required:
+      - enabled
+      - notify
+      - conditions
+      properties:
+        type:
+          type: string
+          default: total-sent
+          description: ''
+        enabled:
+          type: boolean
+          description: Automation template name.
+        msID:
+          type: string
+          description: 'Message send ID where alert is applied. Required if mdtID not present. '
+        mdtID:
+          type: string
+          description: 'Automation template ID where alert is applied. Required if msID not present. '
+        notify:
+          type: array
+          items:
+            type: string
+          description: Destination email for the alert.
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertConditions'
+        period:
+          type: integer
+          description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
+    AlertRemoveImpossible:
+      title: AlertRemoveImpossible
+      type: object
+  responses:
+    AlertRemoveImpossible:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlertRemoveImpossible'
+    AlertErrorValidation:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlertErrorValidation'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS

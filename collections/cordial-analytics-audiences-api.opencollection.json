@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial analytics audiences API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "analytics audiences",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an audience trends export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/audiencetrendsexport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create an audience trends export job"
+        },
+        {
+          "info": {
+            "name": "Create an audience trends export job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/audiencetrendsexport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create an audience trends export job"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

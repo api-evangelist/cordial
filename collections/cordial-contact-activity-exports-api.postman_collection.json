@@ -1,0 +1,448 @@
+{
+  "item": [
+    {
+      "id": "91d8f52a-c960-4b78-b8e2-9a63cf6dcaa9",
+      "name": "contact activity exports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "262aaff9-5b1b-4603-bf6a-ad11a161d9d5",
+          "name": "Create an event export job",
+          "request": {
+            "name": "Create an event export job",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "contactactivityexport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"server\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"path\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\"\n  },\n  \"selected_timeframe_start\": \"<dateTime>\",\n  \"selected_timeframe_end\": \"<dateTime>\",\n  \"exportType\": \"<string>\",\n  \"columnHeaders\": [\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"showHeader\": \"<boolean>\",\n  \"selected_action_name\": \"<string>\",\n  \"selected_action_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"selected_message_type\": \"<string>\",\n  \"showAllProperties\": false,\n  \"selected_message_id\": \"<string>\",\n  \"limitRecordsPerFile\": \"<integer>\",\n  \"compress\": false,\n  \"selected_contact\": \"<string>\",\n  \"selected_audience_key\": \"<string>\",\n  \"confirmEmail\": \"<string>\",\n  \"additionalJsonlFields\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b494c67-ac48-4fb1-b483-8a401a72ed84",
+              "name": "jobId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contactactivityexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"server\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"path\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\"\n  },\n  \"selected_timeframe_start\": \"<dateTime>\",\n  \"selected_timeframe_end\": \"<dateTime>\",\n  \"exportType\": \"<string>\",\n  \"columnHeaders\": [\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"showHeader\": \"<boolean>\",\n  \"selected_action_name\": \"<string>\",\n  \"selected_action_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"selected_message_type\": \"<string>\",\n  \"showAllProperties\": false,\n  \"selected_message_id\": \"<string>\",\n  \"limitRecordsPerFile\": \"<integer>\",\n  \"compress\": false,\n  \"selected_contact\": \"<string>\",\n  \"selected_audience_key\": \"<string>\",\n  \"confirmEmail\": \"<string>\",\n  \"additionalJsonlFields\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "01bda058-9f5f-40cf-b6dc-68013dd94194",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contactactivityexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"server\": \"<string>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"path\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\"\n  },\n  \"selected_timeframe_start\": \"<dateTime>\",\n  \"selected_timeframe_end\": \"<dateTime>\",\n  \"exportType\": \"<string>\",\n  \"columnHeaders\": [\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"showHeader\": \"<boolean>\",\n  \"selected_action_name\": \"<string>\",\n  \"selected_action_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"selected_message_type\": \"<string>\",\n  \"showAllProperties\": false,\n  \"selected_message_id\": \"<string>\",\n  \"limitRecordsPerFile\": \"<integer>\",\n  \"compress\": false,\n  \"selected_contact\": \"<string>\",\n  \"selected_audience_key\": \"<string>\",\n  \"confirmEmail\": \"<string>\",\n  \"additionalJsonlFields\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "899914b9-e596-406b-8269-105974adb34b",
+          "name": "Create an event export job",
+          "request": {
+            "name": "Create an event export job",
+            "description": {
+              "content": "Creates an export job to download and store a file of contact activities to an external location. The exported file can be downloaded via Cordial UI, via FTP/SFTP, sent to Amazon S3 bucket, or sent to Google Cloud Storage bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contactactivityexport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"exportType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"selected_timeframe_start\": \"<dateTime>\",\n  \"selected_timeframe_end\": \"<dateTime>\",\n  \"delimiter\": \"<string>\",\n  \"columnHeaders\": [\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"showHeader\": \"<boolean>\",\n  \"selected_action_name\": \"<string>\",\n  \"selected_action_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"selected_message_type\": \"<string>\",\n  \"showAllProperties\": \"<boolean>\",\n  \"selected_message_id\": \"<string>\",\n  \"limitRecordsPerFile\": \"<integer>\",\n  \"compress\": \"<boolean>\",\n  \"selected_contact\": \"<string>\",\n  \"selected_audience_key\": \"<string>\",\n  \"confirmEmail\": \"<string>\",\n  \"additionalJsonlFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contactFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"selected_channel\": \"<string>\",\n  \"sendType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5276413-6f2a-407e-85db-6285b1ee41d6",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactactivityexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"exportType\": \"csv\",\n  \"name\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"sftp.example.com\",\n    \"port\": 22,\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"selected_timeframe_start\": \"<dateTime>\",\n  \"selected_timeframe_end\": \"<dateTime>\",\n  \"delimiter\": \",\",\n  \"columnHeaders\": [\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"showHeader\": \"<boolean>\",\n  \"selected_action_name\": \"message-sent\",\n  \"selected_action_names\": [\n    \"open\",\n    \"click\",\n    \"bounce\",\n    \"optout\"\n  ],\n  \"selected_message_type\": \"<string>\",\n  \"showAllProperties\": \"<boolean>\",\n  \"selected_message_id\": \"<string>\",\n  \"limitRecordsPerFile\": \"<integer>\",\n  \"compress\": \"<boolean>\",\n  \"selected_contact\": \"<string>\",\n  \"selected_audience_key\": \"vip_members\",\n  \"confirmEmail\": \"<string>\",\n  \"additionalJsonlFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contactFields\": [\n    \"channels.sms.address\",\n    \"extPK\",\n    \"first_name\"\n  ],\n  \"selected_channel\": \"email\",\n  \"sendType\": \"sms\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12494091-37e8-45f3-a3d3-4d6abc275951",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactactivityexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"exportType\": \"csv\",\n  \"name\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"sftp.example.com\",\n    \"port\": 22,\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"selected_timeframe_start\": \"<dateTime>\",\n  \"selected_timeframe_end\": \"<dateTime>\",\n  \"delimiter\": \",\",\n  \"columnHeaders\": [\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"showHeader\": \"<boolean>\",\n  \"selected_action_name\": \"message-sent\",\n  \"selected_action_names\": [\n    \"open\",\n    \"click\",\n    \"bounce\",\n    \"optout\"\n  ],\n  \"selected_message_type\": \"<string>\",\n  \"showAllProperties\": \"<boolean>\",\n  \"selected_message_id\": \"<string>\",\n  \"limitRecordsPerFile\": \"<integer>\",\n  \"compress\": \"<boolean>\",\n  \"selected_contact\": \"<string>\",\n  \"selected_audience_key\": \"vip_members\",\n  \"confirmEmail\": \"<string>\",\n  \"additionalJsonlFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contactFields\": [\n    \"channels.sms.address\",\n    \"extPK\",\n    \"first_name\"\n  ],\n  \"selected_channel\": \"email\",\n  \"sendType\": \"sms\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"The source.transport field is required.\",\n  \"errorKey\": \"GENERIC_ERROR_KEY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c915282b-e8bd-43b0-b7d2-dd6bc607f141",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactactivityexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"exportType\": \"csv\",\n  \"name\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"sftp.example.com\",\n    \"port\": 22,\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"selected_timeframe_start\": \"<dateTime>\",\n  \"selected_timeframe_end\": \"<dateTime>\",\n  \"delimiter\": \",\",\n  \"columnHeaders\": [\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"showHeader\": \"<boolean>\",\n  \"selected_action_name\": \"message-sent\",\n  \"selected_action_names\": [\n    \"open\",\n    \"click\",\n    \"bounce\",\n    \"optout\"\n  ],\n  \"selected_message_type\": \"<string>\",\n  \"showAllProperties\": \"<boolean>\",\n  \"selected_message_id\": \"<string>\",\n  \"limitRecordsPerFile\": \"<integer>\",\n  \"compress\": \"<boolean>\",\n  \"selected_contact\": \"<string>\",\n  \"selected_audience_key\": \"vip_members\",\n  \"confirmEmail\": \"<string>\",\n  \"additionalJsonlFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contactFields\": [\n    \"channels.sms.address\",\n    \"extPK\",\n    \"first_name\"\n  ],\n  \"selected_channel\": \"email\",\n  \"sendType\": \"sms\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"Please use only one from existing filters 'selected_action_name' OR 'selected_action_names'\",\n  \"errorKey\": \"GENERIC_ERROR_KEY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "672f97ae-8247-4d42-8d71-041c97fd6e4f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactactivityexport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"exportType\": \"csv\",\n  \"name\": \"<string>\",\n  \"destination\": {\n    \"type\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"sftp.example.com\",\n    \"port\": 22,\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"path\": \"<string>\",\n    \"gcs_bucket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\"\n  },\n  \"selected_timeframe_start\": \"<dateTime>\",\n  \"selected_timeframe_end\": \"<dateTime>\",\n  \"delimiter\": \",\",\n  \"columnHeaders\": [\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ],\n  \"showHeader\": \"<boolean>\",\n  \"selected_action_name\": \"message-sent\",\n  \"selected_action_names\": [\n    \"open\",\n    \"click\",\n    \"bounce\",\n    \"optout\"\n  ],\n  \"selected_message_type\": \"<string>\",\n  \"showAllProperties\": \"<boolean>\",\n  \"selected_message_id\": \"<string>\",\n  \"limitRecordsPerFile\": \"<integer>\",\n  \"compress\": \"<boolean>\",\n  \"selected_contact\": \"<string>\",\n  \"selected_audience_key\": \"vip_members\",\n  \"confirmEmail\": \"<string>\",\n  \"additionalJsonlFields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"contactFields\": [\n    \"channels.sms.address\",\n    \"extPK\",\n    \"first_name\"\n  ],\n  \"selected_channel\": \"email\",\n  \"sendType\": \"sms\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.\",\n  \"errorKey\": \"UNSUPPORTED_MEDIA_TYPE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "37499f7c-2302-415d-918e-2b9ad6df9d30",
+    "name": "Cordial contact activity exports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged contact activity exports across 2 of this provider's published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

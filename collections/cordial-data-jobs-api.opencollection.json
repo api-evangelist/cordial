@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial data jobs API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "data jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Run a data transformation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/datajobs/:key/transform",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Data job automation key."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Runs the advanced transformation script for the specified data job automation. The data automation is defined by its unique `key` value."
+        },
+        {
+          "info": {
+            "name": "Trigger a data transformation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/datajobs/:key/trigger",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Data job automation key."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Triggers the advanced transformation script for the specified data job automation. The data automation is defined by its unique `key` value and must be already configured and published."
+        },
+        {
+          "info": {
+            "name": "Return stats for particular oneTime data job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/datajobs/:dabId/stats",
+            "params": [
+              {
+                "name": "dabId",
+                "value": "",
+                "type": "path",
+                "description": "One time data job ID."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Return stats for particular oneTime data job"
+        },
+        {
+          "info": {
+            "name": "Return per-run statistics for recurring data job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/datajobs/:key/runs/:runMarker/stats",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Data job automation key."
+              },
+              {
+                "name": "runMarker",
+                "value": "",
+                "type": "path",
+                "description": "Specific run marker. Usually, the date time marker, like: rm202506180920"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Return per-run statistics for recurring data job"
+        },
+        {
+          "info": {
+            "name": "Return list of runs for recurring data job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/datajobs/:key/runs",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "Data job automation key."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Return list of runs for recurring data job"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

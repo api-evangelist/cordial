@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial Productimports API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "productimports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a product import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/productimports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a product import job"
+        },
+        {
+          "info": {
+            "name": "Create a product import job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/productimports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates an import job to batch load a file of products into the Cordial database from an external location. Supported import file types include CSV and JSONL. Column headers need to be the product attribute field names. First row column headers describe the data for that column. Column headers are not required in CSV. They can be included as an array within the API call in the \"columns\" field."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

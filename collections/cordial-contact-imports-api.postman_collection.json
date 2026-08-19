@@ -1,0 +1,346 @@
+{
+  "item": [
+    {
+      "id": "b4e9a723-c183-4d92-a436-df3a5e9fe126",
+      "name": "contact imports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "57ac790b-07cb-423a-b6f6-231d5fed05ed",
+          "name": "Add a new contact import job",
+          "request": {
+            "name": "Add a new contact import job",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "contactimports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": {\n    \"transport\": \"<string>\",\n    \"url\": \"<string>\",\n    \"path\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"importName\": \"<string>\",\n  \"hasHeader\": \"<boolean>\",\n  \"columns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"delimiter\": \"<string>\",\n  \"confirmEmail\": \"<string>\",\n  \"strategy\": \"<string>\",\n  \"suppressTriggers\": false,\n  \"jobStatusWebhookUrl\": \"<string>\",\n  \"lists\": {\n    \"addTo\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removeFrom\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"nullMarker\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3372c3e6-12d1-42b1-95f4-2c28f43535cb",
+              "name": "record created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contactimports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"transport\": \"<string>\",\n    \"url\": \"<string>\",\n    \"path\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"importName\": \"<string>\",\n  \"hasHeader\": \"<boolean>\",\n  \"columns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"delimiter\": \"<string>\",\n  \"confirmEmail\": \"<string>\",\n  \"strategy\": \"<string>\",\n  \"suppressTriggers\": false,\n  \"jobStatusWebhookUrl\": \"<string>\",\n  \"lists\": {\n    \"addTo\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removeFrom\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"nullMarker\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e72500fc-a74c-49a9-941a-06fa1bec41d1",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contactimports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"transport\": \"<string>\",\n    \"url\": \"<string>\",\n    \"path\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\"\n  },\n  \"importName\": \"<string>\",\n  \"hasHeader\": \"<boolean>\",\n  \"columns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"delimiter\": \"<string>\",\n  \"confirmEmail\": \"<string>\",\n  \"strategy\": \"<string>\",\n  \"suppressTriggers\": false,\n  \"jobStatusWebhookUrl\": \"<string>\",\n  \"lists\": {\n    \"addTo\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removeFrom\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"nullMarker\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94a59d27-5cb6-42a9-a65e-2de95ba6a069",
+          "name": "Add a new contact import job",
+          "request": {
+            "name": "Add a new contact import job",
+            "description": {
+              "content": "Creates an import job to batch load a file of contact records to the Cordial database from an external location. The import file can be retrieved via HTTP/HTTPS, FTP/SFTP, from the Amazon S3 bucket, and from the Google Cloud Storage bucket. Supported import file types include CSV, TSV and TXT.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "contactimports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": {\n    \"transport\": \"<string>\",\n    \"url\": \"<string>\",\n    \"path\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\",\n    \"aws_bucket\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"server\": \"<string>\",\n    \"port\": \"<integer>\",\n    \"username\": \"<string>\",\n    \"password\": \"<string>\",\n    \"savedKey\": \"<string>\",\n    \"buket\": \"<string>\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\",\n    \"database\": \"<string>\",\n    \"schema\": \"<string>\",\n    \"source\": \"<string>\"\n  },\n  \"importName\": \"<string>\",\n  \"hasHeader\": \"<boolean>\",\n  \"columns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"delimiter\": \"<string>\",\n  \"confirmEmail\": \"<string>\",\n  \"strategy\": \"<string>\",\n  \"suppressTriggers\": \"<boolean>\",\n  \"jobStatusWebhookUrl\": \"<string>\",\n  \"lists\": {\n    \"addTo\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"removeFrom\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"nullMarker\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "408552d9-bced-4cec-bffc-abf34f0b7828",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactimports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"transport\": \"<string>\",\n    \"url\": \"http://files.example.com/file.csv\",\n    \"path\": \"files/file.csv\",\n    \"aws_access_key_id\": \"WIfdavFHS8adsfhad98df\",\n    \"aws_secret_access_key\": \"dudhKDDHE476383kdsdhdka\",\n    \"aws_bucket\": \"my_bucket\",\n    \"aws_region\": \"us-west-2\",\n    \"server\": \"example.com\",\n    \"port\": \"<integer>\",\n    \"username\": \"myusername\",\n    \"password\": \"Msm1th$99!\",\n    \"savedKey\": \"<string>\",\n    \"buket\": \"name_used_in_marketplace_setup\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\",\n    \"database\": \"<string>\",\n    \"schema\": \"<string>\",\n    \"source\": \"<string>\"\n  },\n  \"importName\": \"<string>\",\n  \"hasHeader\": true,\n  \"columns\": [\n    \"channels.email.address\",\n    \"channels.email.subscribeStatus\",\n    \"firstname\"\n  ],\n  \"delimiter\": \",\",\n  \"confirmEmail\": \"joesmith@example.com\",\n  \"strategy\": \"insertOnly\",\n  \"suppressTriggers\": \"<boolean>\",\n  \"jobStatusWebhookUrl\": \"<string>\",\n  \"lists\": {\n    \"addTo\": [\n      \"foo\",\n      \"bar\"\n    ],\n    \"removeFrom\": [\n      \"biz\",\n      \"baz\"\n    ]\n  },\n  \"nullMarker\": \"ignore\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"5f6b1434f778ac145d25391a\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48100916-cc11-4c2a-88c1-d59eaa78b0a2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "contactimports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"transport\": \"<string>\",\n    \"url\": \"http://files.example.com/file.csv\",\n    \"path\": \"files/file.csv\",\n    \"aws_access_key_id\": \"WIfdavFHS8adsfhad98df\",\n    \"aws_secret_access_key\": \"dudhKDDHE476383kdsdhdka\",\n    \"aws_bucket\": \"my_bucket\",\n    \"aws_region\": \"us-west-2\",\n    \"server\": \"example.com\",\n    \"port\": \"<integer>\",\n    \"username\": \"myusername\",\n    \"password\": \"Msm1th$99!\",\n    \"savedKey\": \"<string>\",\n    \"buket\": \"name_used_in_marketplace_setup\",\n    \"account\": \"<string>\",\n    \"container\": \"<string>\",\n    \"database\": \"<string>\",\n    \"schema\": \"<string>\",\n    \"source\": \"<string>\"\n  },\n  \"importName\": \"<string>\",\n  \"hasHeader\": true,\n  \"columns\": [\n    \"channels.email.address\",\n    \"channels.email.subscribeStatus\",\n    \"firstname\"\n  ],\n  \"delimiter\": \",\",\n  \"confirmEmail\": \"joesmith@example.com\",\n  \"strategy\": \"insertOnly\",\n  \"suppressTriggers\": \"<boolean>\",\n  \"jobStatusWebhookUrl\": \"<string>\",\n  \"lists\": {\n    \"addTo\": [\n      \"foo\",\n      \"bar\"\n    ],\n    \"removeFrom\": [\n      \"biz\",\n      \"baz\"\n    ]\n  },\n  \"nullMarker\": \"ignore\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"The source.transport field is required.\",\n  \"errorKey\": \"GENERIC_ERROR_KEY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "068b7843-bd97-471e-ac8f-54b747037489",
+    "name": "Cordial contact imports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged contact imports across 2 of this provider's published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

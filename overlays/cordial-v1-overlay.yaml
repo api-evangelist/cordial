@@ -2,7 +2,7 @@ overlay: 1.0.0
 info:
   title: API Evangelist enhancements for Cordial API v1
   version: 1.0.0
-extends: openapi/cordial-v1-openapi-original.json
+extends: openapi/_original/cordial-v1-openapi-original.json
 x-generated: '2026-08-04'
 x-method: generated
 x-note: Captures API Evangelist annotations over the provider's harvested Swagger 2.0 document. The original at openapi/ is

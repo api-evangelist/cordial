@@ -1,0 +1,818 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cordial batch messages API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "batch messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get batch messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/batchmessages",
+            "params": [
+              {
+                "name": "sendTime[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Send Time greater "
+              },
+              {
+                "name": "sendTime[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Send Time greater or equal"
+              },
+              {
+                "name": "sendTime[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Send Time less"
+              },
+              {
+                "name": "sendTime[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Send Time less or equal"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Message status"
+              },
+              {
+                "name": "triggers[api][enabled]",
+                "value": "",
+                "type": "query",
+                "description": "API trigger"
+              },
+              {
+                "name": "triggers[event][enabled]",
+                "value": "",
+                "type": "query",
+                "description": "Event trigger"
+              },
+              {
+                "name": "triggers[recurring][enabled]",
+                "value": "",
+                "type": "query",
+                "description": "Recurring trigger"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Message tags (can be many, separate by comma)"
+              },
+              {
+                "name": "mdtID",
+                "value": "",
+                "type": "query",
+                "description": "Automation template ID"
+              },
+              {
+                "name": "ct[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Create date greater "
+              },
+              {
+                "name": "ct[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Create date greater or equal"
+              },
+              {
+                "name": "ct[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Create date less"
+              },
+              {
+                "name": "ct[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Create date less or equal"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of records returned"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get batch messages"
+        },
+        {
+          "info": {
+            "name": "Create a batch message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v1/batchmessages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create a batch message"
+        },
+        {
+          "info": {
+            "name": "GET single message by msID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/batchmessages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message send ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "GET single message by msID"
+        },
+        {
+          "info": {
+            "name": "Update an existing message",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/batchmessages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message send ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Update an existing message"
+        },
+        {
+          "info": {
+            "name": "Delete a single contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v1/batchmessages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message send ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a single contact"
+        },
+        {
+          "info": {
+            "name": "Send Manual Messagesend",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/batchmessages/:id/send",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message send ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Send Manual Messagesend"
+        },
+        {
+          "info": {
+            "name": "Send a test batch message",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/batchmessages/:id/sendtest",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message send ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Send a test batch message"
+        },
+        {
+          "info": {
+            "name": "Render preview of a batch message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v1/batchmessages/:id/renderedwip/:contactID",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message send ID"
+              },
+              {
+                "name": "contactID",
+                "value": "",
+                "type": "path",
+                "description": "Contact ID"
+              },
+              {
+                "name": "experiment",
+                "value": "",
+                "type": "query",
+                "description": "Name of experiment "
+              },
+              {
+                "name": "variant",
+                "value": "",
+                "type": "query",
+                "description": "Variant name"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Render preview of a batch message"
+        },
+        {
+          "info": {
+            "name": "Pause a batch message sending",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/batchmessages/:id/pause",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message send ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Pause a batch message sending"
+        },
+        {
+          "info": {
+            "name": "Cancel a batch message sending",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/batchmessages/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message send ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Cancel a batch message sending"
+        },
+        {
+          "info": {
+            "name": "Resume a batch message sending",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v1/batchmessages/:id/resume",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message send ID"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Resume a batch message sending"
+        },
+        {
+          "info": {
+            "name": "Get batch messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/batchmessages",
+            "params": [
+              {
+                "name": "sendTime[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Send time is greater than."
+              },
+              {
+                "name": "sendTime[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Send time is greater than or equal to."
+              },
+              {
+                "name": "sendTime[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Send time is less than."
+              },
+              {
+                "name": "sendTime[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Send time is less than or equal to."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Message status (e.g. sent, canceled, paused, processing, pending)."
+              },
+              {
+                "name": "triggers[api][enabled]",
+                "value": "",
+                "type": "query",
+                "description": "API trigger sending method status. True for enabled and false for disabled."
+              },
+              {
+                "name": "triggers[event][enabled]",
+                "value": "",
+                "type": "query",
+                "description": "Event trigger sending method status. True for enabled and false for disabled."
+              },
+              {
+                "name": "triggers[recurring][enabled]",
+                "value": "",
+                "type": "query",
+                "description": "Recurring trigger sending method status. True for enabled and false for disabled."
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by messages that contain specified message tags (can be many, comma-separated)."
+              },
+              {
+                "name": "mdtID",
+                "value": "",
+                "type": "query",
+                "description": "Automation message delivery template ID (mdtID). Represents both the published and draft versions of an automation template."
+              },
+              {
+                "name": "ct[gt]",
+                "value": "",
+                "type": "query",
+                "description": "Create date is greater than."
+              },
+              {
+                "name": "ct[gte]",
+                "value": "",
+                "type": "query",
+                "description": "Create date is greater than or equal to."
+              },
+              {
+                "name": "ct[lt]",
+                "value": "",
+                "type": "query",
+                "description": "Create date is less than."
+              },
+              {
+                "name": "ct[lte]",
+                "value": "",
+                "type": "query",
+                "description": "Create date less than or equal to."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Specific page number to be returned."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number or records per page."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves batch messages. Note that info and stats on daily message <b>automation</b> sends are retrieved using the <b>GET /batchmessages</b> method. The response for automation sends can be filtered using the automation trigger sending method status, the creation time, and automation message delivery template ID (mdtID)."
+        },
+        {
+          "info": {
+            "name": "Create a batch message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cordial.io/v2/batchmessages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Creates a batch message template using the appropriate JSON body. Posting more than once will create subsequent batch message templates. Use PUT to change or update a batch message template that has not been sent yet."
+        },
+        {
+          "info": {
+            "name": "Get a single batch message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/batchmessages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Batch message ID (msID)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves a batch message. The batch message record is defined by its unique message `id` value."
+        },
+        {
+          "info": {
+            "name": "Update a batch message draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/batchmessages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Batch message ID (msID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Updates a batch message draft using the appropriate JSON body. The batch message record is defined by its unique message `id` value (generated by the POST method). The PUT method can only be used if the message status is `draft`."
+        },
+        {
+          "info": {
+            "name": "Delete a batch message",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cordial.io/v2/batchmessages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Batch message ID (msID)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deletes an existing draft or scheduled batch message. The batch message record is defined by its unique message `id` value."
+        },
+        {
+          "info": {
+            "name": "Send or schedule a batch message",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/batchmessages/:id/send",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Batch message ID (msID)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Sends or schedules an existing batch message draft. If the draft is scheduled for a future send date, the message will be scheduled and sent on that date and time. The batch message record is defined by its unique message `id` value."
+        },
+        {
+          "info": {
+            "name": "Send a test batch message",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/batchmessages/:id/sendtest",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Batch message ID (msID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Sends a test batch message. The batch message record is defined by its unique message `id` value."
+        },
+        {
+          "info": {
+            "name": "Get experiment performance for single batch message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/batchmessages/:id/experimentperformance",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Batch message ID (msID)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves experiment performance for single batch message. The batch message record is defined by its unique message `id` value."
+        },
+        {
+          "info": {
+            "name": "Render preview of a batch message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cordial.io/v2/batchmessages/:id/renderedwip/:contactID",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Batch message ID (msID)."
+              },
+              {
+                "name": "contactID",
+                "value": "",
+                "type": "path",
+                "description": "Cordial database contact ID (cID) value."
+              },
+              {
+                "name": "experiment",
+                "value": "",
+                "type": "query",
+                "description": "Returns the batch message that contains the specified experiment name. Variant is required if experiment is specified."
+              },
+              {
+                "name": "variant",
+                "value": "",
+                "type": "query",
+                "description": "Returns the batch message that contains the specified experiment variant. Experiment is required if variant is specified."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Retrieves the message headers, the rendered HTML, and experiment name and variants of a batch message for a specified contact. The batch message record is defined by its unique message `id` value. The contact record is defined by its unique contact ID (cID) value."
+        },
+        {
+          "info": {
+            "name": "Pause batch message sending",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/batchmessages/:id/pause",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Batch message ID (msID)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Pauses the sending of a batch message. The batch message record is defined by its unique message `id` value."
+        },
+        {
+          "info": {
+            "name": "Cancel batch message sending",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/batchmessages/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Batch message ID (msID)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Cancels the sending of a batch message. A paused message may also be canceled. The batch message record is defined by its unique message `id` value."
+        },
+        {
+          "info": {
+            "name": "Resume batch message sending",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/batchmessages/:id/resume",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Batch message ID (msID)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Resumes the sending of a batch message. The batch message record is defined by its unique message `id` value."
+        },
+        {
+          "info": {
+            "name": "Unschedule a batch message",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cordial.io/v2/batchmessages/:id/unschedule",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Batch message ID (msID)."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Unschedule a scheduled batch message. Unscheduled messages will revert to draft status and can be edited. Messages that are in the processing status cannot be unscheduled. The batch message record is defined by its unique message `id` value."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

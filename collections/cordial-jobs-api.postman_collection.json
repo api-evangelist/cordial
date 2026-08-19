@@ -1,0 +1,1197 @@
+{
+  "item": [
+    {
+      "id": "3cdfe026-08d0-4fee-ba7d-b6502beb5728",
+      "name": "jobs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0f1088f3-7791-4bae-88fd-6ba2d937938f",
+          "name": "Get a single job",
+          "request": {
+            "name": "Get a single job",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "jobs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Job id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "41a6463a-2b52-4040-a19f-b88f79256dd1",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Job id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"Scheduled\",\n  \"jobName\": \"string\",\n  \"totalItems\": 6302,\n  \"completedItems\": 7305,\n  \"times\": {\n    \"start\": \"string\",\n    \"end\": \"string\"\n  },\n  \"result\": {\n    \"totalRecords\": 3986,\n    \"duplicateRecords\": 8930,\n    \"invalidRecords\": 6169,\n    \"newRecords\": 2201\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba199a1e-e0c6-4d0d-a617-9f4e28ecb3f0",
+              "name": "record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Job id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72fce53c-ac97-43c3-a219-aa509bf44d5c",
+          "name": "Get jobs list",
+          "request": {
+            "name": "Get jobs list",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "jobName",
+                  "value": "<string>",
+                  "description": "Name given to the job"
+                },
+                {
+                  "disabled": false,
+                  "key": "times[start][gt]",
+                  "value": "<string>",
+                  "description": "Start Time greater "
+                },
+                {
+                  "disabled": false,
+                  "key": "times[start][gte]",
+                  "value": "<string>",
+                  "description": "Start Time greater or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "times[start][lt]",
+                  "value": "<string>",
+                  "description": "Start Time less"
+                },
+                {
+                  "disabled": false,
+                  "key": "times[start][lte]",
+                  "value": "<string>",
+                  "description": "Start Time less or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "times[end][gt]",
+                  "value": "<string>",
+                  "description": "End Time greater "
+                },
+                {
+                  "disabled": false,
+                  "key": "times[end][gte]",
+                  "value": "<string>",
+                  "description": "End Time greater or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "times[end][lt]",
+                  "value": "<string>",
+                  "description": "End Time less"
+                },
+                {
+                  "disabled": false,
+                  "key": "times[end][lte]",
+                  "value": "<string>",
+                  "description": "End Time less or equal"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Active status for job"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Number of page"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Count items on page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0faa5ee5-e4e0-4eea-8ed5-0c2cc6ae61a4",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "jobName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"status\": \"Failed\",\n    \"jobName\": \"string\",\n    \"totalItems\": 612,\n    \"completedItems\": 7942,\n    \"times\": {\n      \"start\": \"string\",\n      \"end\": \"string\"\n    },\n    \"result\": {\n      \"totalRecords\": 8479,\n      \"duplicateRecords\": 5642,\n      \"invalidRecords\": 9620,\n      \"newRecords\": 5260\n    }\n  },\n  {\n    \"status\": \"Failed\",\n    \"jobName\": \"string\",\n    \"totalItems\": 1705,\n    \"completedItems\": 2612,\n    \"times\": {\n      \"start\": \"string\",\n      \"end\": \"string\"\n    },\n    \"result\": {\n      \"totalRecords\": 9505,\n      \"duplicateRecords\": 8408,\n      \"invalidRecords\": 7243,\n      \"newRecords\": 8830\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85d8cac1-2196-49ad-8787-3137ab6d3f58",
+              "name": "record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "jobName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03818280-54f3-4329-a34f-8ff7237ce2c3",
+          "name": "Get a single job",
+          "request": {
+            "name": "Get a single job",
+            "description": {
+              "content": "Retrieves the specified job record from the Cordial database. The job record is defined by its unique `id` value. For example, /jobs/548817d0367df1ef518b4567 would return the response data for the job with the id of <b>548817d0367df1ef518b4567</b>.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "jobs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Fields to include (can be many, comma-separated)."
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-separated list of optional related resources to attach to the response. Supported values: `statistic` (only meaningful for data automation jobs: `DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration` — adds the `run` and `statistic` blocks with the data automation run's normalized status, start/end times, and full aggregation counters)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique job id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "87fcb4cb-c130-4920-b0f4-d1eb5b931611",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique job id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"Pending\",\n  \"jobName\": \"ImportContacts\",\n  \"totalItems\": 1000,\n  \"completedItems\": 1000,\n  \"times\": {\n    \"start\": \"1965-04-19T08:55:51.619Z\",\n    \"end\": \"1967-05-14T08:17:17.308Z\"\n  },\n  \"result\": {\n    \"totalRecords\": 50,\n    \"updated\": 50,\n    \"rejected\": 50,\n    \"inserted\": 50,\n    \"error\": 50,\n    \"ignored\": 50\n  },\n  \"metadata\": {\n    \"msID\": \"string\",\n    \"dabID\": \"string\",\n    \"daID\": \"string\",\n    \"cID\": \"string\",\n    \"compositionID\": \"string\",\n    \"orchestrationID\": \"string\",\n    \"contactID\": \"string\",\n    \"tzOffset\": 8354,\n    \"messageSendDataName\": \"string\",\n    \"messageSendDataCompositionID\": \"string\",\n    \"messageSendDataOrchestrationID\": \"string\",\n    \"name\": \"string\",\n    \"mdtID\": \"string\",\n    \"exportType\": \"string\",\n    \"lists\": [\n      \"string\",\n      \"string\"\n    ],\n    \"fileName\": \"string\",\n    \"filename\": \"string\",\n    \"importName\": \"string\",\n    \"ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"key\": \"string\",\n    \"taskID\": \"string\",\n    \"parentJobId\": \"string\"\n  },\n  \"run\": {\n    \"status\": \"unknown\",\n    \"startedAt\": \"1978-01-31T14:47:35.757Z\",\n    \"endedAt\": \"1959-01-25T02:48:21.426Z\"\n  },\n  \"statistic\": {\n    \"total_queued\": 1014296,\n    \"total_processed\": 1014296,\n    \"total_successful\": 1014296,\n    \"total_failures\": 0,\n    \"total_executed\": 6838,\n    \"total_messages_sent\": 1668,\n    \"total_contacts_inserted\": 206,\n    \"total_contacts_updated\": 5806,\n    \"total_orders_inserted\": 1857,\n    \"total_orders_updated\": 2427,\n    \"total_products_inserted\": 9045,\n    \"total_products_updated\": 8093,\n    \"total_supplements_inserted\": 7366,\n    \"total_supplements_updated\": 358,\n    \"total_events_inserted\": 2842,\n    \"total_records_inserted\": 1781,\n    \"total_exported\": 6780,\n    \"perRecord\": {\n      \"total_successful\": 1,\n      \"total_failures\": 0,\n      \"total_messages_sent\": 1\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4423754c-0482-4d45-9be2-b1deb7843d18",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "jobs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique job id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c0148a2-05d9-470a-82ea-3cf4d30764d5",
+          "name": "Get jobs",
+          "request": {
+            "name": "Get jobs",
+            "description": {
+              "content": "Retrieves all jobs from the Cordial database. Response data can be filtered by job name, job start/end time and job status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "jobName",
+                  "value": "<string>",
+                  "description": "Name given to the job. Job names are assigned automatically based on the API initiating the job. For example, contactimports will assign the value of <b>ImportContacts</b> to the `jobName`."
+                },
+                {
+                  "disabled": false,
+                  "key": "times[start][gt]",
+                  "value": "<string>",
+                  "description": "Start time is greater than."
+                },
+                {
+                  "disabled": false,
+                  "key": "times[start][gte]",
+                  "value": "<string>",
+                  "description": "Start time is greater than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "times[start][lt]",
+                  "value": "<string>",
+                  "description": "Start time is less than."
+                },
+                {
+                  "disabled": false,
+                  "key": "times[start][lte]",
+                  "value": "<string>",
+                  "description": "Start time is less than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "times[end][gt]",
+                  "value": "<string>",
+                  "description": "End time is greater than."
+                },
+                {
+                  "disabled": false,
+                  "key": "times[end][gte]",
+                  "value": "<string>",
+                  "description": "End time is greater than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "times[end][lt]",
+                  "value": "<string>",
+                  "description": "End time is less than."
+                },
+                {
+                  "disabled": false,
+                  "key": "times[end][lte]",
+                  "value": "<string>",
+                  "description": "End time is less than or equal to."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The current job status."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "Specific page number to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<string>",
+                  "description": "Number of records per page. When `include=statistic` is requested, `per_page` must not exceed 25; a larger value returns a 400 error."
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-separated list of optional related resources to attach to each job in the response. Supported values: `statistic` (only meaningful for data automation jobs: `DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration` — adds the `run` and `statistic` blocks with the data automation run's normalized status, start/end times, and full aggregation counters). Note: requesting `statistic` is a heavy operation, so the page size is capped at 25 — `per_page` values above 25 are rejected with a 400 error."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e5921401-4005-491b-8764-db0c3613c07b",
+              "name": "successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "jobName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"status\": \"Done\",\n    \"jobName\": \"ImportContacts\",\n    \"totalItems\": 1000,\n    \"completedItems\": 1000,\n    \"times\": {\n      \"start\": \"1981-03-27T04:04:33.665Z\",\n      \"end\": \"1971-09-30T06:17:56.161Z\"\n    },\n    \"result\": {\n      \"totalRecords\": 50,\n      \"updated\": 50,\n      \"rejected\": 50,\n      \"inserted\": 50,\n      \"error\": 50,\n      \"ignored\": 50\n    },\n    \"metadata\": {\n      \"msID\": \"string\",\n      \"dabID\": \"string\",\n      \"daID\": \"string\",\n      \"cID\": \"string\",\n      \"compositionID\": \"string\",\n      \"orchestrationID\": \"string\",\n      \"contactID\": \"string\",\n      \"tzOffset\": 9745,\n      \"messageSendDataName\": \"string\",\n      \"messageSendDataCompositionID\": \"string\",\n      \"messageSendDataOrchestrationID\": \"string\",\n      \"name\": \"string\",\n      \"mdtID\": \"string\",\n      \"exportType\": \"string\",\n      \"lists\": [\n        \"string\",\n        \"string\"\n      ],\n      \"fileName\": \"string\",\n      \"filename\": \"string\",\n      \"importName\": \"string\",\n      \"ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key\": \"string\",\n      \"taskID\": \"string\",\n      \"parentJobId\": \"string\"\n    },\n    \"run\": {\n      \"status\": \"draft\",\n      \"startedAt\": \"1946-12-15T07:35:20.347Z\",\n      \"endedAt\": \"1959-09-30T02:47:21.422Z\"\n    },\n    \"statistic\": {\n      \"total_queued\": 1014296,\n      \"total_processed\": 1014296,\n      \"total_successful\": 1014296,\n      \"total_failures\": 0,\n      \"total_executed\": 7706,\n      \"total_messages_sent\": 8788,\n      \"total_contacts_inserted\": 3125,\n      \"total_contacts_updated\": 3940,\n      \"total_orders_inserted\": 6506,\n      \"total_orders_updated\": 5582,\n      \"total_products_inserted\": 4216,\n      \"total_products_updated\": 5233,\n      \"total_supplements_inserted\": 1414,\n      \"total_supplements_updated\": 5903,\n      \"total_events_inserted\": 608,\n      \"total_records_inserted\": 256,\n      \"total_exported\": 3454,\n      \"perRecord\": {\n        \"total_successful\": 1,\n        \"total_failures\": 0,\n        \"total_messages_sent\": 1\n      }\n    }\n  },\n  {\n    \"status\": \"Processing\",\n    \"jobName\": \"ImportContacts\",\n    \"totalItems\": 1000,\n    \"completedItems\": 1000,\n    \"times\": {\n      \"start\": \"1960-05-11T02:45:26.410Z\",\n      \"end\": \"2000-01-12T08:57:20.306Z\"\n    },\n    \"result\": {\n      \"totalRecords\": 50,\n      \"updated\": 50,\n      \"rejected\": 50,\n      \"inserted\": 50,\n      \"error\": 50,\n      \"ignored\": 50\n    },\n    \"metadata\": {\n      \"msID\": \"string\",\n      \"dabID\": \"string\",\n      \"daID\": \"string\",\n      \"cID\": \"string\",\n      \"compositionID\": \"string\",\n      \"orchestrationID\": \"string\",\n      \"contactID\": \"string\",\n      \"tzOffset\": 997,\n      \"messageSendDataName\": \"string\",\n      \"messageSendDataCompositionID\": \"string\",\n      \"messageSendDataOrchestrationID\": \"string\",\n      \"name\": \"string\",\n      \"mdtID\": \"string\",\n      \"exportType\": \"string\",\n      \"lists\": [\n        \"string\",\n        \"string\"\n      ],\n      \"fileName\": \"string\",\n      \"filename\": \"string\",\n      \"importName\": \"string\",\n      \"ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key\": \"string\",\n      \"taskID\": \"string\",\n      \"parentJobId\": \"string\"\n    },\n    \"run\": {\n      \"status\": \"processing\",\n      \"startedAt\": \"1991-02-08T03:34:56.717Z\",\n      \"endedAt\": \"1973-05-11T13:17:09.159Z\"\n    },\n    \"statistic\": {\n      \"total_queued\": 1014296,\n      \"total_processed\": 1014296,\n      \"total_successful\": 1014296,\n      \"total_failures\": 0,\n      \"total_executed\": 9093,\n      \"total_messages_sent\": 4842,\n      \"total_contacts_inserted\": 2136,\n      \"total_contacts_updated\": 4937,\n      \"total_orders_inserted\": 4881,\n      \"total_orders_updated\": 6947,\n      \"total_products_inserted\": 6638,\n      \"total_products_updated\": 4111,\n      \"total_supplements_inserted\": 7070,\n      \"total_supplements_updated\": 4808,\n      \"total_events_inserted\": 5684,\n      \"total_records_inserted\": 6050,\n      \"total_exported\": 4929,\n      \"perRecord\": {\n        \"total_successful\": 1,\n        \"total_failures\": 0,\n        \"total_messages_sent\": 1\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cee9019-d42d-411f-8955-304ffcb7491f",
+              "name": "per_page exceeds the limit allowed when include=statistic is requested",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "jobName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"errorKey\": \"JOBS_STATISTIC_PER_PAGE_EXCEEDED\",\n  \"message\": \"When include=statistic is requested, per_page must not exceed 25.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2573989-ffc8-4c36-a884-4183bfaf748a",
+              "name": "Record not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "jobName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"record not found\",\n  \"errorKey\": \"RECORD_NOT_FOUND\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f865ccf-a735-471a-9cce-b8c9e6672102",
+              "name": "Filter incorrect",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "jobName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[start][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][gte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lt]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "times[end][lte]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"errorKey\": \"GENERIC_ERROR_KEY\",\n  \"message\": \"Time value is incorrect\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cordial.io/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a1596494-5906-473e-a6da-d5db11dcd14e",
+    "name": "Cordial Jobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged jobs across 2 of this provider's published API definitions: cordial-v1-openapi-original.json, cordial-v2-openapi-original.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

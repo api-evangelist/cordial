@@ -1,0 +1,330 @@
+openapi: 3.2.0
+info:
+  description: Welcome to the Cordial API documentation! This interactive API documentation allows you to test API calls from the Swagger interface. Authenticate yourself with the API key from your Cordial account and then make API calls. Keep in mind that testing in Swagger will directly affect your production data.
+  version: 2.0.0
+  title: Cordial data jobs API
+  termsOfService: https://cordial.zendesk.com
+servers:
+- url: https://api.cordial.io/
+tags:
+- name: data jobs
+paths:
+  /v2/datajobs/{key}/transform:
+    post:
+      security:
+      - basicAuth: []
+      tags:
+      - data jobs
+      operationId: runTransformation
+      description: Runs the advanced transformation script for the specified data job automation. The data automation is defined by its unique `key` value.
+      summary: Run a data transformation
+      parameters:
+      - name: key
+        description: Data job automation key.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Transformation is processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataJobsSuccess'
+        '400':
+          description: Bad request
+          $ref: '#/components/responses/DataJobsError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataJobsRecord'
+        description: JSON object to be transformed.
+        required: true
+  /v2/datajobs/{key}/trigger:
+    post:
+      security:
+      - basicAuth: []
+      tags:
+      - data jobs
+      operationId: runTrigger
+      description: Triggers the advanced transformation script for the specified data job automation. The data automation is defined by its unique `key` value and must be already configured and published.
+      summary: Trigger a data transformation
+      parameters:
+      - name: key
+        description: Data job automation key.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Transformation is triggered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataJobsTriggeredSuccess'
+        '400':
+          description: Bad request
+          $ref: '#/components/responses/DataJobsError'
+  /v2/datajobs/{dabId}/stats:
+    get:
+      security:
+      - basicAuth: []
+      tags:
+      - data jobs
+      summary: Return stats for particular oneTime data job
+      description: ''
+      operationId: onetimeStats
+      parameters:
+      - name: dabId
+        description: One time data job ID.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A single stats document for the specified one-time data job (dabId), including run metadata and aggregated totals (queued, processed, successful, failures, exported).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OneTimeStatsReturnedSuccess'
+        '400':
+          description: Bad request
+          $ref: '#/components/responses/DataJobsError'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+        '422':
+          description: Validation error
+          $ref: '#/components/responses/DataJobsError'
+  /v2/datajobs/{key}/runs/{runMarker}/stats:
+    get:
+      security:
+      - basicAuth: []
+      tags:
+      - data jobs
+      summary: Return per-run statistics for recurring data job
+      description: ''
+      operationId: statsForSingleAggregation
+      parameters:
+      - name: key
+        description: Data job automation key.
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: runMarker
+        description: 'Specific run marker. Usually, the date time marker, like: rm202506180920'
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns per-run stats (counts and top-level run metadata) for the specified recurring data job run.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OneTimeStatsReturnedSuccess'
+        '400':
+          description: Bad request
+          $ref: '#/components/responses/DataJobsError'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+        '422':
+          description: Validation error
+          $ref: '#/components/responses/DataJobsError'
+  /v2/datajobs/{key}/runs:
+    get:
+      security:
+      - basicAuth: []
+      tags:
+      - data jobs
+      summary: Return list of runs for recurring data job
+      description: ''
+      operationId: listOfRunsForDataAutomation
+      parameters:
+      - name: key
+        description: Data job automation key.
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of executed batches for a data job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOfRunsReturnedSuccess'
+        '400':
+          description: Bad request
+          $ref: '#/components/responses/DataJobsError'
+        '404':
+          $ref: '#/components/responses/RecordNotFound'
+        '422':
+          description: Validation error
+          $ref: '#/components/responses/DataJobsError'
+components:
+  schemas:
+    DataJobsSuccess:
+      title: 'Transformation is processing.
+
+
+        '
+      required:
+      - success
+      - message
+      properties:
+        message:
+          type: string
+          example: Transformation is processing.
+        success:
+          type: boolean
+          example: true
+    OneTimeStatsReturnedSuccess:
+      title: Response
+      type: object
+      required:
+      - dabId
+      - run
+      - stats
+      properties:
+        dabId:
+          type: string
+        run:
+          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessRun'
+        stats:
+          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessStats'
+    DataJobsRecord:
+      title: Data transformation object.
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    OneTimeStatsReturnedSuccessStats:
+      title: Stats
+      type: object
+      required: []
+      properties:
+        total_queued:
+          type: number
+        total_processed:
+          type: number
+        total_failures:
+          type: number
+        total_successful:
+          type: number
+        total_exported:
+          type: number
+    DataJobsTriggeredSuccess:
+      title: 'Transformation is triggered.
+
+
+        '
+      required:
+      - success
+      - message
+      - jobIds
+      - dabID
+      properties:
+        message:
+          type: string
+          example: Transformation is triggered.
+        dabID:
+          type: string
+        jobIds:
+          type: array
+          items:
+            type: string
+          example:
+          - job1
+          - job2
+          - job3
+        success:
+          type: boolean
+          example: true
+    ListOfRunsReturnedSuccess:
+      title: Response
+      type: object
+      required:
+      - daId
+      - runs
+      properties:
+        daId:
+          type: string
+        runs:
+          type: array
+          items:
+            type: string
+    OneTimeStatsReturnedSuccessRun:
+      title: Run
+      type: object
+      required:
+      - accountId
+      - daId
+      - status
+      - startedAt
+      - endedAt
+      properties:
+        accountId:
+          type: number
+        daId:
+          type: string
+        status:
+          type: string
+        startedAt:
+          type: string
+          format: date-time
+        endedAt:
+          type: string
+          format: date-time
+    DataJobsError:
+      title: Invalid request
+      required:
+      - messages
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Data Automation does not exist.
+          description: 'Possible errors: [''Data Automation does not exist.'',''Trigger API is disabled.'']'
+  responses:
+    DataJobsError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DataJobsError'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication. Works over HTTPS
