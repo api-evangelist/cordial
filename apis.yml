@@ -70,6 +70,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Account Attributes
+  tags_raw:
   - account attributes
   properties:
   - type: OpenAPI
@@ -88,6 +90,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Account Lists
+  tags_raw:
   - account lists
   properties:
   - type: OpenAPI
@@ -124,6 +128,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Alerts
+  tags_raw:
   - alerts
   properties:
   - type: OpenAPI
@@ -269,6 +275,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Contact Exports
+  tags_raw:
   - contact exports
   properties:
   - type: OpenAPI
@@ -287,6 +295,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Contact Imports
+  tags_raw:
   - contact imports
   properties:
   - type: OpenAPI
@@ -305,6 +315,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Contacts
+  tags_raw:
   - contacts
   properties:
   - type: OpenAPI
@@ -323,6 +335,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Data jobs
+  tags_raw:
   - data jobs
   properties:
   - type: OpenAPI
@@ -341,6 +355,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Job
+  tags_raw:
   - jobs
   properties:
   - type: OpenAPI
@@ -378,6 +394,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Orchestrations
+  tags_raw:
   - orchestrations
   properties:
   - type: OpenAPI
@@ -396,6 +414,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Order
+  tags_raw:
   - orders
   properties:
   - type: OpenAPI
@@ -450,6 +470,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Product
+  tags_raw:
   - products
   properties:
   - type: OpenAPI
@@ -468,6 +490,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Programs
+  tags_raw:
   - programs
   properties:
   - type: OpenAPI
@@ -486,6 +510,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Supplements
+  tags_raw:
   - supplements
   properties:
   - type: OpenAPI
