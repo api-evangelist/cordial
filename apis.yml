@@ -82,7 +82,7 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
-  - account attributes
+  - Account Attributes
   tags_raw:
   - account attributes
   properties:
@@ -102,7 +102,7 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
-  - account lists
+  - Account Lists
   tags_raw:
   - account lists
   properties:
@@ -287,7 +287,7 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
-  - contact exports
+  - Contact Exports
   tags_raw:
   - contact exports
   properties:
@@ -307,7 +307,7 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
-  - contact imports
+  - Contact Imports
   tags_raw:
   - contact imports
   properties:
@@ -347,7 +347,7 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
-  - data jobs
+  - Data jobs
   tags_raw:
   - data jobs
   properties:
@@ -406,7 +406,7 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
-  - orchestrations
+  - Orchestrations
   tags_raw:
   - orchestrations
   properties:
@@ -522,7 +522,7 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
-  - supplements
+  - Supplements
   tags_raw:
   - supplements
   properties:
