@@ -267,6 +267,8 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
+  - Contact Activities
+  tags_raw:
   - contact activities
   properties:
   - type: OpenAPI
