@@ -425,7 +425,7 @@ apis:
   humanURL: https://developers.cordial.com/api
   baseURL: https://api.cordial.io/v2
   tags:
-  - Orchestrations
+  - Orchestration
   tags_raw:
   - orchestrations
   properties:
