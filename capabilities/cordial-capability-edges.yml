@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 4
+edge_count: 5
 edges:
 - tag: contacts
   spec_file: cordial-contacts-api-openapi.yml
@@ -52,3 +52,14 @@ edges:
   reason: Create, test-send, send, pause, cancel and resume batch (campaign) messages across email/SMS/push
     — outbound marketing campaign execution. Sub-capability could also read as demand generation, hence
     0.7.
+- tag: orchestrations
+  spec_file: cordial-orchestrations-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: POST /v2/orchestrations/{orchestrationID}/trigger  triggerOrchestration; GET /v2/orchestrations/{orchestrationID}/actions  orchestrationActions
+  reason: Listing and triggering cross-channel messaging journeys (orchestrations) with contact identification
+    payloads — marketing automation, not generic workflow tooling, given the vendor's messaging platform
+    context.
+  recovered_from: vertical-retail-consumer-goods-edges.json
