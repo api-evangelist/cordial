@@ -87,6 +87,8 @@ paths:
           description: successful operation
         '404':
           description: record not found
+    servers:
+    - url: https://api.cordial.io/
   /v1/accountlists/{id}/clear:
     put:
       security:
@@ -107,6 +109,8 @@ paths:
           description: Successful operation
         '404':
           description: Record not found
+    servers:
+    - url: https://api.cordial.io/
   /v1/accountlists:
     post:
       security:
@@ -156,12 +160,14 @@ paths:
                   $ref: '#/components/schemas/ListShow'
         '404':
           description: Records not found
+    servers:
+    - url: https://api.cordial.io/
   /v2/accountlists/{id}:
     get:
       security:
       - basicAuth: []
       summary: Get a single list
-      description: Retrieves the specified list. The list is defined by its unique `id` value. For example, /accountlists/128 would return the response data for the list with the id value of <b>128</b>.
+      description: Retrieves the specified list. The list is defined by its unique `id` value. For example, /accountlists/128 would return the response data for the list with the id value of 128.
       operationId: getlist
       tags:
       - account lists
@@ -219,7 +225,7 @@ paths:
       security:
       - basicAuth: []
       summary: Delete an existing list
-      description: Deletes an existing list. The list is defined by its unique `id` value. For example, /accountlists/128 would delete the list with the id value of <b>128</b>.
+      description: Deletes an existing list. The list is defined by its unique `id` value. For example, /accountlists/128 would delete the list with the id value of 128.
       operationId: deletelist
       tags:
       - account lists
@@ -241,12 +247,14 @@ paths:
           $ref: '#/components/responses/AuthenticationFailure'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
   /v2/accountlists/{id}/count:
     get:
       security:
       - basicAuth: []
       summary: Get a single list with count of assigned contacts
-      description: Retrieves the specified list. The list is defined by its unique `id` value. For example, /accountlists/128/count would return the response data for the list with the id value of <b>128</b> and count of contacts assigned to this list.
+      description: Retrieves the specified list. The list is defined by its unique `id` value. For example, /accountlists/128/count would return the response data for the list with the id value of 128 and count of contacts assigned to this list.
       operationId: getlistcount
       tags:
       - account lists
@@ -266,6 +274,8 @@ paths:
                 $ref: '#/components/schemas/ListShowCount'
         '404':
           $ref: '#/components/responses/ListNotExist'
+    servers:
+    - url: https://api.cordial.io/
   /v2/accountlists/{id}/clear:
     put:
       security:
@@ -293,6 +303,8 @@ paths:
           $ref: '#/components/responses/AuthenticationFailure'
         '404':
           $ref: '#/components/responses/ListNotExist'
+    servers:
+    - url: https://api.cordial.io/
   /v2/accountlists:
     post:
       security:
@@ -301,7 +313,16 @@ paths:
       description: 'Creates a new list using the appropriate JSON body. Posting more than once for the same list name will generate an error.
 
 
-        The accountlists collection contains the names of lists used to define segments of your audience. For example, you may have lists for Weekly Specials, Daily Deals, and Fashion Newsletter. Each represents subscriber selections on information and promotions they requested to receive. You can also use accountlists to represent groups or segments you determine to be important such as New Customers, VIPs, or Net Promoters.<ul><li>A single contact can be associated with one or more lists.</li><li>Create as many lists as required.</li><li>List names must be unique, so it is important to use a naming convention that supports creation of multiple lists over time.</li>'
+        The accountlists collection contains the names of lists used to define segments of your audience. For example, you may have lists for Weekly Specials, Daily Deals, and Fashion Newsletter. Each represents subscriber selections on information and promotions they requested to receive. You can also use accountlists to represent groups or segments you determine to be important such as New Customers, VIPs, or Net Promoters.
+
+
+        A single contact can be associated with one or more lists.
+
+
+        Create as many lists as required.
+
+
+        List names must be unique, so it is important to use a naming convention that supports creation of multiple lists over time.'
       operationId: addList
       tags:
       - account lists
@@ -351,31 +372,34 @@ paths:
           $ref: '#/components/responses/AuthenticationFailure'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
 components:
   schemas:
-    List_2:
+    ListShow:
+      type: object
+      title: List
+      required:
+      - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list '
+    List:
       type: object
       required:
       - name
       properties:
         name:
           type: string
-          description: Unique name to identify and reference the list.
-          example: Sellers
         enhanced:
           type: boolean
-          description: 'Automatically track the date each contact is added to this list. Possible values: true, false.'
-          example: true
-    AuthenticationFailed:
-      title: AuthenticationFailure
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          example: 'Access Denied: Authentication Failure'
-    SuccessOperation:
+          description: 'Automatically track the date each contact is added to this list '
+    ListCreationSuccess:
       title: Successful operation
       type: object
       required:
@@ -384,6 +408,43 @@ components:
         success:
           type: boolean
           example: true
+        id:
+          type: number
+          example: 123
+    ListShow_2:
+      type: object
+      title: List
+      required:
+      - name
+      properties:
+        id:
+          type: integer
+          description: 'List id: unique identifier on the platform.'
+          example: 123
+        name:
+          type: string
+          description: List name. Should be unique and have maximum of 128 characters.
+          example: Sellers
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list. '
+          example: true
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
     ListValidationError:
       title: Validation Error
       required:
@@ -402,19 +463,60 @@ components:
           type: string
           example: Name must contain only letters, numbers, and dashes. Should not exceed 128 characters.
           description: 'Message with error explanation. Possible errors: [''Name must contain only letters, numbers and dashes and should not exceed 128 characters'',''Name must be unique'']'
-    ListShow:
+    AuthenticationFailed:
+      title: AuthenticationFailure
       type: object
-      title: List
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    ListNotExist:
+      title: List does not exist
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: ACCOUNT_LISTS_NOT_FOUND
+        message:
+          type: string
+          example: List does not exist
+    List_2:
+      type: object
       required:
       - name
       properties:
-        id:
-          type: integer
         name:
           type: string
+          description: Unique name to identify and reference the list.
+          example: Sellers
         enhanced:
           type: boolean
-          description: 'Automatically track the date each contact is added to this list '
+          description: 'Automatically track the date each contact is added to this list. Possible values: true, false.'
+          example: true
+    ListNotFound:
+      title: List is not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: List is not found
     ListShowCount:
       type: object
       title: List
@@ -454,7 +556,7 @@ components:
           type: string
           example: Name must be unique
           description: 'Message with error explanation. Possible errors: [''cid is not allowed for list names.'', ''Name must contain only letters, numbers, and dashes. Should not exceed 128 characters''].'
-    ListCreationSuccess:
+    SuccessOperation:
       title: Successful operation
       type: object
       required:
@@ -463,122 +565,43 @@ components:
         success:
           type: boolean
           example: true
-        id:
-          type: number
-          example: 123
-    ListNotFound:
-      title: List is not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: List is not found
-    ListNotExist:
-      title: List does not exist
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: ACCOUNT_LISTS_NOT_FOUND
-        message:
-          type: string
-          example: List does not exist
-    List:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        enhanced:
-          type: boolean
-          description: 'Automatically track the date each contact is added to this list '
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    ListShow_2:
-      type: object
-      title: List
-      required:
-      - name
-      properties:
-        id:
-          type: integer
-          description: 'List id: unique identifier on the platform.'
-          example: 123
-        name:
-          type: string
-          description: List name. Should be unique and have maximum of 128 characters.
-          example: Sellers
-        enhanced:
-          type: boolean
-          description: 'Automatically track the date each contact is added to this list. '
-          example: true
   responses:
-    ListError:
-      description: Name must be unique
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListError'
-    ListNotFound:
-      description: List is not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListNotFound'
-    ListValidationError:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListValidationError'
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
-    ListNotExist:
-      description: List does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListNotExist'
     AuthenticationFailure:
       description: Unauthorized
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/AuthenticationFailed'
+    ListNotExist:
+      description: List does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListNotExist'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    ListError:
+      description: Name must be unique
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListError'
+    ListValidationError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListValidationError'
+    ListNotFound:
+      description: List is not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListNotFound'
   securitySchemes:
     basicAuth:
       type: http

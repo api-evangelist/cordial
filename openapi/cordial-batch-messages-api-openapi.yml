@@ -153,6 +153,8 @@ paths:
                   $ref: '#/components/schemas/MessageSendBatch'
         '404':
           description: Record not found
+    servers:
+    - url: https://api.cordial.io/
   /v1/batchmessages/{id}:
     put:
       security:
@@ -222,6 +224,8 @@ paths:
           description: successful operation
         '404':
           description: Record not found
+    servers:
+    - url: https://api.cordial.io/
   /v1/batchmessages/{id}/send:
     put:
       security:
@@ -244,6 +248,8 @@ paths:
           description: Record not found
         '400':
           description: Count not create SendBatchMessage job
+    servers:
+    - url: https://api.cordial.io/
   /v1/batchmessages/{id}/sendtest:
     put:
       security:
@@ -271,6 +277,8 @@ paths:
               $ref: '#/components/schemas/RecipientsTestBatch'
         description: Array of contacts
         required: true
+    servers:
+    - url: https://api.cordial.io/
   /v1/batchmessages/{id}/renderedwip/{contactID}:
     get:
       security:
@@ -309,6 +317,8 @@ paths:
           description: Successful operation
         '404':
           description: Record is not found
+    servers:
+    - url: https://api.cordial.io/
   /v1/batchmessages/{id}/pause:
     put:
       security:
@@ -329,6 +339,8 @@ paths:
           description: Successful operation
         '404':
           description: Record is not found
+    servers:
+    - url: https://api.cordial.io/
   /v1/batchmessages/{id}/cancel:
     put:
       security:
@@ -349,6 +361,8 @@ paths:
           description: Successful operation
         '404':
           description: Record is not found
+    servers:
+    - url: https://api.cordial.io/
   /v1/batchmessages/{id}/resume:
     put:
       security:
@@ -369,6 +383,8 @@ paths:
           description: Successful operation
         '404':
           description: Record is not found
+    servers:
+    - url: https://api.cordial.io/
   /v2/batchmessages:
     post:
       security:
@@ -402,7 +418,7 @@ paths:
       security:
       - basicAuth: []
       summary: Get batch messages
-      description: Retrieves batch messages. Note that info and stats on daily message <b>automation</b> sends are retrieved using the <b>GET /batchmessages</b> method. The response for automation sends can be filtered using the automation trigger sending method status, the creation time, and automation message delivery template ID (mdtID).
+      description: Retrieves batch messages. Note that info and stats on daily message automation sends are retrieved using the GET /batchmessages method. The response for automation sends can be filtered using the automation trigger sending method status, the creation time, and automation message delivery template ID (mdtID).
       operationId: getBatch
       tags:
       - batch messages
@@ -523,6 +539,8 @@ paths:
                   $ref: '#/components/schemas/MessageSendBatch_2'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
   /v2/batchmessages/{id}:
     put:
       security:
@@ -609,6 +627,8 @@ paths:
                 $ref: '#/components/schemas/SuccessOperation'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
   /v2/batchmessages/{id}/send:
     put:
       security:
@@ -640,6 +660,8 @@ paths:
                 $ref: '#/components/schemas/BatchSendMessageError'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
   /v2/batchmessages/{id}/sendtest:
     put:
       security:
@@ -678,6 +700,8 @@ paths:
               $ref: '#/components/schemas/RecipientsTestBatch_2'
         description: An array of contact identifier key/value pairs.
         required: true
+    servers:
+    - url: https://api.cordial.io/
   /v2/batchmessages/{id}/experimentperformance:
     get:
       security:
@@ -703,6 +727,8 @@ paths:
                 $ref: '#/components/schemas/ExperimentsStats'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
   /v2/batchmessages/{id}/renderedwip/{contactID}:
     get:
       security:
@@ -752,6 +778,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BatchRenderMessageError'
+    servers:
+    - url: https://api.cordial.io/
   /v2/batchmessages/{id}/pause:
     put:
       security:
@@ -777,6 +805,8 @@ paths:
                 $ref: '#/components/schemas/SuccessOperation'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
   /v2/batchmessages/{id}/cancel:
     put:
       security:
@@ -802,6 +832,8 @@ paths:
                 $ref: '#/components/schemas/SuccessOperation'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
   /v2/batchmessages/{id}/resume:
     put:
       security:
@@ -827,6 +859,8 @@ paths:
                 $ref: '#/components/schemas/SuccessOperation'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
   /v2/batchmessages/{id}/unschedule:
     put:
       security:
@@ -852,188 +886,11 @@ paths:
                 $ref: '#/components/schemas/SuccessOperation'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
 components:
   schemas:
-    MessageSendBatchPost_2:
-      title: MessageSend
-      type: object
-      required:
-      - channel
-      - classification
-      properties:
-        channel:
-          type: string
-          description: Messaging channel key (e.g. email). Note that some of your channels may have custom keys.
-        classification:
-          type: string
-          description: If applicable, classifies the message as transactional or promotional.
-        name:
-          type: string
-          description: Batch message template name.
-        tags:
-          type: array
-          description: An array of batch template tags (e.g. ["birthday","promo"]). Tags are case-sensitive.
-          items:
-            type: string
-        audience:
-          type: object
-          description: See audience-key.
-        audience-key:
-          type: string
-          description: Set the batch template audience using a saved audience rule name (e.g. 30_Day_Engaged).
-        schedule:
-          type: string
-          description: Set a future batch template send date and time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
-          format: date-time
-        message:
-          $ref: '#/components/schemas/MessageBatch'
-        transportID:
-          type: string
-          description: Defines the transportID if overriding the default.
-        trackLinks:
-          type: string
-          description: 'Determines if link performance will be tracked. Link tracking is `enabled` by default. Possible values: enabled, disabled.'
-        scheduleType:
-          type: string
-          description: 'Indicates if the scheduled send time should recpect contact''s own time zone. If not specified, the template will send using the Cordial account default time zone. Possible values: contactTZ.'
-        sendTimeType:
-          type: string
-        tests:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tests_2'
-        priority:
-          type: number
-          default: 2
-          description: Messages with a higher priority will be processed before those with a lower priority. 1 - Low, 2 - Standard, 3 - High, 4 - Highest.
-        bcc:
-          type: string
-          description: Defines BCC email address that will receive a copy of every email. Only works with the 'enable-bcc' feature.
-        bccEnabled:
-          type: boolean
-          description: Determines if the BCC enabled/disabled. Only works with the 'enable-bcc' feature.
-        vanityDomainKey:
-          type: string
-          description: Defines the vanity domain key for email messages.
-    ContentBatch:
-      title: Content
-      type: object
-      required:
-      - text/html
-      properties:
-        text/html:
-          type: string
-    AlertResponse:
-      title: AlertResponse
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          default: total-sent
-          description: ''
-        msID:
-          type: string
-          description: 'Message send ID where alert is applied. Required if mdtID not present. '
-        mdtID:
-          type: string
-          description: 'Automation template ID where alert is applied. Required if msID not present. '
-        enabled:
-          type: boolean
-          description: Automation template name.
-        notify:
-          type: array
-          items:
-            type: string
-          description: Destination email for the alert.
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlertConditions'
-        period:
-          type: integer
-          description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
-    BatchMessageCreated:
-      title: New batch message created
-      type: object
-      required:
-      - success
-      - bmID
-      properties:
-        success:
-          type: boolean
-          example: true
-        bmID:
-          type: string
-          example: bmID
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-    RecipientsTestBatch:
-      title: Recipients
-      type: object
-      required:
-      - <primaryKey>
-      properties:
-        <primaryKey>:
-          type: array
-          items:
-            type: string
-          description: Array of primaryKeys emails etc.
-    AlertConditions:
-      title: conditions
-      required:
-      - type
-      - operator
-      - value
-      - period
-      type: object
-      properties:
-        operator:
-          type: string
-          enum:
-          - lt
-          - lte
-          - gt
-          - gte
-        value:
-          type: integer
-          description: ''
-    ExperimentsStats:
-      title: ExperimentsStats
-      type: object
-      required:
-      - name
-      - variants
-      - strategy
-      - conversions
-      - totalAudience
-      properties:
-        name:
-          type: string
-          description: Experiment name.
-        variants:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExperimentVariants'
-          description: Experiment variants
-        strategy:
-          type: integer
-          description: 'Strategy of experiment. Possible values: split, split-with-champion, 2 - Multi-armed bandit.'
-        conversions:
-          type: integer
-          description: Number of conversions for the variant.
-        totalAudience:
-          type: integer
-          description: Total audience for the experiment.
-    HeadersBatch_2:
+    HeadersBatch:
       title: Headers
       type: object
       required:
@@ -1044,153 +901,12 @@ components:
       properties:
         subject:
           type: string
-          description: Message subject line.
         fromEmail:
           type: string
-          description: Sender email address.
         replyEmail:
           type: string
-          description: '"Reply to" email address.'
         fromDesc:
           type: string
-          description: The sender "from" description.
-    BatchRenderMessageError:
-      title: Batch send test message error
-      required:
-      - message
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: object
-          example: 'Object with error explanation what happen when try ot render a message. Possible errors: [''Message ID is not found'', ''Contact is not found'']'
-    ContentBatch_2:
-      title: Content
-      type: object
-      required:
-      - text/html
-      properties:
-        text/html:
-          type: string
-          description: Message content. Can contain HTML markup or plain text depending on message type and channel.
-    ExperimentStats:
-      title: ExperimentStats
-      type: object
-      required: []
-      properties:
-        ts:
-          type: integer
-          description: Number of total sends for the variant.
-        tc:
-          type: integer
-          description: Number of total click for the variant.
-        uc:
-          type: integer
-          description: Unique clicks for the variant.
-        to:
-          type: integer
-          description: Number of total opens for the variant.
-        uo:
-          type: integer
-          description: Number of unique opens for the variant.
-        tci:
-          type: integer
-          description: If there is a variant attached to the link and it aligns with our recorded variant
-        uci:
-          type: integer
-          description: If there is a variant attached to the link and it aligns with our recorded variant first time
-        tb:
-          type: integer
-          description: Total bounce.
-        tr:
-          type: integer
-          description: Total revenue.
-        tri:
-          type: integer
-          description: Total revenue indirect
-        or:
-          type: integer
-          description: Total orders.
-        ori:
-          type: integer
-          description: Total orders indirect
-        cmp:
-          type: integer
-          description: Total complaints.
-        oo:
-          type: integer
-          description: Total optout.
-    MessageBatch:
-      title: Message
-      type: object
-      required:
-      - headers
-      - content
-      properties:
-        headers:
-          $ref: '#/components/schemas/HeadersBatch'
-        content:
-          $ref: '#/components/schemas/ContentBatch'
-    Tests:
-      title: tests
-      type: object
-      required:
-      - type
-      - enabled
-      properties:
-        type:
-          type: string
-        enabled:
-          type: boolean
-    MessageSendBatch_2:
-      title: MessageSend
-      type: object
-      required:
-      - channel
-      - classification
-      properties:
-        channel:
-          type: string
-          description: Messaging channel key (e.g. email). Note that some of your channels may have custom keys.
-        classification:
-          type: string
-          description: If applicable, classifies the message as transactional or promotional.
-        name:
-          type: string
-          description: Batch message template name.
-        audience:
-          type: object
-          description: See audience-key.
-        schedule:
-          type: string
-          description: Set a future batch template send date and time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
-          format: date
-        message:
-          $ref: '#/components/schemas/MessageBatch'
-        transportID:
-          type: string
-          description: Defines the transportID if overriding the default.
-        trackLinks:
-          type: string
-          description: 'Determines if link performance will be tracked. Link tracking is `enabled` by default. Possible values: enabled, disabled.'
-        priority:
-          type: number
-          default: 2
-          description: Messages with a higher priority will be processed before those with a lower priority. 1 - Low, 2 - Standard, 3 - High, 4 - Highest.
-        bcc:
-          type: string
-          description: Defines BCC email address that will receive a copy of every email. Only works with the 'enable-bcc' feature.
-        bccEnabled:
-          type: boolean
-          description: Determines if the BCC enabled/disabled. Only works with the 'enable-bcc' feature.
-        alerts:
-          $ref: '#/components/schemas/AlertResponse'
     MessageSendBatchPost:
       title: MessageSend
       type: object
@@ -1276,6 +992,292 @@ components:
           type: number
           default: 2
           description: Messages with a higher priority will be processed before those with a lower priority, 1 - Low, 2 - Standard, 3 - High,4 - Highest
+    ContentBatch:
+      title: Content
+      type: object
+      required:
+      - text/html
+      properties:
+        text/html:
+          type: string
+    MessageBatch:
+      title: Message
+      type: object
+      required:
+      - headers
+      - content
+      properties:
+        headers:
+          $ref: '#/components/schemas/HeadersBatch'
+        content:
+          $ref: '#/components/schemas/ContentBatch'
+    RecipientsTestBatch:
+      title: Recipients
+      type: object
+      required:
+      - <primaryKey>
+      properties:
+        <primaryKey>:
+          type: array
+          items:
+            type: string
+          description: Array of primaryKeys emails etc.
+    Tests:
+      title: tests
+      type: object
+      required:
+      - type
+      - enabled
+      properties:
+        type:
+          type: string
+        enabled:
+          type: boolean
+    ExperimentsStats:
+      title: ExperimentsStats
+      type: object
+      required:
+      - name
+      - variants
+      - strategy
+      - conversions
+      - totalAudience
+      properties:
+        name:
+          type: string
+          description: Experiment name.
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExperimentVariants'
+          description: Experiment variants
+        strategy:
+          type: integer
+          description: 'Strategy of experiment. Possible values: split, split-with-champion, 2 - Multi-armed bandit.'
+        conversions:
+          type: integer
+          description: Number of conversions for the variant.
+        totalAudience:
+          type: integer
+          description: Total audience for the experiment.
+    ContentBatch_2:
+      title: Content
+      type: object
+      required:
+      - text/html
+      properties:
+        text/html:
+          type: string
+          description: Message content. Can contain HTML markup or plain text depending on message type and channel.
+    BatchMessageError:
+      title: Contact error
+      required:
+      - message
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: object
+          example: 'Object with error explanation what happen with payload. Possible errors: [''Could not create SendBatchMessage job'']'
+    ExperimentVariants:
+      title: experimentVariants
+      type: object
+      required:
+      - stats
+      - name
+      properties:
+        stats:
+          type: object
+          $ref: '#/components/schemas/ExperimentStats'
+        name:
+          type: string
+          description: Variant name.
+    HeadersBatch_2:
+      title: Headers
+      type: object
+      required:
+      - subject
+      - fromEmail
+      - fromDesc
+      - replyEmail
+      properties:
+        subject:
+          type: string
+          description: Message subject line.
+        fromEmail:
+          type: string
+          description: Sender email address.
+        replyEmail:
+          type: string
+          description: '"Reply to" email address.'
+        fromDesc:
+          type: string
+          description: The sender "from" description.
+    BatchSendMessageError:
+      title: Batch send message error
+      required:
+      - message
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: object
+          example: 'Object with error explanation what happen when try ot send a message. Possible errors: [''Transport should be selected before sending'']'
+    AlertConditions:
+      title: conditions
+      required:
+      - type
+      - operator
+      - value
+      - period
+      type: object
+      properties:
+        operator:
+          type: string
+          enum:
+          - lt
+          - lte
+          - gt
+          - gte
+        value:
+          type: integer
+          description: ''
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    MessageSendBatchPost_2:
+      title: MessageSend
+      type: object
+      required:
+      - channel
+      - classification
+      properties:
+        channel:
+          type: string
+          description: Messaging channel key (e.g. email). Note that some of your channels may have custom keys.
+        classification:
+          type: string
+          description: If applicable, classifies the message as transactional or promotional.
+        name:
+          type: string
+          description: Batch message template name.
+        tags:
+          type: array
+          description: An array of batch template tags (e.g. ["birthday","promo"]). Tags are case-sensitive.
+          items:
+            type: string
+        audience:
+          type: object
+          description: See audience-key.
+        audience-key:
+          type: string
+          description: Set the batch template audience using a saved audience rule name (e.g. 30_Day_Engaged).
+        schedule:
+          type: string
+          description: Set a future batch template send date and time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+          format: date-time
+        message:
+          $ref: '#/components/schemas/MessageBatch'
+        transportID:
+          type: string
+          description: Defines the transportID if overriding the default.
+        trackLinks:
+          type: string
+          description: 'Determines if link performance will be tracked. Link tracking is `enabled` by default. Possible values: enabled, disabled.'
+        scheduleType:
+          type: string
+          description: 'Indicates if the scheduled send time should recpect contact''s own time zone. If not specified, the template will send using the Cordial account default time zone. Possible values: contactTZ.'
+        sendTimeType:
+          type: string
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tests_2'
+        priority:
+          type: number
+          default: 2
+          description: Messages with a higher priority will be processed before those with a lower priority. 1 - Low, 2 - Standard, 3 - High, 4 - Highest.
+        bcc:
+          type: string
+          description: Defines BCC email address that will receive a copy of every email. Only works with the 'enable-bcc' feature.
+        bccEnabled:
+          type: boolean
+          description: Determines if the BCC enabled/disabled. Only works with the 'enable-bcc' feature.
+        vanityDomainKey:
+          type: string
+          description: Defines the vanity domain key for email messages.
+    ExperimentStats:
+      title: ExperimentStats
+      type: object
+      required: []
+      properties:
+        ts:
+          type: integer
+          description: Number of total sends for the variant.
+        tc:
+          type: integer
+          description: Number of total click for the variant.
+        uc:
+          type: integer
+          description: Unique clicks for the variant.
+        to:
+          type: integer
+          description: Number of total opens for the variant.
+        uo:
+          type: integer
+          description: Number of unique opens for the variant.
+        tci:
+          type: integer
+          description: If there is a variant attached to the link and it aligns with our recorded variant
+        uci:
+          type: integer
+          description: If there is a variant attached to the link and it aligns with our recorded variant first time
+        tb:
+          type: integer
+          description: Total bounce.
+        tr:
+          type: integer
+          description: Total revenue.
+        tri:
+          type: integer
+          description: Total revenue indirect
+        or:
+          type: integer
+          description: Total orders.
+        ori:
+          type: integer
+          description: Total orders indirect
+        cmp:
+          type: integer
+          description: Total complaints.
+        oo:
+          type: integer
+          description: Total optout.
     BatchSendTestMessageError:
       title: Batch send test message error
       required:
@@ -1292,23 +1294,6 @@ components:
         message:
           type: object
           example: 'Object with error explanation what happen when try ot send a message. Possible errors: [''Contact not support message channel'']'
-    HeadersBatch:
-      title: Headers
-      type: object
-      required:
-      - subject
-      - fromEmail
-      - fromDesc
-      - replyEmail
-      properties:
-        subject:
-          type: string
-        fromEmail:
-          type: string
-        replyEmail:
-          type: string
-        fromDesc:
-          type: string
     RecipientsTestBatch_2:
       title: Recipients
       type: object
@@ -1320,6 +1305,102 @@ components:
           items:
             type: string
           description: 'An array of contact identifier key/value pairs. Use the "identifierKey": ["identifierValue1", "identifierValue2"] format.'
+    Tests_2:
+      title: tests
+      type: object
+      required:
+      - type
+      - enabled
+      properties:
+        type:
+          type: string
+          description: Defines which test to run.
+        enabled:
+          type: boolean
+          description: Flag to determine if the test is enabled or disabled. Tests are `disabled` by default.
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    AlertResponse:
+      title: AlertResponse
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          default: total-sent
+          description: ''
+        msID:
+          type: string
+          description: 'Message send ID where alert is applied. Required if mdtID not present. '
+        mdtID:
+          type: string
+          description: 'Automation template ID where alert is applied. Required if msID not present. '
+        enabled:
+          type: boolean
+          description: Automation template name.
+        notify:
+          type: array
+          items:
+            type: string
+          description: Destination email for the alert.
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertConditions'
+        period:
+          type: integer
+          description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
+    MessageSendBatch_2:
+      title: MessageSend
+      type: object
+      required:
+      - channel
+      - classification
+      properties:
+        channel:
+          type: string
+          description: Messaging channel key (e.g. email). Note that some of your channels may have custom keys.
+        classification:
+          type: string
+          description: If applicable, classifies the message as transactional or promotional.
+        name:
+          type: string
+          description: Batch message template name.
+        audience:
+          type: object
+          description: See audience-key.
+        schedule:
+          type: string
+          description: Set a future batch template send date and time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+          format: date
+        message:
+          $ref: '#/components/schemas/MessageBatch'
+        transportID:
+          type: string
+          description: Defines the transportID if overriding the default.
+        trackLinks:
+          type: string
+          description: 'Determines if link performance will be tracked. Link tracking is `enabled` by default. Possible values: enabled, disabled.'
+        priority:
+          type: number
+          default: 2
+          description: Messages with a higher priority will be processed before those with a lower priority. 1 - Low, 2 - Standard, 3 - High, 4 - Highest.
+        bcc:
+          type: string
+          description: Defines BCC email address that will receive a copy of every email. Only works with the 'enable-bcc' feature.
+        bccEnabled:
+          type: boolean
+          description: Determines if the BCC enabled/disabled. Only works with the 'enable-bcc' feature.
+        alerts:
+          $ref: '#/components/schemas/AlertResponse'
     SuccessRenderMessage:
       title: Successful operation
       type: object
@@ -1337,34 +1418,21 @@ components:
             - varaint1
             - varaint2
             - variantN
-    ExperimentVariants:
-      title: experimentVariants
+    BatchMessageCreated:
+      title: New batch message created
       type: object
       required:
-      - stats
-      - name
+      - success
+      - bmID
       properties:
-        stats:
-          type: object
-          $ref: '#/components/schemas/ExperimentStats'
-        name:
-          type: string
-          description: Variant name.
-    Tests_2:
-      title: tests
-      type: object
-      required:
-      - type
-      - enabled
-      properties:
-        type:
-          type: string
-          description: Defines which test to run.
-        enabled:
+        success:
           type: boolean
-          description: Flag to determine if the test is enabled or disabled. Tests are `disabled` by default.
-    BatchSendMessageError:
-      title: Batch send message error
+          example: true
+        bmID:
+          type: string
+          example: bmID
+    BatchRenderMessageError:
+      title: Batch send test message error
       required:
       - message
       - errorKey
@@ -1378,39 +1446,7 @@ components:
           example: GENERIC_ERROR_KEY
         message:
           type: object
-          example: 'Object with error explanation what happen when try ot send a message. Possible errors: [''Transport should be selected before sending'']'
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    BatchMessageError:
-      title: Contact error
-      required:
-      - message
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: object
-          example: 'Object with error explanation what happen with payload. Possible errors: [''Could not create SendBatchMessage job'']'
+          example: 'Object with error explanation what happen when try ot render a message. Possible errors: [''Message ID is not found'', ''Contact is not found'']'
   responses:
     RecordNotFound:
       description: Record not found

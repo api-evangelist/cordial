@@ -27,6 +27,8 @@ paths:
               $ref: '#/components/schemas/JobOI'
         description: Import new orders
         required: true
+    servers:
+    - url: https://api.cordial.io/
   /v2/ordersimport:
     post:
       security:
@@ -52,6 +54,8 @@ paths:
               $ref: '#/components/schemas/OrderImportsJob'
         description: JSON body information to create the import job.
         required: true
+    servers:
+    - url: https://api.cordial.io/
 components:
   schemas:
     SourceOrders:
@@ -146,6 +150,25 @@ components:
                 type: string
                 example: Can't login to the server (serverName)
                 description: 'Field is present if import configuration is wrong. Possible errors: [''Can''t login to the server (serverName)'', ''Can''t connect to the server (serverName)'', ''Couldn''t get the size of the file (fileFolder/file.json)'']'
+    OrderImportsJob:
+      title: Job
+      type: object
+      required:
+      - source
+      properties:
+        importName:
+          type: string
+          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
+        source:
+          $ref: '#/components/schemas/SourceObject'
+        confirmEmail:
+          type: string
+          description: Email address to send an administrative alert when the job is done running.
+          example: joesmith@example.com
+        suppressTriggers:
+          type: boolean
+          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
+          default: true
     OrderImportConfigError:
       title: Import configuration error
       required:
@@ -235,25 +258,6 @@ components:
         source:
           type: string
           description: Defines the Snowflake table or view. Required if destination is SNOWFLAKE.
-    OrderImportsJob:
-      title: Job
-      type: object
-      required:
-      - source
-      properties:
-        importName:
-          type: string
-          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
-        source:
-          $ref: '#/components/schemas/SourceObject'
-        confirmEmail:
-          type: string
-          description: Email address to send an administrative alert when the job is done running.
-          example: joesmith@example.com
-        suppressTriggers:
-          type: boolean
-          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
-          default: true
   responses:
     OrderImportConfigError:
       description: ''

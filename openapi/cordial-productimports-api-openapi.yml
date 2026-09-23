@@ -27,6 +27,8 @@ paths:
               $ref: '#/components/schemas/JobPI'
         description: Import new products
         required: true
+    servers:
+    - url: https://api.cordial.io/
   /v2/productimports:
     post:
       security:
@@ -56,6 +58,8 @@ paths:
               $ref: '#/components/schemas/JobPI_2'
         description: JSON body information to create the import job.
         required: true
+    servers:
+    - url: https://api.cordial.io/
 components:
   schemas:
     JobPI:
@@ -81,38 +85,54 @@ components:
           description: required, if 'hasHeader' is not explicitly set to 'true', if imported file 'jsonl' columns will be ignored
         nullMarker:
           type: string
-    JobPI_2:
-      title: Job
+    SourceSup:
+      title: Source
       type: object
       required:
-      - source
+      - transport
+      - url
+      - path
       properties:
-        importName:
+        transport:
           type: string
-          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
-        source:
-          $ref: '#/components/schemas/SourceObject'
-        confirmEmail:
+          enum:
+          - ftp
+          - http
+          - sftp
+          - s3
+        aws_access_key_id:
           type: string
-        hasHeader:
-          type: boolean
-          description: Determines if the first row column headers will be present. Default is `false`. Required if `columns` parameter is <b>not</b> included. If import file type is <b>JSONL</b>, `hasHeader` will be ignored.
-        columns:
-          type: array
-          items:
-            type: string
-          description: An array of import file column headers, arranged from left to right by column position. Using "" will ignore the entire column. Required if `hasHeader` is not explicitly set to `true`. If imported file type is <b>JSONL</b>, `columns` will be ignored.
-        nullMarker:
+          description: (required for s3)
+        aws_secret_access_key:
           type: string
-          description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
-    ProductImportsResponse:
-      title: ProductImports
-      type: object
-      required:
-      - jobId
-      properties:
-        jobId:
+          description: (required for s3)
+        aws_bucket:
           type: string
+          description: (required for s3)
+        aws_region:
+          type: string
+          description: (required for s3)
+        url:
+          type: string
+        server:
+          type: string
+          enum:
+          - ftp
+          - sftp
+        port:
+          type: integer
+        username:
+          type: string
+          description: (optional for http basic auth)
+        password:
+          type: string
+          description: (optional for http basic auth)
+        path:
+          type: string
+          description: (filepath only for s3)
+          enum:
+          - ftp
+          - sftp
     SourceObject:
       title: Source
       type: object
@@ -203,54 +223,38 @@ components:
           type: string
           example: Error validation message
           description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
-    SourceSup:
-      title: Source
+    JobPI_2:
+      title: Job
       type: object
       required:
-      - transport
-      - url
-      - path
+      - source
       properties:
-        transport:
+        importName:
           type: string
-          enum:
-          - ftp
-          - http
-          - sftp
-          - s3
-        aws_access_key_id:
+          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
+        source:
+          $ref: '#/components/schemas/SourceObject'
+        confirmEmail:
           type: string
-          description: (required for s3)
-        aws_secret_access_key:
+        hasHeader:
+          type: boolean
+          description: Determines if the first row column headers will be present. Default is `false`. Required if `columns` parameter is <b>not</b> included. If import file type is <b>JSONL</b>, `hasHeader` will be ignored.
+        columns:
+          type: array
+          items:
+            type: string
+          description: An array of import file column headers, arranged from left to right by column position. Using "" will ignore the entire column. Required if `hasHeader` is not explicitly set to `true`. If imported file type is <b>JSONL</b>, `columns` will be ignored.
+        nullMarker:
           type: string
-          description: (required for s3)
-        aws_bucket:
+          description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
+    ProductImportsResponse:
+      title: ProductImports
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
           type: string
-          description: (required for s3)
-        aws_region:
-          type: string
-          description: (required for s3)
-        url:
-          type: string
-        server:
-          type: string
-          enum:
-          - ftp
-          - sftp
-        port:
-          type: integer
-        username:
-          type: string
-          description: (optional for http basic auth)
-        password:
-          type: string
-          description: (optional for http basic auth)
-        path:
-          type: string
-          description: (filepath only for s3)
-          enum:
-          - ftp
-          - sftp
   securitySchemes:
     basicAuth:
       type: http

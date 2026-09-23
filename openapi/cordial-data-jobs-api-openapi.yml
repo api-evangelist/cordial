@@ -7,14 +7,14 @@ info:
 servers:
 - url: https://api.cordial.io/
 tags:
-- name: data jobs
+- name: Data jobs
 paths:
   /v2/datajobs/{key}/transform:
     post:
       security:
       - basicAuth: []
       tags:
-      - data jobs
+      - Data jobs
       operationId: runTransformation
       description: Runs the advanced transformation script for the specified data job automation. The data automation is defined by its unique `key` value.
       summary: Run a data transformation
@@ -47,7 +47,7 @@ paths:
       security:
       - basicAuth: []
       tags:
-      - data jobs
+      - Data jobs
       operationId: runTrigger
       description: Triggers the advanced transformation script for the specified data job automation. The data automation is defined by its unique `key` value and must be already configured and published.
       summary: Trigger a data transformation
@@ -73,7 +73,7 @@ paths:
       security:
       - basicAuth: []
       tags:
-      - data jobs
+      - Data jobs
       summary: Return stats for particular oneTime data job
       description: ''
       operationId: onetimeStats
@@ -104,7 +104,7 @@ paths:
       security:
       - basicAuth: []
       tags:
-      - data jobs
+      - Data jobs
       summary: Return per-run statistics for recurring data job
       description: ''
       operationId: statsForSingleAggregation
@@ -141,7 +141,7 @@ paths:
       security:
       - basicAuth: []
       tags:
-      - data jobs
+      - Data jobs
       summary: Return list of runs for recurring data job
       description: ''
       operationId: listOfRunsForDataAutomation
@@ -169,35 +169,6 @@ paths:
           $ref: '#/components/responses/DataJobsError'
 components:
   schemas:
-    DataJobsSuccess:
-      title: 'Transformation is processing.
-
-
-        '
-      required:
-      - success
-      - message
-      properties:
-        message:
-          type: string
-          example: Transformation is processing.
-        success:
-          type: boolean
-          example: true
-    OneTimeStatsReturnedSuccess:
-      title: Response
-      type: object
-      required:
-      - dabId
-      - run
-      - stats
-      properties:
-        dabId:
-          type: string
-        run:
-          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessRun'
-        stats:
-          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessStats'
     DataJobsRecord:
       title: Data transformation object.
     RecordNotFound:
@@ -231,6 +202,28 @@ components:
           type: number
         total_exported:
           type: number
+    OneTimeStatsReturnedSuccessRun:
+      title: Run
+      type: object
+      required:
+      - accountId
+      - daId
+      - status
+      - startedAt
+      - endedAt
+      properties:
+        accountId:
+          type: number
+        daId:
+          type: string
+        status:
+          type: string
+        startedAt:
+          type: string
+          format: date-time
+        endedAt:
+          type: string
+          format: date-time
     DataJobsTriggeredSuccess:
       title: 'Transformation is triggered.
 
@@ -271,28 +264,21 @@ components:
           type: array
           items:
             type: string
-    OneTimeStatsReturnedSuccessRun:
-      title: Run
-      type: object
+    DataJobsSuccess:
+      title: 'Transformation is processing.
+
+
+        '
       required:
-      - accountId
-      - daId
-      - status
-      - startedAt
-      - endedAt
+      - success
+      - message
       properties:
-        accountId:
-          type: number
-        daId:
+        message:
           type: string
-        status:
-          type: string
-        startedAt:
-          type: string
-          format: date-time
-        endedAt:
-          type: string
-          format: date-time
+          example: Transformation is processing.
+        success:
+          type: boolean
+          example: true
     DataJobsError:
       title: Invalid request
       required:
@@ -310,19 +296,33 @@ components:
           type: string
           example: Data Automation does not exist.
           description: 'Possible errors: [''Data Automation does not exist.'',''Trigger API is disabled.'']'
+    OneTimeStatsReturnedSuccess:
+      title: Response
+      type: object
+      required:
+      - dabId
+      - run
+      - stats
+      properties:
+        dabId:
+          type: string
+        run:
+          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessRun'
+        stats:
+          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessStats'
   responses:
-    DataJobsError:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DataJobsError'
     RecordNotFound:
       description: Record not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/RecordNotFound'
+    DataJobsError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DataJobsError'
   securitySchemes:
     basicAuth:
       type: http

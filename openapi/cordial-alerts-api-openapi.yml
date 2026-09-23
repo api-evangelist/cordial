@@ -7,7 +7,7 @@ info:
 servers:
 - url: https://api.cordial.io/
 tags:
-- name: alerts
+- name: Alerts
 paths:
   /v2/alerts/{id}:
     get:
@@ -17,7 +17,7 @@ paths:
       description: Retrieves the specified alert.
       operationId: getalert
       tags:
-      - alerts
+      - Alerts
       parameters:
       - name: id
         description: Alert id value.
@@ -41,7 +41,7 @@ paths:
       description: Update alert
       operationId: updatealert
       tags:
-      - alerts
+      - Alerts
       parameters:
       - name: id
         description: Alert id value.
@@ -75,7 +75,7 @@ paths:
       description: Deletes alerts.
       operationId: removealert
       tags:
-      - alerts
+      - Alerts
       parameters:
       - name: id
         description: Alert id value.
@@ -102,7 +102,7 @@ paths:
       description: Adds a new alert using the appropriate JSON body.
       operationId: addalert
       tags:
-      - alerts
+      - Alerts
       responses:
         '201':
           description: successful operation
@@ -127,7 +127,7 @@ paths:
       description: Retrieves alerts list. Using query string parameters, it is possible to filter the response mdtID or msID to retrieve information for particular messages or templates.
       operationId: getincludes
       tags:
-      - alerts
+      - Alerts
       parameters:
       - name: mdtID
         description: Filter alerts by automation message delivery template ID (mdtID).
@@ -190,40 +190,6 @@ paths:
           $ref: '#/components/responses/RecordNotFound'
 components:
   schemas:
-    AlertCreationSuccess:
-      title: AlertCreationSuccess
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-        id:
-          type: number
-          example: 123
-    AlertErrorValidation:
-      title: AlertErrorValidation
-      type: object
-      properties:
-        errors:
-          type: object
-          example:
-            for:
-            - The for field is required
-        error:
-          type: boolean
-        errorKey:
-          type: string
-          enum:
-          - VALIDATION_ERROR
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
     RecordNotFound:
       title: Record not found
       required:
@@ -271,25 +237,19 @@ components:
         period:
           type: integer
           description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
-    AlertConditions:
-      title: conditions
-      required:
-      - type
-      - operator
-      - value
-      - period
+    AlertCreationSuccess:
+      title: AlertCreationSuccess
       type: object
       properties:
-        operator:
-          type: string
-          enum:
-          - lt
-          - lte
-          - gt
-          - gte
-        value:
-          type: integer
-          description: ''
+        success:
+          type: boolean
+          example: true
+        id:
+          type: number
+          example: 123
+    AlertRemoveImpossible:
+      title: AlertRemoveImpossible
+      type: object
     AlertI:
       title: Alerts
       type: object
@@ -323,9 +283,49 @@ components:
         period:
           type: integer
           description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
-    AlertRemoveImpossible:
-      title: AlertRemoveImpossible
+    AlertErrorValidation:
+      title: AlertErrorValidation
       type: object
+      properties:
+        errors:
+          type: object
+          example:
+            for:
+            - The for field is required
+        error:
+          type: boolean
+        errorKey:
+          type: string
+          enum:
+          - VALIDATION_ERROR
+    AlertConditions:
+      title: conditions
+      required:
+      - type
+      - operator
+      - value
+      - period
+      type: object
+      properties:
+        operator:
+          type: string
+          enum:
+          - lt
+          - lte
+          - gt
+          - gte
+        value:
+          type: integer
+          description: ''
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
   responses:
     AlertRemoveImpossible:
       description: ''
@@ -333,18 +333,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AlertRemoveImpossible'
-    AlertErrorValidation:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AlertErrorValidation'
     RecordNotFound:
       description: Record not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/RecordNotFound'
+    AlertErrorValidation:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlertErrorValidation'
   securitySchemes:
     basicAuth:
       type: http

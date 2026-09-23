@@ -7,7 +7,7 @@ info:
 servers:
 - url: https://api.cordial.io/
 tags:
-- name: contact exports
+- name: Contact Exports
 paths:
   /v1/contactexports:
     post:
@@ -16,7 +16,7 @@ paths:
       summary: Create a contacts export job
       operationId: createExportJob
       tags:
-      - contact exports
+      - Contact Exports
       responses:
         '200':
           description: jobId
@@ -29,6 +29,8 @@ paths:
               $ref: '#/components/schemas/SourceCE'
         description: Export object that needs to be getting from the system
         required: true
+    servers:
+    - url: https://api.cordial.io/
   /v2/contactexports:
     post:
       security:
@@ -37,7 +39,7 @@ paths:
       description: Creates an export job to download and store a file of contact records to an external location. The exported file can be downloaded via Cordial UI, via FTP/SFTP, sent to Amazon S3 bucket, or sent to Google Cloud Storage bucket.
       operationId: createExportJob
       tags:
-      - contact exports
+      - Contact Exports
       responses:
         '200':
           description: successful operation
@@ -61,16 +63,113 @@ paths:
               $ref: '#/components/schemas/SourceCE_2'
         description: JSON body information to create the export job.
         required: true
+    servers:
+    - url: https://api.cordial.io/
 components:
   schemas:
-    ContactExportsResponse:
-      title: ContactExports
+    SourceCE:
+      title: Source
       type: object
       required:
-      - jobId
+      - destination
+      - fields
+      - accountId
       properties:
-        jobId:
+        name:
           type: string
+          description: File name
+        exportType:
+          description: Type of report
+          type: string
+          enum:
+          - csv
+          - json
+        destination:
+          $ref: '#/components/schemas/DestinationCE'
+        fields:
+          type: array
+          items:
+            type: string
+          description: Export list fields, the sequence has a value
+        lists:
+          type: array
+          items:
+            type: number
+          description: Export list of lists, the sequence has a value
+        audience-key:
+          type: string
+          description: Audience name for filtering contacts
+        showHeader:
+          type: boolean
+          description: Add header in export file
+        accountId:
+          type: integer
+          description: Account ID
+        compress:
+          type: boolean
+          default: false
+          description: If true then gzip and add .gz to filename(s)
+        confirmEmail:
+          type: string
+    DestinationCE:
+      title: Destination
+      type: object
+      required:
+      - type
+      - port
+      properties:
+        type:
+          type: string
+          description: Type of report
+          enum:
+          - ftp
+          - aws
+          - sftp
+          - s3
+        aws_access_key_id:
+          type: string
+          description: (required for s3)
+        aws_secret_access_key:
+          type: string
+          description: (required for s3)
+        aws_bucket:
+          type: string
+          description: (required for s3)
+        aws_region:
+          type: string
+          description: (required for s3)
+        server:
+          type: string
+          description: (required for ftp or sftp)
+        port:
+          type: integer
+        username:
+          type: string
+          description: (required for ftp or sftp)
+        password:
+          type: string
+          description: (required for ftp or sftp)
+        path:
+          type: string
+          description: (required for ftp,sftp,s3)
+    ContactExportsError:
+      title: ContactExports
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Error validation message
+          description: 'Error explanation. Possible errors: [''SSH key with such Name/ID: wrong does not exist.'', ''The selected export type is invalid.'', ''Audience with name: ''string'' does not exist.'', etc.]'
     MediaTypeIsIncorrect:
       title: Unsupported Media Type
       description: Unsupported Media Type
@@ -88,51 +187,14 @@ components:
         message:
           type: string
           example: 'Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.'
-    SourceCE_2:
-      title: Source
+    ContactExportsResponse:
+      title: ContactExports
       type: object
       required:
-      - destination
-      - fields
-      - accountId
+      - jobId
       properties:
-        name:
+        jobId:
           type: string
-          description: Defines the export file name. If provided, this value will be displayed next to the job ID on the Jobs status page.
-        exportType:
-          description: 'Defines the file type to be exported. Possible values: CSV, JSON, TXT.'
-          type: string
-        delimiter:
-          type: string
-          description: Character used to break up export file columns. Only used if ExportType is set to TXT. Defaults to `,` if not specified.
-          example: ','
-        destination:
-          $ref: '#/components/schemas/DestinationObject'
-        fields:
-          type: array
-          items:
-            type: string
-          description: Fields or contact attribute keys to include (e.g. ["first_name","last_name"]).
-        lists:
-          type: array
-          items:
-            type: number
-          description: List names or list IDs to include (e.g. ["monthly_newsletter","weekly_specials"] or [8756,8757]). Contact's list association is indicated with a <b>1</b> for being on the list or an <b>0</b> for not being on the lsit.
-        audience-key:
-          type: string
-          description: Limit export results to a specific audience using a saved audience rule name (e.g. 30_Day_Engaged).
-        accountId:
-          type: integer
-          description: Account ID.
-        showHeader:
-          type: boolean
-          description: 'For use when export file type is <b>CSV</b> to determine if the first row will display column names. Possible values: true, false.'
-        compress:
-          type: boolean
-          description: Compresses the exported file. If set to `true`, the file is compressed using GZIP with the file extension <b>.gz</b> added to the filename.
-        confirmEmail:
-          type: string
-          description: Email address to send an administrative alert when the job is done running.
     DestinationObject:
       title: Destination
       type: object
@@ -183,66 +245,7 @@ components:
         container:
           type: string
           description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
-    ContactExportsError:
-      title: ContactExports
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Error validation message
-          description: 'Error explanation. Possible errors: [''SSH key with such Name/ID: wrong does not exist.'', ''The selected export type is invalid.'', ''Audience with name: ''string'' does not exist.'', etc.]'
-    DestinationCE:
-      title: Destination
-      type: object
-      required:
-      - type
-      - port
-      properties:
-        type:
-          type: string
-          description: Type of report
-          enum:
-          - ftp
-          - aws
-          - sftp
-          - s3
-        aws_access_key_id:
-          type: string
-          description: (required for s3)
-        aws_secret_access_key:
-          type: string
-          description: (required for s3)
-        aws_bucket:
-          type: string
-          description: (required for s3)
-        aws_region:
-          type: string
-          description: (required for s3)
-        server:
-          type: string
-          description: (required for ftp or sftp)
-        port:
-          type: integer
-        username:
-          type: string
-          description: (required for ftp or sftp)
-        password:
-          type: string
-          description: (required for ftp or sftp)
-        path:
-          type: string
-          description: (required for ftp,sftp,s3)
-    SourceCE:
+    SourceCE_2:
       title: Source
       type: object
       required:
@@ -252,40 +255,41 @@ components:
       properties:
         name:
           type: string
-          description: File name
+          description: Defines the export file name. If provided, this value will be displayed next to the job ID on the Jobs status page.
         exportType:
-          description: Type of report
+          description: 'Defines the file type to be exported. Possible values: CSV, JSON, TXT.'
           type: string
-          enum:
-          - csv
-          - json
+        delimiter:
+          type: string
+          description: Character used to break up export file columns. Only used if ExportType is set to TXT. Defaults to `,` if not specified.
+          example: ','
         destination:
-          $ref: '#/components/schemas/DestinationCE'
+          $ref: '#/components/schemas/DestinationObject'
         fields:
           type: array
           items:
             type: string
-          description: Export list fields, the sequence has a value
+          description: Fields or contact attribute keys to include (e.g. ["first_name","last_name"]).
         lists:
           type: array
           items:
             type: number
-          description: Export list of lists, the sequence has a value
+          description: List names or list IDs to include (e.g. ["monthly_newsletter","weekly_specials"] or [8756,8757]). Contact's list association is indicated with a <b>1</b> for being on the list or an <b>0</b> for not being on the lsit.
         audience-key:
           type: string
-          description: Audience name for filtering contacts
-        showHeader:
-          type: boolean
-          description: Add header in export file
+          description: Limit export results to a specific audience using a saved audience rule name (e.g. 30_Day_Engaged).
         accountId:
           type: integer
-          description: Account ID
+          description: Account ID.
+        showHeader:
+          type: boolean
+          description: 'For use when export file type is <b>CSV</b> to determine if the first row will display column names. Possible values: true, false.'
         compress:
           type: boolean
-          default: false
-          description: If true then gzip and add .gz to filename(s)
+          description: Compresses the exported file. If set to `true`, the file is compressed using GZIP with the file extension <b>.gz</b> added to the filename.
         confirmEmail:
           type: string
+          description: Email address to send an administrative alert when the job is done running.
   responses:
     incorrectmediatype:
       description: ''

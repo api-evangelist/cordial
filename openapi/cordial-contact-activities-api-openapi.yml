@@ -7,7 +7,7 @@ info:
 servers:
 - url: https://api.cordial.io/
 tags:
-- name: contact activities
+- name: Contact Activities
 paths:
   /v1/contactactivities:
     get:
@@ -16,7 +16,7 @@ paths:
       summary: Get events
       operationId: getActivityList
       tags:
-      - contact activities
+      - Contact Activities
       parameters:
       - name: time
         description: can be searched with modifiers (lt, gt, lte, gte, between.start, between.end)
@@ -75,7 +75,7 @@ paths:
       summary: Add a new event
       operationId: addActivity
       tags:
-      - contact activities
+      - Contact Activities
       responses:
         '201':
           description: successful operation
@@ -86,6 +86,8 @@ paths:
               $ref: '#/components/schemas/ActivityActivity'
         description: Activity object that needs to be added to the system
         required: true
+    servers:
+    - url: https://api.cordial.io/
   /v2/contactactivities:
     get:
       security:
@@ -94,7 +96,7 @@ paths:
       description: Retrieves contact activities. Response data can be filtered for a specific contact using the `email` and `mcID` query string parameters.
       operationId: getActivityList
       tags:
-      - contact activities
+      - Contact Activities
       parameters:
       - name: time[lt]
         description: Filter activities that occurred before this time (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
@@ -192,7 +194,7 @@ paths:
       description: Creates a new contact activity using the appropriate JSON body.
       operationId: addActivity
       tags:
-      - contact activities
+      - Contact Activities
       responses:
         '201':
           description: successful operation
@@ -207,47 +209,10 @@ paths:
               $ref: '#/components/schemas/ActivityActivity_2'
         description: Activity object that needs to be added.
         required: true
+    servers:
+    - url: https://api.cordial.io/
 components:
   schemas:
-    validationErrors:
-      required:
-      - validationErrors
-      properties:
-        validationErrors:
-          type: object
-          description: Object with validation error explanation for each field from payload.
-    AuthenticationFailed:
-      title: AuthenticationFailure
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          example: 'Access Denied: Authentication Failure'
-    ActivityActivityShow_2:
-      title: Activity
-      type: object
-      required:
-      - action
-      properties:
-        action:
-          type: string
-          description: Can be click, open, send, or any user-defined actions.
-        cID:
-          type: string
-          description: Contact ID
-        time:
-          type: string
-          format: dateTime
-        mcID:
-          type: string
-        bmID:
-          type: string
-        first:
-          type: integer
-        properties:
-          type: object
     ActivityActivityShow:
       title: Activity
       type: object
@@ -271,26 +236,6 @@ components:
           type: integer
         properties:
           type: object
-    PropertiesActivity:
-      title: Properties
-      type: object
-      properties: {}
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
     ActivityActivity:
       title: Activity
       type: object
@@ -312,23 +257,26 @@ components:
           format: If provided must be in ISO 8601 format
         properties:
           $ref: '#/components/schemas/PropertiesActivity'
-    ContactActivityError:
-      title: Invalid request
+    PropertiesActivity:
+      title: Properties
+      type: object
+      properties: {}
+    RecordNotFound:
+      title: Record not found
       required:
-      - messages
-      - errorKey
       - error
+      - message
+      type: object
       properties:
         error:
           type: boolean
           example: true
         errorKey:
           type: string
-          example: GENERIC_ERROR_KEY
+          example: RECORD_NOT_FOUND
         message:
           type: string
-          example: Data Automation does not exist.
-          description: 'Possible errors: [''too many parameters'',''Contact doesn''t exist'']'
+          example: record not found
     AttributeErrorOrValidationErrors:
       title: Attribute Error Or Validation Errors
       required:
@@ -374,6 +322,62 @@ components:
           description: 'An object of additional event attributes (e.g. {"propertyOne": 1, "propertyTwo": 2}. Note that property keys consisting of numeric-only values (e.g. 57) or keys containing a "dot" (e.g. shoes.color) will be stripped.'
           example:
             key: value
+    ActivityActivityShow_2:
+      title: Activity
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          description: Can be click, open, send, or any user-defined actions.
+        cID:
+          type: string
+          description: Contact ID
+        time:
+          type: string
+          format: dateTime
+        mcID:
+          type: string
+        bmID:
+          type: string
+        first:
+          type: integer
+        properties:
+          type: object
+    validationErrors:
+      required:
+      - validationErrors
+      properties:
+        validationErrors:
+          type: object
+          description: Object with validation error explanation for each field from payload.
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    ContactActivityError:
+      title: Invalid request
+      required:
+      - messages
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Data Automation does not exist.
+          description: 'Possible errors: [''too many parameters'',''Contact doesn''t exist'']'
   responses:
     AuthenticationFailure:
       description: Unauthorized
@@ -381,18 +385,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AuthenticationFailed'
-    AttributeErrorOrValidationErrors:
-      description: Attribute Error Or Validation Errors
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AttributeErrorOrValidationErrors'
     RecordNotFound:
       description: Record not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/RecordNotFound'
+    AttributeErrorOrValidationErrors:
+      description: Attribute Error Or Validation Errors
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttributeErrorOrValidationErrors'
   securitySchemes:
     basicAuth:
       type: http

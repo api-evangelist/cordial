@@ -7,7 +7,7 @@ info:
 servers:
 - url: https://api.cordial.io/
 tags:
-- name: jobs
+- name: Jobs
 paths:
   /v1/jobs/{id}:
     get:
@@ -16,7 +16,7 @@ paths:
       summary: Get a single job
       operationId: getsinglejob
       tags:
-      - jobs
+      - Jobs
       parameters:
       - name: id
         description: Job id
@@ -33,6 +33,8 @@ paths:
                 $ref: '#/components/schemas/JobJ'
         '404':
           description: record not found
+    servers:
+    - url: https://api.cordial.io/
   /v1/jobs:
     get:
       security:
@@ -40,7 +42,7 @@ paths:
       summary: Get jobs list
       operationId: getjobs
       tags:
-      - jobs
+      - Jobs
       parameters:
       - name: jobName
         description: Name given to the job
@@ -132,15 +134,17 @@ paths:
                   $ref: '#/components/schemas/JobJ'
         '404':
           description: record not found
+    servers:
+    - url: https://api.cordial.io/
   /v2/jobs/{id}:
     get:
       security:
       - basicAuth: []
       summary: Get a single job
-      description: Retrieves the specified job record from the Cordial database. The job record is defined by its unique `id` value. For example, /jobs/548817d0367df1ef518b4567 would return the response data for the job with the id of <b>548817d0367df1ef518b4567</b>.
+      description: Retrieves the specified job record from the Cordial database. The job record is defined by its unique `id` value. For example, /jobs/548817d0367df1ef518b4567 would return the response data for the job with the id of 548817d0367df1ef518b4567.
       operationId: getsinglejob
       tags:
-      - jobs
+      - Jobs
       parameters:
       - name: id
         description: Unique job id.
@@ -171,6 +175,8 @@ paths:
                 $ref: '#/components/schemas/JobJ_2'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
   /v2/jobs:
     get:
       security:
@@ -179,7 +185,7 @@ paths:
       description: Retrieves all jobs from the Cordial database. Response data can be filtered by job name, job start/end time and job status.
       operationId: getjobs
       tags:
-      - jobs
+      - Jobs
       parameters:
       - name: jobName
         description: Name given to the job. Job names are assigned automatically based on the API initiating the job. For example, contactimports will assign the value of <b>ImportContacts</b> to the `jobName`.
@@ -308,100 +314,10 @@ paths:
           $ref: '#/components/responses/RecordNotFound'
         '422':
           $ref: '#/components/responses/JobsFilterError'
+    servers:
+    - url: https://api.cordial.io/
 components:
   schemas:
-    JobRunJ:
-      title: JobRun
-      type: object
-      description: Status and timing of the underlying data automation run. Maps internal `dataautomationbatch` statuses to a normalized vocabulary.
-      properties:
-        status:
-          type: string
-          description: Normalized run status.
-          enum:
-          - completed
-          - failed
-          - cancelled
-          - processing
-          - pending
-          - draft
-          - unknown
-        startedAt:
-          type: string
-          format: date-time
-          description: Timestamp the run started.
-        endedAt:
-          type: string
-          format: date-time
-          description: Timestamp the run ended. Null when still in progress.
-    JobsFilterError:
-      title: Filter incorrect
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Time value is incorrect
-    ResultJ_2:
-      title: Result
-      type: object
-      properties:
-        totalRecords:
-          type: integer
-          format: int64
-          example: 50
-          description: Total amount of processed records.
-        updated:
-          type: integer
-          format: int64
-          example: 50
-          description: Amount of updated records.
-        rejected:
-          type: integer
-          format: int64
-          example: 50
-          description: Amount of rejected records from insert/update.
-        inserted:
-          type: integer
-          format: int64
-          example: 50
-          description: Amount of inserted records.
-        error:
-          type: integer
-          format: int64
-          example: 50
-          description: Amount of records that provide error because of 'Unique constraint error'.
-        ignored:
-          type: integer
-          format: int64
-          example: 50
-          description: Amount of ignored records because of strategy config, etc.
-    JobsStatisticPerPageError:
-      title: per_page limit exceeded for include=statistic
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: JOBS_STATISTIC_PER_PAGE_EXCEEDED
-        message:
-          type: string
-          example: When include=statistic is requested, per_page must not exceed 25.
     JobJ:
       title: Job
       type: object
@@ -436,22 +352,6 @@ components:
         end:
           type: string
           format: datetime
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
     ResultJ:
       title: Result
       type: object
@@ -468,6 +368,162 @@ components:
         newRecords:
           type: integer
           format: int64
+    JobRunJ:
+      title: JobRun
+      type: object
+      description: Status and timing of the underlying data automation run. Maps internal `dataautomationbatch` statuses to a normalized vocabulary.
+      properties:
+        status:
+          type: string
+          description: Normalized run status.
+          enum:
+          - completed
+          - failed
+          - cancelled
+          - processing
+          - pending
+          - draft
+          - unknown
+        startedAt:
+          type: string
+          format: date-time
+          description: Timestamp the run started.
+        endedAt:
+          type: string
+          format: date-time
+          description: Timestamp the run ended. Null when still in progress.
+    JobJ_2:
+      title: Job
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - Scheduled
+          - Pending
+          - Processing
+          - Failed
+          - Done
+        jobName:
+          type: string
+          description: Job name for current job.
+          example: ImportContacts
+        totalItems:
+          type: integer
+          format: int64
+          example: 1000
+          description: Amount of records/contacts that should be processed.
+        completedItems:
+          type: integer
+          format: int64
+          example: 1000
+          description: Amount of records/contacts that processed.
+        times:
+          $ref: '#/components/schemas/TimesJ_2'
+        result:
+          $ref: '#/components/schemas/ResultJ_2'
+        metadata:
+          $ref: '#/components/schemas/JobMetadataJ'
+        run:
+          $ref: '#/components/schemas/JobRunJ'
+          description: Returned only for data automation jobs (`DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration`) when `include=statistic` is requested.
+        statistic:
+          $ref: '#/components/schemas/JobStatisticJ'
+          description: Returned only for data automation jobs (`DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration`) when `include=statistic` is requested. Null when no aggregated counters exist for the run.
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    JobMetadataJ:
+      title: JobMetadata
+      type: object
+      description: Job-type-specific identifiers and parameters lifted from the underlying job payload. Fields present depend on the job type.
+      properties:
+        msID:
+          type: string
+          description: Message send ID.
+        dabID:
+          type: string
+          description: Data automation batch (run) ID. Present for data automation jobs (`DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration`).
+        daID:
+          type: string
+          description: Data automation ID.
+        cID:
+          type: string
+          description: Campaign ID.
+        compositionID:
+          type: string
+          description: Composition ID.
+        orchestrationID:
+          type: string
+          description: Orchestration ID.
+        contactID:
+          type: string
+          description: Contact ID.
+        tzOffset:
+          type: integer
+          description: Timezone offset for the run.
+        messageSendDataName:
+          type: string
+        messageSendDataCompositionID:
+          type: string
+        messageSendDataOrchestrationID:
+          type: string
+        name:
+          type: string
+        mdtID:
+          type: string
+        exportType:
+          type: string
+        lists:
+          type: array
+          items:
+            type: string
+        fileName:
+          type: string
+        filename:
+          type: string
+        importName:
+          type: string
+        ids:
+          type: array
+          items:
+            type: string
+        key:
+          type: string
+        taskID:
+          type: string
+        parentJobId:
+          type: string
+    JobsStatisticPerPageError:
+      title: per_page limit exceeded for include=statistic
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: JOBS_STATISTIC_PER_PAGE_EXCEEDED
+        message:
+          type: string
+          example: When include=statistic is requested, per_page must not exceed 25.
     JobStatisticJ:
       title: JobStatistic
       type: object
@@ -546,6 +602,57 @@ components:
             total_successful: 1
             total_failures: 0
             total_messages_sent: 1
+    JobsFilterError:
+      title: Filter incorrect
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Time value is incorrect
+    ResultJ_2:
+      title: Result
+      type: object
+      properties:
+        totalRecords:
+          type: integer
+          format: int64
+          example: 50
+          description: Total amount of processed records.
+        updated:
+          type: integer
+          format: int64
+          example: 50
+          description: Amount of updated records.
+        rejected:
+          type: integer
+          format: int64
+          example: 50
+          description: Amount of rejected records from insert/update.
+        inserted:
+          type: integer
+          format: int64
+          example: 50
+          description: Amount of inserted records.
+        error:
+          type: integer
+          format: int64
+          example: 50
+          description: Amount of records that provide error because of 'Unique constraint error'.
+        ignored:
+          type: integer
+          format: int64
+          example: 50
+          description: Amount of ignored records because of strategy config, etc.
     TimesJ_2:
       title: Times
       type: object
@@ -558,105 +665,6 @@ components:
           type: string
           format: date-time
           description: Time when job ends execution.
-    JobJ_2:
-      title: Job
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - Scheduled
-          - Pending
-          - Processing
-          - Failed
-          - Done
-        jobName:
-          type: string
-          description: Job name for current job.
-          example: ImportContacts
-        totalItems:
-          type: integer
-          format: int64
-          example: 1000
-          description: Amount of records/contacts that should be processed.
-        completedItems:
-          type: integer
-          format: int64
-          example: 1000
-          description: Amount of records/contacts that processed.
-        times:
-          $ref: '#/components/schemas/TimesJ_2'
-        result:
-          $ref: '#/components/schemas/ResultJ_2'
-        metadata:
-          $ref: '#/components/schemas/JobMetadataJ'
-        run:
-          $ref: '#/components/schemas/JobRunJ'
-          description: Returned only for data automation jobs (`DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration`) when `include=statistic` is requested.
-        statistic:
-          $ref: '#/components/schemas/JobStatisticJ'
-          description: Returned only for data automation jobs (`DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration`) when `include=statistic` is requested. Null when no aggregated counters exist for the run.
-    JobMetadataJ:
-      title: JobMetadata
-      type: object
-      description: Job-type-specific identifiers and parameters lifted from the underlying job payload. Fields present depend on the job type.
-      properties:
-        msID:
-          type: string
-          description: Message send ID.
-        dabID:
-          type: string
-          description: Data automation batch (run) ID. Present for data automation jobs (`DataAutomationProcessList`, `DataAutomationProcessAudience`, `DataAutomationUpdateIntegration`).
-        daID:
-          type: string
-          description: Data automation ID.
-        cID:
-          type: string
-          description: Campaign ID.
-        compositionID:
-          type: string
-          description: Composition ID.
-        orchestrationID:
-          type: string
-          description: Orchestration ID.
-        contactID:
-          type: string
-          description: Contact ID.
-        tzOffset:
-          type: integer
-          description: Timezone offset for the run.
-        messageSendDataName:
-          type: string
-        messageSendDataCompositionID:
-          type: string
-        messageSendDataOrchestrationID:
-          type: string
-        name:
-          type: string
-        mdtID:
-          type: string
-        exportType:
-          type: string
-        lists:
-          type: array
-          items:
-            type: string
-        fileName:
-          type: string
-        filename:
-          type: string
-        importName:
-          type: string
-        ids:
-          type: array
-          items:
-            type: string
-        key:
-          type: string
-        taskID:
-          type: string
-        parentJobId:
-          type: string
   responses:
     JobsStatisticPerPageError:
       description: per_page exceeds the limit allowed when include=statistic is requested

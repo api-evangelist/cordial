@@ -84,6 +84,8 @@ paths:
           description: successful operation
         '404':
           description: Record not found
+    servers:
+    - url: https://api.cordial.io/
   /v1/includes:
     post:
       security:
@@ -143,12 +145,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/IncludeI'
+    servers:
+    - url: https://api.cordial.io/
   /v2/includes/{key}:
     get:
       security:
       - basicAuth: []
       summary: Get a single include
-      description: Retrieves the specified message content include from the HTML content library. The include is defined by its unique `key` value. For example, /includes/footer would return data for the content include with the key value of <b>footer</b>.
+      description: Retrieves the specified message content include from the HTML content library. The include is defined by its unique `key` value. For example, /includes/footer would return data for the content include with the key value of footer.
       operationId: getinclude
       tags:
       - message content includes
@@ -178,7 +182,7 @@ paths:
       security:
       - basicAuth: []
       summary: Update a single include
-      description: Updates message content include name, description, and content fields. The include is defined by its unique `key` value. For example, /includes/footer would update the content include with the key value of <b>footer</b>.
+      description: Updates message content include name, description, and content fields. The include is defined by its unique `key` value. For example, /includes/footer would update the content include with the key value of footer.
       operationId: updateinclude
       tags:
       - message content includes
@@ -212,7 +216,7 @@ paths:
       security:
       - basicAuth: []
       summary: Delete an include
-      description: Deletes a content include from the HTML content library. The include is defined by its unique `key` value. For example, /includes/footer would delete the content include with the key value of <b>footer</b>.
+      description: Deletes a content include from the HTML content library. The include is defined by its unique `key` value. For example, /includes/footer would delete the content include with the key value of footer.
       operationId: removeinclude
       tags:
       - message content includes
@@ -234,6 +238,8 @@ paths:
           $ref: '#/components/responses/IncludeRemoveImpossible'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
   /v2/includes:
     post:
       security:
@@ -304,66 +310,30 @@ paths:
                   $ref: '#/components/schemas/IncludeResponse'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
 components:
-  responses:
-    IncludeErrorValidation:
-      description: validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IncludeErrorValidation'
-    IncludeRemoveImpossible:
-      description: Operation failed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IncludeRemoveImpossible'
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
   schemas:
-    IncludeRemoveImpossible:
-      title: ''
-      required:
-      - error
-      - errorKey
-      - message
+    IncludeI:
+      title: Include
       type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Include can't be deleted because it used in next message(s) - SundayMessage
-          description: 'Error returned in case removing is impossible. Possible errors: [''Include can''t be deleted because it used in next message(s) - "messageName"'',''Include can''t be deleted because it used in next message automation(s) - "automationName"''].'
-    IncludeErrorValidation:
-      title: ''
       required:
-      - error
-      - errorKey
-      type: object
+      - key
+      - content
       properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
+        key:
           type: string
-          example: GENERIC_ERROR_KEY
-        message:
+        name:
           type: string
-          example: Key must be unique
-          description: 'Message with error explanation. Possible errors: [''Key must be unique'',''Internal error received on content validation'', At least one user should be subscribed to the channel :channelName]. This field is optional, can be replaced with ''fieldErrors'''
-        fieldErrors:
-          type: object
-          $ref: '#/components/schemas/fieldErrorsInclude'
-          description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
+        tags:
+          type: array
+          description: An array of message content tags (e.g. ["birthday","promo"]). Tags are case sensitive.
+          items:
+            type: string
+        description:
+          type: string
+        content:
+          type: string
     IncludeResponse:
       title: Include
       type: object
@@ -404,15 +374,19 @@ components:
           type: string
           format: date-time
           description: Last modified date.
-    SuccessOperation:
-      title: Successful operation
+    IncludeCreationSuccess:
+      title: Successful operation for include content creation
       type: object
       required:
       - success
+      - message
       properties:
         success:
           type: boolean
           example: true
+        message:
+          type: string
+          example: record created
     RecordNotFound:
       title: Record not found
       required:
@@ -429,6 +403,45 @@ components:
         message:
           type: string
           example: record not found
+    IncludeRemoveImpossible:
+      title: ''
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Include can't be deleted because it used in next message(s) - SundayMessage
+          description: 'Error returned in case removing is impossible. Possible errors: [''Include can''t be deleted because it used in next message(s) - "messageName"'',''Include can''t be deleted because it used in next message automation(s) - "automationName"''].'
+    IncludeErrorValidation:
+      title: ''
+      required:
+      - error
+      - errorKey
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Key must be unique
+          description: 'Message with error explanation. Possible errors: [''Key must be unique'',''Internal error received on content validation'', At least one user should be subscribed to the channel :channelName]. This field is optional, can be replaced with ''fieldErrors'''
+        fieldErrors:
+          type: object
+          $ref: '#/components/schemas/fieldErrorsInclude'
+          description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
     fieldErrorsInclude:
       type: object
       required:
@@ -439,39 +452,6 @@ components:
           items:
             type: string
             example: The destination field is required.
-    IncludeCreationSuccess:
-      title: Successful operation for include content creation
-      type: object
-      required:
-      - success
-      - message
-      properties:
-        success:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: record created
-    IncludeI:
-      title: Include
-      type: object
-      required:
-      - key
-      - content
-      properties:
-        key:
-          type: string
-        name:
-          type: string
-        tags:
-          type: array
-          description: An array of message content tags (e.g. ["birthday","promo"]). Tags are case sensitive.
-          items:
-            type: string
-        description:
-          type: string
-        content:
-          type: string
     IncludeI_2:
       title: Include
       type: object
@@ -496,6 +476,34 @@ components:
         content:
           type: string
           description: HTML or Smarty content to be used as an include in message content.
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+  responses:
+    IncludeErrorValidation:
+      description: validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IncludeErrorValidation'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    IncludeRemoveImpossible:
+      description: Operation failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IncludeRemoveImpossible'
   securitySchemes:
     basicAuth:
       type: http

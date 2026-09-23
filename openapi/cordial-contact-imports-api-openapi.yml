@@ -7,7 +7,7 @@ info:
 servers:
 - url: https://api.cordial.io/
 tags:
-- name: contact imports
+- name: Contact Imports
 paths:
   /v1/contactimports:
     post:
@@ -16,7 +16,7 @@ paths:
       summary: Add a new contact import job
       operationId: createImportJob
       tags:
-      - contact imports
+      - Contact Imports
       responses:
         '201':
           description: record created
@@ -29,6 +29,8 @@ paths:
               $ref: '#/components/schemas/JobCI'
         description: Job object that needs to be added to the system
         required: true
+    servers:
+    - url: https://api.cordial.io/
   /v2/contactimports:
     post:
       security:
@@ -37,7 +39,7 @@ paths:
       description: Creates an import job to batch load a file of contact records to the Cordial database from an external location. The import file can be retrieved via HTTP/HTTPS, FTP/SFTP, from the Amazon S3 bucket, and from the Google Cloud Storage bucket. Supported import file types include CSV, TSV and TXT.
       operationId: createImportJob
       tags:
-      - contact imports
+      - Contact Imports
       responses:
         '201':
           description: successful operation
@@ -54,6 +56,8 @@ paths:
               $ref: '#/components/schemas/ContactImportJob'
         description: JSON body information to create the import job.
         required: true
+    servers:
+    - url: https://api.cordial.io/
 components:
   schemas:
     SourceCI:
@@ -104,27 +108,20 @@ components:
           enum:
           - ftp
           - sftp
-    ContactImportConfigSuccess:
-      title: Import configuration error
-      required:
-      - jobId
+    ListsCI:
+      title: Lists
+      type: object
       properties:
-        jobId:
-          type: string|object
-          example: 5f6b1434f778ac145d25391a
-          schema:
-            description: String. Mongo ID or object from created job when successful.
-            properties:
-              error:
-                type: boolean
-                example: true
-              errorKey:
-                type: string
-                example: GENERIC_ERROR_KEY
-              message:
-                type: string
-                example: Can't login to the server (serverName)
-                description: 'Field present if import configuration is wrong. Possible errors: [''Can''t login to the server (serverName)'', ''Can''t connect to the server (serverName)'', ''Couldn''t get the size of the file (fileFolder/file.csv)'']'
+        addTo:
+          type: array
+          items:
+            type: string
+          description: Array of list names.
+        removeFrom:
+          type: array
+          items:
+            type: string
+          description: Array of list names.
     JobCI:
       title: Job
       type: object
@@ -164,6 +161,112 @@ components:
           $ref: '#/components/schemas/ListsCI'
         nullMarker:
           type: string
+    ContactImportConfigError:
+      title: Import configuration error
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: The source.transport field is required.
+          description: 'This field is present if import configuration is wrong. Possible errors: [''The source.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'',''The source.path field is required.'', ''The source.transport field is required.'', ''The selected source.transport is invalid.'', ''The source.aws access key id field is required.'', ''The source.aws secret access key field is required.'', ''The source.aws bucket field is required.'', ''The source.aws region field is required.'', ''The columns field is required.'']'
+    ListsCI_2:
+      title: Lists
+      type: object
+      properties:
+        addTo:
+          type: array
+          items:
+            type: string
+          example:
+          - foo
+          - bar
+          description: All contacts will get added to each list in the array (e.g. ["foo","bar"]). If you pass this parameter, you should not pass a column in the file with the same key. This field will always override it.
+        removeFrom:
+          type: array
+          items:
+            type: string
+          example:
+          - biz
+          - baz
+          description: All contacts will get removed from each list in the array (e.g. ["biz","baz"]). If you pass this parameter, you should not pass a column in the file with the same key. This field will always override it.
+    ContactImportJob:
+      title: Job
+      type: object
+      required:
+      - source
+      properties:
+        importName:
+          type: string
+          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
+        source:
+          $ref: '#/components/schemas/SourceObject'
+        hasHeader:
+          type: boolean
+          example: true
+          description: Determines if the first row column headers will be present. Default is `false`. Required if `columns` parameter is <b>not</b> included. If import file type is <b>JSONL</b>, `hasHeader` will be ignored.
+        columns:
+          type: array
+          items:
+            type: string
+          example:
+          - channels.email.address
+          - channels.email.subscribeStatus
+          - firstname
+          description: An array of import file column headers, arranged from left to right by column position. Using "" will ignore the entire column. Required if `hasHeader` is not explicitly set to `true`. If imported file type is <b>JSONL</b>, `columns` will be ignored.
+        delimiter:
+          type: string
+          description: Character used to break up import file columns. Defaults to `,` if not specified.
+          example: ','
+        confirmEmail:
+          type: string
+          description: Email address to send an administrative alert when the job is done running.
+          example: joesmith@example.com
+        strategy:
+          type: string
+          example: insertOnly
+          description: 'Possible values: `insertOnly` - only adds the new records, `updateOnly` - only updates the existing records. If `undefined`, the import will upsert (update and insert). Defaults to `undefined`.'
+        suppressTriggers:
+          type: boolean
+          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
+        jobStatusWebhookUrl:
+          type: string
+          description: API output will be posted to the <b>jobStatusWebhookUrl</b> when the job is done running.
+        lists:
+          $ref: '#/components/schemas/ListsCI_2'
+        nullMarker:
+          type: string
+          example: ignore
+          description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
+    ContactImportConfigSuccess:
+      title: Import configuration error
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string|object
+          example: 5f6b1434f778ac145d25391a
+          schema:
+            description: String. Mongo ID or object from created job when successful.
+            properties:
+              error:
+                type: boolean
+                example: true
+              errorKey:
+                type: string
+                example: GENERIC_ERROR_KEY
+              message:
+                type: string
+                example: Can't login to the server (serverName)
+                description: 'Field present if import configuration is wrong. Possible errors: [''Can''t login to the server (serverName)'', ''Can''t connect to the server (serverName)'', ''Couldn''t get the size of the file (fileFolder/file.csv)'']'
     SourceObject:
       title: Source
       type: object
@@ -236,105 +339,6 @@ components:
         source:
           type: string
           description: Defines the Snowflake table or view. Required if destination is SNOWFLAKE.
-    ContactImportConfigError:
-      title: Import configuration error
-      required:
-      - error
-      - message
-      - errorKey
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: The source.transport field is required.
-          description: 'This field is present if import configuration is wrong. Possible errors: [''The source.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'',''The source.path field is required.'', ''The source.transport field is required.'', ''The selected source.transport is invalid.'', ''The source.aws access key id field is required.'', ''The source.aws secret access key field is required.'', ''The source.aws bucket field is required.'', ''The source.aws region field is required.'', ''The columns field is required.'']'
-    ContactImportJob:
-      title: Job
-      type: object
-      required:
-      - source
-      properties:
-        importName:
-          type: string
-          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
-        source:
-          $ref: '#/components/schemas/SourceObject'
-        hasHeader:
-          type: boolean
-          example: true
-          description: Determines if the first row column headers will be present. Default is `false`. Required if `columns` parameter is <b>not</b> included. If import file type is <b>JSONL</b>, `hasHeader` will be ignored.
-        columns:
-          type: array
-          items:
-            type: string
-          example:
-          - channels.email.address
-          - channels.email.subscribeStatus
-          - firstname
-          description: An array of import file column headers, arranged from left to right by column position. Using "" will ignore the entire column. Required if `hasHeader` is not explicitly set to `true`. If imported file type is <b>JSONL</b>, `columns` will be ignored.
-        delimiter:
-          type: string
-          description: Character used to break up import file columns. Defaults to `,` if not specified.
-          example: ','
-        confirmEmail:
-          type: string
-          description: Email address to send an administrative alert when the job is done running.
-          example: joesmith@example.com
-        strategy:
-          type: string
-          example: insertOnly
-          description: 'Possible values: `insertOnly` - only adds the new records, `updateOnly` - only updates the existing records. If `undefined`, the import will upsert (update and insert). Defaults to `undefined`.'
-        suppressTriggers:
-          type: boolean
-          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
-        jobStatusWebhookUrl:
-          type: string
-          description: API output will be posted to the <b>jobStatusWebhookUrl</b> when the job is done running.
-        lists:
-          $ref: '#/components/schemas/ListsCI_2'
-        nullMarker:
-          type: string
-          example: ignore
-          description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
-    ListsCI_2:
-      title: Lists
-      type: object
-      properties:
-        addTo:
-          type: array
-          items:
-            type: string
-          example:
-          - foo
-          - bar
-          description: All contacts will get added to each list in the array (e.g. ["foo","bar"]). If you pass this parameter, you should not pass a column in the file with the same key. This field will always override it.
-        removeFrom:
-          type: array
-          items:
-            type: string
-          example:
-          - biz
-          - baz
-          description: All contacts will get removed from each list in the array (e.g. ["biz","baz"]). If you pass this parameter, you should not pass a column in the file with the same key. This field will always override it.
-    ListsCI:
-      title: Lists
-      type: object
-      properties:
-        addTo:
-          type: array
-          items:
-            type: string
-          description: Array of list names.
-        removeFrom:
-          type: array
-          items:
-            type: string
-          description: Array of list names.
   responses:
     ContactImportConfigError:
       description: ''

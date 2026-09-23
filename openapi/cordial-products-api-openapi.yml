@@ -7,7 +7,7 @@ info:
 servers:
 - url: https://api.cordial.io/
 tags:
-- name: products
+- name: Products
 paths:
   /v1/products/{productID}:
     get:
@@ -15,7 +15,7 @@ paths:
       - basicAuth: []
       summary: Get a single product
       tags:
-      - products
+      - Products
       operationId: getproduct
       parameters:
       - name: productID
@@ -38,7 +38,7 @@ paths:
       - basicAuth: []
       summary: Update an existing product
       tags:
-      - products
+      - Products
       operationId: updateproducts
       parameters:
       - name: productID
@@ -64,7 +64,7 @@ paths:
       - basicAuth: []
       summary: Delete a single product
       tags:
-      - products
+      - Products
       operationId: deleteproducts
       parameters:
       - name: productID
@@ -76,13 +76,15 @@ paths:
       responses:
         '400':
           description: unable to validate segment participation
+    servers:
+    - url: https://api.cordial.io/
   /v1/products:
     post:
       security:
       - basicAuth: []
       summary: Add new products
       tags:
-      - products
+      - Products
       operationId: addproducts
       responses:
         '200':
@@ -99,7 +101,7 @@ paths:
       - basicAuth: []
       summary: Get products list
       tags:
-      - products
+      - Products
       operationId: getproducts
       parameters:
       - name: page
@@ -131,14 +133,16 @@ paths:
                   $ref: '#/components/schemas/ProductP'
         '404':
           description: record not found
+    servers:
+    - url: https://api.cordial.io/
   /v2/products/{productID}:
     get:
       security:
       - basicAuth: []
       summary: Get a single product
-      description: Retrieves the specified product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would return the response data for the product with the productID value of <b>112233</b>.
+      description: Retrieves the specified product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would return the response data for the product with the productID value of 112233.
       tags:
-      - products
+      - Products
       operationId: getproduct
       parameters:
       - name: productID
@@ -160,9 +164,9 @@ paths:
       security:
       - basicAuth: []
       summary: Update an existing product
-      description: Updates a product in the Cordial database using the appropriate JSON body. The product is defined by its unique product `id` value. For example, /products/112233 would update the the product with the productID value of <b>112233</b>.
+      description: Updates a product in the Cordial database using the appropriate JSON body. The product is defined by its unique product `id` value. For example, /products/112233 would update the the product with the productID value of 112233.
       tags:
-      - products
+      - Products
       operationId: updateproducts
       parameters:
       - name: productID
@@ -193,9 +197,9 @@ paths:
       security:
       - basicAuth: []
       summary: Delete a single product
-      description: Deletes a product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would remove the product with the productID value of <b>112233</b>.
+      description: Deletes a product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would remove the product with the productID value of 112233.
       tags:
-      - products
+      - Products
       operationId: deleteproducts
       parameters:
       - name: productID
@@ -213,6 +217,8 @@ paths:
                 $ref: '#/components/schemas/SuccessOperation'
         '400':
           $ref: '#/components/responses/ProductNotFound'
+    servers:
+    - url: https://api.cordial.io/
   /v2/products:
     post:
       security:
@@ -220,7 +226,7 @@ paths:
       summary: Add new products
       description: Creates a new product in the Cordial database using the appropriate JSON body. A product can include one or more variants. Posting the same product more than once with the same `productID` value will update the existing product. This is helpful for reloading and/or updating product information when batch processing multiple records.
       tags:
-      - products
+      - Products
       operationId: addproducts
       responses:
         '201':
@@ -244,7 +250,7 @@ paths:
       summary: Get products list
       description: Retrieves all products from the Cordial database. Using query string parameters, it is possible to filter the field set returned using a query string for the `fields` parameter.
       tags:
-      - products
+      - Products
       operationId: getproducts
       parameters:
       - name: page
@@ -291,24 +297,22 @@ paths:
                   $ref: '#/components/schemas/ProductResponse'
         '400':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
 components:
   schemas:
-    ProductNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
+    VariantsP:
+      title: Variants
       type: object
+      required:
+      - sku
       properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
+        sku:
           type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Product not found
+        attr:
+          $ref: '#/components/schemas/AttrP'
+        qty:
+          type: integer
     ProductP:
       title: Product
       type: object
@@ -364,27 +368,6 @@ components:
             type: string
         properties:
           type: object
-    VariantsP:
-      title: Variants
-      type: object
-      required:
-      - sku
-      properties:
-        sku:
-          type: string
-        attr:
-          $ref: '#/components/schemas/AttrP'
-        qty:
-          type: integer
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
     SaleP:
       title: Sale
       properties:
@@ -399,6 +382,43 @@ components:
         end:
           type: string
           format: date
+    AttrP:
+      title: Attr
+      type: object
+      properties:
+        color:
+          type: string
+        size:
+          type: string
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    ProductCreationSuccess:
+      title: Success operation on product creation
+      type: object
+      required:
+      - success
+      - message
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: product created
     ProductResponse:
       title: Product
       type: object
@@ -487,22 +507,36 @@ components:
           type: string
           format: date-time
           description: Last modified date.
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
+    SaleP_2:
+      title: Sale
+      properties:
+        enabled:
+          type: boolean
+          description: 'Flag to determine if the sale is active. Possible values: true, false, or 1, 0. Defaults to `false`.'
+          example: true
+        price:
+          type: number
+          format: float
+          description: Sale price of the item.
+          example: 12.95
+        start:
+          type: string
+          format: date
+          description: The date and time the sale is in effect or active.
+        end:
+          type: string
+          format: date
+          description: The date and time the sale ends or becomes inactive.
+    AttrP_2:
+      title: Attr
       type: object
       properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
+        color:
           type: string
-          example: RECORD_NOT_FOUND
-        message:
+          example: blue
+        size:
           type: string
-          example: record not found
+          example: medium
     ProductCreationModel:
       title: Product
       type: object
@@ -585,6 +619,22 @@ components:
           example:
             hasVideo: true
             ratings: 5 stars
+    ProductNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Product not found
     VariantsP_2:
       title: Variants
       type: object
@@ -602,31 +652,6 @@ components:
           type: integer
           description: The available inventory.
           example: 1
-    AttrP:
-      title: Attr
-      type: object
-      properties:
-        color:
-          type: string
-        size:
-          type: string
-    AttrP_2:
-      title: Attr
-      type: object
-      properties:
-        color:
-          type: string
-          example: blue
-        size:
-          type: string
-          example: medium
-    validationProductErrors:
-      required:
-      - validationErrors
-      properties:
-        validationErrors:
-          type: object
-          description: 'Object with validation error explanation for each field from payload. Possible errors: [''The product id field is required.'', ''The product name field is required.'', ''The qty must be a number.'', ''The sku field is required'']'
     ProductValidationError:
       title: Validation error
       required:
@@ -643,39 +668,22 @@ components:
         messages:
           type: object
           $ref: '#/components/schemas/validationProductErrors'
-    SaleP_2:
-      title: Sale
+    validationProductErrors:
+      required:
+      - validationErrors
       properties:
-        enabled:
-          type: boolean
-          description: 'Flag to determine if the sale is active. Possible values: true, false, or 1, 0. Defaults to `false`.'
-          example: true
-        price:
-          type: number
-          format: float
-          description: Sale price of the item.
-          example: 12.95
-        start:
-          type: string
-          format: date
-          description: The date and time the sale is in effect or active.
-        end:
-          type: string
-          format: date
-          description: The date and time the sale ends or becomes inactive.
-    ProductCreationSuccess:
-      title: Success operation on product creation
+        validationErrors:
+          type: object
+          description: 'Object with validation error explanation for each field from payload. Possible errors: [''The product id field is required.'', ''The product name field is required.'', ''The qty must be a number.'', ''The sku field is required'']'
+    SuccessOperation:
+      title: Successful operation
       type: object
       required:
       - success
-      - message
       properties:
         success:
           type: boolean
           example: true
-        message:
-          type: string
-          example: product created
   responses:
     ProductValidationError:
       description: Validation error
@@ -683,18 +691,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ProductValidationError'
-    ProductNotFound:
-      description: Product not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProductNotFound'
     RecordNotFound:
       description: Record not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/RecordNotFound'
+    ProductNotFound:
+      description: Product not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductNotFound'
   securitySchemes:
     basicAuth:
       type: http

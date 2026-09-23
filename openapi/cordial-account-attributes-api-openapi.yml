@@ -7,14 +7,14 @@ info:
 servers:
 - url: https://api.cordial.io/
 tags:
-- name: account attributes
+- name: Account Attributes
 paths:
   /v1/accountcontactattributes:
     get:
       security:
       - basicAuth: []
       tags:
-      - account attributes
+      - Account Attributes
       summary: Get contact attributes
       description: Retrieves attributes by type. Options are string, number, date, geo or array.
       operationId: getListAccountAttributes
@@ -56,7 +56,7 @@ paths:
       - basicAuth: []
       summary: Add a new attribute
       tags:
-      - account attributes
+      - Account Attributes
       operationId: addattribute
       responses:
         '200':
@@ -76,6 +76,8 @@ paths:
               $ref: '#/components/schemas/Attribute'
         description: Attribute object that needs to be added to the system
         required: true
+    servers:
+    - url: https://api.cordial.io/
   /v1/accountcontactattributes/{key}:
     get:
       security:
@@ -83,7 +85,7 @@ paths:
       summary: Get a single attribute
       operationId: getAttribute
       tags:
-      - account attributes
+      - Account Attributes
       parameters:
       - name: key
         description: Key for attribute
@@ -108,7 +110,7 @@ paths:
       summary: Update an existing attribute
       operationId: updateAttribute
       tags:
-      - account attributes
+      - Account Attributes
       parameters:
       - name: key
         description: Key for attribute
@@ -132,7 +134,7 @@ paths:
       summary: Delete an existing attribute
       operationId: deleteattribute
       tags:
-      - account attributes
+      - Account Attributes
       parameters:
       - name: key
         description: Key for attribute
@@ -143,14 +145,16 @@ paths:
       responses:
         '404':
           description: record not found
+    servers:
+    - url: https://api.cordial.io/
   /v2/accountcontactattributes:
     get:
       security:
       - basicAuth: []
       tags:
-      - account attributes
+      - Account Attributes
       summary: Get contact attributes
-      description: Retrieves contact attributes. It is possible to filter the response using query string parameters for attribute type (string, number, date, geo, or array) and index status. For example, you may want to retrieve all <b>non-indexed</b> <b>string</b> type attributes.
+      description: Retrieves contact attributes. It is possible to filter the response using query string parameters for attribute type (string, number, date, geo, or array) and index status. For example, you may want to retrieve all non-indexed string type attributes.
       operationId: getListAccountAttributes
       parameters:
       - in: query
@@ -194,14 +198,29 @@ paths:
       - basicAuth: []
       summary: Add an attribute
       tags:
-      - account attributes
+      - Account Attributes
       description: 'Creates a new contact attribute using the appropriate JSON body. Posting more than once for the same attribute name or key value will generate an error. Use the PUT method to change or update fields once the attribute is created. Attributes may be added at any time to your database and are immediately available to all contacts once created. Attributes must exist before contact data for those attributes can be added.
 
 
         Attributes can be optionally indexed, and if the data is strictly used for personalization, there is no need to index. However, if the field will be used for audience segmentation, it should be indexed.
 
 
-        Possible data types for contact attributes are:<ul><li><b>string:</b> Can be any string.</li><li><b>number:</b> Must be a number.</li><li><b>date:</b> Must be a date (ISO 08601 format e.g. YYYY-MM-DDThh:mm:ss).</li><li><b>geo:</b> This is an object that contains address fields as well as coordinates. Geo attributes are automatically indexed.</li><li><b>array:</b> An array of one or more values.</li></ul>'
+        Possible data types for contact attributes are:
+
+
+        string: Can be any string.
+
+
+        number: Must be a number.
+
+
+        date: Must be a date (ISO 08601 format e.g. YYYY-MM-DDThh:mm:ss).
+
+
+        geo: This is an object that contains address fields as well as coordinates. Geo attributes are automatically indexed.
+
+
+        array: An array of one or more values.'
       operationId: addattribute
       responses:
         '200':
@@ -221,15 +240,17 @@ paths:
               $ref: '#/components/schemas/Attribute_2'
         description: Attribute object that needs to be added.
         required: true
+    servers:
+    - url: https://api.cordial.io/
   /v2/accountcontactattributes/{key}:
     get:
       security:
       - basicAuth: []
       summary: Get a single attribute
-      description: Retrieves the specified contact attribute based on its unique `key` value. For example, /accountcontactattributes/first_name would return the response data for the attribute with the key value of <b>first_name</b>.
+      description: Retrieves the specified contact attribute based on its unique `key` value. For example, /accountcontactattributes/first_name would return the response data for the attribute with the key value of first_name.
       operationId: getAttribute
       tags:
-      - account attributes
+      - Account Attributes
       parameters:
       - name: key
         description: Attribute key value.
@@ -249,10 +270,10 @@ paths:
       security:
       - basicAuth: []
       summary: Update an attribute
-      description: Updates existing contact attribute fields using the appropriate JSON body. For example, /accountcontactattributes/first_name allows the attribute with the key value of <b>first_name</b> to be updated.
+      description: Updates existing contact attribute fields using the appropriate JSON body. For example, /accountcontactattributes/first_name allows the attribute with the key value of first_name to be updated.
       operationId: updateAttribute
       tags:
-      - account attributes
+      - Account Attributes
       parameters:
       - name: key
         description: Attribute key value.
@@ -282,10 +303,10 @@ paths:
       security:
       - basicAuth: []
       summary: Delete an attribute
-      description: Deletes an existing contact attribute. For example, /accountcontactattributes/points would delete the attribute with the key of <b>points</b>.
+      description: Deletes an existing contact attribute. For example, /accountcontactattributes/points would delete the attribute with the key of points.
       operationId: deleteattribute
       tags:
-      - account attributes
+      - Account Attributes
       parameters:
       - name: key
         description: Attribute key value.
@@ -302,35 +323,55 @@ paths:
                 $ref: '#/components/schemas/SuccessOperation'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+    servers:
+    - url: https://api.cordial.io/
 components:
   schemas:
-    AttributeError:
-      title: attributeError
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
+    AttributeUPD:
       properties:
-        error:
+        name:
+          type: string
+        validators:
+          type: string
+        updateUnauthenticated:
           type: boolean
-          example: true
-        errorKey:
+          default: false
+        retainOnDestroy:
           type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Key must be unique
-          description: 'Message with error explanation. Possible errors: [''Name must be unique'', ''invalid field type'', ''You can not change type'']'
-    AuthenticationFailed:
-      title: AuthenticationFailure
+          default: ''''''
+          description: Empty brackets will set to `destroy`
+          enum:
+          - ''
+          - anonymized
+          - unchanged
       type: object
-      required:
-      - error
+    AttributeShow:
       properties:
-        error:
+        key:
           type: string
-          example: 'Access Denied: Authentication Failure'
+        name:
+          type: string
+        type:
+          type: string
+        index:
+          type: boolean
+        unique:
+          type: boolean
+        validators:
+          type: object
+        schema:
+          type: object
+        updateUnauthenticated:
+          type: boolean
+        retainOnDestroy:
+          type: string
+        ct:
+          type: string
+          format: date-time
+        lm:
+          type: string
+          format: date-time
+      type: object
     Attribute:
       properties:
         key:
@@ -361,6 +402,40 @@ components:
       - key
       - name
       - type
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    AttributeError:
+      title: attributeError
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Key must be unique
+          description: 'Message with error explanation. Possible errors: [''Name must be unique'', ''invalid field type'', ''You can not change type'']'
     Attribute_2:
       properties:
         key:
@@ -400,15 +475,6 @@ components:
       - key
       - name
       - type
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
     AttributeUPD_2:
       properties:
         name:
@@ -424,74 +490,43 @@ components:
           type: string
           description: 'Determines how attribute values will be treated when a contact record is deleted. If no value (or `null` value) is passed, the attribute value will be destroyed. Default is `null`. Possible values: anonymized, unchanged, null, "".'
       type: object
-    RecordNotFound:
-      title: Record not found
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
       required:
       - error
-      - message
-      type: object
       properties:
         error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
           type: boolean
           example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    AttributeShow:
-      properties:
-        key:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        index:
-          type: boolean
-        unique:
-          type: boolean
-        validators:
-          type: object
-        schema:
-          type: object
-        updateUnauthenticated:
-          type: boolean
-        retainOnDestroy:
-          type: string
-        ct:
-          type: string
-          format: date-time
-        lm:
-          type: string
-          format: date-time
-      type: object
-    AttributeUPD:
-      properties:
-        name:
-          type: string
-        validators:
-          type: string
-        updateUnauthenticated:
-          type: boolean
-          default: false
-        retainOnDestroy:
-          type: string
-          default: ''''''
-          description: Empty brackets will set to `destroy`
-          enum:
-          - ''
-          - anonymized
-          - unchanged
-      type: object
   responses:
+    AttributeError:
+      description: General Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttributeError'
     AuthenticationFailure:
       description: Unauthorized
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/AuthenticationFailed'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
     AttributeShow:
       description: Successful operation
       content:
@@ -543,18 +578,6 @@ components:
               retainOnDestroy:
                 type: string
                 description: Describe how attributes will be processed on removing
-    AttributeError:
-      description: General Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AttributeError'
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
   securitySchemes:
     basicAuth:
       type: http

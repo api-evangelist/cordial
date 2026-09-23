@@ -7,17 +7,17 @@ info:
 servers:
 - url: https://api.cordial.io/
 tags:
-- name: programs
+- name: Programs
 paths:
   /v2/programs/{id}/summary:
     get:
       security:
       - basicAuth: []
       summary: Get a summary of stats for a given program
-      description: Validates if program exists and returns summary stats for it. <b>Note:</b> Programs endpoints are a beta feature. Please contact your CSM or Solutions representative for more information.
+      description: 'Validates if program exists and returns summary stats for it. Note: Programs endpoints are a beta feature. Please contact your CSM or Solutions representative for more information.'
       operationId: getProgramSummary
       tags:
-      - programs
+      - Programs
       parameters:
       - name: id
         description: Program id
@@ -65,10 +65,10 @@ paths:
       security:
       - basicAuth: []
       summary: Get time series data for a messages in a given program
-      description: Validates if program exists and returns program messages with stats. <b>Note:</b> Programs endpoints are a beta feature. Please contact your CSM or Solutions representative for more information.
+      description: 'Validates if program exists and returns program messages with stats. Note: Programs endpoints are a beta feature. Please contact your CSM or Solutions representative for more information.'
       operationId: getProgramStats
       tags:
-      - programs
+      - Programs
       parameters:
       - name: id
         description: Program id
@@ -119,15 +119,22 @@ paths:
           $ref: '#/components/responses/RecordNotFound'
 components:
   schemas:
-    AuthenticationFailed:
-      title: AuthenticationFailure
-      type: object
+    RecordNotFound:
+      title: Record not found
       required:
       - error
+      - message
+      type: object
       properties:
         error:
+          type: boolean
+          example: true
+        errorKey:
           type: string
-          example: 'Access Denied: Authentication Failure'
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
     ProgramMessageStats:
       type: object
       title: Message Send Stats
@@ -172,6 +179,60 @@ components:
         stats:
           title: Aggregated stats for program
           type: object
+    PaginatedResponse:
+      properties:
+        total:
+          type: number
+        per_page:
+          type: number
+        current_page:
+          type: number
+        last_page:
+          type: number
+        first_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=1
+        last_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=2
+        prev_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=1
+        next_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=2
+        path:
+          type: string
+        from:
+          type: number
+        to:
+          type: number
+    ProgramStatsResponse:
+      title: Program stats
+      properties:
+        data:
+          title: List of messages.
+          type: array
+          items:
+            $ref: '#/components/schemas/ProgramMessageStats'
+        query:
+          title: Query parameters
+          type: object
+          properties:
+            start_date:
+              type: string
+              example: '2018-01-01'
+            end_date:
+              type: string
+              example: '2018-01-01'
+            channel_type:
+              type: string
+            channel_key:
+              type: string
+        pagination:
+          title: Pagination data
+          type: object
+          $ref: '#/components/schemas/PaginatedResponse'
     ProgramSummaryResponse:
       title: Program summary
       properties:
@@ -264,76 +325,15 @@ components:
           type: string
           format: date-time
           description: Last modified date.
-    RecordNotFound:
-      title: Record not found
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
       required:
       - error
-      - message
-      type: object
       properties:
         error:
-          type: boolean
-          example: true
-        errorKey:
           type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    ProgramStatsResponse:
-      title: Program stats
-      properties:
-        data:
-          title: List of messages.
-          type: array
-          items:
-            $ref: '#/components/schemas/ProgramMessageStats'
-        query:
-          title: Query parameters
-          type: object
-          properties:
-            start_date:
-              type: string
-              example: '2018-01-01'
-            end_date:
-              type: string
-              example: '2018-01-01'
-            channel_type:
-              type: string
-            channel_key:
-              type: string
-        pagination:
-          title: Pagination data
-          type: object
-          $ref: '#/components/schemas/PaginatedResponse'
-    PaginatedResponse:
-      properties:
-        total:
-          type: number
-        per_page:
-          type: number
-        current_page:
-          type: number
-        last_page:
-          type: number
-        first_page_url:
-          type: string
-          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=1
-        last_page_url:
-          type: string
-          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=2
-        prev_page_url:
-          type: string
-          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=1
-        next_page_url:
-          type: string
-          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=2
-        path:
-          type: string
-        from:
-          type: number
-        to:
-          type: number
+          example: 'Access Denied: Authentication Failure'
   responses:
     AuthenticationFailure:
       description: Unauthorized

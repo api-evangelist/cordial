@@ -40,6 +40,14 @@ paths:
         required: true
 components:
   schemas:
+    AccountMonitorExportResponse:
+      title: ContactExports
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
     SourceAccountMonitorExport:
       title: Source Account Monitor export
       type: object
@@ -104,14 +112,6 @@ components:
           type: object
           $ref: '#/components/schemas/fieldErrorsInclude'
           description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
-    AccountMonitorExportResponse:
-      title: ContactExports
-      type: object
-      required:
-      - jobId
-      properties:
-        jobId:
-          type: string
     DestinationObject:
       title: Destination
       type: object
