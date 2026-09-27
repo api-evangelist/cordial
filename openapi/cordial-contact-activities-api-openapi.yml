@@ -94,7 +94,7 @@ paths:
       - basicAuth: []
       summary: Get events
       description: Retrieves contact activities. Response data can be filtered for a specific contact using the `email` and `mcID` query string parameters.
-      operationId: getActivityList
+      operationId: getV2Contactactivities
       tags:
       - Contact Activities
       parameters:
@@ -187,12 +187,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ContactActivityError'
+      x-operation-id-source: normalized
+      x-operation-id-original: getActivityList
     post:
       security:
       - basicAuth: []
       summary: Add a new event
       description: Creates a new contact activity using the appropriate JSON body.
-      operationId: addActivity
+      operationId: postV2Contactactivities
       tags:
       - Contact Activities
       responses:
@@ -209,10 +211,33 @@ paths:
               $ref: '#/components/schemas/ActivityActivity_2'
         description: Activity object that needs to be added.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: addActivity
     servers:
     - url: https://api.cordial.io/
 components:
   schemas:
+    ActivityActivity:
+      title: Activity
+      type: object
+      required:
+      - a
+      - <primaryKey>
+      properties:
+        a:
+          type: string
+          description: can be click, open, send, or any user defined actions
+        UID:
+          type: string
+          description: unique identifier of the event
+        <primaryKey>:
+          type: string
+          description: Primary key for the contact
+        ats:
+          type: string
+          format: If provided must be in ISO 8601 format
+        properties:
+          $ref: '#/components/schemas/PropertiesActivity'
     ActivityActivityShow:
       title: Activity
       type: object
@@ -236,67 +261,33 @@ components:
           type: integer
         properties:
           type: object
-    ActivityActivity:
-      title: Activity
-      type: object
-      required:
-      - a
-      - <primaryKey>
-      properties:
-        a:
-          type: string
-          description: can be click, open, send, or any user defined actions
-        UID:
-          type: string
-          description: unique identifier of the event
-        <primaryKey>:
-          type: string
-          description: Primary key for the contact
-        ats:
-          type: string
-          format: If provided must be in ISO 8601 format
-        properties:
-          $ref: '#/components/schemas/PropertiesActivity'
     PropertiesActivity:
       title: Properties
       type: object
       properties: {}
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
+    ActivityActivityShow_2:
+      title: Activity
       type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    AttributeErrorOrValidationErrors:
-      title: Attribute Error Or Validation Errors
       required:
-      - error
-      - errorKey
-      type: object
+      - action
       properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
+        action:
           type: string
-          example: GENERIC_ERROR_KEY
-        message:
+          description: Can be click, open, send, or any user-defined actions.
+        cID:
           type: string
-          example: Key must be unique
-          description: 'Message with error explanation. Possible errors: [''Name must be unique'', ''invalid field type'', ''You can not change type'']'
-        messages:
+          description: Contact ID
+        time:
+          type: string
+          format: dateTime
+        mcID:
+          type: string
+        bmID:
+          type: string
+        first:
+          type: integer
+        properties:
           type: object
-          $ref: '#/components/schemas/validationErrors'
     ActivityActivity_2:
       title: Activity
       type: object
@@ -322,36 +313,26 @@ components:
           description: 'An object of additional event attributes (e.g. {"propertyOne": 1, "propertyTwo": 2}. Note that property keys consisting of numeric-only values (e.g. 57) or keys containing a "dot" (e.g. shoes.color) will be stripped.'
           example:
             key: value
-    ActivityActivityShow_2:
-      title: Activity
+    AttributeErrorOrValidationErrors:
+      title: Attribute Error Or Validation Errors
+      required:
+      - error
+      - errorKey
       type: object
-      required:
-      - action
       properties:
-        action:
+        error:
+          type: boolean
+          example: true
+        errorKey:
           type: string
-          description: Can be click, open, send, or any user-defined actions.
-        cID:
+          example: GENERIC_ERROR_KEY
+        message:
           type: string
-          description: Contact ID
-        time:
-          type: string
-          format: dateTime
-        mcID:
-          type: string
-        bmID:
-          type: string
-        first:
-          type: integer
-        properties:
+          example: Key must be unique
+          description: 'Message with error explanation. Possible errors: [''Name must be unique'', ''invalid field type'', ''You can not change type'']'
+        messages:
           type: object
-    validationErrors:
-      required:
-      - validationErrors
-      properties:
-        validationErrors:
-          type: object
-          description: Object with validation error explanation for each field from payload.
+          $ref: '#/components/schemas/validationErrors'
     AuthenticationFailed:
       title: AuthenticationFailure
       type: object
@@ -378,25 +359,48 @@ components:
           type: string
           example: Data Automation does not exist.
           description: 'Possible errors: [''too many parameters'',''Contact doesn''t exist'']'
-  responses:
-    AuthenticationFailure:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AuthenticationFailed'
+    validationErrors:
+      required:
+      - validationErrors
+      properties:
+        validationErrors:
+          type: object
+          description: Object with validation error explanation for each field from payload.
     RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+  responses:
     AttributeErrorOrValidationErrors:
       description: Attribute Error Or Validation Errors
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/AttributeErrorOrValidationErrors'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    AuthenticationFailure:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationFailed'
   securitySchemes:
     basicAuth:
       type: http

@@ -373,7 +373,7 @@ paths:
       - basicAuth: []
       summary: Get a single automation template
       description: Retrieves the specified automation template. The automation template record is defined by its unique `key` value.
-      operationId: gettemplate
+      operationId: getV2AutomationtemplatesByKey
       tags:
       - automation templates
       parameters:
@@ -398,12 +398,14 @@ paths:
                 $ref: '#/components/schemas/TemplateShowAuto_2'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: gettemplate
     put:
       security:
       - basicAuth: []
       summary: Update an automation template
       description: Updates automation template fields. The automation template record is defined by its unique `key` value. For example, /automationtemplates/promo_01_20_2018 allows the template with the key value of promo_01_20_2018 to be updated using the appropriate JSON body.
-      operationId: updateTemplate
+      operationId: putV2AutomationtemplatesByKey
       tags:
       - automation templates
       parameters:
@@ -429,12 +431,14 @@ paths:
               $ref: '#/components/schemas/TemplateupdateAuto_2'
         description: Template object that needs to be updated.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: updateTemplate
     delete:
       security:
       - basicAuth: []
       summary: Delete an automation template
       description: Deletes an existing automation template. The automation template is defined by its unique `key` value. For example, /automationtemplate/newsletter_week1 would delete the template with the key value of newsletter_week1.
-      operationId: deleteTemplate
+      operationId: deleteV2AutomationtemplatesByKey
       tags:
       - automation templates
       parameters:
@@ -453,6 +457,8 @@ paths:
                 $ref: '#/components/schemas/AutomationTemplateDelete'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: deleteTemplate
     servers:
     - url: https://api.cordial.io/
   /v2/automationtemplates:
@@ -461,7 +467,7 @@ paths:
       - basicAuth: []
       summary: Add a new automation template
       description: Creates a new automation template using the appropriate JSON body. Posting more than once for the same template key will generate an error. Use the PUT method to change or update fields once the template is created.
-      operationId: addTemplate
+      operationId: postV2Automationtemplates
       tags:
       - automation templates
       responses:
@@ -484,12 +490,14 @@ paths:
               $ref: '#/components/schemas/TemplateAuto_2'
         description: Template object that needs to be added.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: addTemplate
     get:
       security:
       - basicAuth: []
       summary: Get automation templates
       description: Retrieves automation templates. Response data can be filtered using template `fields`, message `tags`, and `timestamp` values.
-      operationId: getTemplates
+      operationId: getV2Automationtemplates
       tags:
       - automation templates
       parameters:
@@ -586,6 +594,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TemplateShowAuto_2'
+      x-operation-id-source: normalized
+      x-operation-id-original: getTemplates
     servers:
     - url: https://api.cordial.io/
   /v2/automationtemplates/{key}/send:
@@ -594,7 +604,7 @@ paths:
       - basicAuth: []
       summary: Send a batch message from an automation template
       description: Sends an existing automation template. The template can be sent to one or more contacts, as specified within the JSON body. This endpoint will successfully create a new contact record if the contact key value in the request does not already exist. The newly added contact will have a subscribe status of none and will not receive promotional messages until subscribed to the appropriate channel. If the contact key exists, data passed in the contact object will upsert corresponding contact attributes in the Cordial database.
-      operationId: sentMessage
+      operationId: postV2AutomationtemplatesByKeySend
       tags:
       - automation templates
       parameters:
@@ -620,6 +630,8 @@ paths:
               $ref: '#/components/schemas/RecipientsAuto_2'
         description: One or more `contact` objects along with any external variables that will render content in the message.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: sentMessage
     servers:
     - url: https://api.cordial.io/
   /v2/automationtemplates/{key}/senddraft:
@@ -628,7 +640,7 @@ paths:
       - basicAuth: []
       summary: Send a draft message of an automation template
       description: Sends an existing automation template draft for testing purposes. For example, /automationtemplates/promo_01_20_2018/senddraft allows the draft automation template with the key value of promo_01_20_2018 to be sent using the appropriate JSON body. The template can be sent to one or more contacts, as specified within the JSON body.
-      operationId: sentDraftMessage
+      operationId: postV2AutomationtemplatesByKeySenddraft
       tags:
       - automation templates
       parameters:
@@ -658,6 +670,8 @@ paths:
               $ref: '#/components/schemas/RecipientsAutoTest'
         description: One or more `contact` objects along with any external variables that will render content in the message.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: sentDraftMessage
     servers:
     - url: https://api.cordial.io/
   /v2/automationtemplates/{key}/publish:
@@ -666,7 +680,7 @@ paths:
       - basicAuth: []
       summary: Publish a single automation template
       description: Publishes an existing automation template draft. The automation template record is defined by its unique `key` value.
-      operationId: publishTemplate
+      operationId: putV2AutomationtemplatesByKeyPublish
       tags:
       - automation templates
       parameters:
@@ -691,6 +705,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AutomationTemplateError'
+      x-operation-id-source: normalized
+      x-operation-id-original: publishTemplate
     servers:
     - url: https://api.cordial.io/
   /v2/automationtemplates/{key}/renderdraft/{contactID}:
@@ -699,7 +715,7 @@ paths:
       - basicAuth: []
       summary: Render draft content of a single automation template
       description: Retrieves the message headers, the rendered HTML, and experiment name and variants of an automated template draft for a specified contact. Additionally, experiment names and variants can be passed using a query string.
-      operationId: renderPreviewAutomationtemplate
+      operationId: getV2AutomationtemplatesByKeyRenderdraftByContactID
       tags:
       - automation templates
       parameters:
@@ -736,6 +752,8 @@ paths:
                 $ref: '#/components/schemas/AutomationTemplateRenderDraft'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: renderPreviewAutomationtemplate
     servers:
     - url: https://api.cordial.io/
   /v2/automationtemplates/{key}/renderpublished/{contactID}:
@@ -744,7 +762,7 @@ paths:
       - basicAuth: []
       summary: Render published content of a single automation template
       description: Retrieves the message headers, the rendered HTML, and experiment name and variants of a published automated template for a specified contact. Additionally, experiment names and variants can be passed using a query string.
-      operationId: renderPublishedAutomationtemplate
+      operationId: getV2AutomationtemplatesByKeyRenderpublishedByContactID
       tags:
       - automation templates
       parameters:
@@ -781,6 +799,8 @@ paths:
                 $ref: '#/components/schemas/AutomationTemplateRenderPublish'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: renderPublishedAutomationtemplate
     servers:
     - url: https://api.cordial.io/
   /v2/automationtemplates/{key}/experimentperformance:
@@ -812,30 +832,6 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
-    HeadersAuto:
-      title: Headers
-      type: object
-      required:
-      - subject
-      - fromEmail
-      - fromDesc
-      properties:
-        subject:
-          type: string
-        fromEmail:
-          type: string
-        replyEmail:
-          type: string
-        fromDesc:
-          type: string
-    RecipientsAuto:
-      title: Recipients
-      type: object
-      required:
-      - to
-      properties:
-        to:
-          $ref: '#/components/schemas/ToAuto'
     ToAuto:
       title: To
       type: object
@@ -846,6 +842,52 @@ components:
           $ref: '#/components/schemas/ContactAuto'
         extVars:
           $ref: '#/components/schemas/extVarsAuto'
+    TemplateShowAuto:
+      title: Template
+      type: object
+      required:
+      - accountID
+      - key
+      - channel
+      - classification
+      - baseAggregation
+      - message
+      properties:
+        accountID:
+          type: string
+        key:
+          type: string
+        channel:
+          type: string
+          description: can be 'email', 'push' etc.
+        classification:
+          type: string
+          enum:
+          - transactional
+          - promotional
+        baseAggregation:
+          type: string
+          enum:
+          - daily
+          - hourly
+        message:
+          $ref: '#/components/schemas/MessageAuto'
+        transportID:
+          type: string
+        stats:
+          type: object
+        priority:
+          type: number
+          default: 2
+          description: Messages with a higher priority will be processed before those with a lower priority, 1 - Low, 2 - Standard, 3 - High,4 - Highest
+    RecipientsAuto:
+      title: Recipients
+      type: object
+      required:
+      - to
+      properties:
+        to:
+          $ref: '#/components/schemas/ToAuto'
     TemplateAuto:
       title: Template
       type: object
@@ -893,44 +935,6 @@ components:
           type: number
           default: 2
           description: Messages with a higher priority will be processed before those with a lower priority, 1 - Low, 2 - Standard, 3 - High,4 - Highest
-    TemplateShowAuto:
-      title: Template
-      type: object
-      required:
-      - accountID
-      - key
-      - channel
-      - classification
-      - baseAggregation
-      - message
-      properties:
-        accountID:
-          type: string
-        key:
-          type: string
-        channel:
-          type: string
-          description: can be 'email', 'push' etc.
-        classification:
-          type: string
-          enum:
-          - transactional
-          - promotional
-        baseAggregation:
-          type: string
-          enum:
-          - daily
-          - hourly
-        message:
-          $ref: '#/components/schemas/MessageAuto'
-        transportID:
-          type: string
-        stats:
-          type: object
-        priority:
-          type: number
-          default: 2
-          description: Messages with a higher priority will be processed before those with a lower priority, 1 - Low, 2 - Standard, 3 - High,4 - Highest
     MessageAuto:
       title: Message
       type: object
@@ -942,6 +946,22 @@ components:
           $ref: '#/components/schemas/HeadersAuto'
         content:
           $ref: '#/components/schemas/ContentAuto'
+    HeadersAuto:
+      title: Headers
+      type: object
+      required:
+      - subject
+      - fromEmail
+      - fromDesc
+      properties:
+        subject:
+          type: string
+        fromEmail:
+          type: string
+        replyEmail:
+          type: string
+        fromDesc:
+          type: string
     ContactAuto:
       title: Contact
       type: object
@@ -949,6 +969,22 @@ components:
       - email
       properties:
         email:
+          type: string
+    extVarsAuto:
+      title: extVars
+      type: object
+      description: 'Using ''extVars'', any number of additional external variables may be added. These values are then available in the template. For example, if ''extVars'': {''orderID'':''o1234''} is included as an order ID value, then in the message it can be accessed as {$extVars.orderID}.'
+      properties:
+        key:
+          type: string
+          default: value
+    ContentAuto:
+      title: Content
+      type: object
+      required:
+      - text/html
+      properties:
+        text/html:
           type: string
     TemplateupdateAuto:
       title: Templateupdate
@@ -972,49 +1008,328 @@ components:
           type: number
           default: 2
           description: Messages with a higher priority will be processed before those with a lower priority, 1 - Low, 2 - Standard, 3 - High,4 - Highest
-    ContentAuto:
-      title: Content
-      type: object
+    TemplateSendResponse:
+      title: Template send draft response
       required:
-      - text/html
+      - success
+      - message
+      - response
       properties:
-        text/html:
+        success:
+          type: boolean
+          example: true
+        message:
           type: string
-    extVarsAuto:
-      title: extVars
-      type: object
-      description: 'Using ''extVars'', any number of additional external variables may be added. These values are then available in the template. For example, if ''extVars'': {''orderID'':''o1234''} is included as an order ID value, then in the message it can be accessed as {$extVars.orderID}.'
-      properties:
-        key:
-          type: string
-          default: value
-    ExperimentsStats:
-      title: ExperimentsStats
-      type: object
-      required:
-      - name
-      - variants
-      - strategy
-      - conversions
-      - totalAudience
-      properties:
-        name:
-          type: string
-          description: Experiment name.
-        variants:
+          example: messages sent
+        messagecontacts:
           type: array
           items:
-            $ref: '#/components/schemas/ExperimentVariants'
-          description: Experiment variants
-        strategy:
+            $ref: '#/components/schemas/messagecontactsresponse'
+    RecipientsAuto_2:
+      title: Recipients
+      type: object
+      required:
+      - to
+      properties:
+        to:
+          $ref: '#/components/schemas/ToAuto'
+        identifyBy:
+          $ref: '#/components/schemas/IdentifyBy'
+    ExperimentStats:
+      title: ExperimentStats
+      type: object
+      required: []
+      properties:
+        ts:
           type: integer
-          description: 'Strategy of experiment. Possible values: split, split-with-champion, 2 - Multi-armed bandit.'
-        conversions:
+          description: Number of total sends for the variant.
+        tc:
           type: integer
-          description: Number of conversions for the variant.
-        totalAudience:
+          description: Number of total click for the variant.
+        uc:
           type: integer
-          description: Total audience for the experiment.
+          description: Unique clicks for the variant.
+        to:
+          type: integer
+          description: Number of total opens for the variant.
+        uo:
+          type: integer
+          description: Number of unique opens for the variant.
+        tci:
+          type: integer
+          description: If there is a variant attached to the link and it aligns with our recorded variant
+        uci:
+          type: integer
+          description: If there is a variant attached to the link and it aligns with our recorded variant first time
+        tb:
+          type: integer
+          description: Total bounce.
+        tr:
+          type: integer
+          description: Total revenue.
+        tri:
+          type: integer
+          description: Total revenue indirect
+        or:
+          type: integer
+          description: Total orders.
+        ori:
+          type: integer
+          description: Total orders indirect
+        cmp:
+          type: integer
+          description: Total complaints.
+        oo:
+          type: integer
+          description: Total optout.
+    HeadersAuto_2:
+      title: Headers
+      type: object
+      required:
+      - subject
+      - fromEmail
+      - fromDesc
+      properties:
+        subject:
+          type: string
+          description: Message subject line.
+        fromEmail:
+          type: string
+          description: Sender email address.
+        replyEmail:
+          type: string
+          description: The "Reply to" email address.
+        fromDesc:
+          type: string
+          description: The sender "from" description.
+    contactIdentifier:
+      required:
+      - success
+      - message
+      - response
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Test message has been sent
+        response:
+          type: boolean
+          example: true
+    ExperimentVariants:
+      title: experimentVariants
+      type: object
+      required:
+      - stats
+      - name
+      properties:
+        stats:
+          type: object
+          $ref: '#/components/schemas/ExperimentStats'
+        name:
+          type: string
+          description: Variant name.
+    TemplateupdateAuto_2:
+      title: Templateupdate
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          $ref: '#/components/schemas/MessageAuto'
+        transportID:
+          type: string
+          description: Defines the transportID if overriding the default.
+        draftContent:
+          type: boolean
+          description: 'Determines if the automation template will be submitted as `draft` or `published` (version set in UI). Auotmation templates are submitted as `published` by default. Possible values: true, false.'
+        trackLinks:
+          type: string
+          description: 'Determines if link performance will be tracked. Link tracking is `enabled` by default. Possible values: enabled, disabled.'
+        priority:
+          type: number
+          default: 2
+          description: Messages with a higher priority will be processed before those with a lower priority. 1 - Low, 2 - Standard, 3 - High, 4 - Highest.
+        bcc:
+          type: string
+          description: Defines BCC email address that will receive a copy of every email. Only works with the 'enable-bcc' feature.
+        bccEnabled:
+          type: boolean
+          description: Determines if the BCC is enabled or disabled. Only works with the 'enable-bcc' feature.
+    AutomationTemplateRenderPublish:
+      title: Render publish automation template
+      type: object
+      properties:
+        headers:
+          type: object
+          schema:
+            properties:
+              fromDesc:
+                type: string
+                example: From description
+              subject:
+                type: string
+                example: Subject
+              fromEmail:
+                type: string
+                example: from-email@cordial.com
+              replyEmail:
+                type: string
+                example: reply-email@cordial.com
+        content:
+          type: object
+          schema:
+            properties:
+              text/html:
+                type: string
+                example: Some HTML content with smarty
+              text:
+                type: string
+                example: plain text
+                description: This field is only used for SMS channel type.
+              senderNumber:
+                type: string
+                example: '12345'
+                description: This field is only used for SMS channel type.
+              smsProgramId:
+                type: string
+                example: program-name
+                description: This field is only used for SMS channel type.
+    AutomationTemplateCreated:
+      title: New automation template created
+      type: object
+      required:
+      - success
+      - message
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: record created
+    TemplateShowAuto_2:
+      title: Template
+      type: object
+      required:
+      - accountID
+      - key
+      - channel
+      - classification
+      - baseAggregation
+      - message
+      properties:
+        accountID:
+          type: string
+        key:
+          type: string
+        channel:
+          type: string
+          description: Can be 'email', 'push', 'sms', etc.
+        classification:
+          type: string
+          enum:
+          - transactional
+          - promotional
+        baseAggregation:
+          type: string
+          enum:
+          - daily
+          - hourly
+        message:
+          $ref: '#/components/schemas/MessageAuto'
+        transportID:
+          type: string
+        stats:
+          type: object
+        priority:
+          type: number
+          default: 2
+          description: Messages with a higher priority will be processed before those with a lower priority. 1 - Low, 2 - Standard, 3 - High, 4 - Highest.
+        bcc:
+          type: string
+          description: Defines BCC email address that will receive a copy of every email. Only works with the 'enable-bcc' feature.
+        bccEnabled:
+          type: boolean
+          description: Determines if the BCC is enabled or disabled. Only works with the 'enable-bcc' feature.
+        alerts:
+          $ref: '#/components/schemas/AlertResponse'
+        triggerTypesEnabled:
+          type: array
+          items:
+            type: string
+          description: 'Array of enabled triggers. Possible values: api, event, recurring, or any combination thereof.'
+        recurringSchedule:
+          type: string
+          description: Explanation of the execution frequency for 'recurring' trigger in automation template.
+    AlertConditions:
+      title: conditions
+      required:
+      - type
+      - operator
+      - value
+      - period
+      type: object
+      properties:
+        operator:
+          type: string
+          enum:
+          - lt
+          - lte
+          - gt
+          - gte
+        value:
+          type: integer
+          description: ''
+    messagecontactsresponse:
+      title: ''
+      required:
+      - accepted
+      - cID
+      - mcID
+      properties:
+        accepted:
+          type: boolean
+          example: true
+          description: Response from platform if message was accepted for sending
+        cID:
+          type: string
+          description: Cordial database contact ID (cID) value.
+        mcID:
+          type: string
+          description: Unique message contact ID (mcID) typically used for tracking revenue attribution.
+        primary_key:
+          type: string
+          description: Primary key value, present only if accepted equal to true and account primary key not equal to message channel.
+        address:
+          type: string
+          description: Primary key value, present only if accepted equal to true and account primary key not equal to message channel.
+    ToAutoTest:
+      title: To
+      type: object
+      required:
+      - contact
+      properties:
+        contact:
+          $ref: '#/components/schemas/ContactAuto_2'
+        extVars:
+          $ref: '#/components/schemas/extVarsAuto_2'
+    AutomationTemplateSuccess:
+      title: Success operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    IdentifyBy:
+      title: IdentifyBy
+      type: array
+      items:
+        type: string
+      description: Specifies which identifier key in the request body should be used to look up the contact (e.g. cID, email, custID). Accepts a string or an array of strings in descending priority order. Because contact attribute data sent in the `contact` object of the call will upsert corresponding contact attributes in Cordial, `identifyBy` should be used to specify which key serves as the contact identifier and should not be upserted.
     AutomationTemplateRenderDraft:
       title: Render draft automation template
       type: object
@@ -1093,160 +1408,15 @@ components:
                 type: string
                 example: program-name
                 description: This field is only used for SMS channel type.
-    AutomationTemplateSuccess:
-      title: Success operation
+    ContactAuto_2:
+      title: Contact
       type: object
       required:
-      - success
+      - email
       properties:
-        success:
-          type: boolean
-          example: true
-    HeadersAuto_2:
-      title: Headers
-      type: object
-      required:
-      - subject
-      - fromEmail
-      - fromDesc
-      properties:
-        subject:
+        email:
           type: string
-          description: Message subject line.
-        fromEmail:
-          type: string
-          description: Sender email address.
-        replyEmail:
-          type: string
-          description: The "Reply to" email address.
-        fromDesc:
-          type: string
-          description: The sender "from" description.
-    IdentifyBy:
-      title: IdentifyBy
-      type: array
-      items:
-        type: string
-      description: Specifies which identifier key in the request body should be used to look up the contact (e.g. cID, email, custID). Accepts a string or an array of strings in descending priority order. Because contact attribute data sent in the `contact` object of the call will upsert corresponding contact attributes in Cordial, `identifyBy` should be used to specify which key serves as the contact identifier and should not be upserted.
-    AutomationTemplateCreated:
-      title: New automation template created
-      type: object
-      required:
-      - success
-      - message
-      properties:
-        success:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: record created
-    AutomationTemplateError:
-      title: Invalid request
-      required:
-      - messages
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: KEY must be unique
-          description: 'Possible errors: [''KEY must be unique'',''Template does not exist''].'
-    ExperimentVariants:
-      title: experimentVariants
-      type: object
-      required:
-      - stats
-      - name
-      properties:
-        stats:
-          type: object
-          $ref: '#/components/schemas/ExperimentStats'
-        name:
-          type: string
-          description: Variant name.
-    AutomationTemplateRenderPublish:
-      title: Render publish automation template
-      type: object
-      properties:
-        headers:
-          type: object
-          schema:
-            properties:
-              fromDesc:
-                type: string
-                example: From description
-              subject:
-                type: string
-                example: Subject
-              fromEmail:
-                type: string
-                example: from-email@cordial.com
-              replyEmail:
-                type: string
-                example: reply-email@cordial.com
-        content:
-          type: object
-          schema:
-            properties:
-              text/html:
-                type: string
-                example: Some HTML content with smarty
-              text:
-                type: string
-                example: plain text
-                description: This field is only used for SMS channel type.
-              senderNumber:
-                type: string
-                example: '12345'
-                description: This field is only used for SMS channel type.
-              smsProgramId:
-                type: string
-                example: program-name
-                description: This field is only used for SMS channel type.
-    ToAutoTest:
-      title: To
-      type: object
-      required:
-      - contact
-      properties:
-        contact:
-          $ref: '#/components/schemas/ContactAuto_2'
-        extVars:
-          $ref: '#/components/schemas/extVarsAuto_2'
-    TemplateupdateAuto_2:
-      title: Templateupdate
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          $ref: '#/components/schemas/MessageAuto'
-        transportID:
-          type: string
-          description: Defines the transportID if overriding the default.
-        draftContent:
-          type: boolean
-          description: 'Determines if the automation template will be submitted as `draft` or `published` (version set in UI). Auotmation templates are submitted as `published` by default. Possible values: true, false.'
-        trackLinks:
-          type: string
-          description: 'Determines if link performance will be tracked. Link tracking is `enabled` by default. Possible values: enabled, disabled.'
-        priority:
-          type: number
-          default: 2
-          description: Messages with a higher priority will be processed before those with a lower priority. 1 - Low, 2 - Standard, 3 - High, 4 - Highest.
-        bcc:
-          type: string
-          description: Defines BCC email address that will receive a copy of every email. Only works with the 'enable-bcc' feature.
-        bccEnabled:
-          type: boolean
-          description: Determines if the BCC is enabled or disabled. Only works with the 'enable-bcc' feature.
+          description: 'Contact identifier key/value pair. Use the "identifierKey": "identifierValue" format (e.g. "cID": "58d2fc99ac0c8117814d4e78", "email": "msmith@example.com", "custID": "ID1234").'
     ContentAuto_2:
       title: Content
       type: object
@@ -1256,54 +1426,6 @@ components:
         text/html:
           type: string
           description: Message content. Can contain HTML markup or plain text depending on message type and channel.
-    contactIdentifier:
-      required:
-      - success
-      - message
-      - response
-      properties:
-        success:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: Test message has been sent
-        response:
-          type: boolean
-          example: true
-    AutomationTemplateDelete:
-      title: Delete automation template
-      type: object
-      properties:
-        <mdtID>:
-          type: object
-          schema:
-            properties:
-              success:
-                type: boolean
-                example: true
-              name:
-                type: string
-                example: automation-template-name
-    AlertConditions:
-      title: conditions
-      required:
-      - type
-      - operator
-      - value
-      - period
-      type: object
-      properties:
-        operator:
-          type: string
-          enum:
-          - lt
-          - lte
-          - gt
-          - gte
-        value:
-          type: integer
-          description: ''
     RecordNotFound:
       title: Record not found
       required:
@@ -1320,53 +1442,33 @@ components:
         message:
           type: string
           example: record not found
-    ExperimentStats:
-      title: ExperimentStats
+    ExperimentsStats:
+      title: ExperimentsStats
       type: object
-      required: []
+      required:
+      - name
+      - variants
+      - strategy
+      - conversions
+      - totalAudience
       properties:
-        ts:
+        name:
+          type: string
+          description: Experiment name.
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExperimentVariants'
+          description: Experiment variants
+        strategy:
           type: integer
-          description: Number of total sends for the variant.
-        tc:
+          description: 'Strategy of experiment. Possible values: split, split-with-champion, 2 - Multi-armed bandit.'
+        conversions:
           type: integer
-          description: Number of total click for the variant.
-        uc:
+          description: Number of conversions for the variant.
+        totalAudience:
           type: integer
-          description: Unique clicks for the variant.
-        to:
-          type: integer
-          description: Number of total opens for the variant.
-        uo:
-          type: integer
-          description: Number of unique opens for the variant.
-        tci:
-          type: integer
-          description: If there is a variant attached to the link and it aligns with our recorded variant
-        uci:
-          type: integer
-          description: If there is a variant attached to the link and it aligns with our recorded variant first time
-        tb:
-          type: integer
-          description: Total bounce.
-        tr:
-          type: integer
-          description: Total revenue.
-        tri:
-          type: integer
-          description: Total revenue indirect
-        or:
-          type: integer
-          description: Total orders.
-        ori:
-          type: integer
-          description: Total orders indirect
-        cmp:
-          type: integer
-          description: Total complaints.
-        oo:
-          type: integer
-          description: Total optout.
+          description: Total audience for the experiment.
     TemplateAuto_2:
       title: Template
       type: object
@@ -1421,77 +1523,6 @@ components:
         vanityDomainKey:
           type: string
           description: Defines the vanity domain key for email messages.
-    RecipientsAutoTest:
-      title: Recipients
-      type: object
-      required:
-      - to
-      properties:
-        to:
-          $ref: '#/components/schemas/ToAutoTest'
-    TemplateShowAuto_2:
-      title: Template
-      type: object
-      required:
-      - accountID
-      - key
-      - channel
-      - classification
-      - baseAggregation
-      - message
-      properties:
-        accountID:
-          type: string
-        key:
-          type: string
-        channel:
-          type: string
-          description: Can be 'email', 'push', 'sms', etc.
-        classification:
-          type: string
-          enum:
-          - transactional
-          - promotional
-        baseAggregation:
-          type: string
-          enum:
-          - daily
-          - hourly
-        message:
-          $ref: '#/components/schemas/MessageAuto'
-        transportID:
-          type: string
-        stats:
-          type: object
-        priority:
-          type: number
-          default: 2
-          description: Messages with a higher priority will be processed before those with a lower priority. 1 - Low, 2 - Standard, 3 - High, 4 - Highest.
-        bcc:
-          type: string
-          description: Defines BCC email address that will receive a copy of every email. Only works with the 'enable-bcc' feature.
-        bccEnabled:
-          type: boolean
-          description: Determines if the BCC is enabled or disabled. Only works with the 'enable-bcc' feature.
-        alerts:
-          $ref: '#/components/schemas/AlertResponse'
-        triggerTypesEnabled:
-          type: array
-          items:
-            type: string
-          description: 'Array of enabled triggers. Possible values: api, event, recurring, or any combination thereof.'
-        recurringSchedule:
-          type: string
-          description: Explanation of the execution frequency for 'recurring' trigger in automation template.
-    ContactAuto_2:
-      title: Contact
-      type: object
-      required:
-      - email
-      properties:
-        email:
-          type: string
-          description: 'Contact identifier key/value pair. Use the "identifierKey": "identifierValue" format (e.g. "cID": "58d2fc99ac0c8117814d4e78", "email": "msmith@example.com", "custID": "ID1234").'
     AlertResponse:
       title: AlertResponse
       type: object
@@ -1523,16 +1554,6 @@ components:
         period:
           type: integer
           description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
-    RecipientsAuto_2:
-      title: Recipients
-      type: object
-      required:
-      - to
-      properties:
-        to:
-          $ref: '#/components/schemas/ToAuto'
-        identifyBy:
-          $ref: '#/components/schemas/IdentifyBy'
     TemplateSendDraftResponse:
       title: Template send draft response
       required:
@@ -1541,46 +1562,45 @@ components:
         contactIdentifier:
           $ref: '#/components/schemas/contactIdentifier'
           description: Contact identifier that is used in the payload for the sent message. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`.
-    messagecontactsresponse:
-      title: ''
+    AutomationTemplateError:
+      title: Invalid request
       required:
-      - accepted
-      - cID
-      - mcID
+      - messages
+      - errorKey
+      - error
       properties:
-        accepted:
+        error:
           type: boolean
           example: true
-          description: Response from platform if message was accepted for sending
-        cID:
+        errorKey:
           type: string
-          description: Cordial database contact ID (cID) value.
-        mcID:
-          type: string
-          description: Unique message contact ID (mcID) typically used for tracking revenue attribution.
-        primary_key:
-          type: string
-          description: Primary key value, present only if accepted equal to true and account primary key not equal to message channel.
-        address:
-          type: string
-          description: Primary key value, present only if accepted equal to true and account primary key not equal to message channel.
-    TemplateSendResponse:
-      title: Template send draft response
-      required:
-      - success
-      - message
-      - response
-      properties:
-        success:
-          type: boolean
-          example: true
+          example: GENERIC_ERROR_KEY
         message:
           type: string
-          example: messages sent
-        messagecontacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/messagecontactsresponse'
+          example: KEY must be unique
+          description: 'Possible errors: [''KEY must be unique'',''Template does not exist''].'
+    AutomationTemplateDelete:
+      title: Delete automation template
+      type: object
+      properties:
+        <mdtID>:
+          type: object
+          schema:
+            properties:
+              success:
+                type: boolean
+                example: true
+              name:
+                type: string
+                example: automation-template-name
+    RecipientsAutoTest:
+      title: Recipients
+      type: object
+      required:
+      - to
+      properties:
+        to:
+          $ref: '#/components/schemas/ToAutoTest'
     extVarsAuto_2:
       title: extVars
       type: object

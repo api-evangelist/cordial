@@ -153,7 +153,7 @@ paths:
       - basicAuth: []
       summary: Get a single include
       description: Retrieves the specified message content include from the HTML content library. The include is defined by its unique `key` value. For example, /includes/footer would return data for the content include with the key value of footer.
-      operationId: getinclude
+      operationId: getV2IncludesByKey
       tags:
       - message content includes
       parameters:
@@ -178,12 +178,14 @@ paths:
                 $ref: '#/components/schemas/IncludeResponse'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: getinclude
     put:
       security:
       - basicAuth: []
       summary: Update a single include
       description: Updates message content include name, description, and content fields. The include is defined by its unique `key` value. For example, /includes/footer would update the content include with the key value of footer.
-      operationId: updateinclude
+      operationId: putV2IncludesByKey
       tags:
       - message content includes
       parameters:
@@ -212,12 +214,14 @@ paths:
               $ref: '#/components/schemas/IncludeI_2'
         description: Content include object that needs to be updated.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: updateinclude
     delete:
       security:
       - basicAuth: []
       summary: Delete an include
       description: Deletes a content include from the HTML content library. The include is defined by its unique `key` value. For example, /includes/footer would delete the content include with the key value of footer.
-      operationId: removeinclude
+      operationId: deleteV2IncludesByKey
       tags:
       - message content includes
       parameters:
@@ -238,6 +242,8 @@ paths:
           $ref: '#/components/responses/IncludeRemoveImpossible'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: removeinclude
     servers:
     - url: https://api.cordial.io/
   /v2/includes:
@@ -246,7 +252,7 @@ paths:
       - basicAuth: []
       summary: Add a content include
       description: Adds a new message content include to the HTML content library using the appropriate JSON body. Posting more than once for the same include key will generate an error.
-      operationId: addinclude
+      operationId: postV2Includes
       tags:
       - message content includes
       responses:
@@ -266,12 +272,14 @@ paths:
               $ref: '#/components/schemas/IncludeI_2'
         description: Content include object that needs to be added.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: addinclude
     get:
       security:
       - basicAuth: []
       summary: Get content includes
       description: Retrieves message content includes from the HTML content library. Using query string parameters, it is possible to filter the response by content "key" to retrieve information for a single content include, as well as retrieve only the specified fields including name, createdAt, lastUpdate, and content.
-      operationId: getincludes
+      operationId: getV2Includes
       tags:
       - message content includes
       parameters:
@@ -310,6 +318,8 @@ paths:
                   $ref: '#/components/schemas/IncludeResponse'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: getincludes
     servers:
     - url: https://api.cordial.io/
 components:
@@ -374,35 +384,30 @@ components:
           type: string
           format: date-time
           description: Last modified date.
-    IncludeCreationSuccess:
-      title: Successful operation for include content creation
+    IncludeI_2:
+      title: Include
       type: object
       required:
-      - success
-      - message
+      - key
+      - content
       properties:
-        success:
-          type: boolean
-          example: true
-        message:
+        key:
           type: string
-          example: record created
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
+          description: Unique message content key to identify and reference the include.
+        tags:
+          type: array
+          description: An array of message content tags (e.g. ["birthday","promo"]). Tags are case-sensitive.
+          items:
+            type: string
+        name:
           type: string
-          example: RECORD_NOT_FOUND
-        message:
+          description: Message content include name.
+        description:
           type: string
-          example: record not found
+          description: A short description for the message include.
+        content:
+          type: string
+          description: HTML or Smarty content to be used as an include in message content.
     IncludeRemoveImpossible:
       title: ''
       required:
@@ -442,6 +447,28 @@ components:
           type: object
           $ref: '#/components/schemas/fieldErrorsInclude'
           description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    IncludeCreationSuccess:
+      title: Successful operation for include content creation
+      type: object
+      required:
+      - success
+      - message
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: record created
     fieldErrorsInclude:
       type: object
       required:
@@ -452,52 +479,35 @@ components:
           items:
             type: string
             example: The destination field is required.
-    IncludeI_2:
-      title: Include
-      type: object
+    RecordNotFound:
+      title: Record not found
       required:
-      - key
-      - content
-      properties:
-        key:
-          type: string
-          description: Unique message content key to identify and reference the include.
-        tags:
-          type: array
-          description: An array of message content tags (e.g. ["birthday","promo"]). Tags are case-sensitive.
-          items:
-            type: string
-        name:
-          type: string
-          description: Message content include name.
-        description:
-          type: string
-          description: A short description for the message include.
-        content:
-          type: string
-          description: HTML or Smarty content to be used as an include in message content.
-    SuccessOperation:
-      title: Successful operation
+      - error
+      - message
       type: object
-      required:
-      - success
       properties:
-        success:
+        error:
           type: boolean
           example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
   responses:
-    IncludeErrorValidation:
-      description: validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IncludeErrorValidation'
     RecordNotFound:
       description: Record not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/RecordNotFound'
+    IncludeErrorValidation:
+      description: validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IncludeErrorValidation'
     IncludeRemoveImpossible:
       description: Operation failed
       content:

@@ -143,7 +143,7 @@ paths:
       description: Retrieves the specified product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would return the response data for the product with the productID value of 112233.
       tags:
       - Products
-      operationId: getproduct
+      operationId: getV2ProductsByProductID
       parameters:
       - name: productID
         description: Product id value.
@@ -160,6 +160,8 @@ paths:
                 $ref: '#/components/schemas/ProductResponse'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: getproduct
     put:
       security:
       - basicAuth: []
@@ -167,7 +169,7 @@ paths:
       description: Updates a product in the Cordial database using the appropriate JSON body. The product is defined by its unique product `id` value. For example, /products/112233 would update the the product with the productID value of 112233.
       tags:
       - Products
-      operationId: updateproducts
+      operationId: putV2ProductsByProductID
       parameters:
       - name: productID
         description: Product id value.
@@ -193,6 +195,8 @@ paths:
               $ref: '#/components/schemas/ProductCreationModel'
         description: Product object that needs to be updated.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: updateproducts
     delete:
       security:
       - basicAuth: []
@@ -200,7 +204,7 @@ paths:
       description: Deletes a product from the Cordial database. The product is defined by its unique product `id` value. For example, /products/112233 would remove the product with the productID value of 112233.
       tags:
       - Products
-      operationId: deleteproducts
+      operationId: deleteV2ProductsByProductID
       parameters:
       - name: productID
         description: Product id value.
@@ -217,6 +221,8 @@ paths:
                 $ref: '#/components/schemas/SuccessOperation'
         '400':
           $ref: '#/components/responses/ProductNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: deleteproducts
     servers:
     - url: https://api.cordial.io/
   /v2/products:
@@ -227,7 +233,7 @@ paths:
       description: Creates a new product in the Cordial database using the appropriate JSON body. A product can include one or more variants. Posting the same product more than once with the same `productID` value will update the existing product. This is helpful for reloading and/or updating product information when batch processing multiple records.
       tags:
       - Products
-      operationId: addproducts
+      operationId: postV2Products
       responses:
         '201':
           description: successful operation
@@ -244,6 +250,8 @@ paths:
               $ref: '#/components/schemas/ProductCreationModel'
         description: Product object that needs to be added.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: addproducts
     get:
       security:
       - basicAuth: []
@@ -251,7 +259,7 @@ paths:
       description: Retrieves all products from the Cordial database. Using query string parameters, it is possible to filter the field set returned using a query string for the `fields` parameter.
       tags:
       - Products
-      operationId: getproducts
+      operationId: getV2Products
       parameters:
       - name: page
         description: Specific page number to be returned.
@@ -297,22 +305,20 @@ paths:
                   $ref: '#/components/schemas/ProductResponse'
         '400':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: getproducts
     servers:
     - url: https://api.cordial.io/
 components:
   schemas:
-    VariantsP:
-      title: Variants
+    AttrP:
+      title: Attr
       type: object
-      required:
-      - sku
       properties:
-        sku:
+        color:
           type: string
-        attr:
-          $ref: '#/components/schemas/AttrP'
-        qty:
-          type: integer
+        size:
+          type: string
     ProductP:
       title: Product
       type: object
@@ -368,6 +374,18 @@ components:
             type: string
         properties:
           type: object
+    VariantsP:
+      title: Variants
+      type: object
+      required:
+      - sku
+      properties:
+        sku:
+          type: string
+        attr:
+          $ref: '#/components/schemas/AttrP'
+        qty:
+          type: integer
     SaleP:
       title: Sale
       properties:
@@ -382,43 +400,66 @@ components:
         end:
           type: string
           format: date
-    AttrP:
-      title: Attr
-      type: object
+    SaleP_2:
+      title: Sale
       properties:
-        color:
+        enabled:
+          type: boolean
+          description: 'Flag to determine if the sale is active. Possible values: true, false, or 1, 0. Defaults to `false`.'
+          example: true
+        price:
+          type: number
+          format: float
+          description: Sale price of the item.
+          example: 12.95
+        start:
           type: string
-        size:
+          format: date
+          description: The date and time the sale is in effect or active.
+        end:
           type: string
-    RecordNotFound:
-      title: Record not found
+          format: date
+          description: The date and time the sale ends or becomes inactive.
+    ProductValidationError:
+      title: Validation error
       required:
+      - messages
+      - errorKey
       - error
-      - message
-      type: object
       properties:
         error:
           type: boolean
           example: true
         errorKey:
           type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    ProductCreationSuccess:
-      title: Success operation on product creation
+          example: GENERIC_ERROR_KEY
+        messages:
+          type: object
+          $ref: '#/components/schemas/validationProductErrors'
+    validationProductErrors:
+      required:
+      - validationErrors
+      properties:
+        validationErrors:
+          type: object
+          description: 'Object with validation error explanation for each field from payload. Possible errors: [''The product id field is required.'', ''The product name field is required.'', ''The qty must be a number.'', ''The sku field is required'']'
+    VariantsP_2:
+      title: Variants
       type: object
       required:
-      - success
-      - message
+      - sku
       properties:
-        success:
-          type: boolean
-          example: true
-        message:
+        sku:
           type: string
-          example: product created
+          description: The Stock Keeping Unit value for the product (e.g. RF-WP33286-21).
+          example: RF-WP33286-21
+        attr:
+          $ref: '#/components/schemas/AttrP_2'
+          description: Key value pairs describing product attributes (e.g. "size":"large", "color":"red"). Attribute values <b>cannot</b> be searched using the Kaleidoscope or within Smarty for personalization.
+        qty:
+          type: integer
+          description: The available inventory.
+          example: 1
     ProductResponse:
       title: Product
       type: object
@@ -507,36 +548,31 @@ components:
           type: string
           format: date-time
           description: Last modified date.
-    SaleP_2:
-      title: Sale
-      properties:
-        enabled:
-          type: boolean
-          description: 'Flag to determine if the sale is active. Possible values: true, false, or 1, 0. Defaults to `false`.'
-          example: true
-        price:
-          type: number
-          format: float
-          description: Sale price of the item.
-          example: 12.95
-        start:
-          type: string
-          format: date
-          description: The date and time the sale is in effect or active.
-        end:
-          type: string
-          format: date
-          description: The date and time the sale ends or becomes inactive.
-    AttrP_2:
-      title: Attr
+    ProductNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
       type: object
       properties:
-        color:
+        error:
+          type: boolean
+          example: true
+        errorKey:
           type: string
-          example: blue
-        size:
+          example: GENERIC_ERROR_KEY
+        message:
           type: string
-          example: medium
+          example: Product not found
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
     ProductCreationModel:
       title: Product
       type: object
@@ -619,7 +655,30 @@ components:
           example:
             hasVideo: true
             ratings: 5 stars
-    ProductNotFound:
+    ProductCreationSuccess:
+      title: Success operation on product creation
+      type: object
+      required:
+      - success
+      - message
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: product created
+    AttrP_2:
+      title: Attr
+      type: object
+      properties:
+        color:
+          type: string
+          example: blue
+        size:
+          type: string
+          example: medium
+    RecordNotFound:
       title: Record not found
       required:
       - error
@@ -631,72 +690,23 @@ components:
           example: true
         errorKey:
           type: string
-          example: GENERIC_ERROR_KEY
+          example: RECORD_NOT_FOUND
         message:
           type: string
-          example: Product not found
-    VariantsP_2:
-      title: Variants
-      type: object
-      required:
-      - sku
-      properties:
-        sku:
-          type: string
-          description: The Stock Keeping Unit value for the product (e.g. RF-WP33286-21).
-          example: RF-WP33286-21
-        attr:
-          $ref: '#/components/schemas/AttrP_2'
-          description: Key value pairs describing product attributes (e.g. "size":"large", "color":"red"). Attribute values <b>cannot</b> be searched using the Kaleidoscope or within Smarty for personalization.
-        qty:
-          type: integer
-          description: The available inventory.
-          example: 1
-    ProductValidationError:
-      title: Validation error
-      required:
-      - messages
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        messages:
-          type: object
-          $ref: '#/components/schemas/validationProductErrors'
-    validationProductErrors:
-      required:
-      - validationErrors
-      properties:
-        validationErrors:
-          type: object
-          description: 'Object with validation error explanation for each field from payload. Possible errors: [''The product id field is required.'', ''The product name field is required.'', ''The qty must be a number.'', ''The sku field is required'']'
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
+          example: record not found
   responses:
-    ProductValidationError:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProductValidationError'
     RecordNotFound:
       description: Record not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/RecordNotFound'
+    ProductValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductValidationError'
     ProductNotFound:
       description: Product not found
       content:

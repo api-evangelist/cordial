@@ -36,22 +36,11 @@ paths:
         description: Audience object for returning count.
         required: true
 components:
-  responses:
-    AudienceCountErrorValidation:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AudienceCountErrorValidation'
   schemas:
-    AudienceCountSuccess:
+    AudienceObject:
       title: Source
       type: object
-      properties:
-        count:
-          type: number
-          description: Count of contacts
-          default: 123
+      properties: {}
     AudienceCountErrorValidation:
       title: Contact error
       required:
@@ -68,10 +57,21 @@ components:
         message:
           type: object
           example: 'Object with error explanation what happen with payload. Possible errors: [''Timezones should not be empty'',''Timezone source should be either string or geo number provided'', ''Dynamic values is not set'']'
-    AudienceObject:
+    AudienceCountSuccess:
       title: Source
       type: object
-      properties: {}
+      properties:
+        count:
+          type: number
+          description: Count of contacts
+          default: 123
+  responses:
+    AudienceCountErrorValidation:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AudienceCountErrorValidation'
   securitySchemes:
     basicAuth:
       type: http

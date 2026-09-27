@@ -155,7 +155,7 @@ paths:
       - Account Attributes
       summary: Get contact attributes
       description: Retrieves contact attributes. It is possible to filter the response using query string parameters for attribute type (string, number, date, geo, or array) and index status. For example, you may want to retrieve all non-indexed string type attributes.
-      operationId: getListAccountAttributes
+      operationId: getV2Accountcontactattributes
       parameters:
       - in: query
         name: type
@@ -193,6 +193,8 @@ paths:
           $ref: '#/components/responses/AuthenticationFailure'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: getListAccountAttributes
     post:
       security:
       - basicAuth: []
@@ -221,7 +223,7 @@ paths:
 
 
         array: An array of one or more values.'
-      operationId: addattribute
+      operationId: postV2Accountcontactattributes
       responses:
         '200':
           description: Success
@@ -240,6 +242,8 @@ paths:
               $ref: '#/components/schemas/Attribute_2'
         description: Attribute object that needs to be added.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: addattribute
     servers:
     - url: https://api.cordial.io/
   /v2/accountcontactattributes/{key}:
@@ -248,7 +252,7 @@ paths:
       - basicAuth: []
       summary: Get a single attribute
       description: Retrieves the specified contact attribute based on its unique `key` value. For example, /accountcontactattributes/first_name would return the response data for the attribute with the key value of first_name.
-      operationId: getAttribute
+      operationId: getV2AccountcontactattributesByKey
       tags:
       - Account Attributes
       parameters:
@@ -266,12 +270,14 @@ paths:
           $ref: '#/components/responses/AuthenticationFailure'
         '422':
           $ref: '#/components/responses/AttributeError'
+      x-operation-id-source: normalized
+      x-operation-id-original: getAttribute
     put:
       security:
       - basicAuth: []
       summary: Update an attribute
       description: Updates existing contact attribute fields using the appropriate JSON body. For example, /accountcontactattributes/first_name allows the attribute with the key value of first_name to be updated.
-      operationId: updateAttribute
+      operationId: putV2AccountcontactattributesByKey
       tags:
       - Account Attributes
       parameters:
@@ -299,12 +305,14 @@ paths:
               $ref: '#/components/schemas/AttributeUPD_2'
         description: Attribute object that needs to be updated.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: updateAttribute
     delete:
       security:
       - basicAuth: []
       summary: Delete an attribute
       description: Deletes an existing contact attribute. For example, /accountcontactattributes/points would delete the attribute with the key of points.
-      operationId: deleteattribute
+      operationId: deleteV2AccountcontactattributesByKey
       tags:
       - Account Attributes
       parameters:
@@ -323,10 +331,42 @@ paths:
                 $ref: '#/components/schemas/SuccessOperation'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: deleteattribute
     servers:
     - url: https://api.cordial.io/
 components:
   schemas:
+    Attribute:
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        index:
+          type: boolean
+        validators:
+          type: string
+        options:
+          type: object
+        updateUnauthenticated:
+          type: boolean
+          default: false
+        retainOnDestroy:
+          type: string
+          default: ''''''
+          description: Empty brackets will set to `destroy`
+          enum:
+          - ''
+          - anonymized
+          - unchanged
+      type: object
+      required:
+      - key
+      - name
+      - type
     AttributeUPD:
       properties:
         name:
@@ -372,70 +412,6 @@ components:
           type: string
           format: date-time
       type: object
-    Attribute:
-      properties:
-        key:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        index:
-          type: boolean
-        validators:
-          type: string
-        options:
-          type: object
-        updateUnauthenticated:
-          type: boolean
-          default: false
-        retainOnDestroy:
-          type: string
-          default: ''''''
-          description: Empty brackets will set to `destroy`
-          enum:
-          - ''
-          - anonymized
-          - unchanged
-      type: object
-      required:
-      - key
-      - name
-      - type
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    AttributeError:
-      title: attributeError
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Key must be unique
-          description: 'Message with error explanation. Possible errors: [''Name must be unique'', ''invalid field type'', ''You can not change type'']'
     Attribute_2:
       properties:
         key:
@@ -475,21 +451,24 @@ components:
       - key
       - name
       - type
-    AttributeUPD_2:
-      properties:
-        name:
-          type: string
-          description: User-friendly display name (e.g. First Name).
-        validators:
-          type: string
-          description: Defines the min/max number of characters for string data type, or per array value in array data type, and min/max values for numeric data type. Min default is `0` and max default is `128`. Can also define if a value is `required` (true/false). Default is `false`.
-        updateUnauthenticated:
-          type: boolean
-          description: 'Determines if unauthenticated attribute modifications are allowed via JavaScript. Default is `false`. Possible Values: true, false.'
-        retainOnDestroy:
-          type: string
-          description: 'Determines how attribute values will be treated when a contact record is deleted. If no value (or `null` value) is passed, the attribute value will be destroyed. Default is `null`. Possible values: anonymized, unchanged, null, "".'
+    AttributeError:
+      title: attributeError
+      required:
+      - error
+      - errorKey
+      - message
       type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Key must be unique
+          description: 'Message with error explanation. Possible errors: [''Name must be unique'', ''invalid field type'', ''You can not change type'']'
     AuthenticationFailed:
       title: AuthenticationFailure
       type: object
@@ -508,25 +487,38 @@ components:
         success:
           type: boolean
           example: true
-  responses:
-    AttributeError:
-      description: General Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AttributeError'
-    AuthenticationFailure:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AuthenticationFailed'
+    AttributeUPD_2:
+      properties:
+        name:
+          type: string
+          description: User-friendly display name (e.g. First Name).
+        validators:
+          type: string
+          description: Defines the min/max number of characters for string data type, or per array value in array data type, and min/max values for numeric data type. Min default is `0` and max default is `128`. Can also define if a value is `required` (true/false). Default is `false`.
+        updateUnauthenticated:
+          type: boolean
+          description: 'Determines if unauthenticated attribute modifications are allowed via JavaScript. Default is `false`. Possible Values: true, false.'
+        retainOnDestroy:
+          type: string
+          description: 'Determines how attribute values will be treated when a contact record is deleted. If no value (or `null` value) is passed, the attribute value will be destroyed. Default is `null`. Possible values: anonymized, unchanged, null, "".'
+      type: object
     RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+  responses:
     AttributeShow:
       description: Successful operation
       content:
@@ -578,6 +570,24 @@ components:
               retainOnDestroy:
                 type: string
                 description: Describe how attributes will be processed on removing
+    AttributeError:
+      description: General Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttributeError'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    AuthenticationFailure:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationFailed'
   securitySchemes:
     basicAuth:
       type: http

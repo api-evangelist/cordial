@@ -37,7 +37,7 @@ paths:
       description: Creates an import job to batch load a file of products into the Cordial database from an external location. Supported import file types include CSV and JSONL. Column headers need to be the product attribute field names. First row column headers describe the data for that column. Column headers are not required in CSV. They can be included as an array within the API call in the "columns" field.
       tags:
       - productimports
-      operationId: productimport
+      operationId: postV2Productimports
       responses:
         '201':
           description: successful operation
@@ -58,33 +58,12 @@ paths:
               $ref: '#/components/schemas/JobPI_2'
         description: JSON body information to create the import job.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: productimport
     servers:
     - url: https://api.cordial.io/
 components:
   schemas:
-    JobPI:
-      title: Job
-      type: object
-      required:
-      - source
-      properties:
-        importName:
-          type: string
-          description: If field provided, will be shown in Job Widget
-        source:
-          $ref: '#/components/schemas/SourceSup'
-        confirmEmail:
-          type: string
-        hasHeader:
-          type: boolean
-          description: required, if 'columns' is not included, if imported file 'jsonl' hasHeader will be ignored
-        columns:
-          type: array
-          items:
-            type: string
-          description: required, if 'hasHeader' is not explicitly set to 'true', if imported file 'jsonl' columns will be ignored
-        nullMarker:
-          type: string
     SourceSup:
       title: Source
       type: object
@@ -133,6 +112,55 @@ components:
           enum:
           - ftp
           - sftp
+    JobPI:
+      title: Job
+      type: object
+      required:
+      - source
+      properties:
+        importName:
+          type: string
+          description: If field provided, will be shown in Job Widget
+        source:
+          $ref: '#/components/schemas/SourceSup'
+        confirmEmail:
+          type: string
+        hasHeader:
+          type: boolean
+          description: required, if 'columns' is not included, if imported file 'jsonl' hasHeader will be ignored
+        columns:
+          type: array
+          items:
+            type: string
+          description: required, if 'hasHeader' is not explicitly set to 'true', if imported file 'jsonl' columns will be ignored
+        nullMarker:
+          type: string
+    ProductImportsResponse:
+      title: ProductImports
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
+    ProductImportsError:
+      title: ProductImportsError
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Error validation message
+          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
     SourceObject:
       title: Source
       type: object
@@ -205,24 +233,6 @@ components:
         source:
           type: string
           description: Defines the Snowflake table or view. Required if destination is SNOWFLAKE.
-    ProductImportsError:
-      title: ProductImportsError
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Error validation message
-          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
     JobPI_2:
       title: Job
       type: object
@@ -247,14 +257,6 @@ components:
         nullMarker:
           type: string
           description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
-    ProductImportsResponse:
-      title: ProductImports
-      type: object
-      required:
-      - jobId
-      properties:
-        jobId:
-          type: string
   securitySchemes:
     basicAuth:
       type: http

@@ -169,24 +169,25 @@ paths:
           $ref: '#/components/responses/DataJobsError'
 components:
   schemas:
-    DataJobsRecord:
-      title: Data transformation object.
-    RecordNotFound:
-      title: Record not found
+    DataJobsError:
+      title: Invalid request
       required:
+      - messages
+      - errorKey
       - error
-      - message
-      type: object
       properties:
         error:
           type: boolean
           example: true
         errorKey:
           type: string
-          example: RECORD_NOT_FOUND
+          example: GENERIC_ERROR_KEY
         message:
           type: string
-          example: record not found
+          example: Data Automation does not exist.
+          description: 'Possible errors: [''Data Automation does not exist.'',''Trigger API is disabled.'']'
+    DataJobsRecord:
+      title: Data transformation object.
     OneTimeStatsReturnedSuccessStats:
       title: Stats
       type: object
@@ -224,6 +225,48 @@ components:
         endedAt:
           type: string
           format: date-time
+    OneTimeStatsReturnedSuccess:
+      title: Response
+      type: object
+      required:
+      - dabId
+      - run
+      - stats
+      properties:
+        dabId:
+          type: string
+        run:
+          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessRun'
+        stats:
+          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessStats'
+    DataJobsSuccess:
+      title: 'Transformation is processing.
+
+
+        '
+      required:
+      - success
+      - message
+      properties:
+        message:
+          type: string
+          example: Transformation is processing.
+        success:
+          type: boolean
+          example: true
+    ListOfRunsReturnedSuccess:
+      title: Response
+      type: object
+      required:
+      - daId
+      - runs
+      properties:
+        daId:
+          type: string
+        runs:
+          type: array
+          items:
+            type: string
     DataJobsTriggeredSuccess:
       title: 'Transformation is triggered.
 
@@ -251,65 +294,22 @@ components:
         success:
           type: boolean
           example: true
-    ListOfRunsReturnedSuccess:
-      title: Response
-      type: object
+    RecordNotFound:
+      title: Record not found
       required:
-      - daId
-      - runs
-      properties:
-        daId:
-          type: string
-        runs:
-          type: array
-          items:
-            type: string
-    DataJobsSuccess:
-      title: 'Transformation is processing.
-
-
-        '
-      required:
-      - success
-      - message
-      properties:
-        message:
-          type: string
-          example: Transformation is processing.
-        success:
-          type: boolean
-          example: true
-    DataJobsError:
-      title: Invalid request
-      required:
-      - messages
-      - errorKey
       - error
+      - message
+      type: object
       properties:
         error:
           type: boolean
           example: true
         errorKey:
           type: string
-          example: GENERIC_ERROR_KEY
+          example: RECORD_NOT_FOUND
         message:
           type: string
-          example: Data Automation does not exist.
-          description: 'Possible errors: [''Data Automation does not exist.'',''Trigger API is disabled.'']'
-    OneTimeStatsReturnedSuccess:
-      title: Response
-      type: object
-      required:
-      - dabId
-      - run
-      - stats
-      properties:
-        dabId:
-          type: string
-        run:
-          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessRun'
-        stats:
-          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessStats'
+          example: record not found
   responses:
     RecordNotFound:
       description: Record not found

@@ -190,22 +190,21 @@ paths:
           $ref: '#/components/responses/RecordNotFound'
 components:
   schemas:
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
+    AlertErrorValidation:
+      title: AlertErrorValidation
       type: object
       properties:
+        errors:
+          type: object
+          example:
+            for:
+            - The for field is required
         error:
           type: boolean
-          example: true
         errorKey:
           type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
+          enum:
+          - VALIDATION_ERROR
     AlertResponse:
       title: AlertResponse
       type: object
@@ -237,19 +236,6 @@ components:
         period:
           type: integer
           description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
-    AlertCreationSuccess:
-      title: AlertCreationSuccess
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-        id:
-          type: number
-          example: 123
-    AlertRemoveImpossible:
-      title: AlertRemoveImpossible
-      type: object
     AlertI:
       title: Alerts
       type: object
@@ -283,21 +269,44 @@ components:
         period:
           type: integer
           description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
-    AlertErrorValidation:
-      title: AlertErrorValidation
+    AlertCreationSuccess:
+      title: AlertCreationSuccess
       type: object
       properties:
-        errors:
-          type: object
-          example:
-            for:
-            - The for field is required
+        success:
+          type: boolean
+          example: true
+        id:
+          type: number
+          example: 123
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    AlertRemoveImpossible:
+      title: AlertRemoveImpossible
+      type: object
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
         error:
           type: boolean
+          example: true
         errorKey:
           type: string
-          enum:
-          - VALIDATION_ERROR
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
     AlertConditions:
       title: conditions
       required:
@@ -317,34 +326,25 @@ components:
         value:
           type: integer
           description: ''
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
   responses:
-    AlertRemoveImpossible:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AlertRemoveImpossible'
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
     AlertErrorValidation:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/AlertErrorValidation'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    AlertRemoveImpossible:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlertRemoveImpossible'
   securitySchemes:
     basicAuth:
       type: http

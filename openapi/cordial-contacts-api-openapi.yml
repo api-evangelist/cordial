@@ -408,7 +408,7 @@ paths:
       - basicAuth: []
       summary: Add a contact
       description: Creates a new contact record using the appropriate JSON body. The contact object can optionally include attribute values and list associations. Note that contact attribute keys and list names must be created in advance using the Cordial UI or the /accountcontactattributes and /accountlists API endpoints.
-      operationId: addContact
+      operationId: postV2Contacts
       tags:
       - Contacts
       responses:
@@ -431,12 +431,14 @@ paths:
               $ref: '#/components/schemas/ContactCPost'
         description: Contact object that needs to be added.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: addContact
     get:
       security:
       - basicAuth: []
       summary: Get contacts
       description: Retrieves contact records from the Cordial database. It is possible to filter the response using query string parameters including a unique contact identifier to retrieve information for a single contact, saved audience rule to limit the response to contacts in an audience, and by contact attribute key to get contact records with a specified attribute value.
-      operationId: getContacts
+      operationId: getV2Contacts
       tags:
       - Contacts
       parameters:
@@ -500,6 +502,8 @@ paths:
                   $ref: '#/components/schemas/ContactC_2'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: getContacts
     servers:
     - url: https://api.cordial.io/
   /v2/contacts/{primary_key}:
@@ -508,7 +512,7 @@ paths:
       - basicAuth: []
       summary: Update a contact
       description: Updates a contact record using the appropriate JSON body.
-      operationId: updateContacts
+      operationId: putV2ContactsByPrimaryKey
       tags:
       - Contacts
       parameters:
@@ -540,12 +544,14 @@ paths:
               $ref: '#/components/schemas/ContactCPut'
         description: Contact object that needs to be updated.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: updateContacts
     get:
       security:
       - basicAuth: []
       summary: Get a single contact
       description: Retrieves a single contact record and the associated contact attribute values.
-      operationId: getsinglecontact
+      operationId: getV2ContactsByPrimaryKey
       tags:
       - Contacts
       parameters:
@@ -564,12 +570,14 @@ paths:
                 $ref: '#/components/schemas/ContactC_2'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: getsinglecontact
     delete:
       security:
       - basicAuth: []
       summary: Delete a single contact
       description: Deletes a contact record and the associated account attribute values.
-      operationId: deletesinglecontact
+      operationId: deleteV2ContactsByPrimaryKey
       tags:
       - Contacts
       parameters:
@@ -588,6 +596,8 @@ paths:
                 $ref: '#/components/schemas/SuccessOperation'
         '404':
           $ref: '#/components/responses/RecordNotFound'
+      x-operation-id-source: normalized
+      x-operation-id-original: deletesinglecontact
     servers:
     - url: https://api.cordial.io/
   /v2/contacts/{primary_key}/unsubscribe/{channel}:
@@ -596,7 +606,7 @@ paths:
       - basicAuth: []
       summary: Unsubscribe a contact
       description: Unsubscribes a contact from the specified channel. Contacts can be associated with multiple channels (email, SMS, push, etc.), each channel having a subscribe status of either subscribed, unsubscribed, or none. Promotional messages will not be sent to unsubscribed contacts.
-      operationId: unsubscribecontact
+      operationId: putV2ContactsByPrimaryKeyUnsubscribeByChannel
       tags:
       - Contacts
       parameters:
@@ -629,6 +639,8 @@ paths:
           $ref: '#/components/responses/RecordNotFound'
         '422':
           $ref: '#/components/responses/ContactUnsubscribeError'
+      x-operation-id-source: normalized
+      x-operation-id-original: unsubscribecontact
     servers:
     - url: https://api.cordial.io/
   /v2/contacts/merge:
@@ -729,7 +741,7 @@ paths:
       - basicAuth: []
       summary: Add contact cart object
       description: Adds a cart object to the contact record.
-      operationId: savecartcontact
+      operationId: postV2ContactsByPrimaryKeyCart
       tags:
       - Contacts
       parameters:
@@ -755,12 +767,14 @@ paths:
               $ref: '#/components/schemas/CartC_2'
         description: Cart object that needs to be added.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: savecartcontact
     put:
       security:
       - basicAuth: []
       summary: Update contact cart object
       description: Updates the cart object for the contact record.
-      operationId: updatecartcontact
+      operationId: putV2ContactsByPrimaryKeyCart
       tags:
       - Contacts
       parameters:
@@ -788,12 +802,14 @@ paths:
               $ref: '#/components/schemas/CartC_2'
         description: Cart object that needs to be updated.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: updatecartcontact
     delete:
       security:
       - basicAuth: []
       summary: Remove contact cart object
       description: Removes the cart object from the contact record.
-      operationId: clearcartcontact
+      operationId: deleteV2ContactsByPrimaryKeyCart
       tags:
       - Contacts
       parameters:
@@ -814,6 +830,8 @@ paths:
           $ref: '#/components/responses/RecordNotFound'
         '422':
           $ref: '#/components/responses/ContactCartError'
+      x-operation-id-source: normalized
+      x-operation-id-original: clearcartcontact
     servers:
     - url: https://api.cordial.io/
   /v2/contacts/{primary_key}/cartitems:
@@ -822,7 +840,7 @@ paths:
       - basicAuth: []
       summary: Add product to cart
       description: Adds a product to the contact's cart.
-      operationId: addproducttocartcontact
+      operationId: postV2ContactsByPrimaryKeyCartitems
       tags:
       - Contacts
       parameters:
@@ -848,6 +866,8 @@ paths:
               $ref: '#/components/schemas/CartitemsC_2'
         description: Cart item object that needs to be added.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: addproducttocartcontact
     servers:
     - url: https://api.cordial.io/
   /v2/contacts/{primary_key}/cartitems/{productID}/{qty}/{sku}:
@@ -856,7 +876,7 @@ paths:
       - basicAuth: []
       summary: Remove product from cart in quantities by product ID and, optionally, SKU
       description: Removes the specified quantity of a product from the contact's cart.
-      operationId: removeproducttocartqtycontact
+      operationId: deleteV2ContactsByPrimaryKeyCartitemsByProductIDByQtyBySku
       tags:
       - Contacts
       parameters:
@@ -895,6 +915,8 @@ paths:
           $ref: '#/components/responses/RecordNotFound'
         '422':
           $ref: '#/components/responses/ContactCartError'
+      x-operation-id-source: normalized
+      x-operation-id-original: removeproducttocartqtycontact
     servers:
     - url: https://api.cordial.io/
   /v2/contacts/{primary_key}/downloadprofile:
@@ -903,7 +925,7 @@ paths:
       - basicAuth: []
       summary: Download contact profile
       description: Creates an export job to download and store a JSON file of a contact's profile including channel association, contact attributes, and event data. Destination parameters are only required if FTP/SFTP is used as the destination. If parameters are not supplied or set as "AWS", the exported file can be downloaded via the Jobs page from the Cordial UI.
-      operationId: buildcontactprofile
+      operationId: postV2ContactsByPrimaryKeyDownloadprofile
       tags:
       - Contacts
       parameters:
@@ -931,10 +953,42 @@ paths:
               $ref: '#/components/schemas/SourceCPB_2'
         description: JSON body information to create the export job.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: buildcontactprofile
     servers:
     - url: https://api.cordial.io/
 components:
   schemas:
+    ContactC:
+      title: Contact
+      type: object
+      required:
+      - channels
+      properties:
+        channels:
+          $ref: '#/components/schemas/ChannelC'
+        <attribute_key>:
+          type: string
+          default: <value>
+        <list_name>:
+          type: boolean
+          default: true
+    SourceCPB:
+      title: Source
+      type: object
+      required:
+      - accountId
+      properties:
+        destination:
+          $ref: '#/components/schemas/DestinationCE'
+    ChannelC:
+      title: Channel
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          $ref: '#/components/schemas/EmailC'
     EmailC:
       title: Email
       type: object
@@ -976,6 +1030,41 @@ components:
           type: integer
         tax:
           type: integer
+    CartitemsC:
+      title: Cartitems
+      type: object
+      required:
+      - productID
+      - sku
+      - category
+      - name
+      properties:
+        productID:
+          type: string
+        description:
+          type: string
+        sku:
+          type: string
+        category:
+          type: string
+        name:
+          type: string
+        qty:
+          type: integer
+        itemPrice:
+          type: number
+          format: double
+          default: 0
+        url:
+          type: string
+        attr:
+          type: object
+        images:
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
     DestinationCE:
       title: Destination
       type: object
@@ -1017,58 +1106,7 @@ components:
         path:
           type: string
           description: (required for ftp,sftp,s3)
-    ChannelC:
-      title: Channel
-      type: object
-      required:
-      - email
-      properties:
-        email:
-          $ref: '#/components/schemas/EmailC'
-    SourceCPB:
-      title: Source
-      type: object
-      required:
-      - accountId
-      properties:
-        destination:
-          $ref: '#/components/schemas/DestinationCE'
-    CartitemsC:
-      title: Cartitems
-      type: object
-      required:
-      - productID
-      - sku
-      - category
-      - name
-      properties:
-        productID:
-          type: string
-        description:
-          type: string
-        sku:
-          type: string
-        category:
-          type: string
-        name:
-          type: string
-        qty:
-          type: integer
-        itemPrice:
-          type: number
-          format: double
-          default: 0
-        url:
-          type: string
-        attr:
-          type: object
-        images:
-          type: array
-          items:
-            type: string
-        properties:
-          type: object
-    ContactC:
+    ContactC_2:
       title: Contact
       type: object
       required:
@@ -1076,12 +1114,12 @@ components:
       properties:
         channels:
           $ref: '#/components/schemas/ChannelC'
-        <attribute_key>:
+        attribute_key:
           type: string
-          default: <value>
-        <list_name>:
+          description: 'Adds a value for string, date (ISO 8601 format), number, array, or geo ("geo_attribute_key.city": "San Diego") contact attribute types.'
+        list_name:
           type: boolean
-          default: true
+          description: 'Adds or removes the contact from a list. Possible values: true, false.'
     SourceCPB_2:
       title: Source
       type: object
@@ -1090,7 +1128,34 @@ components:
       properties:
         destination:
           $ref: '#/components/schemas/DestinationObject'
-    MergeContactsError:
+    MergeContactsSuccess:
+      title: Successful operation
+      type: object
+      required:
+      - jobID
+      - message
+      properties:
+        jobID:
+          type: string
+        message:
+          type: string
+    ContactError:
+      title: Contact error
+      required:
+      - message
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        messages:
+          type: object
+          example: 'Object with error explanation what happen with payload. Possible errors: [''Contact doesn''t exist'', ''Address not exists'', ''Search field is not correct'', ''Incorrect value for suppressTriggers'']'
+    SplitContactRequestError:
       title: Provided request properties validation error
       type: object
       required:
@@ -1104,6 +1169,35 @@ components:
           type: string
         message:
           type: string
+    SplitContactSuccess:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      - message
+      - channelsSplit
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        channelsSplit:
+          type: array
+          items:
+            type: string
+            description: Names of the channels that would be split
+    EmailC_2:
+      title: Email
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+          description: Unique channel key and address for the contact (e.g. email). Note that some of your channels may have custom keys.
+        subscribeStatus:
+          type: string
+          description: 'Channel subscribe status. Promotional messages will not be sent unless set to `subscribed`. Default is `none`. Possible values: none, subscribed, unsubscribed.'
     CartC_2:
       title: Cart
       type: object
@@ -1138,6 +1232,150 @@ components:
         tax:
           type: integer
           description: The amount of tax.
+    MergeContactsError:
+      title: Provided request properties validation error
+      type: object
+      required:
+      - error
+      - errorKey
+      - message
+      properties:
+        error:
+          type: boolean
+        errorKey:
+          type: string
+        message:
+          type: string
+    MergeContacts:
+      title: MergeContacts
+      type: object
+      required:
+      - sourceContact
+      - destinationContact
+      - options
+      properties:
+        sourceContact:
+          type: string
+        destinationContact:
+          type: string
+        options:
+          $ref: '#/components/schemas/MergeContactsOptions'
+    SplitContact:
+      title: SplitContact
+      type: object
+      required:
+      - primaryKey
+      - channelNames
+      properties:
+        primaryKey:
+          type: string
+          description: Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`.
+        channelNames:
+          type: array
+          items:
+            type: string
+            description: The names of the channels to split from the provided contact
+    CartitemsC_2:
+      title: Cartitems
+      type: object
+      required:
+      - productID
+      - sku
+      - category
+      - name
+      properties:
+        productID:
+          type: string
+          description: Unique product identifier (e.g. 1234abcd).
+        description:
+          type: string
+          description: Product description (e.g. Ultra soft casual t-shirt).
+        sku:
+          type: string
+          description: The Stock Keeping Unit value for a particular item (e.g. RF-WP33286-21).
+        category:
+          type: string
+          description: Item category.
+        name:
+          type: string
+          description: The name of the person or company placing the order.
+        qty:
+          type: integer
+          description: The number of items purchased. Defaults to `1` if not specified.
+        itemPrice:
+          type: number
+          description: Item price.
+          format: double
+        url:
+          type: string
+          description: Link to the product page (e.g. https://mydomain.com/myproduct).
+        attr:
+          type: object
+          description: Key/value pairs describing product attributes (e.g. "size":"large", "color":"red"). Attribute values <b>cannot</b> be searched using the Kaleidoscope or within Smarty for personalization.
+        images:
+          type: array
+          items:
+            type: string
+            description: A comma-separated array of image file locations. Use an empty array `[]` as default if no values exist (e.g. "http://example.com/image1.jpg", "http://example.com/image2.jpg").
+        properties:
+          type: object
+          description: 'Can be used in place of the `attr` key (e.g. "brands":["Marmot", "Quicksilver"], "return_date": "2018-07-01 00:00:00"). Values added <b>can</b> be searched using the Kaleidoscope and within Smarty for personalization.'
+    ContactCPost:
+      title: Contact
+      type: object
+      required:
+      - channels
+      properties:
+        channels:
+          $ref: '#/components/schemas/ChannelC'
+        attribute_key:
+          type: string
+          description: 'Adds a value for string, date (ISO 8601 format), number, array, or geo ("geo_attribute_key.city": "San Diego") contact attribute types.'
+        list_name:
+          type: boolean
+          description: 'Adds or removes the contact from a list. Possible values: true, false'
+        suppressTriggers:
+          type: boolean
+          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
+        identifyBy:
+          type: array
+          items:
+            type: string
+          description: 'Array where 1 or more valid secondary keys are supplied in descending priority order. Updates existing contacts when applicable. '
+          example:
+          - email
+          - channels.sms.address
+          - custID
+    ContactDownloadProfileError:
+      title: Contact download profile error
+      required:
+      - message
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        messages:
+          type: object
+          example: 'Object with error explanation what happen when do action with cartitems. Possible errors: [''Export type not found'']'
+    SplitContactNotFoundError:
+      title: Contact not found
+      type: object
+      required:
+      - error
+      - errorKey
+      - message
+      properties:
+        error:
+          type: boolean
+        errorKey:
+          type: string
+        message:
+          type: string
     ContactCreated:
       title: New contact created
       type: object
@@ -1216,65 +1454,7 @@ components:
           enum:
           - sourceContact
           - destinationContact
-    ContactCPut:
-      title: Contact
-      type: object
-      required:
-      - channels
-      properties:
-        channels:
-          $ref: '#/components/schemas/ChannelC'
-        attribute_key:
-          type: string
-          description: 'Adds a value for string, date (ISO 8601 format), number, array, or geo ("geo_attribute_key.city": "San Diego") contact attribute types.'
-        list_name:
-          type: boolean
-          description: 'Adds or removes the contact from a list. Possible values: true, false'
-        suppressTriggers:
-          type: boolean
-          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
-        forceSubscribe:
-          type: boolean
-          default: false
-          description: 'If contact unsubscribed, this key must be used to update subscribeStatus to subscribed. Possible values: true, false'
-    ContactDownloadProfileSuccess:
-      title: Success operation on contact download profile
-      type: object
-      required:
-      - jobId
-      properties:
-        jobId:
-          type: string
-          example: job ID
-    SplitContactNotAvailable:
-      title: Operation failed due to feature availability
-      type: object
-      required:
-      - error
-      - errorKey
-      - message
-      properties:
-        error:
-          type: boolean
-        errorKey:
-          type: string
-        message:
-          type: string
-    ContactC_2:
-      title: Contact
-      type: object
-      required:
-      - channels
-      properties:
-        channels:
-          $ref: '#/components/schemas/ChannelC'
-        attribute_key:
-          type: string
-          description: 'Adds a value for string, date (ISO 8601 format), number, array, or geo ("geo_attribute_key.city": "San Diego") contact attribute types.'
-        list_name:
-          type: boolean
-          description: 'Adds or removes the contact from a list. Possible values: true, false.'
-    MergeContactsServerError:
+    SplitContactApplicationError:
       title: Operation failed due to unexpected server error
       type: object
       required:
@@ -1288,6 +1468,15 @@ components:
           type: string
         message:
           type: string
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
     RecordNotFound:
       title: Record not found
       required:
@@ -1304,61 +1493,6 @@ components:
         message:
           type: string
           example: record not found
-    MergeContactsSuccess:
-      title: Successful operation
-      type: object
-      required:
-      - jobID
-      - message
-      properties:
-        jobID:
-          type: string
-        message:
-          type: string
-    SplitContactRequestError:
-      title: Provided request properties validation error
-      type: object
-      required:
-      - error
-      - errorKey
-      - message
-      properties:
-        error:
-          type: boolean
-        errorKey:
-          type: string
-        message:
-          type: string
-    SplitContactNotFoundError:
-      title: Contact not found
-      type: object
-      required:
-      - error
-      - errorKey
-      - message
-      properties:
-        error:
-          type: boolean
-        errorKey:
-          type: string
-        message:
-          type: string
-    ContactError:
-      title: Contact error
-      required:
-      - message
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        messages:
-          type: object
-          example: 'Object with error explanation what happen with payload. Possible errors: [''Contact doesn''t exist'', ''Address not exists'', ''Search field is not correct'', ''Incorrect value for suppressTriggers'']'
     DestinationObject:
       title: Destination
       type: object
@@ -1409,90 +1543,7 @@ components:
         container:
           type: string
           description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
-    MergeContacts:
-      title: MergeContacts
-      type: object
-      required:
-      - sourceContact
-      - destinationContact
-      - options
-      properties:
-        sourceContact:
-          type: string
-        destinationContact:
-          type: string
-        options:
-          $ref: '#/components/schemas/MergeContactsOptions'
-    SplitContact:
-      title: SplitContact
-      type: object
-      required:
-      - primaryKey
-      - channelNames
-      properties:
-        primaryKey:
-          type: string
-          description: Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`.
-        channelNames:
-          type: array
-          items:
-            type: string
-            description: The names of the channels to split from the provided contact
-    SplitContactSuccess:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      - message
-      - channelsSplit
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-        channelsSplit:
-          type: array
-          items:
-            type: string
-            description: Names of the channels that would be split
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-    ContactDownloadProfileError:
-      title: Contact download profile error
-      required:
-      - message
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        messages:
-          type: object
-          example: 'Object with error explanation what happen when do action with cartitems. Possible errors: [''Export type not found'']'
-    EmailC_2:
-      title: Email
-      type: object
-      required:
-      - address
-      properties:
-        address:
-          type: string
-          description: Unique channel key and address for the contact (e.g. email). Note that some of your channels may have custom keys.
-        subscribeStatus:
-          type: string
-          description: 'Channel subscribe status. Promotional messages will not be sent unless set to `subscribed`. Default is `none`. Possible values: none, subscribed, unsubscribed.'
-    SplitContactApplicationError:
+    MergeContactsServerError:
       title: Operation failed due to unexpected server error
       type: object
       required:
@@ -1506,7 +1557,44 @@ components:
           type: string
         message:
           type: string
-    ContactCPost:
+    ContactDownloadProfileSuccess:
+      title: Success operation on contact download profile
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
+          example: job ID
+    SplitContactNotAvailable:
+      title: Operation failed due to feature availability
+      type: object
+      required:
+      - error
+      - errorKey
+      - message
+      properties:
+        error:
+          type: boolean
+        errorKey:
+          type: string
+        message:
+          type: string
+    MergeContactsFeatureError:
+      title: Operation is not permitted
+      type: object
+      required:
+      - error
+      - errorKey
+      - message
+      properties:
+        error:
+          type: boolean
+        errorKey:
+          type: string
+        message:
+          type: string
+    ContactCPut:
       title: Contact
       type: object
       required:
@@ -1523,74 +1611,10 @@ components:
         suppressTriggers:
           type: boolean
           description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
-        identifyBy:
-          type: array
-          items:
-            type: string
-          description: 'Array where 1 or more valid secondary keys are supplied in descending priority order. Updates existing contacts when applicable. '
-          example:
-          - email
-          - channels.sms.address
-          - custID
-    MergeContactsFeatureError:
-      title: Operation is not permitted
-      type: object
-      required:
-      - error
-      - errorKey
-      - message
-      properties:
-        error:
+        forceSubscribe:
           type: boolean
-        errorKey:
-          type: string
-        message:
-          type: string
-    CartitemsC_2:
-      title: Cartitems
-      type: object
-      required:
-      - productID
-      - sku
-      - category
-      - name
-      properties:
-        productID:
-          type: string
-          description: Unique product identifier (e.g. 1234abcd).
-        description:
-          type: string
-          description: Product description (e.g. Ultra soft casual t-shirt).
-        sku:
-          type: string
-          description: The Stock Keeping Unit value for a particular item (e.g. RF-WP33286-21).
-        category:
-          type: string
-          description: Item category.
-        name:
-          type: string
-          description: The name of the person or company placing the order.
-        qty:
-          type: integer
-          description: The number of items purchased. Defaults to `1` if not specified.
-        itemPrice:
-          type: number
-          description: Item price.
-          format: double
-        url:
-          type: string
-          description: Link to the product page (e.g. https://mydomain.com/myproduct).
-        attr:
-          type: object
-          description: Key/value pairs describing product attributes (e.g. "size":"large", "color":"red"). Attribute values <b>cannot</b> be searched using the Kaleidoscope or within Smarty for personalization.
-        images:
-          type: array
-          items:
-            type: string
-            description: A comma-separated array of image file locations. Use an empty array `[]` as default if no values exist (e.g. "http://example.com/image1.jpg", "http://example.com/image2.jpg").
-        properties:
-          type: object
-          description: 'Can be used in place of the `attr` key (e.g. "brands":["Marmot", "Quicksilver"], "return_date": "2018-07-01 00:00:00"). Values added <b>can</b> be searched using the Kaleidoscope and within Smarty for personalization.'
+          default: false
+          description: 'If contact unsubscribed, this key must be used to update subscribeStatus to subscribed. Possible values: true, false'
     ContactCartError:
       title: Contact unsubscribe error
       required:
@@ -1608,30 +1632,30 @@ components:
           type: object
           example: 'Object with error explanation what happen when do action with cart. Possible errors: [''Contact doesn\''t exist'']'
   responses:
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
-    ContactCartError:
-      description: Contact unsubscribe error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ContactCartError'
-    ContactDownloadProfileError:
-      description: Contact download profile error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ContactDownloadProfileError'
     ContactUnsubscribeError:
       description: Contact unsubscribe error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ContactError'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    ContactDownloadProfileError:
+      description: Contact download profile error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContactDownloadProfileError'
+    ContactCartError:
+      description: Contact unsubscribe error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContactCartError'
   securitySchemes:
     basicAuth:
       type: http

@@ -40,78 +40,6 @@ paths:
         required: true
 components:
   schemas:
-    AccountMonitorExportResponse:
-      title: ContactExports
-      type: object
-      required:
-      - jobId
-      properties:
-        jobId:
-          type: string
-    SourceAccountMonitorExport:
-      title: Source Account Monitor export
-      type: object
-      required:
-      - exportType
-      - name
-      - destination
-      - selected_timeframe_start
-      - selected_timeframe_end
-      properties:
-        name:
-          type: string
-          description: Defines the export file name. If provided, this value will be displayed next to the job ID on the Jobs status page.
-        destination:
-          description: This parameter is only required if SFTP, FTP, S3, or Google Cloud Storage (GCS) is used as the destination. Destination type "AWS" should be used if the file is to be downloaded via the UI.
-          $ref: '#/components/schemas/DestinationObject'
-        selected_timeframe_start:
-          type: string
-          format: date-time
-          description: Start time for the export time period (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
-        selected_timeframe_end:
-          type: string
-          format: date-time
-          description: End time for the export time period (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
-        selected_category:
-          type: string
-          description: 'Specifies the category to export. Possible values: API, Automated messages, Batch messages, Data Automation, Exports, Imports, Inbound, Jobs, JS Listener, System.'
-          example: API
-        selected_level:
-          type: string
-          description: 'Specifies the level to export. Possible values: Debug, Info, Warning, Error. If no value is passed, all levels will be exported. Possible values: Debug, Info, Warning, Error'
-          example: Error
-        limitRecordsPerFile:
-          type: integer
-          description: Defines the number of exported records per file. If no value is passed, all records that match the filters will be exported in one file. Default is `0`.
-          example: 1000
-        compress:
-          type: boolean
-          description: 'Compresses the exported file. If set to `true`, the file is compressed using GZIP with the file extension <b>.gz</b> added to the filename(s). Possible values: true, false.'
-        confirmEmail:
-          type: string
-          description: Email address to send an administrative alert when the job is done running.
-    AccountMonitorExportError:
-      title: AccountMonitorExportError
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Error validation message
-          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
-        fieldErrors:
-          type: object
-          $ref: '#/components/schemas/fieldErrorsInclude'
-          description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
     DestinationObject:
       title: Destination
       type: object
@@ -162,6 +90,70 @@ components:
         container:
           type: string
           description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
+    AccountMonitorExportError:
+      title: AccountMonitorExportError
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Error validation message
+          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
+        fieldErrors:
+          type: object
+          $ref: '#/components/schemas/fieldErrorsInclude'
+          description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
+    SourceAccountMonitorExport:
+      title: Source Account Monitor export
+      type: object
+      required:
+      - exportType
+      - name
+      - destination
+      - selected_timeframe_start
+      - selected_timeframe_end
+      properties:
+        name:
+          type: string
+          description: Defines the export file name. If provided, this value will be displayed next to the job ID on the Jobs status page.
+        destination:
+          description: This parameter is only required if SFTP, FTP, S3, or Google Cloud Storage (GCS) is used as the destination. Destination type "AWS" should be used if the file is to be downloaded via the UI.
+          $ref: '#/components/schemas/DestinationObject'
+        selected_timeframe_start:
+          type: string
+          format: date-time
+          description: Start time for the export time period (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        selected_timeframe_end:
+          type: string
+          format: date-time
+          description: End time for the export time period (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        selected_category:
+          type: string
+          description: 'Specifies the category to export. Possible values: API, Automated messages, Batch messages, Data Automation, Exports, Imports, Inbound, Jobs, JS Listener, System.'
+          example: API
+        selected_level:
+          type: string
+          description: 'Specifies the level to export. Possible values: Debug, Info, Warning, Error. If no value is passed, all levels will be exported. Possible values: Debug, Info, Warning, Error'
+          example: Error
+        limitRecordsPerFile:
+          type: integer
+          description: Defines the number of exported records per file. If no value is passed, all records that match the filters will be exported in one file. Default is `0`.
+          example: 1000
+        compress:
+          type: boolean
+          description: 'Compresses the exported file. If set to `true`, the file is compressed using GZIP with the file extension <b>.gz</b> added to the filename(s). Possible values: true, false.'
+        confirmEmail:
+          type: string
+          description: Email address to send an administrative alert when the job is done running.
     fieldErrorsInclude:
       type: object
       required:
@@ -172,6 +164,14 @@ components:
           items:
             type: string
             example: The destination field is required.
+    AccountMonitorExportResponse:
+      title: ContactExports
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
   securitySchemes:
     basicAuth:
       type: http
