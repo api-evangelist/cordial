@@ -69,47 +69,6 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
-    DestinationCE:
-      title: Destination
-      type: object
-      required:
-      - type
-      - port
-      properties:
-        type:
-          type: string
-          description: Type of report
-          enum:
-          - ftp
-          - aws
-          - sftp
-          - s3
-        aws_access_key_id:
-          type: string
-          description: (required for s3)
-        aws_secret_access_key:
-          type: string
-          description: (required for s3)
-        aws_bucket:
-          type: string
-          description: (required for s3)
-        aws_region:
-          type: string
-          description: (required for s3)
-        server:
-          type: string
-          description: (required for ftp or sftp)
-        port:
-          type: integer
-        username:
-          type: string
-          description: (required for ftp or sftp)
-        password:
-          type: string
-          description: (required for ftp or sftp)
-        path:
-          type: string
-          description: (required for ftp,sftp,s3)
     SourceCE:
       title: Source
       type: object
@@ -153,6 +112,55 @@ components:
           default: false
           description: If true then gzip and add .gz to filename(s)
         confirmEmail:
+          type: string
+    DestinationCE:
+      title: Destination
+      type: object
+      required:
+      - type
+      - port
+      properties:
+        type:
+          type: string
+          description: Type of report
+          enum:
+          - ftp
+          - aws
+          - sftp
+          - s3
+        aws_access_key_id:
+          type: string
+          description: (required for s3)
+        aws_secret_access_key:
+          type: string
+          description: (required for s3)
+        aws_bucket:
+          type: string
+          description: (required for s3)
+        aws_region:
+          type: string
+          description: (required for s3)
+        server:
+          type: string
+          description: (required for ftp or sftp)
+        port:
+          type: integer
+        username:
+          type: string
+          description: (required for ftp or sftp)
+        password:
+          type: string
+          description: (required for ftp or sftp)
+        path:
+          type: string
+          description: (required for ftp,sftp,s3)
+    ContactExportsResponse:
+      title: ContactExports
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
           type: string
     DestinationObject:
       title: Destination
@@ -204,23 +212,6 @@ components:
         container:
           type: string
           description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
-    MediaTypeIsIncorrect:
-      title: Unsupported Media Type
-      description: Unsupported Media Type
-      required:
-      - error
-      - message
-      - errorKey
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: UNSUPPORTED_MEDIA_TYPE
-        message:
-          type: string
-          example: 'Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.'
     SourceCE_2:
       title: Source
       type: object
@@ -266,6 +257,23 @@ components:
         confirmEmail:
           type: string
           description: Email address to send an administrative alert when the job is done running.
+    MediaTypeIsIncorrect:
+      title: Unsupported Media Type
+      description: Unsupported Media Type
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: UNSUPPORTED_MEDIA_TYPE
+        message:
+          type: string
+          example: 'Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.'
     ContactExportsError:
       title: ContactExports
       required:
@@ -284,14 +292,6 @@ components:
           type: string
           example: Error validation message
           description: 'Error explanation. Possible errors: [''SSH key with such Name/ID: wrong does not exist.'', ''The selected export type is invalid.'', ''Audience with name: ''string'' does not exist.'', etc.]'
-    ContactExportsResponse:
-      title: ContactExports
-      type: object
-      required:
-      - jobId
-      properties:
-        jobId:
-          type: string
   responses:
     incorrectmediatype:
       description: ''

@@ -192,78 +192,12 @@ paths:
           $ref: '#/components/responses/AuthenticationFailure'
 components:
   schemas:
-    extVarsPodium:
-      title: extVars
-      type: object
-      description: 'Using the `extVars` object, any number of external variables may be added. These values are then made available for all initial actions in the orchestration. For example, if `"extVars": {"orderID":"o1234"}` is included in the request body, then within the message it can be accessed as `{$extVars.triggerData.orderID}`. `extVars` defined within a <b>PodiumForPayload</b> are merged with `extVars` defined at the root of the request body.'
-      properties:
-        key:
-          type: string
-          description: 'Using the `extVars` object, any number of external variables may be added. These values are then made available for all initial actions in the orchestration. For example, if `"extVars": {"orderID":"o1234"}` is included in the request body, then within the message it can be accessed as `{$extVars.triggerData.orderID}`. `extVars` defined within a PodiumForPayload are merged with `extVars` defined at the root of the request body'
-    PodiumTriggerSuccess:
-      title: Payload
-      type: object
-      required:
-      - triggered
-      - contact
-      properties:
-        triggered:
-          $ref: '#/components/schemas/PodiumTriggerResponseTriggeredValue'
-        contact:
-          $ref: '#/components/schemas/ContactAuto'
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    PodiumTriggerFailure:
-      title: Payload
-      type: object
-      required:
-      - triggered
-      - payload
-      - error
-      properties:
-        triggered:
-          $ref: '#/components/schemas/PodiumTriggerResponseTriggeredValue'
-          example: false
-        payload:
-          $ref: '#/components/schemas/PodiumForPayload'
-        error:
-          type: string
-    TriggerOrchestrationSuccessResponse:
-      title: Response
-      type: object
-      required:
-      - success
-      - message
-      - triggered
-      - failures
-      properties:
-        success:
-          type: boolean
-        message:
-          type: string
-          example: Orchestration API trigger successfully processed
-        triggered:
-          type: array
-          items:
-            $ref: '#/components/schemas/PodiumTriggerSuccess'
-        failures:
-          type: array
-          items:
-            $ref: '#/components/schemas/PodiumTriggerFailure'
+    IdentifyBy:
+      title: IdentifyBy
+      type: array
+      items:
+        type: string
+      description: Specifies which identifier key in the request body should be used to look up the contact (e.g. cID, email, custID). Accepts a string or an array of strings in descending priority order. Because contact attribute data sent in the `contact` object of the call will upsert corresponding contact attributes in Cordial, `identifyBy` should be used to specify which key serves as the contact identifier and should not be upserted.
     TriggerOrchestrationFailureResponse:
       title: Response
       type: object
@@ -288,6 +222,54 @@ components:
           - ORCHESTRATIONS_API_TRIGGER_NOT_CONFIGURED
           - ORCHESTRATIONS_API_INVALID_CONTACTS_PAYLOAD
           - ORCHESTRATIONS_API_NO_VALID_CONTACTS_FOUND
+    TriggerOrchestrationRequestBody:
+      title: Request Body
+      type: object
+      required:
+      - for
+      properties:
+        for:
+          title: For
+          type: array
+          items:
+            $ref: '#/components/schemas/PodiumForPayload'
+        identifyBy:
+          $ref: '#/components/schemas/IdentifyBy'
+        extVars:
+          $ref: '#/components/schemas/extVarsPodium'
+    PodiumTriggerResponseTriggeredValue:
+      type: boolean
+      description: Indicates whether the orchestration was successfully triggered for the given payload.
+    TriggerOrchestrationSuccessResponse:
+      title: Response
+      type: object
+      required:
+      - success
+      - message
+      - triggered
+      - failures
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+          example: Orchestration API trigger successfully processed
+        triggered:
+          type: array
+          items:
+            $ref: '#/components/schemas/PodiumTriggerSuccess'
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/PodiumTriggerFailure'
+    extVarsPodium:
+      title: extVars
+      type: object
+      description: 'Using the `extVars` object, any number of external variables may be added. These values are then made available for all initial actions in the orchestration. For example, if `"extVars": {"orderID":"o1234"}` is included in the request body, then within the message it can be accessed as `{$extVars.triggerData.orderID}`. `extVars` defined within a <b>PodiumForPayload</b> are merged with `extVars` defined at the root of the request body.'
+      properties:
+        key:
+          type: string
+          description: 'Using the `extVars` object, any number of external variables may be added. These values are then made available for all initial actions in the orchestration. For example, if `"extVars": {"orderID":"o1234"}` is included in the request body, then within the message it can be accessed as `{$extVars.triggerData.orderID}`. `extVars` defined within a PodiumForPayload are merged with `extVars` defined at the root of the request body'
     AuthenticationFailed:
       title: AuthenticationFailure
       type: object
@@ -297,6 +279,84 @@ components:
         error:
           type: string
           example: 'Access Denied: Authentication Failure'
+    PodiumTriggerFailure:
+      title: Payload
+      type: object
+      required:
+      - triggered
+      - payload
+      - error
+      properties:
+        triggered:
+          $ref: '#/components/schemas/PodiumTriggerResponseTriggeredValue'
+          example: false
+        payload:
+          $ref: '#/components/schemas/PodiumForPayload'
+        error:
+          type: string
+    ContactAuto:
+      title: Contact
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          description: 'Contact identifier key/value pair. Use the "identifierKey": "identifierValue" format (e.g. "cID": "58d2fc99ac0c8117814d4e78", "email": "msmith@example.com", "custID": "ID1234").'
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    PodiumTriggerSuccess:
+      title: Payload
+      type: object
+      required:
+      - triggered
+      - contact
+      properties:
+        triggered:
+          $ref: '#/components/schemas/PodiumTriggerResponseTriggeredValue'
+        contact:
+          $ref: '#/components/schemas/ContactAuto'
+    Orchestration:
+      title: Orchestration
+      type: object
+      required:
+      - _id
+      - name
+      - status
+      - composition
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        status:
+          type: boolean
+        composition:
+          type: object
+    PodiumForPayload:
+      title: For
+      type: object
+      required:
+      - contact
+      properties:
+        contact:
+          $ref: '#/components/schemas/ContactAuto'
+        extVars:
+          $ref: '#/components/schemas/extVarsPodium'
     ActionsOrchestrationSuccessResponse:
       title: ActionsOrchestrationSuccess
       required:
@@ -325,79 +385,19 @@ components:
           type: string
           example: 6ef675eb444c55d554a6b354f89af4b0
           description: Content key of current published version.
-    Orchestration:
-      title: Orchestration
-      type: object
-      required:
-      - _id
-      - name
-      - status
-      - composition
-      properties:
-        _id:
-          type: string
-        name:
-          type: string
-        status:
-          type: boolean
-        composition:
-          type: object
-    PodiumTriggerResponseTriggeredValue:
-      type: boolean
-      description: Indicates whether the orchestration was successfully triggered for the given payload.
-    IdentifyBy:
-      title: IdentifyBy
-      type: array
-      items:
-        type: string
-      description: Specifies which identifier key in the request body should be used to look up the contact (e.g. cID, email, custID). Accepts a string or an array of strings in descending priority order. Because contact attribute data sent in the `contact` object of the call will upsert corresponding contact attributes in Cordial, `identifyBy` should be used to specify which key serves as the contact identifier and should not be upserted.
-    TriggerOrchestrationRequestBody:
-      title: Request Body
-      type: object
-      required:
-      - for
-      properties:
-        for:
-          title: For
-          type: array
-          items:
-            $ref: '#/components/schemas/PodiumForPayload'
-        identifyBy:
-          $ref: '#/components/schemas/IdentifyBy'
-        extVars:
-          $ref: '#/components/schemas/extVarsPodium'
-    PodiumForPayload:
-      title: For
-      type: object
-      required:
-      - contact
-      properties:
-        contact:
-          $ref: '#/components/schemas/ContactAuto'
-        extVars:
-          $ref: '#/components/schemas/extVarsPodium'
-    ContactAuto:
-      title: Contact
-      type: object
-      required:
-      - email
-      properties:
-        email:
-          type: string
-          description: 'Contact identifier key/value pair. Use the "identifierKey": "identifierValue" format (e.g. "cID": "58d2fc99ac0c8117814d4e78", "email": "msmith@example.com", "custID": "ID1234").'
   responses:
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
     AuthenticationFailure:
       description: Unauthorized
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/AuthenticationFailed'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
   securitySchemes:
     basicAuth:
       type: http

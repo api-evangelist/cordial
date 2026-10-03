@@ -41,6 +41,14 @@ components:
       title: Source
       type: object
       properties: {}
+    AudienceCountSuccess:
+      title: Source
+      type: object
+      properties:
+        count:
+          type: number
+          description: Count of contacts
+          default: 123
     AudienceCountErrorValidation:
       title: Contact error
       required:
@@ -57,14 +65,6 @@ components:
         message:
           type: object
           example: 'Object with error explanation what happen with payload. Possible errors: [''Timezones should not be empty'',''Timezone source should be either string or geo number provided'', ''Dynamic values is not set'']'
-    AudienceCountSuccess:
-      title: Source
-      type: object
-      properties:
-        count:
-          type: number
-          description: Count of contacts
-          default: 123
   responses:
     AudienceCountErrorValidation:
       description: ''

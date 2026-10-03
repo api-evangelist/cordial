@@ -388,16 +388,6 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
-    List:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        enhanced:
-          type: boolean
-          description: 'Automatically track the date each contact is added to this list '
     ListShow:
       type: object
       title: List
@@ -406,6 +396,16 @@ components:
       properties:
         id:
           type: integer
+        name:
+          type: string
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list '
+    List:
+      type: object
+      required:
+      - name
+      properties:
         name:
           type: string
         enhanced:
@@ -440,8 +440,17 @@ components:
         id:
           type: number
           example: 123
-    ListNotFound:
-      title: List is not found
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    ListNotExist:
+      title: List does not exist
       required:
       - error
       - message
@@ -452,59 +461,26 @@ components:
           example: true
         errorKey:
           type: string
-          example: GENERIC_ERROR_KEY
+          example: ACCOUNT_LISTS_NOT_FOUND
         message:
           type: string
-          example: List is not found
-    ListShow_2:
-      type: object
-      title: List
-      required:
-      - name
-      properties:
-        id:
-          type: integer
-          description: 'List id: unique identifier on the platform.'
-          example: 123
-        name:
-          type: string
-          description: List name. Should be unique and have maximum of 128 characters.
-          example: Sellers
-        enhanced:
-          type: boolean
-          description: 'Automatically track the date each contact is added to this list. '
-          example: true
-    ListShowCount:
-      type: object
-      title: List
-      required:
-      - name
-      properties:
-        id:
-          type: integer
-          description: 'List id: unique identifier on the platform.'
-          example: 123
-        name:
-          type: string
-          description: List name. Should be unique and have maximum of 128 characters.
-          example: Sellers
-        enhanced:
-          type: boolean
-          description: 'Automatically track the date each contact is added to this list. '
-          example: true
-        count:
-          type: integer
-          description: Count of contacts assigned to this list.
-          example: 255
-    AuthenticationFailed:
-      title: AuthenticationFailure
-      type: object
+          example: List does not exist
+    RecordNotFound:
+      title: Record not found
       required:
       - error
+      - message
+      type: object
       properties:
         error:
+          type: boolean
+          example: true
+        errorKey:
           type: string
-          example: 'Access Denied: Authentication Failure'
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
     SuccessOperation:
       title: Successful operation
       type: object
@@ -532,8 +508,48 @@ components:
           type: string
           example: Name must contain only letters, numbers, and dashes. Should not exceed 128 characters.
           description: 'Message with error explanation. Possible errors: [''Name must contain only letters, numbers and dashes and should not exceed 128 characters'',''Name must be unique'']'
-    ListNotExist:
-      title: List does not exist
+    ListShowCount:
+      type: object
+      title: List
+      required:
+      - name
+      properties:
+        id:
+          type: integer
+          description: 'List id: unique identifier on the platform.'
+          example: 123
+        name:
+          type: string
+          description: List name. Should be unique and have maximum of 128 characters.
+          example: Sellers
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list. '
+          example: true
+        count:
+          type: integer
+          description: Count of contacts assigned to this list.
+          example: 255
+    ListShow_2:
+      type: object
+      title: List
+      required:
+      - name
+      properties:
+        id:
+          type: integer
+          description: 'List id: unique identifier on the platform.'
+          example: 123
+        name:
+          type: string
+          description: List name. Should be unique and have maximum of 128 characters.
+          example: Sellers
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list. '
+          example: true
+    ListNotFound:
+      title: List is not found
       required:
       - error
       - message
@@ -544,10 +560,10 @@ components:
           example: true
         errorKey:
           type: string
-          example: ACCOUNT_LISTS_NOT_FOUND
+          example: GENERIC_ERROR_KEY
         message:
           type: string
-          example: List does not exist
+          example: List is not found
     List_2:
       type: object
       required:
@@ -561,59 +577,43 @@ components:
           type: boolean
           description: 'Automatically track the date each contact is added to this list. Possible values: true, false.'
           example: true
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
   responses:
-    ListValidationError:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListValidationError'
     ListNotExist:
       description: List does not exist
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ListNotExist'
-    RecordNotFound:
-      description: Record not found
+    ListValidationError:
+      description: ''
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RecordNotFound'
+            $ref: '#/components/schemas/ListValidationError'
     AuthenticationFailure:
       description: Unauthorized
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/AuthenticationFailed'
-    ListError:
-      description: Name must be unique
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListError'
     ListNotFound:
       description: List is not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ListNotFound'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    ListError:
+      description: Name must be unique
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListError'
   securitySchemes:
     basicAuth:
       type: http

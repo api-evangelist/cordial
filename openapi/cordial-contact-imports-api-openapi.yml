@@ -62,6 +62,59 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
+    JobCI:
+      title: Job
+      type: object
+      required:
+      - source
+      properties:
+        importName:
+          type: string
+          description: If field provided, will be shown in Job Widget
+        source:
+          $ref: '#/components/schemas/SourceCI'
+        hasHeader:
+          type: boolean
+          description: required, if 'columns' is not included, if imported file 'jsonl' hasHeader will be ignored
+        columns:
+          type: array
+          items:
+            type: string
+          description: required, if 'hasHeader' is not explicitly set to 'true', if imported file 'jsonl' columns will be ignored
+        delimiter:
+          type: string
+          description: delimeter (',') by default; to change it use symbol in file
+        confirmEmail:
+          type: string
+        strategy:
+          type: string
+          enum:
+          - updateOnly
+          - insertOnly
+        suppressTriggers:
+          type: boolean
+          default: false
+        jobStatusWebhookUrl:
+          type: string
+          description: API outputs will be posted to the jobStatusWebhookUrl when the job completes, or fails
+        lists:
+          $ref: '#/components/schemas/ListsCI'
+        nullMarker:
+          type: string
+    ListsCI:
+      title: Lists
+      type: object
+      properties:
+        addTo:
+          type: array
+          items:
+            type: string
+          description: Array of list names.
+        removeFrom:
+          type: array
+          items:
+            type: string
+          description: Array of list names.
     SourceCI:
       title: Source
       type: object
@@ -110,97 +163,6 @@ components:
           enum:
           - ftp
           - sftp
-    ListsCI:
-      title: Lists
-      type: object
-      properties:
-        addTo:
-          type: array
-          items:
-            type: string
-          description: Array of list names.
-        removeFrom:
-          type: array
-          items:
-            type: string
-          description: Array of list names.
-    JobCI:
-      title: Job
-      type: object
-      required:
-      - source
-      properties:
-        importName:
-          type: string
-          description: If field provided, will be shown in Job Widget
-        source:
-          $ref: '#/components/schemas/SourceCI'
-        hasHeader:
-          type: boolean
-          description: required, if 'columns' is not included, if imported file 'jsonl' hasHeader will be ignored
-        columns:
-          type: array
-          items:
-            type: string
-          description: required, if 'hasHeader' is not explicitly set to 'true', if imported file 'jsonl' columns will be ignored
-        delimiter:
-          type: string
-          description: delimeter (',') by default; to change it use symbol in file
-        confirmEmail:
-          type: string
-        strategy:
-          type: string
-          enum:
-          - updateOnly
-          - insertOnly
-        suppressTriggers:
-          type: boolean
-          default: false
-        jobStatusWebhookUrl:
-          type: string
-          description: API outputs will be posted to the jobStatusWebhookUrl when the job completes, or fails
-        lists:
-          $ref: '#/components/schemas/ListsCI'
-        nullMarker:
-          type: string
-    ContactImportConfigSuccess:
-      title: Import configuration error
-      required:
-      - jobId
-      properties:
-        jobId:
-          type: string|object
-          example: 5f6b1434f778ac145d25391a
-          schema:
-            description: String. Mongo ID or object from created job when successful.
-            properties:
-              error:
-                type: boolean
-                example: true
-              errorKey:
-                type: string
-                example: GENERIC_ERROR_KEY
-              message:
-                type: string
-                example: Can't login to the server (serverName)
-                description: 'Field present if import configuration is wrong. Possible errors: [''Can''t login to the server (serverName)'', ''Can''t connect to the server (serverName)'', ''Couldn''t get the size of the file (fileFolder/file.csv)'']'
-    ContactImportConfigError:
-      title: Import configuration error
-      required:
-      - error
-      - message
-      - errorKey
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: The source.transport field is required.
-          description: 'This field is present if import configuration is wrong. Possible errors: [''The source.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'',''The source.path field is required.'', ''The source.transport field is required.'', ''The selected source.transport is invalid.'', ''The source.aws access key id field is required.'', ''The source.aws secret access key field is required.'', ''The source.aws bucket field is required.'', ''The source.aws region field is required.'', ''The columns field is required.'']'
     SourceObject:
       title: Source
       type: object
@@ -341,6 +303,44 @@ components:
           type: string
           example: ignore
           description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
+    ContactImportConfigSuccess:
+      title: Import configuration error
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string|object
+          example: 5f6b1434f778ac145d25391a
+          schema:
+            description: String. Mongo ID or object from created job when successful.
+            properties:
+              error:
+                type: boolean
+                example: true
+              errorKey:
+                type: string
+                example: GENERIC_ERROR_KEY
+              message:
+                type: string
+                example: Can't login to the server (serverName)
+                description: 'Field present if import configuration is wrong. Possible errors: [''Can''t login to the server (serverName)'', ''Can''t connect to the server (serverName)'', ''Couldn''t get the size of the file (fileFolder/file.csv)'']'
+    ContactImportConfigError:
+      title: Import configuration error
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: The source.transport field is required.
+          description: 'This field is present if import configuration is wrong. Possible errors: [''The source.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'',''The source.path field is required.'', ''The source.transport field is required.'', ''The selected source.transport is invalid.'', ''The source.aws access key id field is required.'', ''The source.aws secret access key field is required.'', ''The source.aws bucket field is required.'', ''The source.aws region field is required.'', ''The columns field is required.'']'
   responses:
     ContactImportConfigError:
       description: ''

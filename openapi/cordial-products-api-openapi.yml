@@ -311,6 +311,32 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
+    VariantsP:
+      title: Variants
+      type: object
+      required:
+      - sku
+      properties:
+        sku:
+          type: string
+        attr:
+          $ref: '#/components/schemas/AttrP'
+        qty:
+          type: integer
+    SaleP:
+      title: Sale
+      properties:
+        enabled:
+          type: boolean
+        price:
+          type: number
+          format: float
+        start:
+          type: string
+          format: date
+        end:
+          type: string
+          format: date
     AttrP:
       title: Attr
       type: object
@@ -374,58 +400,12 @@ components:
             type: string
         properties:
           type: object
-    VariantsP:
-      title: Variants
-      type: object
+    ProductNotFound:
+      title: Record not found
       required:
-      - sku
-      properties:
-        sku:
-          type: string
-        attr:
-          $ref: '#/components/schemas/AttrP'
-        qty:
-          type: integer
-    SaleP:
-      title: Sale
-      properties:
-        enabled:
-          type: boolean
-        price:
-          type: number
-          format: float
-        start:
-          type: string
-          format: date
-        end:
-          type: string
-          format: date
-    SaleP_2:
-      title: Sale
-      properties:
-        enabled:
-          type: boolean
-          description: 'Flag to determine if the sale is active. Possible values: true, false, or 1, 0. Defaults to `false`.'
-          example: true
-        price:
-          type: number
-          format: float
-          description: Sale price of the item.
-          example: 12.95
-        start:
-          type: string
-          format: date
-          description: The date and time the sale is in effect or active.
-        end:
-          type: string
-          format: date
-          description: The date and time the sale ends or becomes inactive.
-    ProductValidationError:
-      title: Validation error
-      required:
-      - messages
-      - errorKey
       - error
+      - message
+      type: object
       properties:
         error:
           type: boolean
@@ -433,33 +413,9 @@ components:
         errorKey:
           type: string
           example: GENERIC_ERROR_KEY
-        messages:
-          type: object
-          $ref: '#/components/schemas/validationProductErrors'
-    validationProductErrors:
-      required:
-      - validationErrors
-      properties:
-        validationErrors:
-          type: object
-          description: 'Object with validation error explanation for each field from payload. Possible errors: [''The product id field is required.'', ''The product name field is required.'', ''The qty must be a number.'', ''The sku field is required'']'
-    VariantsP_2:
-      title: Variants
-      type: object
-      required:
-      - sku
-      properties:
-        sku:
+        message:
           type: string
-          description: The Stock Keeping Unit value for the product (e.g. RF-WP33286-21).
-          example: RF-WP33286-21
-        attr:
-          $ref: '#/components/schemas/AttrP_2'
-          description: Key value pairs describing product attributes (e.g. "size":"large", "color":"red"). Attribute values <b>cannot</b> be searched using the Kaleidoscope or within Smarty for personalization.
-        qty:
-          type: integer
-          description: The available inventory.
-          example: 1
+          example: Product not found
     ProductResponse:
       title: Product
       type: object
@@ -548,31 +504,40 @@ components:
           type: string
           format: date-time
           description: Last modified date.
-    ProductNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Product not found
-    SuccessOperation:
-      title: Successful operation
+    VariantsP_2:
+      title: Variants
       type: object
       required:
-      - success
+      - sku
       properties:
-        success:
-          type: boolean
-          example: true
+        sku:
+          type: string
+          description: The Stock Keeping Unit value for the product (e.g. RF-WP33286-21).
+          example: RF-WP33286-21
+        attr:
+          $ref: '#/components/schemas/AttrP_2'
+          description: Key value pairs describing product attributes (e.g. "size":"large", "color":"red"). Attribute values <b>cannot</b> be searched using the Kaleidoscope or within Smarty for personalization.
+        qty:
+          type: integer
+          description: The available inventory.
+          example: 1
+    validationProductErrors:
+      required:
+      - validationErrors
+      properties:
+        validationErrors:
+          type: object
+          description: 'Object with validation error explanation for each field from payload. Possible errors: [''The product id field is required.'', ''The product name field is required.'', ''The qty must be a number.'', ''The sku field is required'']'
+    AttrP_2:
+      title: Attr
+      type: object
+      properties:
+        color:
+          type: string
+          example: blue
+        size:
+          type: string
+          example: medium
     ProductCreationModel:
       title: Product
       type: object
@@ -655,29 +620,6 @@ components:
           example:
             hasVideo: true
             ratings: 5 stars
-    ProductCreationSuccess:
-      title: Success operation on product creation
-      type: object
-      required:
-      - success
-      - message
-      properties:
-        success:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: product created
-    AttrP_2:
-      title: Attr
-      type: object
-      properties:
-        color:
-          type: string
-          example: blue
-        size:
-          type: string
-          example: medium
     RecordNotFound:
       title: Record not found
       required:
@@ -694,25 +636,83 @@ components:
         message:
           type: string
           example: record not found
-  responses:
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    SaleP_2:
+      title: Sale
+      properties:
+        enabled:
+          type: boolean
+          description: 'Flag to determine if the sale is active. Possible values: true, false, or 1, 0. Defaults to `false`.'
+          example: true
+        price:
+          type: number
+          format: float
+          description: Sale price of the item.
+          example: 12.95
+        start:
+          type: string
+          format: date
+          description: The date and time the sale is in effect or active.
+        end:
+          type: string
+          format: date
+          description: The date and time the sale ends or becomes inactive.
     ProductValidationError:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProductValidationError'
+      title: Validation error
+      required:
+      - messages
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        messages:
+          type: object
+          $ref: '#/components/schemas/validationProductErrors'
+    ProductCreationSuccess:
+      title: Success operation on product creation
+      type: object
+      required:
+      - success
+      - message
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: product created
+  responses:
     ProductNotFound:
       description: Product not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ProductNotFound'
+    ProductValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductValidationError'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
   securitySchemes:
     basicAuth:
       type: http

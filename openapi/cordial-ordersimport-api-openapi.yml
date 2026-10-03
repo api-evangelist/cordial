@@ -131,42 +131,6 @@ components:
           description: required, if 'hasHeader' is not explicitly set to 'true', if imported file 'jsonl' columns will be ignored
         nullMarker:
           type: string
-    OrderImportConfigError:
-      title: Import configuration error
-      required:
-      - error
-      - message
-      - errorKey
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: The source.transport field is required.
-          description: 'Field is present if import configuration is wrong. Possible errors: [''The source.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'', ''The source.path field is required.'', ''The source.transport field is required.'', ''The selected source.transport is invalid.'', ''The source.aws access key id field is required.'', ''The source.aws secret access key field is required.'', ''The source.aws bucket field is required.'', ''The source.aws region field is required.'', ''The columns field is required.'']'
-    OrderImportsJob:
-      title: Job
-      type: object
-      required:
-      - source
-      properties:
-        importName:
-          type: string
-          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
-        source:
-          $ref: '#/components/schemas/SourceObject'
-        confirmEmail:
-          type: string
-          description: Email address to send an administrative alert when the job is done running.
-          example: joesmith@example.com
-        suppressTriggers:
-          type: boolean
-          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
-          default: true
     SourceObject:
       title: Source
       type: object
@@ -239,6 +203,23 @@ components:
         source:
           type: string
           description: Defines the Snowflake table or view. Required if destination is SNOWFLAKE.
+    OrderImportConfigError:
+      title: Import configuration error
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: The source.transport field is required.
+          description: 'Field is present if import configuration is wrong. Possible errors: [''The source.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'', ''The source.path field is required.'', ''The source.transport field is required.'', ''The selected source.transport is invalid.'', ''The source.aws access key id field is required.'', ''The source.aws secret access key field is required.'', ''The source.aws bucket field is required.'', ''The source.aws region field is required.'', ''The columns field is required.'']'
     OrderImportConfigSuccess:
       title: Import configuration error
       required:
@@ -260,6 +241,25 @@ components:
                 type: string
                 example: Can't login to the server (serverName)
                 description: 'Field is present if import configuration is wrong. Possible errors: [''Can''t login to the server (serverName)'', ''Can''t connect to the server (serverName)'', ''Couldn''t get the size of the file (fileFolder/file.json)'']'
+    OrderImportsJob:
+      title: Job
+      type: object
+      required:
+      - source
+      properties:
+        importName:
+          type: string
+          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
+        source:
+          $ref: '#/components/schemas/SourceObject'
+        confirmEmail:
+          type: string
+          description: Email address to send an administrative alert when the job is done running.
+          example: joesmith@example.com
+        suppressTriggers:
+          type: boolean
+          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
+          default: true
   responses:
     OrderImportConfigError:
       description: ''

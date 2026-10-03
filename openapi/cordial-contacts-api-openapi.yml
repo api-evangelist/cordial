@@ -1003,68 +1003,6 @@ components:
           - subscribed
           - unsubscribed
           - none
-    CartC:
-      title: Cart
-      type: object
-      required:
-      - cartitems
-      properties:
-        mcID:
-          type: string
-        customerID:
-          type: string
-        linkID:
-          type: string
-        cartID:
-          type: string
-        url:
-          type: string
-        expiration:
-          type: string
-          format: date
-        cartitems:
-          type: array
-          items:
-            $ref: '#/components/schemas/CartitemsC'
-        totalAmount:
-          type: integer
-        tax:
-          type: integer
-    CartitemsC:
-      title: Cartitems
-      type: object
-      required:
-      - productID
-      - sku
-      - category
-      - name
-      properties:
-        productID:
-          type: string
-        description:
-          type: string
-        sku:
-          type: string
-        category:
-          type: string
-        name:
-          type: string
-        qty:
-          type: integer
-        itemPrice:
-          type: number
-          format: double
-          default: 0
-        url:
-          type: string
-        attr:
-          type: object
-        images:
-          type: array
-          items:
-            type: string
-        properties:
-          type: object
     DestinationCE:
       title: Destination
       type: object
@@ -1106,28 +1044,82 @@ components:
         path:
           type: string
           description: (required for ftp,sftp,s3)
-    ContactC_2:
-      title: Contact
+    CartitemsC:
+      title: Cartitems
       type: object
       required:
-      - channels
+      - productID
+      - sku
+      - category
+      - name
       properties:
-        channels:
-          $ref: '#/components/schemas/ChannelC'
-        attribute_key:
+        productID:
           type: string
-          description: 'Adds a value for string, date (ISO 8601 format), number, array, or geo ("geo_attribute_key.city": "San Diego") contact attribute types.'
-        list_name:
-          type: boolean
-          description: 'Adds or removes the contact from a list. Possible values: true, false.'
-    SourceCPB_2:
-      title: Source
+        description:
+          type: string
+        sku:
+          type: string
+        category:
+          type: string
+        name:
+          type: string
+        qty:
+          type: integer
+        itemPrice:
+          type: number
+          format: double
+          default: 0
+        url:
+          type: string
+        attr:
+          type: object
+        images:
+          type: array
+          items:
+            type: string
+        properties:
+          type: object
+    CartC:
+      title: Cart
       type: object
       required:
-      - accountId
+      - cartitems
       properties:
-        destination:
-          $ref: '#/components/schemas/DestinationObject'
+        mcID:
+          type: string
+        customerID:
+          type: string
+        linkID:
+          type: string
+        cartID:
+          type: string
+        url:
+          type: string
+        expiration:
+          type: string
+          format: date
+        cartitems:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartitemsC'
+        totalAmount:
+          type: integer
+        tax:
+          type: integer
+    SplitContactApplicationError:
+      title: Operation failed due to unexpected server error
+      type: object
+      required:
+      - error
+      - errorKey
+      - message
+      properties:
+        error:
+          type: boolean
+        errorKey:
+          type: string
+        message:
+          type: string
     MergeContactsSuccess:
       title: Successful operation
       type: object
@@ -1139,113 +1131,56 @@ components:
           type: string
         message:
           type: string
-    ContactError:
-      title: Contact error
-      required:
-      - message
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        messages:
-          type: object
-          example: 'Object with error explanation what happen with payload. Possible errors: [''Contact doesn''t exist'', ''Address not exists'', ''Search field is not correct'', ''Incorrect value for suppressTriggers'']'
-    SplitContactRequestError:
-      title: Provided request properties validation error
+    DestinationObject:
+      title: Destination
       type: object
       required:
-      - error
-      - errorKey
-      - message
+      - type
       properties:
-        error:
-          type: boolean
-        errorKey:
+        type:
           type: string
-        message:
+          description: 'Defines the destination type. Possible values: AWS (should be used if the file is to be downloaded via the Cordial UI), FTP, SFTP, S3, GCS, AZUREBLOB.'
+        aws_access_key_id:
           type: string
-    SplitContactSuccess:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      - message
-      - channelsSplit
-      properties:
-        success:
-          type: boolean
-        message:
+          description: Defines the public AWS access key ID. Required if destination is S3 and IAM role is not configured.
+        aws_secret_access_key:
           type: string
-        channelsSplit:
-          type: array
-          items:
-            type: string
-            description: Names of the channels that would be split
-    EmailC_2:
-      title: Email
-      type: object
-      required:
-      - address
-      properties:
-        address:
+          description: Defines the secret AWS access key. Required if destination is S3 and IAM role is not configured.
+        aws_bucket:
           type: string
-          description: Unique channel key and address for the contact (e.g. email). Note that some of your channels may have custom keys.
-        subscribeStatus:
+          description: Defines the AWS bucket name. Required if destination is S3.
+        aws_region:
           type: string
-          description: 'Channel subscribe status. Promotional messages will not be sent unless set to `subscribed`. Default is `none`. Possible values: none, subscribed, unsubscribed.'
-    CartC_2:
-      title: Cart
-      type: object
-      required:
-      - cartitems
-      properties:
-        mcID:
+          description: Defines the AWS region (e.g. us-west-2). Required if destination is S3.
+        server:
           type: string
-          description: Message contact ID (mcID). Represents the Cordial account, specific contact, and the specific message (e.g. 45:55....aef:1). Required to track revenue attribution.
-        customerID:
-          type: string
-          description: Customer ID. Typically a value assigned by the eCommerce or CRM platform (e.g. abc123).
-        linkID:
-          type: string
-          description: Cordial ID that represents the specific message and link (e.g. 45:55....aef:1). Required to track revenue attribution to a specific link.
-        cartID:
-          type: string
-          description: Cart ID.
-        url:
-          type: string
-          description: Link to the product page (e.g. https://mydomain.com/myproduct).
-        expiration:
-          type: string
-          format: date
-        cartitems:
-          type: array
-          items:
-            $ref: '#/components/schemas/CartitemsC_2'
-        totalAmount:
+          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP destinations.
+          example: sftp.example.com
+        port:
           type: integer
-          description: Auto-calculated as the sum of each item.amount.
-        tax:
-          type: integer
-          description: The amount of tax.
-    MergeContactsError:
-      title: Provided request properties validation error
-      type: object
-      required:
-      - error
-      - errorKey
-      - message
-      properties:
-        error:
-          type: boolean
-        errorKey:
+          description: Defines the port number for the FTP or SFTP server (e.g. 22).
+          example: 22
+        username:
           type: string
-        message:
+          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        password:
           type: string
+          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        savedKey:
+          type: string
+          description: SFTP public key authentication key `name` if using SFTP public key authentication instead of password.
+        path:
+          type: string
+          description: Path to folder where the export file will be stored. Required if destination is FTP, SFTP, S3, GCS, or AZUREBLOB.
+        gcs_bucket:
+          type: string
+          description: Defines the GCS bucket name. Required if destination is GCS.
+        account:
+          type: string
+          description: Defines the Azure Blob Storage account name. Required if destination is AZUREBLOB.
+        container:
+          type: string
+          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
     MergeContacts:
       title: MergeContacts
       type: object
@@ -1260,21 +1195,15 @@ components:
           type: string
         options:
           $ref: '#/components/schemas/MergeContactsOptions'
-    SplitContact:
-      title: SplitContact
+    SuccessOperation:
+      title: Successful operation
       type: object
       required:
-      - primaryKey
-      - channelNames
+      - success
       properties:
-        primaryKey:
-          type: string
-          description: Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`.
-        channelNames:
-          type: array
-          items:
-            type: string
-            description: The names of the channels to split from the provided contact
+        success:
+          type: boolean
+          example: true
     CartitemsC_2:
       title: Cartitems
       type: object
@@ -1320,7 +1249,31 @@ components:
         properties:
           type: object
           description: 'Can be used in place of the `attr` key (e.g. "brands":["Marmot", "Quicksilver"], "return_date": "2018-07-01 00:00:00"). Values added <b>can</b> be searched using the Kaleidoscope and within Smarty for personalization.'
-    ContactCPost:
+    SourceCPB_2:
+      title: Source
+      type: object
+      required:
+      - accountId
+      properties:
+        destination:
+          $ref: '#/components/schemas/DestinationObject'
+    ContactError:
+      title: Contact error
+      required:
+      - message
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        messages:
+          type: object
+          example: 'Object with error explanation what happen with payload. Possible errors: [''Contact doesn''t exist'', ''Address not exists'', ''Search field is not correct'', ''Incorrect value for suppressTriggers'']'
+    ContactCPut:
       title: Contact
       type: object
       required:
@@ -1337,15 +1290,61 @@ components:
         suppressTriggers:
           type: boolean
           description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
-        identifyBy:
-          type: array
-          items:
-            type: string
-          description: 'Array where 1 or more valid secondary keys are supplied in descending priority order. Updates existing contacts when applicable. '
-          example:
-          - email
-          - channels.sms.address
-          - custID
+        forceSubscribe:
+          type: boolean
+          default: false
+          description: 'If contact unsubscribed, this key must be used to update subscribeStatus to subscribed. Possible values: true, false'
+    ContactDownloadProfileSuccess:
+      title: Success operation on contact download profile
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
+          example: job ID
+    SplitContactRequestError:
+      title: Provided request properties validation error
+      type: object
+      required:
+      - error
+      - errorKey
+      - message
+      properties:
+        error:
+          type: boolean
+        errorKey:
+          type: string
+        message:
+          type: string
+    MergeContactsError:
+      title: Provided request properties validation error
+      type: object
+      required:
+      - error
+      - errorKey
+      - message
+      properties:
+        error:
+          type: boolean
+        errorKey:
+          type: string
+        message:
+          type: string
+    ContactC_2:
+      title: Contact
+      type: object
+      required:
+      - channels
+      properties:
+        channels:
+          $ref: '#/components/schemas/ChannelC'
+        attribute_key:
+          type: string
+          description: 'Adds a value for string, date (ISO 8601 format), number, array, or geo ("geo_attribute_key.city": "San Diego") contact attribute types.'
+        list_name:
+          type: boolean
+          description: 'Adds or removes the contact from a list. Possible values: true, false.'
     ContactDownloadProfileError:
       title: Contact download profile error
       required:
@@ -1394,6 +1393,184 @@ components:
           type: string
           example: 604f30256a44206b3f8d086e
           description: Cordial database contact ID (cID) value.
+    SplitContactNotAvailable:
+      title: Operation failed due to feature availability
+      type: object
+      required:
+      - error
+      - errorKey
+      - message
+      properties:
+        error:
+          type: boolean
+        errorKey:
+          type: string
+        message:
+          type: string
+    ContactCPost:
+      title: Contact
+      type: object
+      required:
+      - channels
+      properties:
+        channels:
+          $ref: '#/components/schemas/ChannelC'
+        attribute_key:
+          type: string
+          description: 'Adds a value for string, date (ISO 8601 format), number, array, or geo ("geo_attribute_key.city": "San Diego") contact attribute types.'
+        list_name:
+          type: boolean
+          description: 'Adds or removes the contact from a list. Possible values: true, false'
+        suppressTriggers:
+          type: boolean
+          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
+        identifyBy:
+          type: array
+          items:
+            type: string
+          description: 'Array where 1 or more valid secondary keys are supplied in descending priority order. Updates existing contacts when applicable. '
+          example:
+          - email
+          - channels.sms.address
+          - custID
+    SplitContactSuccess:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      - message
+      - channelsSplit
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        channelsSplit:
+          type: array
+          items:
+            type: string
+            description: Names of the channels that would be split
+    MergeContactsServerError:
+      title: Operation failed due to unexpected server error
+      type: object
+      required:
+      - error
+      - errorKey
+      - message
+      properties:
+        error:
+          type: boolean
+        errorKey:
+          type: string
+        message:
+          type: string
+    SplitContact:
+      title: SplitContact
+      type: object
+      required:
+      - primaryKey
+      - channelNames
+      properties:
+        primaryKey:
+          type: string
+          description: Contact identifier to look up and reference the contact record. Possible identifier variations include `<cID_value>`, or `<primary_key_value>` or `<secondary_key:secondary_key_value>`.
+        channelNames:
+          type: array
+          items:
+            type: string
+            description: The names of the channels to split from the provided contact
+    CartC_2:
+      title: Cart
+      type: object
+      required:
+      - cartitems
+      properties:
+        mcID:
+          type: string
+          description: Message contact ID (mcID). Represents the Cordial account, specific contact, and the specific message (e.g. 45:55....aef:1). Required to track revenue attribution.
+        customerID:
+          type: string
+          description: Customer ID. Typically a value assigned by the eCommerce or CRM platform (e.g. abc123).
+        linkID:
+          type: string
+          description: Cordial ID that represents the specific message and link (e.g. 45:55....aef:1). Required to track revenue attribution to a specific link.
+        cartID:
+          type: string
+          description: Cart ID.
+        url:
+          type: string
+          description: Link to the product page (e.g. https://mydomain.com/myproduct).
+        expiration:
+          type: string
+          format: date
+        cartitems:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartitemsC_2'
+        totalAmount:
+          type: integer
+          description: Auto-calculated as the sum of each item.amount.
+        tax:
+          type: integer
+          description: The amount of tax.
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    EmailC_2:
+      title: Email
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          type: string
+          description: Unique channel key and address for the contact (e.g. email). Note that some of your channels may have custom keys.
+        subscribeStatus:
+          type: string
+          description: 'Channel subscribe status. Promotional messages will not be sent unless set to `subscribed`. Default is `none`. Possible values: none, subscribed, unsubscribed.'
+    ContactCartError:
+      title: Contact unsubscribe error
+      required:
+      - message
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        messages:
+          type: object
+          example: 'Object with error explanation what happen when do action with cart. Possible errors: [''Contact doesn\''t exist'']'
+    MergeContactsFeatureError:
+      title: Operation is not permitted
+      type: object
+      required:
+      - error
+      - errorKey
+      - message
+      properties:
+        error:
+          type: boolean
+        errorKey:
+          type: string
+        message:
+          type: string
     MergeContactsOptions:
       title: MergeContacts
       type: object
@@ -1454,183 +1631,6 @@ components:
           enum:
           - sourceContact
           - destinationContact
-    SplitContactApplicationError:
-      title: Operation failed due to unexpected server error
-      type: object
-      required:
-      - error
-      - errorKey
-      - message
-      properties:
-        error:
-          type: boolean
-        errorKey:
-          type: string
-        message:
-          type: string
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    DestinationObject:
-      title: Destination
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          description: 'Defines the destination type. Possible values: AWS (should be used if the file is to be downloaded via the Cordial UI), FTP, SFTP, S3, GCS, AZUREBLOB.'
-        aws_access_key_id:
-          type: string
-          description: Defines the public AWS access key ID. Required if destination is S3 and IAM role is not configured.
-        aws_secret_access_key:
-          type: string
-          description: Defines the secret AWS access key. Required if destination is S3 and IAM role is not configured.
-        aws_bucket:
-          type: string
-          description: Defines the AWS bucket name. Required if destination is S3.
-        aws_region:
-          type: string
-          description: Defines the AWS region (e.g. us-west-2). Required if destination is S3.
-        server:
-          type: string
-          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP destinations.
-          example: sftp.example.com
-        port:
-          type: integer
-          description: Defines the port number for the FTP or SFTP server (e.g. 22).
-          example: 22
-        username:
-          type: string
-          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP destinations.
-        password:
-          type: string
-          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP destinations.
-        savedKey:
-          type: string
-          description: SFTP public key authentication key `name` if using SFTP public key authentication instead of password.
-        path:
-          type: string
-          description: Path to folder where the export file will be stored. Required if destination is FTP, SFTP, S3, GCS, or AZUREBLOB.
-        gcs_bucket:
-          type: string
-          description: Defines the GCS bucket name. Required if destination is GCS.
-        account:
-          type: string
-          description: Defines the Azure Blob Storage account name. Required if destination is AZUREBLOB.
-        container:
-          type: string
-          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
-    MergeContactsServerError:
-      title: Operation failed due to unexpected server error
-      type: object
-      required:
-      - error
-      - errorKey
-      - message
-      properties:
-        error:
-          type: boolean
-        errorKey:
-          type: string
-        message:
-          type: string
-    ContactDownloadProfileSuccess:
-      title: Success operation on contact download profile
-      type: object
-      required:
-      - jobId
-      properties:
-        jobId:
-          type: string
-          example: job ID
-    SplitContactNotAvailable:
-      title: Operation failed due to feature availability
-      type: object
-      required:
-      - error
-      - errorKey
-      - message
-      properties:
-        error:
-          type: boolean
-        errorKey:
-          type: string
-        message:
-          type: string
-    MergeContactsFeatureError:
-      title: Operation is not permitted
-      type: object
-      required:
-      - error
-      - errorKey
-      - message
-      properties:
-        error:
-          type: boolean
-        errorKey:
-          type: string
-        message:
-          type: string
-    ContactCPut:
-      title: Contact
-      type: object
-      required:
-      - channels
-      properties:
-        channels:
-          $ref: '#/components/schemas/ChannelC'
-        attribute_key:
-          type: string
-          description: 'Adds a value for string, date (ISO 8601 format), number, array, or geo ("geo_attribute_key.city": "San Diego") contact attribute types.'
-        list_name:
-          type: boolean
-          description: 'Adds or removes the contact from a list. Possible values: true, false'
-        suppressTriggers:
-          type: boolean
-          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `true`.
-        forceSubscribe:
-          type: boolean
-          default: false
-          description: 'If contact unsubscribed, this key must be used to update subscribeStatus to subscribed. Possible values: true, false'
-    ContactCartError:
-      title: Contact unsubscribe error
-      required:
-      - message
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        messages:
-          type: object
-          example: 'Object with error explanation what happen when do action with cart. Possible errors: [''Contact doesn\''t exist'']'
   responses:
     ContactUnsubscribeError:
       description: Contact unsubscribe error
@@ -1644,18 +1644,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RecordNotFound'
-    ContactDownloadProfileError:
-      description: Contact download profile error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ContactDownloadProfileError'
     ContactCartError:
       description: Contact unsubscribe error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ContactCartError'
+    ContactDownloadProfileError:
+      description: Contact download profile error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContactDownloadProfileError'
   securitySchemes:
     basicAuth:
       type: http

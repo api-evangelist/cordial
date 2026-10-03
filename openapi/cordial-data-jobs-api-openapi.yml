@@ -169,40 +169,6 @@ paths:
           $ref: '#/components/responses/DataJobsError'
 components:
   schemas:
-    DataJobsError:
-      title: Invalid request
-      required:
-      - messages
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Data Automation does not exist.
-          description: 'Possible errors: [''Data Automation does not exist.'',''Trigger API is disabled.'']'
-    DataJobsRecord:
-      title: Data transformation object.
-    OneTimeStatsReturnedSuccessStats:
-      title: Stats
-      type: object
-      required: []
-      properties:
-        total_queued:
-          type: number
-        total_processed:
-          type: number
-        total_failures:
-          type: number
-        total_successful:
-          type: number
-        total_exported:
-          type: number
     OneTimeStatsReturnedSuccessRun:
       title: Run
       type: object
@@ -225,20 +191,48 @@ components:
         endedAt:
           type: string
           format: date-time
-    OneTimeStatsReturnedSuccess:
-      title: Response
-      type: object
+    DataJobsTriggeredSuccess:
+      title: 'Transformation is triggered.
+
+
+        '
       required:
-      - dabId
-      - run
-      - stats
+      - success
+      - message
+      - jobIds
+      - dabID
       properties:
-        dabId:
+        message:
           type: string
-        run:
-          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessRun'
-        stats:
-          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessStats'
+          example: Transformation is triggered.
+        dabID:
+          type: string
+        jobIds:
+          type: array
+          items:
+            type: string
+          example:
+          - job1
+          - job2
+          - job3
+        success:
+          type: boolean
+          example: true
+    OneTimeStatsReturnedSuccessStats:
+      title: Stats
+      type: object
+      required: []
+      properties:
+        total_queued:
+          type: number
+        total_processed:
+          type: number
+        total_failures:
+          type: number
+        total_successful:
+          type: number
+        total_exported:
+          type: number
     DataJobsSuccess:
       title: 'Transformation is processing.
 
@@ -267,33 +261,6 @@ components:
           type: array
           items:
             type: string
-    DataJobsTriggeredSuccess:
-      title: 'Transformation is triggered.
-
-
-        '
-      required:
-      - success
-      - message
-      - jobIds
-      - dabID
-      properties:
-        message:
-          type: string
-          example: Transformation is triggered.
-        dabID:
-          type: string
-        jobIds:
-          type: array
-          items:
-            type: string
-          example:
-          - job1
-          - job2
-          - job3
-        success:
-          type: boolean
-          example: true
     RecordNotFound:
       title: Record not found
       required:
@@ -310,19 +277,52 @@ components:
         message:
           type: string
           example: record not found
+    DataJobsRecord:
+      title: Data transformation object.
+    DataJobsError:
+      title: Invalid request
+      required:
+      - messages
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Data Automation does not exist.
+          description: 'Possible errors: [''Data Automation does not exist.'',''Trigger API is disabled.'']'
+    OneTimeStatsReturnedSuccess:
+      title: Response
+      type: object
+      required:
+      - dabId
+      - run
+      - stats
+      properties:
+        dabId:
+          type: string
+        run:
+          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessRun'
+        stats:
+          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessStats'
   responses:
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
     DataJobsError:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/DataJobsError'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
   securitySchemes:
     basicAuth:
       type: http

@@ -189,7 +189,45 @@ paths:
         '404':
           $ref: '#/components/responses/RecordNotFound'
 components:
+  responses:
+    AlertErrorValidation:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlertErrorValidation'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    AlertRemoveImpossible:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlertRemoveImpossible'
   schemas:
+    AlertConditions:
+      title: conditions
+      required:
+      - type
+      - operator
+      - value
+      - period
+      type: object
+      properties:
+        operator:
+          type: string
+          enum:
+          - lt
+          - lte
+          - gt
+          - gte
+        value:
+          type: integer
+          description: ''
     AlertErrorValidation:
       title: AlertErrorValidation
       type: object
@@ -205,37 +243,41 @@ components:
           type: string
           enum:
           - VALIDATION_ERROR
-    AlertResponse:
-      title: AlertResponse
+    AlertCreationSuccess:
+      title: AlertCreationSuccess
       type: object
       properties:
-        id:
-          type: string
-        type:
-          type: string
-          default: total-sent
-          description: ''
-        msID:
-          type: string
-          description: 'Message send ID where alert is applied. Required if mdtID not present. '
-        mdtID:
-          type: string
-          description: 'Automation template ID where alert is applied. Required if msID not present. '
-        enabled:
+        success:
           type: boolean
-          description: Automation template name.
-        notify:
-          type: array
-          items:
-            type: string
-          description: Destination email for the alert.
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlertConditions'
-        period:
-          type: integer
-          description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
+          example: true
+        id:
+          type: number
+          example: 123
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
     AlertI:
       title: Alerts
       type: object
@@ -269,82 +311,40 @@ components:
         period:
           type: integer
           description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
-    AlertCreationSuccess:
-      title: AlertCreationSuccess
+    AlertResponse:
+      title: AlertResponse
       type: object
       properties:
-        success:
-          type: boolean
-          example: true
         id:
-          type: number
-          example: 123
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
+          type: string
+        type:
+          type: string
+          default: total-sent
+          description: ''
+        msID:
+          type: string
+          description: 'Message send ID where alert is applied. Required if mdtID not present. '
+        mdtID:
+          type: string
+          description: 'Automation template ID where alert is applied. Required if msID not present. '
+        enabled:
           type: boolean
-          example: true
+          description: Automation template name.
+        notify:
+          type: array
+          items:
+            type: string
+          description: Destination email for the alert.
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertConditions'
+        period:
+          type: integer
+          description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
     AlertRemoveImpossible:
       title: AlertRemoveImpossible
       type: object
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    AlertConditions:
-      title: conditions
-      required:
-      - type
-      - operator
-      - value
-      - period
-      type: object
-      properties:
-        operator:
-          type: string
-          enum:
-          - lt
-          - lte
-          - gt
-          - gte
-        value:
-          type: integer
-          description: ''
-  responses:
-    AlertErrorValidation:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AlertErrorValidation'
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
-    AlertRemoveImpossible:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AlertRemoveImpossible'
   securitySchemes:
     basicAuth:
       type: http

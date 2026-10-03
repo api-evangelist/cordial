@@ -119,50 +119,6 @@ paths:
           $ref: '#/components/responses/RecordNotFound'
 components:
   schemas:
-    ProgramMessageStats:
-      type: object
-      title: Message Send Stats
-      properties:
-        message_id:
-          type: string
-          example: 64ad5b5725623b7a6d0cb1f6
-          description: Message id.
-        orchestration_id:
-          type: string
-          example: 64ad5b5725623b7a6d0cb1f6
-          description: Orchestration id.
-        orchestration_name:
-          type: string
-          example: some_name
-          description: Orchestration name.
-        message_key:
-          type: string
-          example: some_key
-          description: Message key.
-        subject:
-          type: string
-          example: some_subject
-          description: Message subject.
-        tags:
-          type: array
-          items:
-            type: string
-          description: Tags
-        channel_key:
-          type: string
-          example: some_key
-          description: Channel key.
-        channel_type:
-          type: string
-          example: some_type
-          description: Channel type.
-        sent_at:
-          type: string
-          example: '2022-08-26 12:41:40.219Z'
-          description: Send date.
-        stats:
-          title: Aggregated stats for program
-          type: object
     ProgramSummaryResponse:
       title: Program summary
       properties:
@@ -255,15 +211,6 @@ components:
           type: string
           format: date-time
           description: Last modified date.
-    AuthenticationFailed:
-      title: AuthenticationFailure
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          example: 'Access Denied: Authentication Failure'
     PaginatedResponse:
       properties:
         total:
@@ -292,6 +239,75 @@ components:
           type: number
         to:
           type: number
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    ProgramMessageStats:
+      type: object
+      title: Message Send Stats
+      properties:
+        message_id:
+          type: string
+          example: 64ad5b5725623b7a6d0cb1f6
+          description: Message id.
+        orchestration_id:
+          type: string
+          example: 64ad5b5725623b7a6d0cb1f6
+          description: Orchestration id.
+        orchestration_name:
+          type: string
+          example: some_name
+          description: Orchestration name.
+        message_key:
+          type: string
+          example: some_key
+          description: Message key.
+        subject:
+          type: string
+          example: some_subject
+          description: Message subject.
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags
+        channel_key:
+          type: string
+          example: some_key
+          description: Channel key.
+        channel_type:
+          type: string
+          example: some_type
+          description: Channel type.
+        sent_at:
+          type: string
+          example: '2022-08-26 12:41:40.219Z'
+          description: Send date.
+        stats:
+          title: Aggregated stats for program
+          type: object
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
     ProgramStatsResponse:
       title: Program stats
       properties:
@@ -318,35 +334,19 @@ components:
           title: Pagination data
           type: object
           $ref: '#/components/schemas/PaginatedResponse'
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
   responses:
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
     AuthenticationFailure:
       description: Unauthorized
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/AuthenticationFailed'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
   securitySchemes:
     basicAuth:
       type: http

@@ -265,29 +265,6 @@ components:
       title: Properties
       type: object
       properties: {}
-    ActivityActivityShow_2:
-      title: Activity
-      type: object
-      required:
-      - action
-      properties:
-        action:
-          type: string
-          description: Can be click, open, send, or any user-defined actions.
-        cID:
-          type: string
-          description: Contact ID
-        time:
-          type: string
-          format: dateTime
-        mcID:
-          type: string
-        bmID:
-          type: string
-        first:
-          type: integer
-        properties:
-          type: object
     ActivityActivity_2:
       title: Activity
       type: object
@@ -382,25 +359,48 @@ components:
         message:
           type: string
           example: record not found
+    ActivityActivityShow_2:
+      title: Activity
+      type: object
+      required:
+      - action
+      properties:
+        action:
+          type: string
+          description: Can be click, open, send, or any user-defined actions.
+        cID:
+          type: string
+          description: Contact ID
+        time:
+          type: string
+          format: dateTime
+        mcID:
+          type: string
+        bmID:
+          type: string
+        first:
+          type: integer
+        properties:
+          type: object
   responses:
-    AttributeErrorOrValidationErrors:
-      description: Attribute Error Or Validation Errors
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AttributeErrorOrValidationErrors'
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
     AuthenticationFailure:
       description: Unauthorized
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/AuthenticationFailed'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    AttributeErrorOrValidationErrors:
+      description: Attribute Error Or Validation Errors
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttributeErrorOrValidationErrors'
   securitySchemes:
     basicAuth:
       type: http

@@ -344,6 +344,62 @@ components:
           type: string
         content:
           type: string
+    IncludeErrorValidation:
+      title: ''
+      required:
+      - error
+      - errorKey
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Key must be unique
+          description: 'Message with error explanation. Possible errors: [''Key must be unique'',''Internal error received on content validation'', At least one user should be subscribed to the channel :channelName]. This field is optional, can be replaced with ''fieldErrors'''
+        fieldErrors:
+          type: object
+          $ref: '#/components/schemas/fieldErrorsInclude'
+          description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    fieldErrorsInclude:
+      type: object
+      required:
+      - fieldErrors
+      properties:
+        <field>:
+          type: array
+          items:
+            type: string
+            example: The destination field is required.
     IncludeResponse:
       title: Include
       type: object
@@ -384,6 +440,19 @@ components:
           type: string
           format: date-time
           description: Last modified date.
+    IncludeCreationSuccess:
+      title: Successful operation for include content creation
+      type: object
+      required:
+      - success
+      - message
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: record created
     IncludeI_2:
       title: Include
       type: object
@@ -426,75 +495,6 @@ components:
           type: string
           example: Include can't be deleted because it used in next message(s) - SundayMessage
           description: 'Error returned in case removing is impossible. Possible errors: [''Include can''t be deleted because it used in next message(s) - "messageName"'',''Include can''t be deleted because it used in next message automation(s) - "automationName"''].'
-    IncludeErrorValidation:
-      title: ''
-      required:
-      - error
-      - errorKey
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Key must be unique
-          description: 'Message with error explanation. Possible errors: [''Key must be unique'',''Internal error received on content validation'', At least one user should be subscribed to the channel :channelName]. This field is optional, can be replaced with ''fieldErrors'''
-        fieldErrors:
-          type: object
-          $ref: '#/components/schemas/fieldErrorsInclude'
-          description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-    IncludeCreationSuccess:
-      title: Successful operation for include content creation
-      type: object
-      required:
-      - success
-      - message
-      properties:
-        success:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: record created
-    fieldErrorsInclude:
-      type: object
-      required:
-      - fieldErrors
-      properties:
-        <field>:
-          type: array
-          items:
-            type: string
-            example: The destination field is required.
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
   responses:
     RecordNotFound:
       description: Record not found
@@ -502,18 +502,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RecordNotFound'
-    IncludeErrorValidation:
-      description: validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IncludeErrorValidation'
     IncludeRemoveImpossible:
       description: Operation failed
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/IncludeRemoveImpossible'
+    IncludeErrorValidation:
+      description: validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IncludeErrorValidation'
   securitySchemes:
     basicAuth:
       type: http

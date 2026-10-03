@@ -412,38 +412,61 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
-    OrderUPD:
-      title: Order
+    ItemsO:
+      title: Items
       type: object
+      required:
+      - productID
+      - sku
+      - category
+      - name
       properties:
-        linkID:
-          description: Link ID
+        productID:
           type: string
-        mcID:
-          description: Messagecontact ID
+        description:
           type: string
-        storeID:
-          description: Store ID
+        sku:
           type: string
-        customerID:
+        category:
+          type: string
+        name:
+          type: string
+        qty:
           type: integer
-        purchaseDate:
+        itemPrice:
+          type: number
+          format: float
+        url:
           type: string
-          format: datetime
-        shippingAddress:
-          $ref: '#/components/schemas/ShippingAddressO'
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddressO'
-        items:
+        attr:
+          type: object
+        productType:
+          type: string
+          enum:
+          - physical
+          - digital
+          - subscription
+          - event
+        manufacturerName:
+          type: string
+        UPCCode:
+          type: string
+        images:
           type: array
           items:
-            $ref: '#/components/schemas/ItemsO'
-        tax:
-          type: integer
-        shippingAndHandling:
-          type: string
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
         properties:
           type: object
+        inStock:
+          type: boolean
+        taxable:
+          type: boolean
+        enabled:
+          type: boolean
     ShippingAddressO:
       title: ShippingAddress
       type: object
@@ -531,124 +554,38 @@ components:
           type: string
         properties:
           type: object
-    ItemsO:
-      title: Items
-      type: object
-      required:
-      - productID
-      - sku
-      - category
-      - name
-      properties:
-        productID:
-          type: string
-        description:
-          type: string
-        sku:
-          type: string
-        category:
-          type: string
-        name:
-          type: string
-        qty:
-          type: integer
-        itemPrice:
-          type: number
-          format: float
-        url:
-          type: string
-        attr:
-          type: object
-        productType:
-          type: string
-          enum:
-          - physical
-          - digital
-          - subscription
-          - event
-        manufacturerName:
-          type: string
-        UPCCode:
-          type: string
-        images:
-          type: array
-          items:
-            type: string
-        tags:
-          type: array
-          items:
-            type: string
-        properties:
-          type: object
-        inStock:
-          type: boolean
-        taxable:
-          type: boolean
-        enabled:
-          type: boolean
-    OrderUPD_2:
+    OrderUPD:
       title: Order
       type: object
       properties:
-        cID:
-          description: Cordial database contact ID (cID) value.
-          type: string
-          example: 5f5f89b88b265d3b6563c3b5
         linkID:
-          description: Cordial ID that represents the specific message and link (e.g. 45:55....aef:1). Required to track revenue attribution to a specific link.
+          description: Link ID
           type: string
-          example: 5f5f89b88b265d3b6563c3b5
         mcID:
-          description: Message contact ID (mcID). Represents the Cordial account, specific contact, and the specific message (e.g. 45:55....aef:1). Required to track revenue attribution.
+          description: Messagecontact ID
           type: string
-          example: 1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1
         storeID:
-          description: Store ID.
+          description: Store ID
           type: string
-          example: abc123
         customerID:
-          type: string
-          description: Customer ID. Typically a value assigned by the eCommerce or CRM platform (e.g. abc123).
-          example: abc123
+          type: integer
         purchaseDate:
           type: string
-          format: date-time
-          description: Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+          format: datetime
         shippingAddress:
-          $ref: '#/components/schemas/ShippingAddressO_2'
+          $ref: '#/components/schemas/ShippingAddressO'
         billingAddress:
-          $ref: '#/components/schemas/BillingAddressO_2'
+          $ref: '#/components/schemas/BillingAddressO'
         items:
           type: array
           items:
-            $ref: '#/components/schemas/ItemsO_2'
+            $ref: '#/components/schemas/ItemsO'
         tax:
-          type: float
-          description: The amount of tax.
-          example: 22.5
+          type: integer
         shippingAndHandling:
-          type: number
-          description: The amount charged for shipping and handling.
-          example: 0.0
+          type: string
         properties:
           type: object
-          description: 'Key/value pairs describing order properties (e.g "currency": "USD").'
-          example:
-            currency: USD
-        suppressTriggers:
-          type: boolean
-          example: false
-          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the order. Defaults to `false`.
-        discountApplication:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - fixed
-            amount:
-              type: number
-              format: float
     OrdersFilterError:
       title: Filter incorrect
       required:
@@ -666,233 +603,6 @@ components:
         message:
           type: string
           example: Time value is incorrect
-    OrderOWithSuppress:
-      title: Order
-      type: object
-      required:
-      - orderID
-      - purchaseDate
-      - cID
-      properties:
-        orderID:
-          description: Unique order identifier.
-          type: string
-          example: '33451'
-        cID:
-          description: Cordial database contact ID (cID) value.
-          type: string
-          example: 5f5f89b88b265d3b6563c3b5
-        linkID:
-          description: Cordial ID that represents the specific message and link (e.g. 45:55....aef:1). Required to track revenue attribution to a specific link.
-          type: string
-          example: 5f5f89b88b265d3b6563c3b5
-        status:
-          description: Order status.
-          type: string
-        mcID:
-          description: Message contact ID (mcID). Represents the Cordial account, specific contact, and the specific message (e.g. 45:55....aef:1). Required to track revenue attribution.
-          type: string
-          example: 1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1
-        storeID:
-          description: Store ID.
-          type: string
-          example: abc123
-        customerID:
-          type: string
-          description: Customer ID. Typically a value assigned by the eCommerce or CRM platform (e.g. abc123).
-        purchaseDate:
-          type: string
-          format: date-time
-          description: Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
-        shippingAddress:
-          $ref: '#/components/schemas/ShippingAddressO_2'
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddressO_2'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ItemsO_2'
-        discountApplication:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - fixed
-            amount:
-              type: number
-              format: float
-        tax:
-          type: float
-          description: The amount of the tax
-          example: 22.5
-        shippingAndHandling:
-          type: number
-          description: The amount charged for shipping and handling.
-          example: 0.0
-        properties:
-          type: object
-          description: Key/value pairs describing the properties of the order.
-          example:
-            currency: USD
-        suppressTriggers:
-          type: boolean
-          example: false
-          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the order. Defaults to `false`.
-    ShippingAddressO_2:
-      title: ShippingAddress
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the person or company placing the order.
-          example: Mark Smith
-        address:
-          type: string
-          description: Shipping address street (e.g. 13130 Silverlake Road).
-          example: 13130 Silverlake Road
-        city:
-          type: string
-          description: Shipping address city (e.g. Hollywood).
-          example: Hollywood
-        state:
-          type: string
-          description: Shipping address state (e.g. CA).
-          example: CA
-        postalCode:
-          type: string
-          description: Shipping address postal code (e.g. 90028).
-          example: 90028
-        country:
-          type: string
-          description: Shipping address country (e.g. USA).
-          example: USA
-    BillingAddressO_2:
-      title: BillingAddress
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the person or company placing the order.
-          example: Mark Smith
-        address:
-          type: string
-          description: Billing street address (e.g. 13130 Silverlake Road).
-          example: 13130 Silverlake Road
-        city:
-          type: string
-          description: Billing address city (e.g. Hollywood).
-          example: Hollywood
-        state:
-          type: string
-          description: Billing address state (e.g. CA).
-          example: CA
-        postalCode:
-          type: string
-          description: Billing address postal code (e.g. 90028).
-          example: 90028
-        country:
-          type: string
-          description: Billing address country (e.g. USA).
-          example: USA
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-    OrderO_2:
-      title: Order
-      type: object
-      required:
-      - orderID
-      - purchaseDate
-      - cID
-      properties:
-        orderID:
-          description: Unique order identifier.
-          type: string
-          example: '33451'
-        cID:
-          description: Cordial database contact ID (cID) value.
-          type: string
-          example: 5f5f89b88b265d3b6563c3b5
-        linkID:
-          description: Cordial ID that represents the specific message and link (e.g. 45:55....aef:1). Required to track revenue attribution to a specific link.
-          type: string
-          example: 5f5f89b88b265d3b6563c3b5
-        status:
-          description: Order status.
-          type: string
-        mcID:
-          description: Message contact ID (mcID). Represents the Cordial account, specific contact, and the specific message (e.g. 45:55....aef:1). Required to track revenue attribution.
-          type: string
-          example: 1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1
-        storeID:
-          description: Store ID.
-          type: string
-          example: abc123
-        customerID:
-          type: string
-          description: Customer ID. Typically a value assigned by the eCommerce or CRM platform (e.g. abc123).
-        purchaseDate:
-          type: string
-          format: date-time
-          description: Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
-        shippingAddress:
-          $ref: '#/components/schemas/ShippingAddressO_2'
-        billingAddress:
-          $ref: '#/components/schemas/BillingAddressO_2'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ItemsO_2'
-        totalDiscountAmount:
-          type: number
-          format: float
-          description: Represents discount amount automatically calculated by discountApplication.
-        discountApplication:
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - fixed
-            amount:
-              type: number
-              format: float
-        tax:
-          type: float
-          description: The amount of the tax.
-          example: 22.5
-        shippingAndHandling:
-          type: number
-          description: The amount charged for shipping and handling.
-          example: 0.0
-        properties:
-          type: object
-          description: Key/value pairs describing the properties of the order.
-          example:
-            currency: USD
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
     ItemsO_2:
       title: Items
       type: object
@@ -986,31 +696,321 @@ components:
           type: boolean
           description: 'Flags product as enabled. Possible value: 1, 0, or true, false. Defaults to `false`.'
           example: true
-  responses:
-    OrderValidationError:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OrderValidationError'
+    ShippingAddressO_2:
+      title: ShippingAddress
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the person or company placing the order.
+          example: Mark Smith
+        address:
+          type: string
+          description: Shipping address street (e.g. 13130 Silverlake Road).
+          example: 13130 Silverlake Road
+        city:
+          type: string
+          description: Shipping address city (e.g. Hollywood).
+          example: Hollywood
+        state:
+          type: string
+          description: Shipping address state (e.g. CA).
+          example: CA
+        postalCode:
+          type: string
+          description: Shipping address postal code (e.g. 90028).
+          example: 90028
+        country:
+          type: string
+          description: Shipping address country (e.g. USA).
+          example: USA
+    OrderUPD_2:
+      title: Order
+      type: object
+      properties:
+        cID:
+          description: Cordial database contact ID (cID) value.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        linkID:
+          description: Cordial ID that represents the specific message and link (e.g. 45:55....aef:1). Required to track revenue attribution to a specific link.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        mcID:
+          description: Message contact ID (mcID). Represents the Cordial account, specific contact, and the specific message (e.g. 45:55....aef:1). Required to track revenue attribution.
+          type: string
+          example: 1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1
+        storeID:
+          description: Store ID.
+          type: string
+          example: abc123
+        customerID:
+          type: string
+          description: Customer ID. Typically a value assigned by the eCommerce or CRM platform (e.g. abc123).
+          example: abc123
+        purchaseDate:
+          type: string
+          format: date-time
+          description: Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddressO_2'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddressO_2'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemsO_2'
+        tax:
+          type: float
+          description: The amount of tax.
+          example: 22.5
+        shippingAndHandling:
+          type: number
+          description: The amount charged for shipping and handling.
+          example: 0.0
+        properties:
+          type: object
+          description: 'Key/value pairs describing order properties (e.g "currency": "USD").'
+          example:
+            currency: USD
+        suppressTriggers:
+          type: boolean
+          example: false
+          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the order. Defaults to `false`.
+        discountApplication:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - fixed
+            amount:
+              type: number
+              format: float
+    OrderOWithSuppress:
+      title: Order
+      type: object
+      required:
+      - orderID
+      - purchaseDate
+      - cID
+      properties:
+        orderID:
+          description: Unique order identifier.
+          type: string
+          example: '33451'
+        cID:
+          description: Cordial database contact ID (cID) value.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        linkID:
+          description: Cordial ID that represents the specific message and link (e.g. 45:55....aef:1). Required to track revenue attribution to a specific link.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        status:
+          description: Order status.
+          type: string
+        mcID:
+          description: Message contact ID (mcID). Represents the Cordial account, specific contact, and the specific message (e.g. 45:55....aef:1). Required to track revenue attribution.
+          type: string
+          example: 1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1
+        storeID:
+          description: Store ID.
+          type: string
+          example: abc123
+        customerID:
+          type: string
+          description: Customer ID. Typically a value assigned by the eCommerce or CRM platform (e.g. abc123).
+        purchaseDate:
+          type: string
+          format: date-time
+          description: Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddressO_2'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddressO_2'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemsO_2'
+        discountApplication:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - fixed
+            amount:
+              type: number
+              format: float
+        tax:
+          type: float
+          description: The amount of the tax
+          example: 22.5
+        shippingAndHandling:
+          type: number
+          description: The amount charged for shipping and handling.
+          example: 0.0
+        properties:
+          type: object
+          description: Key/value pairs describing the properties of the order.
+          example:
+            currency: USD
+        suppressTriggers:
+          type: boolean
+          example: false
+          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the order. Defaults to `false`.
+    BillingAddressO_2:
+      title: BillingAddress
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the person or company placing the order.
+          example: Mark Smith
+        address:
+          type: string
+          description: Billing street address (e.g. 13130 Silverlake Road).
+          example: 13130 Silverlake Road
+        city:
+          type: string
+          description: Billing address city (e.g. Hollywood).
+          example: Hollywood
+        state:
+          type: string
+          description: Billing address state (e.g. CA).
+          example: CA
+        postalCode:
+          type: string
+          description: Billing address postal code (e.g. 90028).
+          example: 90028
+        country:
+          type: string
+          description: Billing address country (e.g. USA).
+          example: USA
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
     RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
-    OrdersFilterError:
-      description: Filter incorrect
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OrdersFilterError'
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    OrderO_2:
+      title: Order
+      type: object
+      required:
+      - orderID
+      - purchaseDate
+      - cID
+      properties:
+        orderID:
+          description: Unique order identifier.
+          type: string
+          example: '33451'
+        cID:
+          description: Cordial database contact ID (cID) value.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        linkID:
+          description: Cordial ID that represents the specific message and link (e.g. 45:55....aef:1). Required to track revenue attribution to a specific link.
+          type: string
+          example: 5f5f89b88b265d3b6563c3b5
+        status:
+          description: Order status.
+          type: string
+        mcID:
+          description: Message contact ID (mcID). Represents the Cordial account, specific contact, and the specific message (e.g. 45:55....aef:1). Required to track revenue attribution.
+          type: string
+          example: 1:5f5f89987b8f107ade2be674:ot:5ee22ead517daa8cf0403205:1
+        storeID:
+          description: Store ID.
+          type: string
+          example: abc123
+        customerID:
+          type: string
+          description: Customer ID. Typically a value assigned by the eCommerce or CRM platform (e.g. abc123).
+        purchaseDate:
+          type: string
+          format: date-time
+          description: Order purchase date (ISO 08601 date format e.g. YYYY-MM-DDThh:mm:ss).
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddressO_2'
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddressO_2'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemsO_2'
+        totalDiscountAmount:
+          type: number
+          format: float
+          description: Represents discount amount automatically calculated by discountApplication.
+        discountApplication:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - fixed
+            amount:
+              type: number
+              format: float
+        tax:
+          type: float
+          description: The amount of the tax.
+          example: 22.5
+        shippingAndHandling:
+          type: number
+          description: The amount charged for shipping and handling.
+          example: 0.0
+        properties:
+          type: object
+          description: Key/value pairs describing the properties of the order.
+          example:
+            currency: USD
+  responses:
     OrderNotFound:
       description: Validation error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/OrderNotFound'
+    OrdersFilterError:
+      description: Filter incorrect
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrdersFilterError'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    OrderValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OrderValidationError'
   securitySchemes:
     basicAuth:
       type: http

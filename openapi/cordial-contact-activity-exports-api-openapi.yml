@@ -196,6 +196,14 @@ components:
         label:
           type: string
           description: Label for column which will be represented in file
+    EventsExportResponse:
+      title: Contact activity export
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
     DestinationObject:
       title: Destination
       type: object
@@ -246,9 +254,8 @@ components:
         container:
           type: string
           description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
-    MediaTypeIsIncorrect:
-      title: Unsupported Media Type
-      description: Unsupported Media Type
+    EventsExportDestinationConfigError:
+      title: Export destination config error
       required:
       - error
       - message
@@ -259,10 +266,11 @@ components:
           example: true
         errorKey:
           type: string
-          example: UNSUPPORTED_MEDIA_TYPE
+          example: GENERIC_ERROR_KEY
         message:
           type: string
-          example: 'Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.'
+          example: The source.transport field is required.
+          description: 'Field is present if export destination configuration is wrong. Possible errors: [''The destination.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'', ''The destination.path field is required.'', ''The destination.transport field is required.'', ''The selected destination.transport is invalid.'', ''The destination.aws access key id field is required.'', ''The destination.aws secret access key field is required.'', ''The destination.aws bucket field is required.'', ''The destination.aws region field is required.'', ''The columns field is required.'']'
     SourceCAE_2:
       title: Source contactactivity export
       type: object
@@ -365,8 +373,9 @@ components:
           type: string
           example: sms
           description: 'SendType for sms channel type. Possible values: sms, mms'
-    EventsExportDestinationConfigError:
-      title: Export destination config error
+    MediaTypeIsIncorrect:
+      title: Unsupported Media Type
+      description: Unsupported Media Type
       required:
       - error
       - message
@@ -377,23 +386,10 @@ components:
           example: true
         errorKey:
           type: string
-          example: GENERIC_ERROR_KEY
+          example: UNSUPPORTED_MEDIA_TYPE
         message:
           type: string
-          example: The source.transport field is required.
-          description: 'Field is present if export destination configuration is wrong. Possible errors: [''The destination.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'', ''The destination.path field is required.'', ''The destination.transport field is required.'', ''The selected destination.transport is invalid.'', ''The destination.aws access key id field is required.'', ''The destination.aws secret access key field is required.'', ''The destination.aws bucket field is required.'', ''The destination.aws region field is required.'', ''The columns field is required.'']'
-    ColumnHeaders_2:
-      title: Source
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Data field name as it appears in the Cordial database (e.g. ats, email msID, a). For use when explicitly defining the output column headers.
-        label:
-          type: string
-          description: Custom column header label to accompany the field name (e.g. action timestamp, email address, message ID, action name).
+          example: 'Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.'
     EventsExportConfigError:
       title: Export config error
       required:
@@ -411,14 +407,18 @@ components:
           type: string
           example: Please use only one from existing filters 'selected_action_name' OR 'selected_action_names'
           description: 'Field is present if export configuration is wrong. Possible errors: [''Please use only one from existing filters ''selected_action_name'' OR ''selected_action_names'''', ''Field ''selected_message_type'' should be specified'', ''Incorrect format for ''selected_action_names'''', ''Incorrect format for ''additionalJsonlFields''.'', ''Please use only one from existing filters ''selected_audience_key'' OR ''selected_contact'''', ''Such contact :selected_contact does not exist.'', ''Audience with name :selected_audience_key does not exist.'', ''Field ''exportType'' should be specified'', ''''selected_timeframe_end'' cannot be in past in comparison with ''selected_timeframe_start'''']'
-    EventsExportResponse:
-      title: Contact activity export
+    ColumnHeaders_2:
+      title: Source
       type: object
       required:
-      - jobId
+      - name
       properties:
-        jobId:
+        name:
           type: string
+          description: Data field name as it appears in the Cordial database (e.g. ats, email msID, a). For use when explicitly defining the output column headers.
+        label:
+          type: string
+          description: Custom column header label to accompany the field name (e.g. action timestamp, email address, message ID, action name).
   responses:
     incorrectmediatype:
       description: ''

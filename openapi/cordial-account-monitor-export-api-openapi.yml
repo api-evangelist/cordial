@@ -40,6 +40,14 @@ paths:
         required: true
 components:
   schemas:
+    AccountMonitorExportResponse:
+      title: ContactExports
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
     DestinationObject:
       title: Destination
       type: object
@@ -164,14 +172,6 @@ components:
           items:
             type: string
             example: The destination field is required.
-    AccountMonitorExportResponse:
-      title: ContactExports
-      type: object
-      required:
-      - jobId
-      properties:
-        jobId:
-          type: string
   securitySchemes:
     basicAuth:
       type: http
