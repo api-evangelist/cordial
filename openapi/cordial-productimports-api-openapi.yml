@@ -135,6 +135,14 @@ components:
           enum:
           - ftp
           - sftp
+    ProductImportsResponse:
+      title: ProductImports
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
     SourceObject:
       title: Source
       type: object
@@ -207,24 +215,6 @@ components:
         source:
           type: string
           description: Defines the Snowflake table or view. Required if destination is SNOWFLAKE.
-    ProductImportsError:
-      title: ProductImportsError
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Error validation message
-          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
     JobPI_2:
       title: Job
       type: object
@@ -249,14 +239,24 @@ components:
         nullMarker:
           type: string
           description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
-    ProductImportsResponse:
-      title: ProductImports
-      type: object
+    ProductImportsError:
+      title: ProductImportsError
       required:
-      - jobId
+      - error
+      - errorKey
+      - message
+      type: object
       properties:
-        jobId:
+        error:
+          type: boolean
+          example: true
+        errorKey:
           type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Error validation message
+          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
   securitySchemes:
     basicAuth:
       type: http

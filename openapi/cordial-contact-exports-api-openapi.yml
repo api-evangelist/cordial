@@ -162,6 +162,86 @@ components:
       properties:
         jobId:
           type: string
+    MediaTypeIsIncorrect:
+      title: Unsupported Media Type
+      description: Unsupported Media Type
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: UNSUPPORTED_MEDIA_TYPE
+        message:
+          type: string
+          example: 'Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.'
+    SourceCE_2:
+      title: Source
+      type: object
+      required:
+      - destination
+      - fields
+      - accountId
+      properties:
+        name:
+          type: string
+          description: Defines the export file name. If provided, this value will be displayed next to the job ID on the Jobs status page.
+        exportType:
+          description: 'Defines the file type to be exported. Possible values: CSV, JSON, TXT.'
+          type: string
+        delimiter:
+          type: string
+          description: Character used to break up export file columns. Only used if ExportType is set to TXT. Defaults to `,` if not specified.
+          example: ','
+        destination:
+          $ref: '#/components/schemas/DestinationObject'
+        fields:
+          type: array
+          items:
+            type: string
+          description: Fields or contact attribute keys to include (e.g. ["first_name","last_name"]).
+        lists:
+          type: array
+          items:
+            type: number
+          description: List names or list IDs to include (e.g. ["monthly_newsletter","weekly_specials"] or [8756,8757]). Contact's list association is indicated with a <b>1</b> for being on the list or an <b>0</b> for not being on the lsit.
+        audience-key:
+          type: string
+          description: Limit export results to a specific audience using a saved audience rule name (e.g. 30_Day_Engaged).
+        accountId:
+          type: integer
+          description: Account ID.
+        showHeader:
+          type: boolean
+          description: 'For use when export file type is <b>CSV</b> to determine if the first row will display column names. Possible values: true, false.'
+        compress:
+          type: boolean
+          description: Compresses the exported file. If set to `true`, the file is compressed using GZIP with the file extension <b>.gz</b> added to the filename.
+        confirmEmail:
+          type: string
+          description: Email address to send an administrative alert when the job is done running.
+    ContactExportsError:
+      title: ContactExports
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Error validation message
+          description: 'Error explanation. Possible errors: [''SSH key with such Name/ID: wrong does not exist.'', ''The selected export type is invalid.'', ''Audience with name: ''string'' does not exist.'', etc.]'
     DestinationObject:
       title: Destination
       type: object
@@ -212,86 +292,6 @@ components:
         container:
           type: string
           description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
-    SourceCE_2:
-      title: Source
-      type: object
-      required:
-      - destination
-      - fields
-      - accountId
-      properties:
-        name:
-          type: string
-          description: Defines the export file name. If provided, this value will be displayed next to the job ID on the Jobs status page.
-        exportType:
-          description: 'Defines the file type to be exported. Possible values: CSV, JSON, TXT.'
-          type: string
-        delimiter:
-          type: string
-          description: Character used to break up export file columns. Only used if ExportType is set to TXT. Defaults to `,` if not specified.
-          example: ','
-        destination:
-          $ref: '#/components/schemas/DestinationObject'
-        fields:
-          type: array
-          items:
-            type: string
-          description: Fields or contact attribute keys to include (e.g. ["first_name","last_name"]).
-        lists:
-          type: array
-          items:
-            type: number
-          description: List names or list IDs to include (e.g. ["monthly_newsletter","weekly_specials"] or [8756,8757]). Contact's list association is indicated with a <b>1</b> for being on the list or an <b>0</b> for not being on the lsit.
-        audience-key:
-          type: string
-          description: Limit export results to a specific audience using a saved audience rule name (e.g. 30_Day_Engaged).
-        accountId:
-          type: integer
-          description: Account ID.
-        showHeader:
-          type: boolean
-          description: 'For use when export file type is <b>CSV</b> to determine if the first row will display column names. Possible values: true, false.'
-        compress:
-          type: boolean
-          description: Compresses the exported file. If set to `true`, the file is compressed using GZIP with the file extension <b>.gz</b> added to the filename.
-        confirmEmail:
-          type: string
-          description: Email address to send an administrative alert when the job is done running.
-    MediaTypeIsIncorrect:
-      title: Unsupported Media Type
-      description: Unsupported Media Type
-      required:
-      - error
-      - message
-      - errorKey
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: UNSUPPORTED_MEDIA_TYPE
-        message:
-          type: string
-          example: 'Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.'
-    ContactExportsError:
-      title: ContactExports
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Error validation message
-          description: 'Error explanation. Possible errors: [''SSH key with such Name/ID: wrong does not exist.'', ''The selected export type is invalid.'', ''Audience with name: ''string'' does not exist.'', etc.]'
   responses:
     incorrectmediatype:
       description: ''

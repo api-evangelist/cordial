@@ -388,6 +388,16 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
+    List:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list '
     ListShow:
       type: object
       title: List
@@ -401,95 +411,6 @@ components:
         enhanced:
           type: boolean
           description: 'Automatically track the date each contact is added to this list '
-    List:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        enhanced:
-          type: boolean
-          description: 'Automatically track the date each contact is added to this list '
-    ListError:
-      title: Validation Error
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Name must be unique
-          description: 'Message with error explanation. Possible errors: [''cid is not allowed for list names.'', ''Name must contain only letters, numbers, and dashes. Should not exceed 128 characters''].'
-    ListCreationSuccess:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-        id:
-          type: number
-          example: 123
-    AuthenticationFailed:
-      title: AuthenticationFailure
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          example: 'Access Denied: Authentication Failure'
-    ListNotExist:
-      title: List does not exist
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: ACCOUNT_LISTS_NOT_FOUND
-        message:
-          type: string
-          example: List does not exist
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
     ListValidationError:
       title: Validation Error
       required:
@@ -508,6 +429,132 @@ components:
           type: string
           example: Name must contain only letters, numbers, and dashes. Should not exceed 128 characters.
           description: 'Message with error explanation. Possible errors: [''Name must contain only letters, numbers and dashes and should not exceed 128 characters'',''Name must be unique'']'
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    ListCreationSuccess:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+        id:
+          type: number
+          example: 123
+    List_2:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Unique name to identify and reference the list.
+          example: Sellers
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list. Possible values: true, false.'
+          example: true
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    ListShow_2:
+      type: object
+      title: List
+      required:
+      - name
+      properties:
+        id:
+          type: integer
+          description: 'List id: unique identifier on the platform.'
+          example: 123
+        name:
+          type: string
+          description: List name. Should be unique and have maximum of 128 characters.
+          example: Sellers
+        enhanced:
+          type: boolean
+          description: 'Automatically track the date each contact is added to this list. '
+          example: true
+    ListNotExist:
+      title: List does not exist
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: ACCOUNT_LISTS_NOT_FOUND
+        message:
+          type: string
+          example: List does not exist
+    ListError:
+      title: Validation Error
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Name must be unique
+          description: 'Message with error explanation. Possible errors: [''cid is not allowed for list names.'', ''Name must contain only letters, numbers, and dashes. Should not exceed 128 characters''].'
+    ListNotFound:
+      title: List is not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: List is not found
     ListShowCount:
       type: object
       title: List
@@ -530,72 +577,7 @@ components:
           type: integer
           description: Count of contacts assigned to this list.
           example: 255
-    ListShow_2:
-      type: object
-      title: List
-      required:
-      - name
-      properties:
-        id:
-          type: integer
-          description: 'List id: unique identifier on the platform.'
-          example: 123
-        name:
-          type: string
-          description: List name. Should be unique and have maximum of 128 characters.
-          example: Sellers
-        enhanced:
-          type: boolean
-          description: 'Automatically track the date each contact is added to this list. '
-          example: true
-    ListNotFound:
-      title: List is not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: List is not found
-    List_2:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Unique name to identify and reference the list.
-          example: Sellers
-        enhanced:
-          type: boolean
-          description: 'Automatically track the date each contact is added to this list. Possible values: true, false.'
-          example: true
   responses:
-    ListNotExist:
-      description: List does not exist
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListNotExist'
-    ListValidationError:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ListValidationError'
-    AuthenticationFailure:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AuthenticationFailed'
     ListNotFound:
       description: List is not found
       content:
@@ -608,12 +590,30 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RecordNotFound'
+    AuthenticationFailure:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationFailed'
     ListError:
       description: Name must be unique
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ListError'
+    ListNotExist:
+      description: List does not exist
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListNotExist'
+    ListValidationError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListValidationError'
   securitySchemes:
     basicAuth:
       type: http

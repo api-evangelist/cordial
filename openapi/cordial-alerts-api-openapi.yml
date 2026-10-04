@@ -189,45 +189,7 @@ paths:
         '404':
           $ref: '#/components/responses/RecordNotFound'
 components:
-  responses:
-    AlertErrorValidation:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AlertErrorValidation'
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
-    AlertRemoveImpossible:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AlertRemoveImpossible'
   schemas:
-    AlertConditions:
-      title: conditions
-      required:
-      - type
-      - operator
-      - value
-      - period
-      type: object
-      properties:
-        operator:
-          type: string
-          enum:
-          - lt
-          - lte
-          - gt
-          - gte
-        value:
-          type: integer
-          description: ''
     AlertErrorValidation:
       title: AlertErrorValidation
       type: object
@@ -243,16 +205,6 @@ components:
           type: string
           enum:
           - VALIDATION_ERROR
-    AlertCreationSuccess:
-      title: AlertCreationSuccess
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-        id:
-          type: number
-          example: 123
     SuccessOperation:
       title: Successful operation
       type: object
@@ -262,22 +214,6 @@ components:
         success:
           type: boolean
           example: true
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
     AlertI:
       title: Alerts
       type: object
@@ -311,6 +247,51 @@ components:
         period:
           type: integer
           description: Set how far back you want the alert to apply under Within the last. You can set the alert to go back as far as one day. Value in minutes.
+    AlertConditions:
+      title: conditions
+      required:
+      - type
+      - operator
+      - value
+      - period
+      type: object
+      properties:
+        operator:
+          type: string
+          enum:
+          - lt
+          - lte
+          - gt
+          - gte
+        value:
+          type: integer
+          description: ''
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    AlertCreationSuccess:
+      title: AlertCreationSuccess
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        id:
+          type: number
+          example: 123
     AlertResponse:
       title: AlertResponse
       type: object
@@ -345,6 +326,25 @@ components:
     AlertRemoveImpossible:
       title: AlertRemoveImpossible
       type: object
+  responses:
+    AlertErrorValidation:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlertErrorValidation'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
+    AlertRemoveImpossible:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AlertRemoveImpossible'
   securitySchemes:
     basicAuth:
       type: http

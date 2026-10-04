@@ -142,6 +142,18 @@ components:
           type: boolean
           default: false
           description: If true then gzip and add .gz to filename(s)
+    ColumnHeaders:
+      title: Source
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: 'Name of column in system (ats - action date, message_sent - message sent time, msID - message ID, a - event name, email - contact) '
+        label:
+          type: string
+          description: Label for column which will be represented in file
     DestinationAME:
       title: Destination
       type: object
@@ -182,18 +194,24 @@ components:
         aws_region:
           type: string
           description: (required for s3)
-    ColumnHeaders:
-      title: Source
-      type: object
+    MessageAnalyticsExportError:
+      title: MessageAnalyticsExportError
       required:
-      - name
+      - error
+      - errorKey
+      - message
+      type: object
       properties:
-        name:
+        error:
+          type: boolean
+          example: true
+        errorKey:
           type: string
-          description: 'Name of column in system (ats - action date, message_sent - message sent time, msID - message ID, a - event name, email - contact) '
-        label:
+          example: GENERIC_ERROR_KEY
+        message:
           type: string
-          description: Label for column which will be represented in file
+          example: Error validation message
+          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
     MessageAnalyticsExportResponse:
       title: MessageAnalyticsExport
       type: object
@@ -202,56 +220,18 @@ components:
       properties:
         jobId:
           type: string
-    DestinationObject:
-      title: Destination
+    ColumnHeaders_2:
+      title: Source
       type: object
       required:
-      - type
+      - name
       properties:
-        type:
+        name:
           type: string
-          description: 'Defines the destination type. Possible values: AWS (should be used if the file is to be downloaded via the Cordial UI), FTP, SFTP, S3, GCS, AZUREBLOB.'
-        aws_access_key_id:
+          description: Data field name as it appears in the Cordial database (e.g. ats, email msID, a). For use when explicitly defining the output column headers.
+        label:
           type: string
-          description: Defines the public AWS access key ID. Required if destination is S3 and IAM role is not configured.
-        aws_secret_access_key:
-          type: string
-          description: Defines the secret AWS access key. Required if destination is S3 and IAM role is not configured.
-        aws_bucket:
-          type: string
-          description: Defines the AWS bucket name. Required if destination is S3.
-        aws_region:
-          type: string
-          description: Defines the AWS region (e.g. us-west-2). Required if destination is S3.
-        server:
-          type: string
-          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP destinations.
-          example: sftp.example.com
-        port:
-          type: integer
-          description: Defines the port number for the FTP or SFTP server (e.g. 22).
-          example: 22
-        username:
-          type: string
-          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP destinations.
-        password:
-          type: string
-          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP destinations.
-        savedKey:
-          type: string
-          description: SFTP public key authentication key `name` if using SFTP public key authentication instead of password.
-        path:
-          type: string
-          description: Path to folder where the export file will be stored. Required if destination is FTP, SFTP, S3, GCS, or AZUREBLOB.
-        gcs_bucket:
-          type: string
-          description: Defines the GCS bucket name. Required if destination is GCS.
-        account:
-          type: string
-          description: Defines the Azure Blob Storage account name. Required if destination is AZUREBLOB.
-        container:
-          type: string
-          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
+          description: Custom column header label to accompany the field name (e.g. action timestamp, email address, message ID, action name).
     SourceAnalyticsMessage_2:
       title: Source message analytics export
       type: object
@@ -349,36 +329,56 @@ components:
         includeTotalsRow:
           type: boolean
           description: Include totals row at the bottom of the results.
-    MessageAnalyticsExportError:
-      title: MessageAnalyticsExportError
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Error validation message
-          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
-    ColumnHeaders_2:
-      title: Source
+    DestinationObject:
+      title: Destination
       type: object
       required:
-      - name
+      - type
       properties:
-        name:
+        type:
           type: string
-          description: Data field name as it appears in the Cordial database (e.g. ats, email msID, a). For use when explicitly defining the output column headers.
-        label:
+          description: 'Defines the destination type. Possible values: AWS (should be used if the file is to be downloaded via the Cordial UI), FTP, SFTP, S3, GCS, AZUREBLOB.'
+        aws_access_key_id:
           type: string
-          description: Custom column header label to accompany the field name (e.g. action timestamp, email address, message ID, action name).
+          description: Defines the public AWS access key ID. Required if destination is S3 and IAM role is not configured.
+        aws_secret_access_key:
+          type: string
+          description: Defines the secret AWS access key. Required if destination is S3 and IAM role is not configured.
+        aws_bucket:
+          type: string
+          description: Defines the AWS bucket name. Required if destination is S3.
+        aws_region:
+          type: string
+          description: Defines the AWS region (e.g. us-west-2). Required if destination is S3.
+        server:
+          type: string
+          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP destinations.
+          example: sftp.example.com
+        port:
+          type: integer
+          description: Defines the port number for the FTP or SFTP server (e.g. 22).
+          example: 22
+        username:
+          type: string
+          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        password:
+          type: string
+          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        savedKey:
+          type: string
+          description: SFTP public key authentication key `name` if using SFTP public key authentication instead of password.
+        path:
+          type: string
+          description: Path to folder where the export file will be stored. Required if destination is FTP, SFTP, S3, GCS, or AZUREBLOB.
+        gcs_bucket:
+          type: string
+          description: Defines the GCS bucket name. Required if destination is GCS.
+        account:
+          type: string
+          description: Defines the Azure Blob Storage account name. Required if destination is AZUREBLOB.
+        container:
+          type: string
+          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
   securitySchemes:
     basicAuth:
       type: http

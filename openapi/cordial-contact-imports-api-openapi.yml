@@ -255,6 +255,27 @@ components:
           - biz
           - baz
           description: All contacts will get removed from each list in the array (e.g. ["biz","baz"]). If you pass this parameter, you should not pass a column in the file with the same key. This field will always override it.
+    ContactImportConfigSuccess:
+      title: Import configuration error
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string|object
+          example: 5f6b1434f778ac145d25391a
+          schema:
+            description: String. Mongo ID or object from created job when successful.
+            properties:
+              error:
+                type: boolean
+                example: true
+              errorKey:
+                type: string
+                example: GENERIC_ERROR_KEY
+              message:
+                type: string
+                example: Can't login to the server (serverName)
+                description: 'Field present if import configuration is wrong. Possible errors: [''Can''t login to the server (serverName)'', ''Can''t connect to the server (serverName)'', ''Couldn''t get the size of the file (fileFolder/file.csv)'']'
     ContactImportJob:
       title: Job
       type: object
@@ -303,27 +324,6 @@ components:
           type: string
           example: ignore
           description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
-    ContactImportConfigSuccess:
-      title: Import configuration error
-      required:
-      - jobId
-      properties:
-        jobId:
-          type: string|object
-          example: 5f6b1434f778ac145d25391a
-          schema:
-            description: String. Mongo ID or object from created job when successful.
-            properties:
-              error:
-                type: boolean
-                example: true
-              errorKey:
-                type: string
-                example: GENERIC_ERROR_KEY
-              message:
-                type: string
-                example: Can't login to the server (serverName)
-                description: 'Field present if import configuration is wrong. Possible errors: [''Can''t login to the server (serverName)'', ''Can''t connect to the server (serverName)'', ''Couldn''t get the size of the file (fileFolder/file.csv)'']'
     ContactImportConfigError:
       title: Import configuration error
       required:

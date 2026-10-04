@@ -168,7 +168,34 @@ paths:
           description: Validation error
           $ref: '#/components/responses/DataJobsError'
 components:
+  responses:
+    DataJobsError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DataJobsError'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
   schemas:
+    OneTimeStatsReturnedSuccess:
+      title: Response
+      type: object
+      required:
+      - dabId
+      - run
+      - stats
+      properties:
+        dabId:
+          type: string
+        run:
+          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessRun'
+        stats:
+          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessStats'
     OneTimeStatsReturnedSuccessRun:
       title: Run
       type: object
@@ -191,6 +218,54 @@ components:
         endedAt:
           type: string
           format: date-time
+    DataJobsError:
+      title: Invalid request
+      required:
+      - messages
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Data Automation does not exist.
+          description: 'Possible errors: [''Data Automation does not exist.'',''Trigger API is disabled.'']'
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    OneTimeStatsReturnedSuccessStats:
+      title: Stats
+      type: object
+      required: []
+      properties:
+        total_queued:
+          type: number
+        total_processed:
+          type: number
+        total_failures:
+          type: number
+        total_successful:
+          type: number
+        total_exported:
+          type: number
     DataJobsTriggeredSuccess:
       title: 'Transformation is triggered.
 
@@ -218,21 +293,21 @@ components:
         success:
           type: boolean
           example: true
-    OneTimeStatsReturnedSuccessStats:
-      title: Stats
+    ListOfRunsReturnedSuccess:
+      title: Response
       type: object
-      required: []
+      required:
+      - daId
+      - runs
       properties:
-        total_queued:
-          type: number
-        total_processed:
-          type: number
-        total_failures:
-          type: number
-        total_successful:
-          type: number
-        total_exported:
-          type: number
+        daId:
+          type: string
+        runs:
+          type: array
+          items:
+            type: string
+    DataJobsRecord:
+      title: Data transformation object.
     DataJobsSuccess:
       title: 'Transformation is processing.
 
@@ -248,81 +323,6 @@ components:
         success:
           type: boolean
           example: true
-    ListOfRunsReturnedSuccess:
-      title: Response
-      type: object
-      required:
-      - daId
-      - runs
-      properties:
-        daId:
-          type: string
-        runs:
-          type: array
-          items:
-            type: string
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    DataJobsRecord:
-      title: Data transformation object.
-    DataJobsError:
-      title: Invalid request
-      required:
-      - messages
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Data Automation does not exist.
-          description: 'Possible errors: [''Data Automation does not exist.'',''Trigger API is disabled.'']'
-    OneTimeStatsReturnedSuccess:
-      title: Response
-      type: object
-      required:
-      - dabId
-      - run
-      - stats
-      properties:
-        dabId:
-          type: string
-        run:
-          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessRun'
-        stats:
-          $ref: '#/components/schemas/OneTimeStatsReturnedSuccessStats'
-  responses:
-    DataJobsError:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/DataJobsError'
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
   securitySchemes:
     basicAuth:
       type: http

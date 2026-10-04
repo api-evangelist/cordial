@@ -69,48 +69,6 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
-    DestinationCAE:
-      title: Destination
-      type: object
-      required:
-      - type
-      - port
-      properties:
-        type:
-          type: string
-          description: Type of report
-          enum:
-          - aws
-          - ftp
-          - sftp
-          - s3
-        server:
-          type: string
-          description: (required for ftp or sftp)
-        port:
-          type: integer
-          description: (required for ftp or sftp)
-        username:
-          type: string
-          description: (required for ftp or sftp)
-        password:
-          type: string
-          description: (required for ftp or sftp)
-        path:
-          type: string
-          description: (required for ftp,sftp,s3)
-        aws_access_key_id:
-          type: string
-          description: (required for s3)
-        aws_secret_access_key:
-          type: string
-          description: (required for s3)
-        aws_bucket:
-          type: string
-          description: (required for s3)
-        aws_region:
-          type: string
-          description: (required for s3)
     SourceCAE:
       title: Source contactactivity  export
       type: object
@@ -196,6 +154,48 @@ components:
         label:
           type: string
           description: Label for column which will be represented in file
+    DestinationCAE:
+      title: Destination
+      type: object
+      required:
+      - type
+      - port
+      properties:
+        type:
+          type: string
+          description: Type of report
+          enum:
+          - aws
+          - ftp
+          - sftp
+          - s3
+        server:
+          type: string
+          description: (required for ftp or sftp)
+        port:
+          type: integer
+          description: (required for ftp or sftp)
+        username:
+          type: string
+          description: (required for ftp or sftp)
+        password:
+          type: string
+          description: (required for ftp or sftp)
+        path:
+          type: string
+          description: (required for ftp,sftp,s3)
+        aws_access_key_id:
+          type: string
+          description: (required for s3)
+        aws_secret_access_key:
+          type: string
+          description: (required for s3)
+        aws_bucket:
+          type: string
+          description: (required for s3)
+        aws_region:
+          type: string
+          description: (required for s3)
     EventsExportResponse:
       title: Contact activity export
       type: object
@@ -204,58 +204,9 @@ components:
       properties:
         jobId:
           type: string
-    DestinationObject:
-      title: Destination
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          description: 'Defines the destination type. Possible values: AWS (should be used if the file is to be downloaded via the Cordial UI), FTP, SFTP, S3, GCS, AZUREBLOB.'
-        aws_access_key_id:
-          type: string
-          description: Defines the public AWS access key ID. Required if destination is S3 and IAM role is not configured.
-        aws_secret_access_key:
-          type: string
-          description: Defines the secret AWS access key. Required if destination is S3 and IAM role is not configured.
-        aws_bucket:
-          type: string
-          description: Defines the AWS bucket name. Required if destination is S3.
-        aws_region:
-          type: string
-          description: Defines the AWS region (e.g. us-west-2). Required if destination is S3.
-        server:
-          type: string
-          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP destinations.
-          example: sftp.example.com
-        port:
-          type: integer
-          description: Defines the port number for the FTP or SFTP server (e.g. 22).
-          example: 22
-        username:
-          type: string
-          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP destinations.
-        password:
-          type: string
-          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP destinations.
-        savedKey:
-          type: string
-          description: SFTP public key authentication key `name` if using SFTP public key authentication instead of password.
-        path:
-          type: string
-          description: Path to folder where the export file will be stored. Required if destination is FTP, SFTP, S3, GCS, or AZUREBLOB.
-        gcs_bucket:
-          type: string
-          description: Defines the GCS bucket name. Required if destination is GCS.
-        account:
-          type: string
-          description: Defines the Azure Blob Storage account name. Required if destination is AZUREBLOB.
-        container:
-          type: string
-          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
-    EventsExportDestinationConfigError:
-      title: Export destination config error
+    MediaTypeIsIncorrect:
+      title: Unsupported Media Type
+      description: Unsupported Media Type
       required:
       - error
       - message
@@ -266,11 +217,22 @@ components:
           example: true
         errorKey:
           type: string
-          example: GENERIC_ERROR_KEY
+          example: UNSUPPORTED_MEDIA_TYPE
         message:
           type: string
-          example: The source.transport field is required.
-          description: 'Field is present if export destination configuration is wrong. Possible errors: [''The destination.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'', ''The destination.path field is required.'', ''The destination.transport field is required.'', ''The selected destination.transport is invalid.'', ''The destination.aws access key id field is required.'', ''The destination.aws secret access key field is required.'', ''The destination.aws bucket field is required.'', ''The destination.aws region field is required.'', ''The columns field is required.'']'
+          example: 'Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.'
+    ColumnHeaders_2:
+      title: Source
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Data field name as it appears in the Cordial database (e.g. ats, email msID, a). For use when explicitly defining the output column headers.
+        label:
+          type: string
+          description: Custom column header label to accompany the field name (e.g. action timestamp, email address, message ID, action name).
     SourceCAE_2:
       title: Source contactactivity export
       type: object
@@ -373,9 +335,58 @@ components:
           type: string
           example: sms
           description: 'SendType for sms channel type. Possible values: sms, mms'
-    MediaTypeIsIncorrect:
-      title: Unsupported Media Type
-      description: Unsupported Media Type
+    DestinationObject:
+      title: Destination
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          description: 'Defines the destination type. Possible values: AWS (should be used if the file is to be downloaded via the Cordial UI), FTP, SFTP, S3, GCS, AZUREBLOB.'
+        aws_access_key_id:
+          type: string
+          description: Defines the public AWS access key ID. Required if destination is S3 and IAM role is not configured.
+        aws_secret_access_key:
+          type: string
+          description: Defines the secret AWS access key. Required if destination is S3 and IAM role is not configured.
+        aws_bucket:
+          type: string
+          description: Defines the AWS bucket name. Required if destination is S3.
+        aws_region:
+          type: string
+          description: Defines the AWS region (e.g. us-west-2). Required if destination is S3.
+        server:
+          type: string
+          description: Domain or IP address for the FTP/SFTP server (e.g. sftp.example.com). Required for FTP and SFTP destinations.
+          example: sftp.example.com
+        port:
+          type: integer
+          description: Defines the port number for the FTP or SFTP server (e.g. 22).
+          example: 22
+        username:
+          type: string
+          description: Defines the username for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        password:
+          type: string
+          description: Defines the password for FTP or SFTP authentication. Required for FTP and SFTP destinations.
+        savedKey:
+          type: string
+          description: SFTP public key authentication key `name` if using SFTP public key authentication instead of password.
+        path:
+          type: string
+          description: Path to folder where the export file will be stored. Required if destination is FTP, SFTP, S3, GCS, or AZUREBLOB.
+        gcs_bucket:
+          type: string
+          description: Defines the GCS bucket name. Required if destination is GCS.
+        account:
+          type: string
+          description: Defines the Azure Blob Storage account name. Required if destination is AZUREBLOB.
+        container:
+          type: string
+          description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
+    EventsExportDestinationConfigError:
+      title: Export destination config error
       required:
       - error
       - message
@@ -386,10 +397,11 @@ components:
           example: true
         errorKey:
           type: string
-          example: UNSUPPORTED_MEDIA_TYPE
+          example: GENERIC_ERROR_KEY
         message:
           type: string
-          example: 'Unsupported Media Type: Content-Type header must be application/json or application/x-www-form-urlencoded.'
+          example: The source.transport field is required.
+          description: 'Field is present if export destination configuration is wrong. Possible errors: [''The destination.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'', ''The destination.path field is required.'', ''The destination.transport field is required.'', ''The selected destination.transport is invalid.'', ''The destination.aws access key id field is required.'', ''The destination.aws secret access key field is required.'', ''The destination.aws bucket field is required.'', ''The destination.aws region field is required.'', ''The columns field is required.'']'
     EventsExportConfigError:
       title: Export config error
       required:
@@ -407,25 +419,7 @@ components:
           type: string
           example: Please use only one from existing filters 'selected_action_name' OR 'selected_action_names'
           description: 'Field is present if export configuration is wrong. Possible errors: [''Please use only one from existing filters ''selected_action_name'' OR ''selected_action_names'''', ''Field ''selected_message_type'' should be specified'', ''Incorrect format for ''selected_action_names'''', ''Incorrect format for ''additionalJsonlFields''.'', ''Please use only one from existing filters ''selected_audience_key'' OR ''selected_contact'''', ''Such contact :selected_contact does not exist.'', ''Audience with name :selected_audience_key does not exist.'', ''Field ''exportType'' should be specified'', ''''selected_timeframe_end'' cannot be in past in comparison with ''selected_timeframe_start'''']'
-    ColumnHeaders_2:
-      title: Source
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Data field name as it appears in the Cordial database (e.g. ats, email msID, a). For use when explicitly defining the output column headers.
-        label:
-          type: string
-          description: Custom column header label to accompany the field name (e.g. action timestamp, email address, message ID, action name).
   responses:
-    incorrectmediatype:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/MediaTypeIsIncorrect'
     EventsExportConfigError:
       description: ''
       content:
@@ -438,6 +432,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/EventsExportDestinationConfigError'
+    incorrectmediatype:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MediaTypeIsIncorrect'
   securitySchemes:
     basicAuth:
       type: http

@@ -265,6 +265,26 @@ components:
       title: Properties
       type: object
       properties: {}
+    AttributeErrorOrValidationErrors:
+      title: Attribute Error Or Validation Errors
+      required:
+      - error
+      - errorKey
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Key must be unique
+          description: 'Message with error explanation. Possible errors: [''Name must be unique'', ''invalid field type'', ''You can not change type'']'
+        messages:
+          type: object
+          $ref: '#/components/schemas/validationErrors'
     ActivityActivity_2:
       title: Activity
       type: object
@@ -290,75 +310,6 @@ components:
           description: 'An object of additional event attributes (e.g. {"propertyOne": 1, "propertyTwo": 2}. Note that property keys consisting of numeric-only values (e.g. 57) or keys containing a "dot" (e.g. shoes.color) will be stripped.'
           example:
             key: value
-    AttributeErrorOrValidationErrors:
-      title: Attribute Error Or Validation Errors
-      required:
-      - error
-      - errorKey
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Key must be unique
-          description: 'Message with error explanation. Possible errors: [''Name must be unique'', ''invalid field type'', ''You can not change type'']'
-        messages:
-          type: object
-          $ref: '#/components/schemas/validationErrors'
-    AuthenticationFailed:
-      title: AuthenticationFailure
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          example: 'Access Denied: Authentication Failure'
-    ContactActivityError:
-      title: Invalid request
-      required:
-      - messages
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Data Automation does not exist.
-          description: 'Possible errors: [''too many parameters'',''Contact doesn''t exist'']'
-    validationErrors:
-      required:
-      - validationErrors
-      properties:
-        validationErrors:
-          type: object
-          description: Object with validation error explanation for each field from payload.
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
     ActivityActivityShow_2:
       title: Activity
       type: object
@@ -382,19 +333,68 @@ components:
           type: integer
         properties:
           type: object
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    validationErrors:
+      required:
+      - validationErrors
+      properties:
+        validationErrors:
+          type: object
+          description: Object with validation error explanation for each field from payload.
+    ContactActivityError:
+      title: Invalid request
+      required:
+      - messages
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Data Automation does not exist.
+          description: 'Possible errors: [''too many parameters'',''Contact doesn''t exist'']'
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
   responses:
-    AuthenticationFailure:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AuthenticationFailed'
     RecordNotFound:
       description: Record not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/RecordNotFound'
+    AuthenticationFailure:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationFailed'
     AttributeErrorOrValidationErrors:
       description: Attribute Error Or Validation Errors
       content:

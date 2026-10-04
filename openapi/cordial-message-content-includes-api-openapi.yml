@@ -344,6 +344,34 @@ components:
           type: string
         content:
           type: string
+    fieldErrorsInclude:
+      type: object
+      required:
+      - fieldErrors
+      properties:
+        <field>:
+          type: array
+          items:
+            type: string
+            example: The destination field is required.
+    IncludeRemoveImpossible:
+      title: ''
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Include can't be deleted because it used in next message(s) - SundayMessage
+          description: 'Error returned in case removing is impossible. Possible errors: [''Include can''t be deleted because it used in next message(s) - "messageName"'',''Include can''t be deleted because it used in next message automation(s) - "automationName"''].'
     IncludeErrorValidation:
       title: ''
       required:
@@ -365,41 +393,6 @@ components:
           type: object
           $ref: '#/components/schemas/fieldErrorsInclude'
           description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-    fieldErrorsInclude:
-      type: object
-      required:
-      - fieldErrors
-      properties:
-        <field>:
-          type: array
-          items:
-            type: string
-            example: The destination field is required.
     IncludeResponse:
       title: Include
       type: object
@@ -440,6 +433,15 @@ components:
           type: string
           format: date-time
           description: Last modified date.
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
     IncludeCreationSuccess:
       title: Successful operation for include content creation
       type: object
@@ -453,6 +455,22 @@ components:
         message:
           type: string
           example: record created
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
     IncludeI_2:
       title: Include
       type: object
@@ -477,43 +495,25 @@ components:
         content:
           type: string
           description: HTML or Smarty content to be used as an include in message content.
-    IncludeRemoveImpossible:
-      title: ''
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Include can't be deleted because it used in next message(s) - SundayMessage
-          description: 'Error returned in case removing is impossible. Possible errors: [''Include can''t be deleted because it used in next message(s) - "messageName"'',''Include can''t be deleted because it used in next message automation(s) - "automationName"''].'
   responses:
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
-    IncludeRemoveImpossible:
-      description: Operation failed
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/IncludeRemoveImpossible'
     IncludeErrorValidation:
       description: validation error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/IncludeErrorValidation'
+    IncludeRemoveImpossible:
+      description: Operation failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/IncludeRemoveImpossible'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
   securitySchemes:
     basicAuth:
       type: http

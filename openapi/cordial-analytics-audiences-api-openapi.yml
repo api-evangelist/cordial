@@ -59,6 +59,37 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
+    SourceAE:
+      title: Source
+      type: object
+      required:
+      - exportType
+      - destination
+      - fields
+      - accountId
+      properties:
+        name:
+          type: string
+        exportType:
+          description: Type of report
+          type: string
+          enum:
+          - csv
+        destination:
+          $ref: '#/components/schemas/DestinationCE'
+        selected_timeframe_start:
+          type: string
+          format: date
+          description: selected_timeframe_start (>=)
+        selected_timeframe_end:
+          type: string
+          format: date
+          description: selected_timeframe_end (<=)
+        audiences:
+          type: array
+          items:
+            type: string
+          description: Array of audience names
     DestinationCE:
       title: Destination
       type: object
@@ -100,7 +131,41 @@ components:
         path:
           type: string
           description: (required for ftp,sftp,s3)
-    SourceAE:
+    AudienceTrendsExportDestinationConfigError:
+      title: Export destination config error
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: The destination.type field is required.
+          description: 'Field is present if export destination configuration is wrong. Possible errors: [''The destination.username field is required.'', ''Parameter password is not set'', ''The destination.path field is required.'', ''The destination.transport field is required.'', ''The selected destination.transport is invalid.'', ''The destination.aws access key id field is required.'', ''The destination.aws secret access key field is required.'', ''The destination.aws bucket field is required.'', ''The destination.aws region field is required.'']'
+    AudienceTrendsExportConfigError:
+      title: Export config error
+      required:
+      - error
+      - message
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Audience 'fakeAudience' does not exist.
+          description: 'Field is present if export configuration is wrong. Possible errors: [''selected_timeframe_end'' cannot be in past in comparison with ''selected_timeframe_start'', ''Field ''audiences'' should be provided.'', ''The ''selected_timeframe_end'' is invalid. ISO-8601 is a recommended format.'', ''The ''selected_timeframe_start'' is invalid. ISO-8601 is a recommended format.'', ''Audience '':audience'' does not exist.'', ''For Audience '':audience'' analytics disabled.'', ''Field ''name'' should be provided.'', ''Both fields ''selected_timeframe_start'' and ''selected_timeframe_end'' should be present.'']'
+    SourceAE_2:
       title: Source
       type: object
       required:
@@ -112,12 +177,12 @@ components:
         name:
           type: string
         exportType:
-          description: Type of report
+          description: Type of report.
           type: string
           enum:
           - csv
         destination:
-          $ref: '#/components/schemas/DestinationCE'
+          $ref: '#/components/schemas/DestinationObject'
         selected_timeframe_start:
           type: string
           format: date
@@ -130,7 +195,7 @@ components:
           type: array
           items:
             type: string
-          description: Array of audience names
+          description: Array of audience names.
     DestinationObject:
       title: Destination
       type: object
@@ -181,71 +246,6 @@ components:
         container:
           type: string
           description: Defines the Azure Blob Storage container name. Required if destination is AZUREBLOB.
-    SourceAE_2:
-      title: Source
-      type: object
-      required:
-      - exportType
-      - destination
-      - fields
-      - accountId
-      properties:
-        name:
-          type: string
-        exportType:
-          description: Type of report.
-          type: string
-          enum:
-          - csv
-        destination:
-          $ref: '#/components/schemas/DestinationObject'
-        selected_timeframe_start:
-          type: string
-          format: date
-          description: selected_timeframe_start (>=)
-        selected_timeframe_end:
-          type: string
-          format: date
-          description: selected_timeframe_end (<=)
-        audiences:
-          type: array
-          items:
-            type: string
-          description: Array of audience names.
-    AudienceTrendsExportDestinationConfigError:
-      title: Export destination config error
-      required:
-      - error
-      - message
-      - errorKey
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: The destination.type field is required.
-          description: 'Field is present if export destination configuration is wrong. Possible errors: [''The destination.username field is required.'', ''Parameter password is not set'', ''The destination.path field is required.'', ''The destination.transport field is required.'', ''The selected destination.transport is invalid.'', ''The destination.aws access key id field is required.'', ''The destination.aws secret access key field is required.'', ''The destination.aws bucket field is required.'', ''The destination.aws region field is required.'']'
-    AudienceTrendsExportConfigError:
-      title: Export config error
-      required:
-      - error
-      - message
-      - errorKey
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Audience 'fakeAudience' does not exist.
-          description: 'Field is present if export configuration is wrong. Possible errors: [''selected_timeframe_end'' cannot be in past in comparison with ''selected_timeframe_start'', ''Field ''audiences'' should be provided.'', ''The ''selected_timeframe_end'' is invalid. ISO-8601 is a recommended format.'', ''The ''selected_timeframe_start'' is invalid. ISO-8601 is a recommended format.'', ''Audience '':audience'' does not exist.'', ''For Audience '':audience'' analytics disabled.'', ''Field ''name'' should be provided.'', ''Both fields ''selected_timeframe_start'' and ''selected_timeframe_end'' should be present.'']'
   responses:
     AudienceTrendsExportConfigError:
       description: ''

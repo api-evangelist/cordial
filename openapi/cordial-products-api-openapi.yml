@@ -311,18 +311,14 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
-    VariantsP:
-      title: Variants
+    AttrP:
+      title: Attr
       type: object
-      required:
-      - sku
       properties:
-        sku:
+        color:
           type: string
-        attr:
-          $ref: '#/components/schemas/AttrP'
-        qty:
-          type: integer
+        size:
+          type: string
     SaleP:
       title: Sale
       properties:
@@ -337,14 +333,6 @@ components:
         end:
           type: string
           format: date
-    AttrP:
-      title: Attr
-      type: object
-      properties:
-        color:
-          type: string
-        size:
-          type: string
     ProductP:
       title: Product
       type: object
@@ -400,7 +388,166 @@ components:
             type: string
         properties:
           type: object
-    ProductNotFound:
+    VariantsP:
+      title: Variants
+      type: object
+      required:
+      - sku
+      properties:
+        sku:
+          type: string
+        attr:
+          $ref: '#/components/schemas/AttrP'
+        qty:
+          type: integer
+    VariantsP_2:
+      title: Variants
+      type: object
+      required:
+      - sku
+      properties:
+        sku:
+          type: string
+          description: The Stock Keeping Unit value for the product (e.g. RF-WP33286-21).
+          example: RF-WP33286-21
+        attr:
+          $ref: '#/components/schemas/AttrP_2'
+          description: Key value pairs describing product attributes (e.g. "size":"large", "color":"red"). Attribute values <b>cannot</b> be searched using the Kaleidoscope or within Smarty for personalization.
+        qty:
+          type: integer
+          description: The available inventory.
+          example: 1
+    ProductValidationError:
+      title: Validation error
+      required:
+      - messages
+      - errorKey
+      - error
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        messages:
+          type: object
+          $ref: '#/components/schemas/validationProductErrors'
+    ProductCreationSuccess:
+      title: Success operation on product creation
+      type: object
+      required:
+      - success
+      - message
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: product created
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    ProductCreationModel:
+      title: Product
+      type: object
+      required:
+      - productID
+      - productName
+      properties:
+        productID:
+          type: string
+          description: Unique product identifier (e.g. 1234abcd).
+          example: Acme-30 Stapler
+        productName:
+          type: string
+          description: Name of the product (e.g. Acme-30 Stapler).
+          example: Acme-30 Stapler
+        description:
+          type: string
+          description: Product description.
+          example: Black T-shirt with white print.
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/VariantsP_2'
+        productType:
+          type: string
+          example: physical
+          description: The product type. Options include physical, digital, subscription, and event.
+        price:
+          type: number
+          format: float
+          description: Product price.
+          example: ''
+        sale:
+          $ref: '#/components/schemas/SaleP_2'
+        UPCCode:
+          type: string
+          description: The Universal Product Code (e.g. 8 34460 00372 4).
+          example: 8 34460 00372 4
+        category:
+          type: string
+          description: The category given to the particular item.
+          example: Office Supplies
+        images:
+          type: array
+          items:
+            type: string
+          description: A comma-separated array of image file locations. Use an empty array [] as default if no values exist.
+          example: http://example.com/images/123
+        manufacturerName:
+          type: string
+          description: The name of the manufacturer (e.g. Acme Supplies).
+          example: Acme Supplies
+        inStock:
+          type: boolean
+          description: 'Flags product as in stock. Possible values: true, false or 1, 0. Defaults to `false`.'
+          example: true
+        taxable:
+          type: boolean
+          description: 'Flags product as taxable. Possible values: true, false or 1, 0. Defaults to `false`.'
+          example: true
+        enabled:
+          type: boolean
+          description: 'Flags product as enabled. Possible values: true, false or 1, 0. Defaults to `false`.'
+          example: true
+        url:
+          type: string
+          description: Link to the product page (e.g. https://mydomain.com/myproduct).
+          example: http://acme.com/ac30
+        tags:
+          type: array
+          items:
+            type: string
+          description: A comma-separated array of values to describe the product (e.g. ["office","office supplies"]).
+          example:
+          - office
+          - office supplies
+        properties:
+          type: object
+          description: An schema-less object of metadata about a product (as key value pairs).
+          example:
+            hasVideo: true
+            ratings: 5 stars
+    AttrP_2:
+      title: Attr
+      type: object
+      properties:
+        color:
+          type: string
+          example: blue
+        size:
+          type: string
+          example: medium
+    RecordNotFound:
       title: Record not found
       required:
       - error
@@ -412,10 +559,30 @@ components:
           example: true
         errorKey:
           type: string
-          example: GENERIC_ERROR_KEY
+          example: RECORD_NOT_FOUND
         message:
           type: string
-          example: Product not found
+          example: record not found
+    SaleP_2:
+      title: Sale
+      properties:
+        enabled:
+          type: boolean
+          description: 'Flag to determine if the sale is active. Possible values: true, false, or 1, 0. Defaults to `false`.'
+          example: true
+        price:
+          type: number
+          format: float
+          description: Sale price of the item.
+          example: 12.95
+        start:
+          type: string
+          format: date
+          description: The date and time the sale is in effect or active.
+        end:
+          type: string
+          format: date
+          description: The date and time the sale ends or becomes inactive.
     ProductResponse:
       title: Product
       type: object
@@ -504,123 +671,7 @@ components:
           type: string
           format: date-time
           description: Last modified date.
-    VariantsP_2:
-      title: Variants
-      type: object
-      required:
-      - sku
-      properties:
-        sku:
-          type: string
-          description: The Stock Keeping Unit value for the product (e.g. RF-WP33286-21).
-          example: RF-WP33286-21
-        attr:
-          $ref: '#/components/schemas/AttrP_2'
-          description: Key value pairs describing product attributes (e.g. "size":"large", "color":"red"). Attribute values <b>cannot</b> be searched using the Kaleidoscope or within Smarty for personalization.
-        qty:
-          type: integer
-          description: The available inventory.
-          example: 1
-    validationProductErrors:
-      required:
-      - validationErrors
-      properties:
-        validationErrors:
-          type: object
-          description: 'Object with validation error explanation for each field from payload. Possible errors: [''The product id field is required.'', ''The product name field is required.'', ''The qty must be a number.'', ''The sku field is required'']'
-    AttrP_2:
-      title: Attr
-      type: object
-      properties:
-        color:
-          type: string
-          example: blue
-        size:
-          type: string
-          example: medium
-    ProductCreationModel:
-      title: Product
-      type: object
-      required:
-      - productID
-      - productName
-      properties:
-        productID:
-          type: string
-          description: Unique product identifier (e.g. 1234abcd).
-          example: Acme-30 Stapler
-        productName:
-          type: string
-          description: Name of the product (e.g. Acme-30 Stapler).
-          example: Acme-30 Stapler
-        description:
-          type: string
-          description: Product description.
-          example: Black T-shirt with white print.
-        variants:
-          type: array
-          items:
-            $ref: '#/components/schemas/VariantsP_2'
-        productType:
-          type: string
-          example: physical
-          description: The product type. Options include physical, digital, subscription, and event.
-        price:
-          type: number
-          format: float
-          description: Product price.
-          example: ''
-        sale:
-          $ref: '#/components/schemas/SaleP_2'
-        UPCCode:
-          type: string
-          description: The Universal Product Code (e.g. 8 34460 00372 4).
-          example: 8 34460 00372 4
-        category:
-          type: string
-          description: The category given to the particular item.
-          example: Office Supplies
-        images:
-          type: array
-          items:
-            type: string
-          description: A comma-separated array of image file locations. Use an empty array [] as default if no values exist.
-          example: http://example.com/images/123
-        manufacturerName:
-          type: string
-          description: The name of the manufacturer (e.g. Acme Supplies).
-          example: Acme Supplies
-        inStock:
-          type: boolean
-          description: 'Flags product as in stock. Possible values: true, false or 1, 0. Defaults to `false`.'
-          example: true
-        taxable:
-          type: boolean
-          description: 'Flags product as taxable. Possible values: true, false or 1, 0. Defaults to `false`.'
-          example: true
-        enabled:
-          type: boolean
-          description: 'Flags product as enabled. Possible values: true, false or 1, 0. Defaults to `false`.'
-          example: true
-        url:
-          type: string
-          description: Link to the product page (e.g. https://mydomain.com/myproduct).
-          example: http://acme.com/ac30
-        tags:
-          type: array
-          items:
-            type: string
-          description: A comma-separated array of values to describe the product (e.g. ["office","office supplies"]).
-          example:
-          - office
-          - office supplies
-        properties:
-          type: object
-          description: An schema-less object of metadata about a product (as key value pairs).
-          example:
-            hasVideo: true
-            ratings: 5 stars
-    RecordNotFound:
+    ProductNotFound:
       title: Record not found
       required:
       - error
@@ -632,69 +683,24 @@ components:
           example: true
         errorKey:
           type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-    SaleP_2:
-      title: Sale
-      properties:
-        enabled:
-          type: boolean
-          description: 'Flag to determine if the sale is active. Possible values: true, false, or 1, 0. Defaults to `false`.'
-          example: true
-        price:
-          type: number
-          format: float
-          description: Sale price of the item.
-          example: 12.95
-        start:
-          type: string
-          format: date
-          description: The date and time the sale is in effect or active.
-        end:
-          type: string
-          format: date
-          description: The date and time the sale ends or becomes inactive.
-    ProductValidationError:
-      title: Validation error
-      required:
-      - messages
-      - errorKey
-      - error
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
           example: GENERIC_ERROR_KEY
-        messages:
-          type: object
-          $ref: '#/components/schemas/validationProductErrors'
-    ProductCreationSuccess:
-      title: Success operation on product creation
-      type: object
-      required:
-      - success
-      - message
-      properties:
-        success:
-          type: boolean
-          example: true
         message:
           type: string
-          example: product created
+          example: Product not found
+    validationProductErrors:
+      required:
+      - validationErrors
+      properties:
+        validationErrors:
+          type: object
+          description: 'Object with validation error explanation for each field from payload. Possible errors: [''The product id field is required.'', ''The product name field is required.'', ''The qty must be a number.'', ''The sku field is required'']'
   responses:
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
     ProductNotFound:
       description: Product not found
       content:
@@ -707,12 +713,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ProductValidationError'
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
   securitySchemes:
     basicAuth:
       type: http
