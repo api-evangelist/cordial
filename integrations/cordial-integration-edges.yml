@@ -1,16 +1,32 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/cordial/integrations
 - https://n8n.io/integrations/cordial/
 - https://composio.dev/toolkits/cordial
 - https://monid.ai/tools/cordial
 checked:
+- https://aws.amazon.com/marketplace/
 - https://composio.dev/toolkits/cordial
 - https://monid.ai/tools/cordial
 - https://n8n.io/integrations/cordial/
 - https://zapier.com/apps/cordial/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: AWS Marketplace
+  partner: amazon-web-services
+  partner_match: aggregator
+  type: marketplace
+  marketplace: aws-marketplace
+  channel: distribution
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=9ddfed9f-d460-49cb-8ccf-daca48013e1e
+  listing_count: 1
+  apps:
+  - Cordial
+  seller_name: Cordial
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
 templates: []
