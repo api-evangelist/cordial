@@ -20,8 +20,8 @@ edges:
   type: marketplace
   marketplace: aws-marketplace
   channel: distribution
-  relationship: platform-app
-  direction: provider-built
+  relationship: distribution-channel
+  direction: third-party
   evidence: https://aws.amazon.com/marketplace/seller-profile?id=9ddfed9f-d460-49cb-8ccf-daca48013e1e
   listing_count: 1
   apps:
