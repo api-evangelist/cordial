@@ -118,44 +118,64 @@ paths:
         '404':
           $ref: '#/components/responses/RecordNotFound'
 components:
+  responses:
+    AuthenticationFailure:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationFailed'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
   schemas:
-    PaginatedResponse:
-      properties:
-        total:
-          type: number
-        per_page:
-          type: number
-        current_page:
-          type: number
-        last_page:
-          type: number
-        first_page_url:
-          type: string
-          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=1
-        last_page_url:
-          type: string
-          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=2
-        prev_page_url:
-          type: string
-          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=1
-        next_page_url:
-          type: string
-          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=2
-        path:
-          type: string
-        from:
-          type: number
-        to:
-          type: number
-    AuthenticationFailed:
-      title: AuthenticationFailure
+    ProgramMessageStats:
       type: object
-      required:
-      - error
+      title: Message Send Stats
       properties:
-        error:
+        message_id:
           type: string
-          example: 'Access Denied: Authentication Failure'
+          example: 64ad5b5725623b7a6d0cb1f6
+          description: Message id.
+        orchestration_id:
+          type: string
+          example: 64ad5b5725623b7a6d0cb1f6
+          description: Orchestration id.
+        orchestration_name:
+          type: string
+          example: some_name
+          description: Orchestration name.
+        message_key:
+          type: string
+          example: some_key
+          description: Message key.
+        subject:
+          type: string
+          example: some_subject
+          description: Message subject.
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags
+        channel_key:
+          type: string
+          example: some_key
+          description: Channel key.
+        channel_type:
+          type: string
+          example: some_type
+          description: Channel type.
+        sent_at:
+          type: string
+          example: '2022-08-26 12:41:40.219Z'
+          description: Send date.
+        stats:
+          title: Aggregated stats for program
+          type: object
     ProgramStatsResponse:
       title: Program stats
       properties:
@@ -198,6 +218,43 @@ components:
         message:
           type: string
           example: record not found
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    PaginatedResponse:
+      properties:
+        total:
+          type: number
+        per_page:
+          type: number
+        current_page:
+          type: number
+        last_page:
+          type: number
+        first_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=1
+        last_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=2
+        prev_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=1
+        next_page_url:
+          type: string
+          example: http://api.cordial.com/v2/programs/64ad5b5725623b7a6d0cb1f6/stats?page=2
+        path:
+          type: string
+        from:
+          type: number
+        to:
+          type: number
     ProgramSummaryResponse:
       title: Program summary
       properties:
@@ -290,63 +347,6 @@ components:
           type: string
           format: date-time
           description: Last modified date.
-    ProgramMessageStats:
-      type: object
-      title: Message Send Stats
-      properties:
-        message_id:
-          type: string
-          example: 64ad5b5725623b7a6d0cb1f6
-          description: Message id.
-        orchestration_id:
-          type: string
-          example: 64ad5b5725623b7a6d0cb1f6
-          description: Orchestration id.
-        orchestration_name:
-          type: string
-          example: some_name
-          description: Orchestration name.
-        message_key:
-          type: string
-          example: some_key
-          description: Message key.
-        subject:
-          type: string
-          example: some_subject
-          description: Message subject.
-        tags:
-          type: array
-          items:
-            type: string
-          description: Tags
-        channel_key:
-          type: string
-          example: some_key
-          description: Channel key.
-        channel_type:
-          type: string
-          example: some_type
-          description: Channel type.
-        sent_at:
-          type: string
-          example: '2022-08-26 12:41:40.219Z'
-          description: Send date.
-        stats:
-          title: Aggregated stats for program
-          type: object
-  responses:
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
-    AuthenticationFailure:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AuthenticationFailed'
   securitySchemes:
     basicAuth:
       type: http

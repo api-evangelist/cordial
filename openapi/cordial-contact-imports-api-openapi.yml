@@ -235,26 +235,23 @@ components:
         source:
           type: string
           description: Defines the Snowflake table or view. Required if destination is SNOWFLAKE.
-    ListsCI_2:
-      title: Lists
-      type: object
+    ContactImportConfigError:
+      title: Import configuration error
+      required:
+      - error
+      - message
+      - errorKey
       properties:
-        addTo:
-          type: array
-          items:
-            type: string
-          example:
-          - foo
-          - bar
-          description: All contacts will get added to each list in the array (e.g. ["foo","bar"]). If you pass this parameter, you should not pass a column in the file with the same key. This field will always override it.
-        removeFrom:
-          type: array
-          items:
-            type: string
-          example:
-          - biz
-          - baz
-          description: All contacts will get removed from each list in the array (e.g. ["biz","baz"]). If you pass this parameter, you should not pass a column in the file with the same key. This field will always override it.
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: The source.transport field is required.
+          description: 'This field is present if import configuration is wrong. Possible errors: [''The source.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'',''The source.path field is required.'', ''The source.transport field is required.'', ''The selected source.transport is invalid.'', ''The source.aws access key id field is required.'', ''The source.aws secret access key field is required.'', ''The source.aws bucket field is required.'', ''The source.aws region field is required.'', ''The columns field is required.'']'
     ContactImportConfigSuccess:
       title: Import configuration error
       required:
@@ -324,23 +321,26 @@ components:
           type: string
           example: ignore
           description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
-    ContactImportConfigError:
-      title: Import configuration error
-      required:
-      - error
-      - message
-      - errorKey
+    ListsCI_2:
+      title: Lists
+      type: object
       properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: The source.transport field is required.
-          description: 'This field is present if import configuration is wrong. Possible errors: [''The source.username field is required.'', ''The confirm email must be a valid email address.'', ''Parameter password is not set'',''The source.path field is required.'', ''The source.transport field is required.'', ''The selected source.transport is invalid.'', ''The source.aws access key id field is required.'', ''The source.aws secret access key field is required.'', ''The source.aws bucket field is required.'', ''The source.aws region field is required.'', ''The columns field is required.'']'
+        addTo:
+          type: array
+          items:
+            type: string
+          example:
+          - foo
+          - bar
+          description: All contacts will get added to each list in the array (e.g. ["foo","bar"]). If you pass this parameter, you should not pass a column in the file with the same key. This field will always override it.
+        removeFrom:
+          type: array
+          items:
+            type: string
+          example:
+          - biz
+          - baz
+          description: All contacts will get removed from each list in the array (e.g. ["biz","baz"]). If you pass this parameter, you should not pass a column in the file with the same key. This field will always override it.
   responses:
     ContactImportConfigError:
       description: ''

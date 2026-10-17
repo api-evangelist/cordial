@@ -337,6 +337,51 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
+    AttributeUPD:
+      properties:
+        name:
+          type: string
+        validators:
+          type: string
+        updateUnauthenticated:
+          type: boolean
+          default: false
+        retainOnDestroy:
+          type: string
+          default: ''''''
+          description: Empty brackets will set to `destroy`
+          enum:
+          - ''
+          - anonymized
+          - unchanged
+      type: object
+    AttributeShow:
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        index:
+          type: boolean
+        unique:
+          type: boolean
+        validators:
+          type: object
+        schema:
+          type: object
+        updateUnauthenticated:
+          type: boolean
+        retainOnDestroy:
+          type: string
+        ct:
+          type: string
+          format: date-time
+        lm:
+          type: string
+          format: date-time
+      type: object
     Attribute:
       properties:
         key:
@@ -367,118 +412,6 @@ components:
       - key
       - name
       - type
-    AttributeShow:
-      properties:
-        key:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        index:
-          type: boolean
-        unique:
-          type: boolean
-        validators:
-          type: object
-        schema:
-          type: object
-        updateUnauthenticated:
-          type: boolean
-        retainOnDestroy:
-          type: string
-        ct:
-          type: string
-          format: date-time
-        lm:
-          type: string
-          format: date-time
-      type: object
-    AttributeUPD:
-      properties:
-        name:
-          type: string
-        validators:
-          type: string
-        updateUnauthenticated:
-          type: boolean
-          default: false
-        retainOnDestroy:
-          type: string
-          default: ''''''
-          description: Empty brackets will set to `destroy`
-          enum:
-          - ''
-          - anonymized
-          - unchanged
-      type: object
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-    AuthenticationFailed:
-      title: AuthenticationFailure
-      type: object
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          example: 'Access Denied: Authentication Failure'
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
-    AttributeUPD_2:
-      properties:
-        name:
-          type: string
-          description: User-friendly display name (e.g. First Name).
-        validators:
-          type: string
-          description: Defines the min/max number of characters for string data type, or per array value in array data type, and min/max values for numeric data type. Min default is `0` and max default is `128`. Can also define if a value is `required` (true/false). Default is `false`.
-        updateUnauthenticated:
-          type: boolean
-          description: 'Determines if unauthenticated attribute modifications are allowed via JavaScript. Default is `false`. Possible Values: true, false.'
-        retainOnDestroy:
-          type: string
-          description: 'Determines how attribute values will be treated when a contact record is deleted. If no value (or `null` value) is passed, the attribute value will be destroyed. Default is `null`. Possible values: anonymized, unchanged, null, "".'
-      type: object
-    AttributeError:
-      title: attributeError
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Key must be unique
-          description: 'Message with error explanation. Possible errors: [''Name must be unique'', ''invalid field type'', ''You can not change type'']'
     Attribute_2:
       properties:
         key:
@@ -518,25 +451,74 @@ components:
       - key
       - name
       - type
-  responses:
-    RecordNotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RecordNotFound'
-    AuthenticationFailure:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AuthenticationFailed'
+    AttributeUPD_2:
+      properties:
+        name:
+          type: string
+          description: User-friendly display name (e.g. First Name).
+        validators:
+          type: string
+          description: Defines the min/max number of characters for string data type, or per array value in array data type, and min/max values for numeric data type. Min default is `0` and max default is `128`. Can also define if a value is `required` (true/false). Default is `false`.
+        updateUnauthenticated:
+          type: boolean
+          description: 'Determines if unauthenticated attribute modifications are allowed via JavaScript. Default is `false`. Possible Values: true, false.'
+        retainOnDestroy:
+          type: string
+          description: 'Determines how attribute values will be treated when a contact record is deleted. If no value (or `null` value) is passed, the attribute value will be destroyed. Default is `null`. Possible values: anonymized, unchanged, null, "".'
+      type: object
     AttributeError:
-      description: General Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AttributeError'
+      title: attributeError
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Key must be unique
+          description: 'Message with error explanation. Possible errors: [''Name must be unique'', ''invalid field type'', ''You can not change type'']'
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
+    AuthenticationFailed:
+      title: AuthenticationFailure
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          example: 'Access Denied: Authentication Failure'
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+  responses:
     AttributeShow:
       description: Successful operation
       content:
@@ -588,6 +570,24 @@ components:
               retainOnDestroy:
                 type: string
                 description: Describe how attributes will be processed on removing
+    AttributeError:
+      description: General Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttributeError'
+    AuthenticationFailure:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthenticationFailed'
+    RecordNotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RecordNotFound'
   securitySchemes:
     basicAuth:
       type: http

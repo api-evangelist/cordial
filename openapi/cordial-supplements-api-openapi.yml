@@ -843,54 +843,6 @@ paths:
     - url: https://api.cordial.io/
 components:
   schemas:
-    SourceSup:
-      title: Source
-      type: object
-      required:
-      - transport
-      - url
-      - path
-      properties:
-        transport:
-          type: string
-          enum:
-          - ftp
-          - http
-          - sftp
-          - s3
-        aws_access_key_id:
-          type: string
-          description: (required for s3)
-        aws_secret_access_key:
-          type: string
-          description: (required for s3)
-        aws_bucket:
-          type: string
-          description: (required for s3)
-        aws_region:
-          type: string
-          description: (required for s3)
-        url:
-          type: string
-        server:
-          type: string
-          enum:
-          - ftp
-          - sftp
-        port:
-          type: integer
-        username:
-          type: string
-          description: (optional for http basic auth)
-        password:
-          type: string
-          description: (optional for http basic auth)
-        path:
-          type: string
-          description: (filepath only for s3)
-          enum:
-          - ftp
-          - sftp
     SupplementShowSup:
       title: Supplement
       type: object
@@ -946,6 +898,54 @@ components:
         suppressTriggers:
           type: boolean
           default: true
+    SourceSup:
+      title: Source
+      type: object
+      required:
+      - transport
+      - url
+      - path
+      properties:
+        transport:
+          type: string
+          enum:
+          - ftp
+          - http
+          - sftp
+          - s3
+        aws_access_key_id:
+          type: string
+          description: (required for s3)
+        aws_secret_access_key:
+          type: string
+          description: (required for s3)
+        aws_bucket:
+          type: string
+          description: (required for s3)
+        aws_region:
+          type: string
+          description: (required for s3)
+        url:
+          type: string
+        server:
+          type: string
+          enum:
+          - ftp
+          - sftp
+        port:
+          type: integer
+        username:
+          type: string
+          description: (optional for http basic auth)
+        password:
+          type: string
+          description: (optional for http basic auth)
+        path:
+          type: string
+          description: (filepath only for s3)
+          enum:
+          - ftp
+          - sftp
     SupplementSup:
       title: Supplement
       type: object
@@ -1070,62 +1070,6 @@ components:
         source:
           type: string
           description: Defines the Snowflake table or view. Required if destination is SNOWFLAKE.
-    SuccessOperation:
-      title: Successful operation
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-    validationSupplementErrors:
-      required:
-      - validationErrors
-      properties:
-        validationErrors:
-          type: object
-          description: 'Object with validation error explanation for each field from payload. Possible errors: [''Key exists'', ''key is required'', ''The selected type is invalid'', ''type is required'', ''The indexes field is required'']'
-    RecordSupplementResponse:
-      title: Record
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          example: '1234212'
-          description: Unique record ID for each supplement in a collection. Cannot be a 24-character hex string.
-        attributes:
-          schema:
-            properties:
-              cID:
-                type: string
-                example: 5f27b8c3965afd5165265393
-                description: Contact ID that connects to current supplement record.
-              ct:
-                type: string
-                format: date-time
-                description: Date created.
-              lm:
-                type: string
-                format: date-time
-                description: Last modified date.
-              created:
-                type: string
-                format: date-time
-                description: Date created.
-            example:
-              id: '3324'
-              make: Jeep
-              model: Liberty
-              year: '2007'
-              lm: 2020-09-22T09:00:29+0000
-              ct: 2020-09-22T09:00:29+0000
-              created: 2020-09-22T09:00:29+0000
-              cID: 5f27b8c3965afd5165265393
-            description: Response data for the record.
-          type: object
     SupplementUpdateSup_2:
       title: SupplementUpdate
       type: object
@@ -1153,22 +1097,6 @@ components:
           type: boolean
           default: false
           description: Generates a 24-character random hash for inserted supplement records where the ID is not supplied.
-    RecordNotFound:
-      title: Record not found
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: RECORD_NOT_FOUND
-        message:
-          type: string
-          example: record not found
     SupplementValidationError:
       title: Validation error
       required:
@@ -1188,64 +1116,44 @@ components:
         message:
           type: string
           description: 'Errors. Possible errors: [''Field type can''t be changed.'']'
-    IndexesSup_2:
-      title: Indexes
-      type: object
+    SupplementImportConfigError:
+      title: Import configuration error
       required:
-      - field
-      - type
+      - error
+      - message
+      - errorKey
       properties:
-        field:
+        error:
+          type: boolean
+          example: true
+        errorKey:
           type: string
-          description: The name of the field. Required to be unique within the context of this supplement only.
-          example: model
-        type:
+          example: GENERIC_ERROR_KEY
+        message:
           type: string
-          description: 'Defines the field data type. Possible values: string, number, date, geo, array.'
-          example: string
-    SupplementImportResource:
-      title: Job
-      type: object
+          example: The source.transport field is required.
+          description: 'Field is present if import configuration is wrong. Possible errors: [''The source.username field is required.'',''The confirm email must be a valid email address.'',''Parameter password is not set'',''The source.path field is required.'',''The source.transport field is required.'',''The selected source.transport is invalid.'',''The source.aws access key id field is required.'',''The source.aws secret access key field is required.'',''The source.aws bucket field is required.'',''The source.aws region field is required.'',''The columns field is required.'']'
+    SupplementImportConfigSuccess:
+      title: Import configuration error
       required:
-      - source
+      - jobId
       properties:
-        importName:
-          type: string
-          example: SupplementImport-7-31
-          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
-        source:
-          $ref: '#/components/schemas/SourceObject'
-        confirmEmail:
-          type: string
-          description: Email address to send an administrative alert when the job is done running.
-          example: msmith@example.com
-        hasHeader:
-          type: boolean
-          description: Determines if the first row column headers will be present. Default is `false`. Required if `columns` parameter is <b>not</b> included. If import file type is <b>JSONL</b>, `hasHeader` will be ignored.
-        columns:
-          type: array
-          items:
-            type: string
-          example:
-          - model
-          - year
-          - milage
-          description: An array of import file column headers, arranged from left to right by column position. Using "" will ignore the entire column. Required if `hasHeader` is not explicitly set to `true`. If imported file type is <b>JSONL</b>, `columns` will be ignored.
-        strategy:
-          type: string
-          description: 'Possible values: `insertOnly` - only adds the new records, `updateOnly` - only updates the existing records. If `undefined`, the import will upsert (update and insert). Defaults to `undefined`.'
-          example: insertOnly
-        nullMarker:
-          type: string
-          description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
-          example: skip
-        delimiter:
-          type: string
-          description: Character used to break up import file columns. Defaults to `,` if not specified.
-          example: ','
-        suppressTriggers:
-          type: boolean
-          default: true
+        jobId:
+          type: string|object
+          example: 5f6b1434f778ac145d25391a
+          schema:
+            description: String. Mongo ID or object from created job when successful.
+            properties:
+              error:
+                type: boolean
+                example: true
+              errorKey:
+                type: string
+                example: GENERIC_ERROR_KEY
+              message:
+                type: string
+                example: Supplement with key 'car_models2' does not exist.
+                description: 'Field is present if import configuration is wrong. Possible errors: [''Supplement with key "supplementKey" does not exist'']'
     SupplementRecordPostResponse:
       title: ''
       required:
@@ -1262,6 +1170,22 @@ components:
           type: object
           $ref: '#/components/schemas/validationSupplementErrors'
           description: 'String or object. Possible errors: [''Must include email or secondaryKey email,cID,push'', ''The supplement \''supplementKey\'' does not exist'', ''Field type can''t be changed'', ''empty post'', ''record not found'', ''id is required'', ''Error occurred on validation supplement record.'']'
+    RecordNotFound:
+      title: Record not found
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: RECORD_NOT_FOUND
+        message:
+          type: string
+          example: record not found
     SupplementSup_2:
       title: Supplement
       type: object
@@ -1325,6 +1249,147 @@ components:
           type: boolean
           default: false
           description: Generates a 24-character random hash for inserted supplement records where the ID is not supplied.
+    SuccessOperation:
+      title: Successful operation
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    validationSupplementPutErrors:
+      required:
+      - validationErrors
+      properties:
+        validationErrors:
+          type: object
+          description: 'Object with validation error explanation for each field from payload. Possible errors: [''id is required'', ''<field> is required'',''The <field> must be a number.'']'
+    SupplementRecordPutResponse:
+      title: ''
+      required:
+      - error
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: object
+          $ref: '#/components/schemas/validationSupplementPutErrors'
+          description: 'Can be string or object. Possible errors: [''The supplement \''supplementKey\'' does not exist'',''Error occurred on validation supplement record.'',''ID cannot be updated'']'
+    validationSupplementErrors:
+      required:
+      - validationErrors
+      properties:
+        validationErrors:
+          type: object
+          description: 'Object with validation error explanation for each field from payload. Possible errors: [''Key exists'', ''key is required'', ''The selected type is invalid'', ''type is required'', ''The indexes field is required'']'
+    SupplementRecordCreationSuccess:
+      title: Success operation on supplement record creation
+      type: object
+      required:
+      - success
+      - message
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: record created
+    IndexesSup_2:
+      title: Indexes
+      type: object
+      required:
+      - field
+      - type
+      properties:
+        field:
+          type: string
+          description: The name of the field. Required to be unique within the context of this supplement only.
+          example: model
+        type:
+          type: string
+          description: 'Defines the field data type. Possible values: string, number, date, geo, array.'
+          example: string
+    SupplementImportResource:
+      title: Job
+      type: object
+      required:
+      - source
+      properties:
+        importName:
+          type: string
+          example: SupplementImport-7-31
+          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
+        source:
+          $ref: '#/components/schemas/SourceObject'
+        confirmEmail:
+          type: string
+          description: Email address to send an administrative alert when the job is done running.
+          example: msmith@example.com
+        hasHeader:
+          type: boolean
+          description: Determines if the first row column headers will be present. Default is `false`. Required if `columns` parameter is <b>not</b> included. If import file type is <b>JSONL</b>, `hasHeader` will be ignored.
+        columns:
+          type: array
+          items:
+            type: string
+          example:
+          - model
+          - year
+          - milage
+          description: An array of import file column headers, arranged from left to right by column position. Using "" will ignore the entire column. Required if `hasHeader` is not explicitly set to `true`. If imported file type is <b>JSONL</b>, `columns` will be ignored.
+        strategy:
+          type: string
+          description: 'Possible values: `insertOnly` - only adds the new records, `updateOnly` - only updates the existing records. If `undefined`, the import will upsert (update and insert). Defaults to `undefined`.'
+          example: insertOnly
+        nullMarker:
+          type: string
+          description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
+          example: skip
+        delimiter:
+          type: string
+          description: Character used to break up import file columns. Defaults to `,` if not specified.
+          example: ','
+        suppressTriggers:
+          type: boolean
+          default: true
+    SupplementDoesntExist:
+      title: ''
+      required:
+      - error
+      - errorKey
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: The supplement 'supplementKey' does not exist.
+          description: Returned if supplement doesn't exist.
+    SupplementRecordPost:
+      title: Record
+      type: object
+      description: Additional parameters or fields can be added to the JSON based on your data. This includes the indexed fields previously defined for the supplement and any fields you add as additional fields or fields declared on the fly.
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          example: '1234212'
+          description: Unique record ID for each supplement in a collection. Cannot be a 24-character hex string.
+        suppressTriggers:
+          type: boolean
+          default: false
+          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `false`.
     SupplementUpdateError:
       title: ''
       required:
@@ -1345,31 +1410,9 @@ components:
           type: string
           example: '''supplementKey'' provided but no record found'
           description: Present if 'supplement' doesn't exist.
-    SupplementImportConfigSuccess:
-      title: Import configuration error
-      required:
-      - jobId
-      properties:
-        jobId:
-          type: string|object
-          example: 5f6b1434f778ac145d25391a
-          schema:
-            description: String. Mongo ID or object from created job when successful.
-            properties:
-              error:
-                type: boolean
-                example: true
-              errorKey:
-                type: string
-                example: GENERIC_ERROR_KEY
-              message:
-                type: string
-                example: Supplement with key 'car_models2' does not exist.
-                description: 'Field is present if import configuration is wrong. Possible errors: [''Supplement with key "supplementKey" does not exist'']'
-    SupplementRecordPost:
+    RecordSupplementResponse:
       title: Record
       type: object
-      description: Additional parameters or fields can be added to the JSON based on your data. This includes the indexed fields previously defined for the supplement and any fields you add as additional fields or fields declared on the fly.
       required:
       - id
       properties:
@@ -1377,128 +1420,85 @@ components:
           type: string
           example: '1234212'
           description: Unique record ID for each supplement in a collection. Cannot be a 24-character hex string.
-        suppressTriggers:
-          type: boolean
-          default: false
-          description: If `true`, will suppress triggering messages set to fire based on updates to attribute values in the import file. Defaults to `false`.
-    validationSupplementPutErrors:
-      required:
-      - validationErrors
-      properties:
-        validationErrors:
+        attributes:
+          schema:
+            properties:
+              cID:
+                type: string
+                example: 5f27b8c3965afd5165265393
+                description: Contact ID that connects to current supplement record.
+              ct:
+                type: string
+                format: date-time
+                description: Date created.
+              lm:
+                type: string
+                format: date-time
+                description: Last modified date.
+              created:
+                type: string
+                format: date-time
+                description: Date created.
+            example:
+              id: '3324'
+              make: Jeep
+              model: Liberty
+              year: '2007'
+              lm: 2020-09-22T09:00:29+0000
+              ct: 2020-09-22T09:00:29+0000
+              created: 2020-09-22T09:00:29+0000
+              cID: 5f27b8c3965afd5165265393
+            description: Response data for the record.
           type: object
-          description: 'Object with validation error explanation for each field from payload. Possible errors: [''id is required'', ''<field> is required'',''The <field> must be a number.'']'
-    SupplementImportConfigError:
-      title: Import configuration error
-      required:
-      - error
-      - message
-      - errorKey
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: The source.transport field is required.
-          description: 'Field is present if import configuration is wrong. Possible errors: [''The source.username field is required.'',''The confirm email must be a valid email address.'',''Parameter password is not set'',''The source.path field is required.'',''The source.transport field is required.'',''The selected source.transport is invalid.'',''The source.aws access key id field is required.'',''The source.aws secret access key field is required.'',''The source.aws bucket field is required.'',''The source.aws region field is required.'',''The columns field is required.'']'
-    SupplementRecordPutResponse:
-      title: ''
-      required:
-      - error
-      - errorKey
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: object
-          $ref: '#/components/schemas/validationSupplementPutErrors'
-          description: 'Can be string or object. Possible errors: [''The supplement \''supplementKey\'' does not exist'',''Error occurred on validation supplement record.'',''ID cannot be updated'']'
-    SupplementRecordCreationSuccess:
-      title: Success operation on supplement record creation
-      type: object
-      required:
-      - success
-      - message
-      properties:
-        success:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: record created
-    SupplementDoesntExist:
-      title: ''
-      required:
-      - error
-      - errorKey
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: The supplement 'supplementKey' does not exist.
-          description: Returned if supplement doesn't exist.
   responses:
-    SupplementDoesntExist:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SupplementDoesntExist'
-    SupplementImportConfigError:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SupplementImportConfigError'
-    SupplementRecordPostResponse:
-      description: Errors returned on creating new records for supplement.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SupplementRecordPostResponse'
-    SupplementValidationError:
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SupplementValidationError'
-    SupplementRecordPutResponse:
-      description: Errors returned on updating records for supplement.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SupplementRecordPutResponse'
     RecordNotFound:
       description: Record not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/RecordNotFound'
-    SupplementRemove:
-      description: Error on removing supplement
+    SupplementRecordPutResponse:
+      description: Errors returned on updating records for supplement.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SupplementRemove'
+            $ref: '#/components/schemas/SupplementRecordPutResponse'
+    SupplementImportConfigError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SupplementImportConfigError'
+    SupplementDoesntExist:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SupplementDoesntExist'
     SupplementUpdateError:
       description: ''
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/SupplementUpdateError'
+    SupplementValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SupplementValidationError'
+    SupplementRemove:
+      description: Error on removing supplement
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SupplementRemove'
+    SupplementRecordPostResponse:
+      description: Errors returned on creating new records for supplement.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SupplementRecordPostResponse'
   securitySchemes:
     basicAuth:
       type: http

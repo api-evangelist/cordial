@@ -135,14 +135,48 @@ components:
           enum:
           - ftp
           - sftp
-    ProductImportsResponse:
-      title: ProductImports
+    ProductImportsError:
+      title: ProductImportsError
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Error validation message
+          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
+    JobPI_2:
+      title: Job
       type: object
       required:
-      - jobId
+      - source
       properties:
-        jobId:
+        importName:
           type: string
+          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
+        source:
+          $ref: '#/components/schemas/SourceObject'
+        confirmEmail:
+          type: string
+        hasHeader:
+          type: boolean
+          description: Determines if the first row column headers will be present. Default is `false`. Required if `columns` parameter is <b>not</b> included. If import file type is <b>JSONL</b>, `hasHeader` will be ignored.
+        columns:
+          type: array
+          items:
+            type: string
+          description: An array of import file column headers, arranged from left to right by column position. Using "" will ignore the entire column. Required if `hasHeader` is not explicitly set to `true`. If imported file type is <b>JSONL</b>, `columns` will be ignored.
+        nullMarker:
+          type: string
+          description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
     SourceObject:
       title: Source
       type: object
@@ -215,48 +249,14 @@ components:
         source:
           type: string
           description: Defines the Snowflake table or view. Required if destination is SNOWFLAKE.
-    JobPI_2:
-      title: Job
+    ProductImportsResponse:
+      title: ProductImports
       type: object
       required:
-      - source
+      - jobId
       properties:
-        importName:
+        jobId:
           type: string
-          description: If provided, this value will be displayed next to the job ID on the Jobs status page.
-        source:
-          $ref: '#/components/schemas/SourceObject'
-        confirmEmail:
-          type: string
-        hasHeader:
-          type: boolean
-          description: Determines if the first row column headers will be present. Default is `false`. Required if `columns` parameter is <b>not</b> included. If import file type is <b>JSONL</b>, `hasHeader` will be ignored.
-        columns:
-          type: array
-          items:
-            type: string
-          description: An array of import file column headers, arranged from left to right by column position. Using "" will ignore the entire column. Required if `hasHeader` is not explicitly set to `true`. If imported file type is <b>JSONL</b>, `columns` will be ignored.
-        nullMarker:
-          type: string
-          description: Defines the value to use for ignoring or skipping attribute updates. Upon import, if an attribute contains the nullMarker value (i.e. ignore), then the attribute will be skipped or ignored.
-    ProductImportsError:
-      title: ProductImportsError
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Error validation message
-          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
   securitySchemes:
     basicAuth:
       type: http

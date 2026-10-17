@@ -40,46 +40,6 @@ paths:
         required: true
 components:
   schemas:
-    AccountMonitorExportResponse:
-      title: ContactExports
-      type: object
-      required:
-      - jobId
-      properties:
-        jobId:
-          type: string
-    fieldErrorsInclude:
-      type: object
-      required:
-      - fieldErrors
-      properties:
-        <field>:
-          type: array
-          items:
-            type: string
-            example: The destination field is required.
-    AccountMonitorExportError:
-      title: AccountMonitorExportError
-      required:
-      - error
-      - errorKey
-      - message
-      type: object
-      properties:
-        error:
-          type: boolean
-          example: true
-        errorKey:
-          type: string
-          example: GENERIC_ERROR_KEY
-        message:
-          type: string
-          example: Error validation message
-          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
-        fieldErrors:
-          type: object
-          $ref: '#/components/schemas/fieldErrorsInclude'
-          description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
     SourceAccountMonitorExport:
       title: Source Account Monitor export
       type: object
@@ -122,6 +82,46 @@ components:
         confirmEmail:
           type: string
           description: Email address to send an administrative alert when the job is done running.
+    AccountMonitorExportResponse:
+      title: ContactExports
+      type: object
+      required:
+      - jobId
+      properties:
+        jobId:
+          type: string
+    fieldErrorsInclude:
+      type: object
+      required:
+      - fieldErrors
+      properties:
+        <field>:
+          type: array
+          items:
+            type: string
+            example: The destination field is required.
+    AccountMonitorExportError:
+      title: AccountMonitorExportError
+      required:
+      - error
+      - errorKey
+      - message
+      type: object
+      properties:
+        error:
+          type: boolean
+          example: true
+        errorKey:
+          type: string
+          example: GENERIC_ERROR_KEY
+        message:
+          type: string
+          example: Error validation message
+          description: 'Error explanation. Possible errors: [''Store type not supported'', ''Transport is not set or invalid format'', ''Job could not be created'', etc.]'
+        fieldErrors:
+          type: object
+          $ref: '#/components/schemas/fieldErrorsInclude'
+          description: 'Object with explanation validation error for each field from payload. Possible errors: [''The name may not be greater than 32 characters.'', ''The key may only contain letters, numbers, and dashes.'', ''The content field is required.'']. This field is optional, can be replaced with ''message'''
     DestinationObject:
       title: Destination
       type: object

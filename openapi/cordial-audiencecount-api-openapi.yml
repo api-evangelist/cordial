@@ -36,22 +36,7 @@ paths:
         description: Audience object for returning count.
         required: true
 components:
-  responses:
-    AudienceCountErrorValidation:
-      description: ''
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AudienceCountErrorValidation'
   schemas:
-    AudienceCountSuccess:
-      title: Source
-      type: object
-      properties:
-        count:
-          type: number
-          description: Count of contacts
-          default: 123
     AudienceCountErrorValidation:
       title: Contact error
       required:
@@ -72,6 +57,21 @@ components:
       title: Source
       type: object
       properties: {}
+    AudienceCountSuccess:
+      title: Source
+      type: object
+      properties:
+        count:
+          type: number
+          description: Count of contacts
+          default: 123
+  responses:
+    AudienceCountErrorValidation:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AudienceCountErrorValidation'
   securitySchemes:
     basicAuth:
       type: http
