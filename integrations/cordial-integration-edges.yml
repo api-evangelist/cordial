@@ -6,13 +6,20 @@ source:
 - https://composio.dev/toolkits/cordial
 - https://monid.ai/tools/cordial
 checked:
+- https://api.nuget.org/v3
 - https://aws.amazon.com/marketplace/
 - https://composio.dev/toolkits/cordial
+- https://crates.io/api/v1
 - https://docs.mparticle.com/integrations/cordial/audience/
 - https://github.com/rudderlabs/rudder-integrations-config/tree/main/src/configurations/destinations/cordial
 - https://hightouch.com/docs/destinations/cordial
 - https://monid.ai/tools/cordial
 - https://n8n.io/integrations/cordial/
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-cordial
 - https://zapier.com/apps/cordial/integrations
 - shopify/integrations/shopify-integration-edges.yml
@@ -140,4 +147,34 @@ edges:
   listing_count: 1
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
+- partner_name: Maven Central
+  partner: maven-central
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Java/JVM)
+  evidence: https://central.sonatype.com/artifact/com.cordial.cordialsdk/android
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: Maven Central (public registry JSON)
+    spec_file: null
+    language: Java/JVM
+    packages:
+    - name: com.cordial.cordialsdk:android
+      version: 4.26.1
+      released: '2026-09-02'
+      released_field: lastUpdated
+      lapsed: false
+      page: https://central.sonatype.com/artifact/com.cordial.cordialsdk/android
+      repo_leg: domain:cordial.com
+      publisher_leg: groupId:cordial.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 templates: []
